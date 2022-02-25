@@ -11,6 +11,7 @@ public class RegisterRequest {
     private String cnp;
     private String firstName;
     private String lastName;
+    private String emailUser;
     private String specialty;
     private String password;
     private Role role;
@@ -64,5 +65,13 @@ public class RegisterRequest {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 }

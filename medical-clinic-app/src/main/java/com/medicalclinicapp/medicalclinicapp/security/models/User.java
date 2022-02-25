@@ -14,6 +14,9 @@ public class User {
     @Column(name = "lastName")
     private String lastName;
 
+    @Column(name = "emailUser")
+    private String emailUser;
+
     //cardiology, radiology
     @Column(name = "specialty")
     private String specialty;
@@ -21,14 +24,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
-    public User(String cnp, String firstName, String lastName, String specialty, String password, Role role) {
+    public User(String cnp, String firstName, String lastName, String emailUser, String specialty, String password, Role role) {
         this.cnp = cnp;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.emailUser = emailUser;
         this.specialty = specialty;
         this.password = password;
         this.role = role;
@@ -83,5 +88,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 }
