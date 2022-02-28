@@ -1,0 +1,11 @@
+h3{
+    text-align: center;
+}
+.format-login {
+  background: rgb(102, 217, 255, 0.2);
+  border: solid rgb(0, 159, 212) 3px;
+  border-radius: 5px;
+  margin-top: 10%;
+  margin-left: 35%;
+  margin-right: 35%;
+}
