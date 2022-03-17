@@ -2,10 +2,12 @@ package com.medicalclinicapp.medicalclinicapp.security.repository;
 
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, String> {
-    User findUserByCnp (String cnpUser);
-    User findUserByCnpAndPassword(String emailUser, String passwordUser);
-    boolean existsByCnp(String cnp);
-    boolean existsByCnpAndPassword(String cnp, String passsword);
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByCnp(String cnp);
+    Boolean existsByCnp(String cnp);
 }

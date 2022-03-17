@@ -1,100 +1,86 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Table(name="user")
+public class User implements UserDetails {
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    private Long id;
     private String cnp;
-
-    @Column(name = "firstName")
     private String firstName;
-
-    @Column(name = "lastName")
     private String lastName;
-
-    @Column(name = "emailUser")
     private String emailUser;
-
     //cardiology, radiology
-    @Column(name = "specialty")
     private String specialty;
-
     @Column(name = "password")
     private String password;
-
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private Role role;
 
-    public User(String cnp, String firstName, String lastName, String emailUser, String specialty, String password, Role role) {
-        this.cnp = cnp;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailUser = emailUser;
-        this.specialty = specialty;
-        this.password = password;
-        this.role = role;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(role.name());
+        return Collections.singletonList(authority);
     }
-
-    public User() {
-    }
-
-    public String getCnp() {
+    //We will have username = cnp
+    @Override
+    public String getUsername() {
         return cnp;
     }
 
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getFirstName() {
-        return firstName;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public String getLastName() {
-        return lastName;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return cnp != null && Objects.equals(cnp, user.cnp);
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
-    public String getSpecialty() {
-        return specialty;
-    }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
 }

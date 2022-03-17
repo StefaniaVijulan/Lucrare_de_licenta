@@ -2,17 +2,17 @@
   <div class="form-control format-login">
     <br>
     <h3>Login</h3>
-    <form>
+    <form #loginform ="ngForm" (ngSubmit)="loginDoctor()">
       <br>
       <small class="alert-danger"></small>
       <div class="form-group">
-        <input type="email" class="form-control inputformat" id="email" aria-describedby="emailHelp" placeholder="Enter email"
-          name="email">
+        <input type="number" class="form-control inputformat" placeholder="Enter your cnp"
+          name="number" [(ngModel)]="user.cnp">
       </div>
       <br>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-        <small class="text-danger">Please introduce your password</small>
+        <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password">
+       
       </div>
       <br>
       <div class="text-center">

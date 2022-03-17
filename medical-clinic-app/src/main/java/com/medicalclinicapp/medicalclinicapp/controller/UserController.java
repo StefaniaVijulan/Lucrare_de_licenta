@@ -1,51 +1,73 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.MedicalClinicAppApplication;
+import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
-import com.medicalclinicapp.medicalclinicapp.security.dto.RegisterRequest;
-import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import static com.medicalclinicapp.medicalclinicapp.security.models.Role.DOCTOR;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class UserController {
+
+        private final UserService userService;
+
         @Autowired
-        UserService userService;
+        private AuthenticationManager authenticationManager;
 
+        @Autowired
+        private JwtUtil jwtTokenUtil;
 
-        @PostMapping(value = "/register")
-        public User register(@RequestBody RegisterRequest registerRequest) {
-            return userService.registerUser(registerRequest);
+        @PostMapping(path = "/register")
+        public void registerUser(@RequestBody User user) {
+            System.out.println(user);
+            userService.registerUser(user);
         }
+        @PostMapping(path = "/login")
+        public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
+            try {
 
-        @PostMapping(value = "/login")
-        public User login(@RequestBody LoginRequest loginRequest) {
+                    authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                                    loginRequest.getPassword()));
+                }
+                catch (BadCredentialsException e) {
 
-            //return userService.loginUser(loginRequest);
-            LoginResponse loginResponse = new LoginResponse();
-            User user = userService.loginUser(loginRequest.getCnp(), loginRequest.getPassword());
-            loginResponse.setCnp(user.getCnp());
-            MedicalClinicAppApplication.setCurrentUser(user);
-            System.out.println("Connected successfully");
-            return user;
+                    throw new Exception("Incorrect username or password", e);
+                }
+
+            final UserDetails userDetails = userService
+                    .loadUserByUsername(loginRequest.getUsername());
+
+            final String jwt = jwtTokenUtil.generateToken(userDetails);
+            System.out.println(jwt);
+            return ResponseEntity.ok(new LoginResponse(jwt));
         }
+    @GetMapping(path = "/user")
+    public String user() {
+        return ("<h1>Welcome</h1>");
+    }
 
-        @GetMapping(path = "/logout")
-        public String logoutUser() {
-            MedicalClinicAppApplication.setCurrentUser(null);
-            return "You logged out!";
+    @GetMapping(path = "/admin")
+    public String admin() {
+        return ("<h1>Welcome Admin </h1>");
+    }
 
-        }
+    @GetMapping(path = "/home")
+    public String home() {
+        return ("<h1>Home</h1>");
+    }
 
     }
 

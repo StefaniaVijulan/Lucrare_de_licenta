@@ -1,55 +1,40 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.exception.MyException;
-import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
-import com.medicalclinicapp.medicalclinicapp.security.dto.RegisterRequest;
-import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Service
-public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+@RequiredArgsConstructor
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User registerUser(RegisterRequest registerRequest) {
-        //verify if the new user already exists
-        if (userRepository.existsByCnp(registerRequest.getCnp())) {
-            throw new MyException("This user already exists in system", HttpStatus.UNPROCESSABLE_ENTITY);
+        public void registerUser(User user) {
+            //verificam daca un user cu email-ul respectiv se gaseste deja
+            Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
+            if (userOptional.isPresent()) {
+                throw new IllegalStateException("email taken");
+            }
+
+            //incriptam parola si salvam userul in baza de date
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
         }
+    @Override
+    public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException{
 
-        User newUser = new User();
-        newUser.setCnp(registerRequest.getCnp());
-        newUser.setFirstName(registerRequest.getFirstName());
-        newUser.setLastName(registerRequest.getLastName());
-        newUser.setSpecialty(registerRequest.getSpecialty());
-        newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        newUser.setRole(Role.DOCTOR);
-        registerRequest.setPassword(newUser.getPassword());
-        userRepository.save(newUser);
-        return newUser;
-    }
-
-    public User loginUser(String cnp, String password) {
-
-        if (!userRepository.existsByCnp(cnp)) {
-
-        }
-        User user = userRepository.findUserByCnp(cnp);
-        String pass = user.getPassword();
-        if (!passwordEncoder.matches(password, pass)) {
-            throw new MyException("Invalid cnp", HttpStatus.UNPROCESSABLE_ENTITY);
-
-        }
-        return user;
+        return userRepository.findByCnp(cnp).orElseThrow(() ->
+                new UsernameNotFoundException(
+                        String.format("username with cnp %s not found", cnp)
+                ));
     }
 }
