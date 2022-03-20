@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService {
             //verificam daca un user cu email-ul respectiv se gaseste deja
             Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
             if (userOptional.isPresent()) {
-                throw new IllegalStateException("email taken");
+                throw new IllegalStateException("Cnp taken");
             }
 
             //incriptam parola si salvam userul in baza de date

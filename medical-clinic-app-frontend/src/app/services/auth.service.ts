@@ -1,18 +1,26 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
+
   
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl = environment.baseUrl;
+  private publicHttpHeaders= {
+    headers: new HttpHeaders({'content-type':'application/json'})
+  };
+  constructor(private _http: HttpClient) {}
 
-  constructor(private _http: HttpClient) { }
-
-  public loginDoctorFromRemote(user: User):Observable<any>{
+  loginUser(data:any){
+    return this._http.post(this.baseUrl+"/login",data,this.publicHttpHeaders);
+  }
+/*  public loginDoctorFromRemote(user: User):Observable<any>{
     return this._http.post<any>("http://localhost:8080/login", user)
 
-  }
+  }*/
+
 }

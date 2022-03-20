@@ -36,20 +36,21 @@ public class UserController {
         }
         @PostMapping(path = "/login")
         public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
+            System.out.println("Intra");
             try {
-
+                System.out.println("Intra 1");
                     authenticationManager.authenticate(
                             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                                     loginRequest.getPassword()));
                 }
                 catch (BadCredentialsException e) {
-
+                    System.out.println("Intra 2");
                     throw new Exception("Incorrect username or password", e);
                 }
 
             final UserDetails userDetails = userService
                     .loadUserByUsername(loginRequest.getUsername());
-
+            System.out.println("Intra 3");
             final String jwt = jwtTokenUtil.generateToken(userDetails);
             System.out.println(jwt);
             return ResponseEntity.ok(new LoginResponse(jwt));

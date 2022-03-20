@@ -8,13 +8,15 @@ import { LoginPacientComponent } from './pages/login-pacient/login-pacient.compo
 import { LoginDoctorComponent } from './pages/login-doctor/login-doctor.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { DoctorDashboardComponent } from './pages/doctor-dashboard/doctor-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginPacientComponent,
-    LoginDoctorComponent
+    LoginDoctorComponent,
+    DoctorDashboardComponent
   ],
   imports: [
     BrowserModule,
