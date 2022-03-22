@@ -21,11 +21,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Table(name="user")
 public class User implements UserDetails {
-    @Id
-    @GeneratedValue(
+    /*  @Id
+  @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private Long id;
+    private Long id;*/
+    @Id
     private String cnp;
     private String firstName;
     private String lastName;
