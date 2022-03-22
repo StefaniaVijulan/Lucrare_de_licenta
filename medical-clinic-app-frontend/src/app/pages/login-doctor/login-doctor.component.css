@@ -9,3 +9,12 @@ h3{
   margin-left: 35%;
   margin-right: 35%;
 }
+#login-password{
+  position:absolute;
+  width: 28%;
+}
+#login-eye{
+  position:relative;
+  margin-left: 25.6vw;
+  margin-top: 0.7vh;
+}

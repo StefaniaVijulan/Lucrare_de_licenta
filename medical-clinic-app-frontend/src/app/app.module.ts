@@ -9,7 +9,13 @@ import { LoginDoctorComponent } from './pages/login-doctor/login-doctor.componen
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { DoctorDashboardComponent } from './pages/doctor-dashboard/doctor-dashboard.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +30,13 @@ import { DoctorDashboardComponent } from './pages/doctor-dashboard/doctor-dashbo
     FormsModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
