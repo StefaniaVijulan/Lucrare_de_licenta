@@ -15,14 +15,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from './services/auth.service';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { MatSliderModule } from '@angular/material/slider';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginPacientComponent,
     LoginDoctorComponent,
-    DoctorDashboardComponent
+    DoctorDashboardComponent,
+
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { AuthGuard } from './guards/auth.guard';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSliderModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

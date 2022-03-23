@@ -4,16 +4,21 @@ import com.medicalclinicapp.medicalclinicapp.MedicalClinicAppApplication;
 import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
+import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.UserService;
 import com.medicalclinicapp.medicalclinicapp.services.ExcelReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,9 +66,26 @@ public class UserController {
                     .loadUserByUsername(loginRequest.getUsername());
            // System.out.println("Intra 3");
             final String jwt = jwtTokenUtil.generateToken(userDetails);
+            Role roll =  userService.getRolesFromUser(userDetails);
+
           //  System.out.println(jwt);
-            return ResponseEntity.ok(new LoginResponse(jwt));
+            return ResponseEntity.ok(new LoginResponse(jwt, roll));
         }
+
+    @DeleteMapping(value = "/deleteDoctor", params = {"cnp"})
+    @PreAuthorize("hasRole('MODERATOR')")
+    public ResponseEntity<String> deleteDoctor(@RequestParam String cnp) throws RuntimeException {
+        try {
+            System.out.println("auth");
+          // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            //System.out.println(auth);
+          //  String requsterUsername = auth.getName();
+            userService.deleteDoctor(cnp);
+        } catch (Exception e) {
+            throw e;
+        }
+        return new ResponseEntity<>(cnp, HttpStatus.OK);
+    }
     @GetMapping(path = "/user")
     public String user() {
         return ("<h1>Welcome</h1>");

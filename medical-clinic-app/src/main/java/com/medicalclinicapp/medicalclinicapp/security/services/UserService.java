@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-        public void registerUser(User user) {
+    public void registerUser(User user) {
             //verificam daca un user cu email-ul respectiv se gaseste deja
             Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
             if (userOptional.isPresent()) {
@@ -37,4 +38,21 @@ public class UserService implements UserDetailsService {
                         String.format("username with cnp %s not found", cnp)
                 ));
     }
+    public Role getRolesFromUser( UserDetails userDetails){
+        Role roles= userRepository.findByCnp(userDetails.getUsername()).get().getRole();
+        return roles;
+    }
+    public void deleteDoctor(String cnpDoctor) {
+        if (!userRepository.existsByCnp(cnpDoctor)) {
+            throw new RuntimeException("User doesn't exists");
+        }
+        User userToDelete = userRepository.findUserByCnp(cnpDoctor);
+   //     User requestUser = userRepository.findUserByCnp(cnpModerator);
+     /*   if (!requestUser.getRole().equals("MODERATOR")) {
+            throw new RuntimeException("Role level doesn't permit removing user");
+        }*/
+        userRepository.deleteByCnp(cnpDoctor);
+    }
+
+
 }

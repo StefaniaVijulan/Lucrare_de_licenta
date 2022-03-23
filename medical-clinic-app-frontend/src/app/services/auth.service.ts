@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
+  roleAs: string;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json'})
   };
@@ -18,6 +19,9 @@ export class AuthService {
 
   loginUser(data:any){
     return this._http.post(this.baseUrl+"/login",data,this.publicHttpHeaders);
+  }
+  deleteDoctor(data:any){
+    return this._http.post(this.baseUrl+"/deleteDoctor",data,this.publicHttpHeaders);
   }
   loggedIn(){
     return !!localStorage.getItem('token')
@@ -31,5 +35,8 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token')
   }
-
+  getRole(){
+    return localStorage.getItem('role')
+  }
+  
 }

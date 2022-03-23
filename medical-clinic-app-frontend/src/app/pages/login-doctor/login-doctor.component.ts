@@ -32,6 +32,7 @@ export class LoginDoctorComponent implements OnInit {
       console.log(response);
       if (response && response.jwt) {
         localStorage.setItem('token', response.jwt);
+        localStorage.setItem('role', response.role)
         this._router.navigate(['/doctor-dashboard']);
       }
 
