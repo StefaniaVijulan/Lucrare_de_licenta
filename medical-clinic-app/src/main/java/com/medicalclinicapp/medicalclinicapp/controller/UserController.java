@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -39,7 +40,6 @@ public class UserController {
 
         @Autowired
         private ExcelReadService excelReadService;
-        // add user from exel
 
         // add user - that can be used just if the user is moderator
         @PostMapping(path = "/register")
@@ -47,6 +47,7 @@ public class UserController {
             System.out.println(user);
             userService.registerUser(user);
         }
+
         @PostMapping(path = "/login")
         public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         //    excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
@@ -72,34 +73,25 @@ public class UserController {
             return ResponseEntity.ok(new LoginResponse(jwt, roll));
         }
 
-    @DeleteMapping(value = "/deleteDoctor", params = {"cnp"})
-    @PreAuthorize("hasRole('MODERATOR')")
-    public ResponseEntity<String> deleteDoctor(@RequestParam String cnp) throws RuntimeException {
-        try {
-            System.out.println("auth");
-          // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            //System.out.println(auth);
-          //  String requsterUsername = auth.getName();
-            userService.deleteDoctor(cnp);
-        } catch (Exception e) {
-            throw e;
+        @GetMapping("/user/all")
+        public List<User> getEmployees(){
+            return userService.getAllEmployees();
         }
-        return new ResponseEntity<>(cnp, HttpStatus.OK);
-    }
-    @GetMapping(path = "/user")
-    public String user() {
-        return ("<h1>Welcome</h1>");
-    }
 
-    @GetMapping(path = "/admin")
-    public String admin() {
-        return ("<h1>Welcome Admin </h1>");
-    }
+        @GetMapping("/doctor/all")
+        public List<User> getAllDoctors(){
+                return userService.getAllDoctors();
+            }
 
-    @GetMapping(path = "/home")
-    public String home() {
-        return ("<h1>Home</h1>");
-    }
+        @GetMapping("/secretaries/all")
+        public List<User> getAllSecretaries(){
+            return userService.getAllSecretaries();
+        }
 
-    }
+        @GetMapping("/user/{cnp}")
+        public User getUserByCnp(@PathVariable(value = "cnp") String cnp){
+            System.out.println("da");
+            return userService.getUserByCnp(cnp);
+        }
+}
 

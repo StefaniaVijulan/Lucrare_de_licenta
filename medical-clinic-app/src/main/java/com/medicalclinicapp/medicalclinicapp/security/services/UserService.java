@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,17 +44,32 @@ public class UserService implements UserDetailsService {
         Role roles= userRepository.findByCnp(userDetails.getUsername()).get().getRole();
         return roles;
     }
-    public void deleteDoctor(String cnpDoctor) {
-        if (!userRepository.existsByCnp(cnpDoctor)) {
-            throw new RuntimeException("User doesn't exists");
-        }
-        User userToDelete = userRepository.findUserByCnp(cnpDoctor);
-   //     User requestUser = userRepository.findUserByCnp(cnpModerator);
-     /*   if (!requestUser.getRole().equals("MODERATOR")) {
-            throw new RuntimeException("Role level doesn't permit removing user");
-        }*/
-        userRepository.deleteByCnp(cnpDoctor);
+    public List<User> getAllEmployees(){
+        List<User> userList =  userRepository.findAll();
+        return userList;
     }
+    public List<User> getAllDoctors(){
+        List<User> doctorList = new ArrayList<>();
+        for(int i=0; i<userRepository.findAll().size(); i++){
+            if(userRepository.findAll().get(i).getRole().equals(Role.DOCTOR)){
+                doctorList.add(userRepository.findAll().get(i));
+            }}
+        return doctorList;
+    }
+    public List<User> getAllSecretaries(){
+        List<User> doctorList = new ArrayList<>();
+        for(int i=0; i<userRepository.findAll().size(); i++){
+            if(userRepository.findAll().get(i).getRole().equals(Role.SECRETARY)){
+                doctorList.add(userRepository.findAll().get(i));
+            }}
+        return doctorList;
+    }
+    public User getUserByCnp(String cnp){
+        System.out.println(!userRepository.existsByCnp(cnp));
+        if(!userRepository.existsByCnp(cnp))
+            throw  new IllegalStateException("User not found for this cnp :: " + cnp);
+        else
 
-
+            return userRepository.findUserByCnp(cnp);
+    }
 }

@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register","/login","/home").permitAll()
                 .antMatchers("/user").authenticated()
-                .antMatchers("/deleteDoctor").hasAuthority("MODERATOR")
+                .antMatchers("/user/{cnp}").hasAuthority("MODERATOR")
                 .and().cors().and().csrf().disable();
        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

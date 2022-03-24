@@ -23,9 +23,8 @@ public class MedicalClinicAppApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Ana");
+
 		excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
-		System.out.println("Bana");
 	}
 
 }

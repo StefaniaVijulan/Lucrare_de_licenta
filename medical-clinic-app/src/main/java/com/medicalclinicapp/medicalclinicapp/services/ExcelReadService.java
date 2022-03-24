@@ -29,10 +29,10 @@ public class ExcelReadService {
 
         Workbook workbook = WorkbookFactory.create(new File(excelPath));
         // Retrieving the number of sheets in the Workbook
-        System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
-        System.out.println("Retrieving Sheets using for-each loop");
+      //  System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+       // System.out.println("Retrieving Sheets using for-each loop");
         for (Sheet sheet : workbook) {
-            System.out.println("=> " + sheet.getSheetName());
+           // System.out.println("=> " + sheet.getSheetName());
             for (Row row : sheet) {
 
                 //CNP
@@ -49,7 +49,7 @@ public class ExcelReadService {
                 else if(excelRole.toUpperCase().equals("MODERATOR"))
                     roles = Role.MODERATOR;
                 else
-                    roles = Role.SECRETAR;
+                    roles = Role.SECRETARY;
                 User newUser = new User();
                 newUser.setCnp(excelCnp);
                 newUser.setEmailUser(exceEmail);
@@ -58,7 +58,7 @@ public class ExcelReadService {
                 newUser.setLastName(excelLname);
                 newUser.setSpecialty(excelSpec);
                 newUser.setPassword(bCryptPasswordEncoder.encode(excelPassword));
-                System.out.println(newUser);
+              //  System.out.println(newUser);
                 saveUserDataToDBRepository.save(newUser);
             }
         }
