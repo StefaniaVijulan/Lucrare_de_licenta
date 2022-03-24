@@ -12,6 +12,7 @@
     </div>
 </a>
 <a class="nav-link" style="cursor: pointer" *ngIf = "_service.loggedIn()" (click)="_service.logoutUser()" style="color: black;">Logout</a>
-<a class="nav-link" style="cursor: pointer" *ngIf = "(_service.loggedIn() && _service.getRole())" (click)="_service.deleteDoctor()" style="color: black;">Delete</a>
+
 </nav>
+
 <router-outlet></router-outlet>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginUserDTO } from 'src/app/interfaces/LoginUserDTO';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -7,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorDashboardComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public _service: AuthService) { }
+  
   ngOnInit() {
   }
 

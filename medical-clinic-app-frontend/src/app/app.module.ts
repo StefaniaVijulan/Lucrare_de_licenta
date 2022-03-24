@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +40,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatButtonModule,
     MatIconModule,
     MatSliderModule,
+    MatMenuModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

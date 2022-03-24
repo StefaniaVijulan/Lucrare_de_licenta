@@ -44,11 +44,12 @@ public class ExcelReadService {
                 String excelPassword = row.getCell(5).getStringCellValue();
                 String excelRole = row.getCell(6).getStringCellValue();
                 Role roles;
-                if( excelRole.toUpperCase().equals("USER"))
-                    roles = Role.USER;
-                else
+                if( excelRole.toUpperCase().equals("DOCTOR"))
+                    roles = Role.DOCTOR;
+                else if(excelRole.toUpperCase().equals("MODERATOR"))
                     roles = Role.MODERATOR;
-
+                else
+                    roles = Role.SECRETAR;
                 User newUser = new User();
                 newUser.setCnp(excelCnp);
                 newUser.setEmailUser(exceEmail);
