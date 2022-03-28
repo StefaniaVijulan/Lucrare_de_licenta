@@ -69,7 +69,6 @@ public class UserService implements UserDetailsService {
         if(!userRepository.existsByCnp(cnp))
             throw  new IllegalStateException("User not found for this cnp :: " + cnp);
         else
-
             return userRepository.findUserByCnp(cnp);
     }
 }
