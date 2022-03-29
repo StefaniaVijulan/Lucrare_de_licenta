@@ -46,13 +46,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/register","/login","/home").permitAll()
-               /*
-                .antMatchers("/user").authenticated()
-                */
-                .antMatchers("/user/**").hasAuthority("MODERATOR")
-                .and().cors().and().csrf().disable();
-       // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .antMatchers("/user{cnp}","/doctor/**").hasAuthority("MODERATOR")
+                .antMatchers("/user/changePass").authenticated()
+                .and().cors().and().csrf().disable()
+                .exceptionHandling()
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
+    /*
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -63,5 +65,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 }

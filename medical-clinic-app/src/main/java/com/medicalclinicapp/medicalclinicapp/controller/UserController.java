@@ -22,6 +22,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -52,6 +54,7 @@ public class UserController {
         public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         //    excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
            // System.out.println("Intra");
+
             try {
              //   System.out.println("Intra 1");
                     authenticationManager.authenticate(
@@ -68,11 +71,14 @@ public class UserController {
            // System.out.println("Intra 3");
             final String jwt = jwtTokenUtil.generateToken(userDetails);
             Role roll =  userService.getRolesFromUser(userDetails);
-
           //  System.out.println(jwt);
             return ResponseEntity.ok(new LoginResponse(jwt, roll));
         }
 
+        @PostMapping(path="/user/changePass")
+        public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, Principal principal, HttpSession httpSession){
+            return userService.changePassword(oldPass, newPass, principal, httpSession);
+        }
         @GetMapping("/user/all")
         public List<User> getEmployees(){
             return userService.getAllEmployees();
@@ -88,10 +94,10 @@ public class UserController {
             return userService.getAllSecretaries();
         }
 
-        @GetMapping("/user/{cnp}")
-        public User getUserByCnp(@PathVariable(value = "cnp") String cnp){
-            System.out.println("da");
-            return userService.getUserByCnp(cnp);
+        @GetMapping("/user")
+        public User getUserByCnp(@RequestParam(value = "cnp") String cnp){
+
+            return userService.getUserCnp(cnp);
         }
 }
 

@@ -4,12 +4,16 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.math3.ml.distance.CanberraDistance;
+import org.aspectj.bridge.Message;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +44,27 @@ public class UserService implements UserDetailsService {
                         String.format("username with cnp %s not found", cnp)
                 ));
     }
+    public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
+        System.out.println("Old pass" + oldPass);
+        System.out.println("New pass" + newPass);
+
+        String username =principal.getName();
+        User currentUser = this.userRepository.findUserByCnp(username);
+
+        if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
+        {
+            System.out.println("pass write is the same with the user pass");
+            currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+            this.userRepository.save(currentUser);
+            System.out.println("Pass change");
+        }
+        else
+        {
+            System.out.println("pass write is not the same with the user pass");
+        }
+        return currentUser;
+
+    }
     public Role getRolesFromUser( UserDetails userDetails){
         Role roles= userRepository.findByCnp(userDetails.getUsername()).get().getRole();
         return roles;
@@ -64,7 +89,7 @@ public class UserService implements UserDetailsService {
             }}
         return doctorList;
     }
-    public User getUserByCnp(String cnp){
+    public User getUserCnp(String cnp){
         System.out.println(!userRepository.existsByCnp(cnp));
         if(!userRepository.existsByCnp(cnp))
             throw  new IllegalStateException("User not found for this cnp :: " + cnp);
