@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { map } from 'rxjs/operators';
   
 
 @Injectable({
@@ -26,17 +26,18 @@ export class AuthService {
   loggedIn(){
     return !!localStorage.getItem('token')
   }
-
+  
   logoutUser(){
     localStorage.removeItem('token')
     this._router.navigate(['/login-doctor'])
   }
-
   getToken(){
     return localStorage.getItem('token')
+  }
+  getUser(){
+    return localStorage.getItem('user')
   }
   getRole(){
     return localStorage.getItem('role')
   }
-  
 }

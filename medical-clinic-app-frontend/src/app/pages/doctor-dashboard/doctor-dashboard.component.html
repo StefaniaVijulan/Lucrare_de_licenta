@@ -1,1 +1,30 @@
-<button class="nav-link" style="cursor: pointer" *ngIf = "(_service.loggedIn() && _service.getRole())" (click)="_service.deleteDoctor()" style="color: black;">Delete</button>
+<button class="nav-link" style="cursor: pointer" *ngIf="(_service.loggedIn() && moderatorRole())"
+  (click)="_service.deleteDoctor()" style="color: black;">Delete</button>
+<p>{{user.lastName}}</p>
+<h1>File Upload</h1>
+<input type="file" (change)="onFileSelected($event)">
+<!--<button type="button" (click)="onUpload()">Upload</button>-->
+<button *ngIf="(_service.loggedIn() && moderatorRole())" (click)="allUser()">Submit</button>
+<div [hidden]="!(_service.loggedIn() && moderatorRole())">
+
+
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Cnp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let users of usersList">
+        <td scop="row">{{users.cnp}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div [hidden]="!_service.loggedIn()">
+  <form>
+    Old Pass: <input id="text" type="password" name="oldPass" [(ngModel)]="oldPass">
+    New Pass: <input od="text" type="password" name="newPass" [(ngModel)]="newPass">
+    <button *ngIf="_service.loggedIn()" (click)="changePass()">Submit</button>
+  </form>
+</div>

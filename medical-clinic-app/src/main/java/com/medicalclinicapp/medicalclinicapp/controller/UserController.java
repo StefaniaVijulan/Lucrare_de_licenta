@@ -21,8 +21,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -45,11 +48,15 @@ public class UserController {
 
         // add user - that can be used just if the user is moderator
         @PostMapping(path = "/register")
-        public void registerUser(@RequestBody User user) {
+        public void registerUser(@RequestBody User user) throws IOException {
             System.out.println(user);
             userService.registerUser(user);
         }
-
+      /*  @PostMapping(path = "/changeUserPhoto")
+        public void changePhoto(@ModelAttribute("file") String file, Principal principal)
+        {
+            userService.changePhoto(file,principal);
+        }*/
         @PostMapping(path = "/login")
         public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         //    excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
@@ -70,9 +77,9 @@ public class UserController {
                     .loadUserByUsername(loginRequest.getUsername());
            // System.out.println("Intra 3");
             final String jwt = jwtTokenUtil.generateToken(userDetails);
-            Role roll =  userService.getRolesFromUser(userDetails);
+            User currentUser= userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
           //  System.out.println(jwt);
-            return ResponseEntity.ok(new LoginResponse(jwt, roll));
+            return ResponseEntity.ok(new LoginResponse(jwt, currentUser));
         }
 
         @PostMapping(path="/user/changePass")

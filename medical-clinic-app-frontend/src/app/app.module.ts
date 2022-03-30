@@ -24,9 +24,7 @@ import { MatMenuModule} from '@angular/material/menu';
     HomeComponent,
     LoginPacientComponent,
     LoginDoctorComponent,
-    DoctorDashboardComponent,
-
-    
+    DoctorDashboardComponent,    
   ],
   imports: [
     BrowserModule,

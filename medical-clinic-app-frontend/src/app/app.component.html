@@ -6,11 +6,7 @@
 
     </ul>
   </div>
-  <a class="navbar-brand"  *ngIf = "_service.loggedIn()" href="/">
-    <div class="logo-image">
-          <img src="image" class="img-fluid">
-    </div>
-</a>
+  
 <a class="nav-link" style="cursor: pointer" *ngIf = "_service.loggedIn()" (click)="_service.logoutUser()" style="color: black;">Logout</a>
 
 </nav>

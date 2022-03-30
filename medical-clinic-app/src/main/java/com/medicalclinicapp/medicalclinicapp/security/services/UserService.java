@@ -4,6 +4,7 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.ml.distance.CanberraDistance;
 import org.aspectj.bridge.Message;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +12,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +31,33 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void registerUser(User user) {
+    public void registerUser(User user) throws IOException {
             //verificam daca un user cu email-ul respectiv se gaseste deja
             Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("Cnp taken");
             }
 
+
             //incriptam parola si salvam userul in baza de date
+          /*  String path ="src/main/resources/images/user/" + user.getImage();
+            byte[] fileContent =FileUtils.readFileToByteArray(new File(path));
+
+            user.setImage(Base64.getEncoder().encodeToString(fileContent));*/
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-        }
+        };
+    /*public void changePhoto(String file, Principal principal){
+
+            String username =principal.getName();
+            User currentUser = this.userRepository.findUserByCnp(username);
+            try {
+                byte[] fileContent =FileUtils.readFileToByteArray(new File(file));
+                currentUser.setImage(Base64.getEncoder().encodeToString(fileContent));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
     @Override
     public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException{
 
@@ -43,6 +65,18 @@ public class UserService implements UserDetailsService {
                 new UsernameNotFoundException(
                         String.format("username with cnp %s not found", cnp)
                 ));
+    }
+    public User loginUser(String cnp, String password){
+        if (!userRepository.existsByCnp(cnp)) {
+            throw new IllegalStateException("Cnp doesnt exist");
+        }
+        User user = userRepository.findUserByCnp(cnp);
+        String pass = user.getPassword();
+        if (!bCryptPasswordEncoder.matches(password, pass)) {
+            throw new IllegalStateException("Cnp doesnt exist");
+
+        }
+        return user;
     }
     public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
         System.out.println("Old pass" + oldPass);
