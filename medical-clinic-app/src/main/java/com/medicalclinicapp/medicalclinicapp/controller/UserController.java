@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.MedicalClinicAppApplication;
+import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -82,29 +84,39 @@ public class UserController {
             return ResponseEntity.ok(new LoginResponse(jwt, currentUser));
         }
 
-        @PostMapping(path="/user/changePass")
+        @PostMapping(path="/allUser/changePass")
         public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, Principal principal, HttpSession httpSession){
             return userService.changePassword(oldPass, newPass, principal, httpSession);
         }
-        @GetMapping("/user/all")
+        @GetMapping("/moderator/allUsers")
         public List<User> getEmployees(){
             return userService.getAllEmployees();
         }
 
-        @GetMapping("/doctor/all")
+        @GetMapping("/moderator/allDoctors")
         public List<User> getAllDoctors(){
                 return userService.getAllDoctors();
             }
 
-        @GetMapping("/secretaries/all")
+        @GetMapping("/moderator/allSecretaries")
         public List<User> getAllSecretaries(){
             return userService.getAllSecretaries();
         }
 
-        @GetMapping("/user")
+        @GetMapping("/moderator/userCnp")
         public User getUserByCnp(@RequestParam(value = "cnp") String cnp){
 
             return userService.getUserCnp(cnp);
         }
+
+        @GetMapping("/user/allHospitalization")
+        public List<Hospitalization> getAllHospitalization(Principal principal){
+            return userService.getAllHospitalizationByUser(principal);
+        }
+        @DeleteMapping("/moderator/delete{id}")
+        public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") String cnp){
+            return userService.deleteUser(cnp);
+        }
+
 }
 

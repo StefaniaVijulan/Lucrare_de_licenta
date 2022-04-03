@@ -1,5 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,14 +13,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @RequiredArgsConstructor
 @Table(name="user")
 public class User implements UserDetails {
@@ -37,9 +35,78 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Hospitalization> hospitalizationList;
    /* @Column(columnDefinition = "LONGBLOB")
     private String image;
 */
+
+    public String getCnp() {
+        return cnp;
+    }
+
+    public void setCnp(String cnp) {
+        this.cnp = cnp;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Hospitalization> getHospitalizationList() {
+        return hospitalizationList;
+    }
+
+    public void setHospitalizationList(List<Hospitalization> hospitalizationList) {
+        this.hospitalizationList = hospitalizationList;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =

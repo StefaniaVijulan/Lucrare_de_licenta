@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 @Service
@@ -57,6 +58,7 @@ public class ExcelReadService {
                 newUser.setFirstName(excelFname);
                 newUser.setLastName(excelLname);
                 newUser.setSpecialty(excelSpec);
+                newUser.setHospitalizationList(new ArrayList<>());
                 newUser.setPassword(bCryptPasswordEncoder.encode(excelPassword));
               //  System.out.println(newUser);
                 saveUserDataToDBRepository.save(newUser);

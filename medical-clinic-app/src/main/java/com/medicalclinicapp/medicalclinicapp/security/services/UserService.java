@@ -1,5 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
+import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.Role;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
@@ -7,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.ml.distance.CanberraDistance;
 import org.aspectj.bridge.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,15 +22,16 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private HospitalizationRepository hospitalizationRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -37,15 +41,16 @@ public class UserService implements UserDetailsService {
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("Cnp taken");
             }
+/*
+            List<Hospitalization> hospitalizationList = new ArrayList<>();
+            System.out.println(hospitalizationList);
+            user.setHospitalizationList(hospitalizationList);
+            System.out.println(user.getHospitalizationList());*/
 
-
-            //incriptam parola si salvam userul in baza de date
-          /*  String path ="src/main/resources/images/user/" + user.getImage();
-            byte[] fileContent =FileUtils.readFileToByteArray(new File(path));
-
-            user.setImage(Base64.getEncoder().encodeToString(fileContent));*/
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+
+            userRepository.saveAndFlush(user);
+
         };
     /*public void changePhoto(String file, Principal principal){
 
@@ -70,12 +75,14 @@ public class UserService implements UserDetailsService {
         if (!userRepository.existsByCnp(cnp)) {
             throw new IllegalStateException("Cnp doesnt exist");
         }
+        System.out.println( userRepository.findUserByCnp(cnp).getHospitalizationList());
         User user = userRepository.findUserByCnp(cnp);
         String pass = user.getPassword();
         if (!bCryptPasswordEncoder.matches(password, pass)) {
             throw new IllegalStateException("Cnp doesnt exist");
 
         }
+        System.out.println(user.getHospitalizationList());
         return user;
     }
     public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
@@ -98,10 +105,6 @@ public class UserService implements UserDetailsService {
         }
         return currentUser;
 
-    }
-    public Role getRolesFromUser( UserDetails userDetails){
-        Role roles= userRepository.findByCnp(userDetails.getUsername()).get().getRole();
-        return roles;
     }
     public List<User> getAllEmployees(){
         List<User> userList =  userRepository.findAll();
@@ -129,5 +132,28 @@ public class UserService implements UserDetailsService {
             throw  new IllegalStateException("User not found for this cnp :: " + cnp);
         else
             return userRepository.findUserByCnp(cnp);
+    }
+    public List<Hospitalization> getAllHospitalizationByUser(Principal principal){
+        String username = principal.getName();
+        User currentUser = this.userRepository.findUserByCnp(username);
+
+        List<Hospitalization> hospitalizationList = new ArrayList<>();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getUser().equals(currentUser)){
+                hospitalizationList.add(hospitalizationRepository.findAll().get(i));
+            }
+        }
+        return hospitalizationList;
+    }
+    public Map<String, Boolean> deleteUser(String cnp) throws UsernameNotFoundException {
+        if(!userRepository.existsByCnp(cnp)){
+            throw new IllegalStateException("User not found for this cnp :: " + cnp);
+        }
+        User user = userRepository.findUserByCnp(cnp);
+
+        userRepository.delete(user);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }

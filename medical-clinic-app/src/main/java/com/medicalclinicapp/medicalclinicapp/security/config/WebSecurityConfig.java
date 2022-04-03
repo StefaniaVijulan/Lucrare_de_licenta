@@ -45,9 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/register","/login","/home").permitAll()
-                .antMatchers("/user{cnp}","/doctor/**").hasAuthority("MODERATOR")
-                .antMatchers("/user/changePass{oldPass}{newPass}").authenticated()
+                .antMatchers("/register","/login").permitAll()
+                .antMatchers("/allUser/changePass{oldPass}{newPass}").authenticated()
+                .antMatchers("/moderator/**").hasAuthority("MODERATOR")
+                .antMatchers("/user/**").hasAnyAuthority("SECRETARY","DOCTOR")
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
                 .and().sessionManagement()
