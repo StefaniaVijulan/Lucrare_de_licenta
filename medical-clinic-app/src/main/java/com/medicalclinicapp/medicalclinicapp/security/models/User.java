@@ -14,7 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
-
+@Setter
+@Getter
 @Entity
 @RequiredArgsConstructor
 @Table(name="user")
@@ -29,6 +30,8 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String emailUser;
+    private String numberUser;
+    private String imageUser;
     //cardiology, radiology
     private String specialty;
     @Column(name = "password")
@@ -42,62 +45,6 @@ public class User implements UserDetails {
     private String image;
 */
 
-    public String getCnp() {
-        return cnp;
-    }
-
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public List<Hospitalization> getHospitalizationList() {
         return hospitalizationList;

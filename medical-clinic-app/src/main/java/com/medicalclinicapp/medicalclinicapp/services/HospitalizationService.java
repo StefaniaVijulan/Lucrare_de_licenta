@@ -1,21 +1,16 @@
 package com.medicalclinicapp.medicalclinicapp.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
-import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
-import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.SpringServletContainerInitializer;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
-import java.util.List;
+import java.util.Date;
+import java.util.Optional;
 
 
 @Service
@@ -36,5 +31,23 @@ public class HospitalizationService {
 
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
+    }
+    public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
+        Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
+        if(!hospitalizationOptional.isPresent()){
+            throw new IllegalStateException("This hospitalization doesnt exist");
+        }
+        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
+        hospitalization.setEndDateHospitalization(dateEnd);
+        return "Change Hospitalization Data End";
+    }
+    public String changeHospitalizationNumberOfHospitalization(String registrationNoHospitalization, Integer numberOfHospitalization){
+        Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
+        if(!hospitalizationOptional.isPresent()){
+            throw new IllegalStateException("This hospitalization doesnt exist");
+        }
+        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
+        hospitalization.setNumberOfHospitalization(numberOfHospitalization);
+        return "Change Hospitalization Data End";
     }
 }

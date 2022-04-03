@@ -103,15 +103,19 @@ public class UserController {
             return userService.getAllSecretaries();
         }
 
-        @GetMapping("/moderator/userCnp")
+        @GetMapping("/moderator/userCnp{cnp}")
         public User getUserByCnp(@RequestParam(value = "cnp") String cnp){
 
             return userService.getUserCnp(cnp);
         }
 
+        @GetMapping("/user/allHospitalizationCurrent")
+        public List<Hospitalization> getAllHospitalizationCurrent(Principal principal){
+            return userService.getAllHospitalizationByUser(principal);
+        }
         @GetMapping("/user/allHospitalization")
         public List<Hospitalization> getAllHospitalization(Principal principal){
-            return userService.getAllHospitalizationByUser(principal);
+            return userService.getAllHospitalization(principal);
         }
         @DeleteMapping("/moderator/delete{id}")
         public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") String cnp){

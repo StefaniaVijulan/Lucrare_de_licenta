@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Date;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,10 +25,20 @@ public class HospitalizationController {
     private UserRepository userRepository;
 
     @Transactional
-    @PostMapping("/addHospitalization")
+    @PostMapping("/hospitalization/addHospitalization")
     public Hospitalization getUserByCnp(@RequestBody Hospitalization hospitalization, Principal principal){
 
         return hospitalizationService.addHospitalization(hospitalization, principal);
     }
+    @PostMapping("/hospitalization{registrationNoHospitalization}/changeEndData")
+    public String changeHopEndDate(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody Date endDate){
+        return hospitalizationService.changeHospitalizationDataEnd(registrationNoHospitalization, endDate);
+    }
+    @PostMapping("/hospitalization{registrationNoHospitalization}/changeNumberOfHospitalization")
+    public String changeHopEndDate(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody Integer NumberOfHospitalization){
+        return hospitalizationService.changeHospitalizationNumberOfHospitalization(registrationNoHospitalization, NumberOfHospitalization);
+    }
+
+
 
 }

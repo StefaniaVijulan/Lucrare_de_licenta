@@ -12,7 +12,5 @@ import java.util.List;
 @Repository
 public interface HospitalizationRepository extends JpaRepository<Hospitalization, String> {
 
-    List<Hospitalization> findByUser(User user);
-
-    Page<Hospitalization> findByUserCnp(String cnp, Pageable pageable);
+    Hospitalization findByRegistrationNoHospitalization(String registrationNoHospitalization);
 }

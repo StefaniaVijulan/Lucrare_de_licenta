@@ -41,11 +41,9 @@ public class UserService implements UserDetailsService {
             if (userOptional.isPresent()) {
                 throw new IllegalStateException("Cnp taken");
             }
-/*
-            List<Hospitalization> hospitalizationList = new ArrayList<>();
-            System.out.println(hospitalizationList);
-            user.setHospitalizationList(hospitalizationList);
-            System.out.println(user.getHospitalizationList());*/
+            if(user.getImageUser() == null || user.getImageUser().trim().isEmpty()){
+                user.setImageUser("");
+            }
 
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
@@ -140,7 +138,21 @@ public class UserService implements UserDetailsService {
         List<Hospitalization> hospitalizationList = new ArrayList<>();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             if(hospitalizationRepository.findAll().get(i).getUser().equals(currentUser)){
+                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
                 hospitalizationList.add(hospitalizationRepository.findAll().get(i));
+            }
+        }
+        return hospitalizationList;
+    }
+    public List<Hospitalization> getAllHospitalization(Principal principal){
+        String username = principal.getName();
+        User currentUser = this.userRepository.findUserByCnp(username);
+
+        List<Hospitalization> hospitalizationList = new ArrayList<>();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getUser().equals(currentUser)){
+                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
+                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
             }
         }
         return hospitalizationList;
@@ -156,4 +168,5 @@ public class UserService implements UserDetailsService {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
 }
