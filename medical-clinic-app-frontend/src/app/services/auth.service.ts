@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-  
 
+  
+const AVATAR_KEY = 'AVATAR_KEY';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,9 +25,16 @@ export class AuthService {
     return this._http.post(this.baseUrl+"/deleteDoctor",data,this.publicHttpHeaders);
   }
   loggedIn(){
+    console.log("local")
+    console.log( !!localStorage.getItem('token'))
+    console.log("mesaj")
+    console.log((localStorage.getItem('token')) != null ? true : false)
     return !!localStorage.getItem('token')
   }
-  
+  loggedInIf(){
+ 
+    return !!localStorage.getItem('token')
+  }
   logoutUser(){
     localStorage.removeItem('token')
     this._router.navigate(['/login-doctor'])
@@ -39,5 +47,15 @@ export class AuthService {
   }
   getRole(){
     return localStorage.getItem('role')
+  }
+  setAvatar(avatar: string){
+    window.sessionStorage.removeItem(AVATAR_KEY);
+    window.sessionStorage.setItem(AVATAR_KEY, avatar)
+  }
+  getAvatar(){
+    return window.sessionStorage.getItem("AVATAR_KEY")
+  }
+  getImage(){
+    
   }
 }

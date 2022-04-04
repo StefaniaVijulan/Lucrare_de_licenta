@@ -1,14 +1,77 @@
-<nav class="navbar navbar-expand-lg navbar" style="box-shadow: 0px 1px; color: rgb(43, 158, 235); background-color: white;">
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
-      <i style="margin-left: 1.5rem; margin-right: 1rem;font-size: 2rem; color: rgb(61, 147, 245);" routerLink="/home"
-        class="fas fa-praying-hands"></i>
+<!--
 
-    </ul>
+<nav class="navbar navbar-expand-lg navbar" style="position: fixed;  top: 0; width: 100%;box-shadow: 0px 1px 5px; color: rgb(0, 0, 0); background-color: rgb(43, 136, 235);">
+  <div class="collapse navbar-collapse">
+  <i style="margin-left: 1.5rem; margin-right: 1rem;font-size: 2rem; color: white;"class="fas fa-praying-hands"></i>
   </div>
-  
-<a class="nav-link" style="cursor: pointer" *ngIf = "_service.loggedIn()" (click)="_service.logoutUser()" style="color: black;">Logout</a>
+  <button style="font-size: 1.1rem; color: white;"  *ngIf="(_service.loggedIn())" mat-button >LogOut</button>
 
 </nav>
+<router-outlet></router-outlet>  -->
+<!---->
+<mat-toolbar>
 
-<router-outlet></router-outlet>
+  <button mat-icon-button *ngIf="(_service.loggedIn())" (click)="drawer.toggle()">
+    <mat-icon *ngIf="!showFiller">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="showFiller">
+      open
+    </mat-icon>
+    
+  </button>
+  Responsive side navigation
+</mat-toolbar>
+
+  <mat-drawer-container>
+    <mat-toolbar>
+
+      <button mat-icon-button *ngIf="(_service.loggedIn())" (click)="drawer.toggle()">
+        <mat-icon>
+          menu
+        </mat-icon>
+      </button>
+      Responsive side navigation
+    </mat-toolbar>
+
+    
+    <mat-drawer>
+    <mat-drawer *ngIf="(_service.loggedIn())" #drawer>
+      <button mat-button class="menu-button">
+          <mat-icon >home</mat-icon>
+          <span>Home</span>
+      </button>
+      <button mat-button class="menu-button">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+      </button>
+      <button mat-button class="menu-button">
+          <mat-icon>info</mat-icon>
+          <span>About</span>
+      </button>
+      <a class="image" style="color: springgreen; text-decoration: none;"
+        aria-label="Angular Audio Player" 
+        mat-button tabindex="0" aria-disabled="false"
+        routerLink="/change-avatar">
+      <span class="mat-button-wrapper">
+      <!--<img alt="angular" class="image" [src]=avatar width="40px" height="40px"/>-->
+      </span>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+      <div class="mat-button-focus-overlay"></div>
+      </a><span class="example-spacer"></span>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button">
+          <mat-icon>help</mat-icon>
+          <span>Help</span>
+      </button>
+</mat-drawer>
+   </mat-drawer>
+
+      <mat-drawer-content>
+          <div class="content mat-elevation-z4">
+              <router-outlet></router-outlet>
+          </div>
+      </mat-drawer-content>
+  </mat-drawer-container>

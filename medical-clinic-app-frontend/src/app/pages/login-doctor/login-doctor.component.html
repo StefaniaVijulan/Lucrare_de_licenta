@@ -1,5 +1,6 @@
 <div class="d-flex align-items-center">
   <div class="form-control format-login">
+    
     <br>
     <h3>Login</h3>
     <form #loginform="ngForm" (ngSubmit)="doLoginUser()">
@@ -11,9 +12,9 @@
         #username="ngModel"  [ngClass]="error?'is-invalid':''"  [class.is-invalid]="username.invalid && username.touched"  >
           <div *ngIf="username.errors && (username.invalid && username.touched)">
             <small class="text-danger" *ngIf="username.errors.required">CNP is a required field</small  >
-            <small class="text-danger" *ngIf="username.errors.pattern">Enter the valid CNP</small>
           </div>
       </div>
+
       <br>
       <div class="form-group">
         <input matInput [type]="showPassword ? 'text' : 'password'"  class="form-control" id="login-password" placeholder="Password" name="password" [(ngModel)]="user.password" required #password="ngModel"

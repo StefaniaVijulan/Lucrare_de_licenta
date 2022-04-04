@@ -41,11 +41,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Hospitalization> hospitalizationList;
-   /* @Column(columnDefinition = "LONGBLOB")
-    private String image;
-*/
-
-
     public List<Hospitalization> getHospitalizationList() {
         return hospitalizationList;
     }

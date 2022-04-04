@@ -18,6 +18,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule} from '@angular/material/menu';
+import { MatDividerModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,10 @@ import { MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatSliderModule,
-    MatMenuModule
+    MatMenuModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatDividerModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@ export class LoginDoctorComponent implements OnInit {
   constructor(private _service: AuthService, private _router: Router) {}
  
 
-  ngOnInit() {}
+  ngOnInit() {console.log("sper")}
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
@@ -50,5 +50,7 @@ export class LoginDoctorComponent implements OnInit {
   getUserCurrent(){
     return this.userCurrent;
   }
-  
+  getAvatar(){
+    return this.userCurrent.image
+  }
 }

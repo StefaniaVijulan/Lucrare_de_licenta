@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer, MatSidenav } from '@angular/material';
+import { User } from './interfaces/User';
+import { DoctorDashboardComponent } from './pages/doctor-dashboard/doctor-dashboard.component';
+import { LoginDoctorComponent } from './pages/login-doctor/login-doctor.component';
 import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
@@ -6,7 +11,11 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'medical-clinic-app-frontend';
-  constructor(public _service: AuthService){}
+  @ViewChild('drawer', { static: true }) public drawer: MatDrawer
+  showFiller = false;
+  constructor(public _service: AuthService, private observer: BreakpointObserver){
 
+  }
+
+ 
  }

@@ -11,4 +11,5 @@ import lombok.Getter;
 public class LoginResponse{
     private final String jwt;
     private final User user;
+
 }

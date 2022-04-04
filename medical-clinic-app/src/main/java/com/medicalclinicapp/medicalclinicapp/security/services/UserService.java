@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void registerUser(User user) throws IOException {
+    public String registerUser(User user) throws IOException {
             //verificam daca un user cu email-ul respectiv se gaseste deja
             Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
             if (userOptional.isPresent()) {
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
             userRepository.saveAndFlush(user);
-
+            return "Register done";
         };
     /*public void changePhoto(String file, Principal principal){
 

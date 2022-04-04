@@ -11,6 +11,6 @@ export interface User{
     specialty: String,
     password: String,
     role: Role,
-    image: String,
+    image: string,
   
 }

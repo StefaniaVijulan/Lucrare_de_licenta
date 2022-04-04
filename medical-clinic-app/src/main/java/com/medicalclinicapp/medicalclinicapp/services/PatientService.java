@@ -2,8 +2,6 @@ package com.medicalclinicapp.medicalclinicapp.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
-import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,4 +25,17 @@ public class PatientService {
         patient.setPasswordPatient(bCryptPasswordEncoder.encode(patient.getPasswordPatient()));
         patientRepository.save(patient);
     };
+
+    public Patient loginPatient(String cnpPatient, String passUser){
+        if (!patientRepository.existsByCnpPatient(cnpPatient)) {
+            throw new IllegalStateException("Cnp doesnt exist" );
+        }
+        Patient patient = patientRepository.findByCnp(cnpPatient);
+        String pass = patient.getPasswordPatient();
+        if (!bCryptPasswordEncoder.matches(passUser, pass)) {
+            throw new IllegalStateException("Cnp taken");
+
+        }
+        return patient;
+    }
 }

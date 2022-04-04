@@ -50,9 +50,10 @@ public class UserController {
 
         // add user - that can be used just if the user is moderator
         @PostMapping(path = "/register")
-        public void registerUser(@RequestBody User user) throws IOException {
+        public String registerUser(@RequestBody User user) throws IOException {
             System.out.println(user);
-            userService.registerUser(user);
+            return userService.registerUser(user);
+
         }
       /*  @PostMapping(path = "/changeUserPhoto")
         public void changePhoto(@ModelAttribute("file") String file, Principal principal)
