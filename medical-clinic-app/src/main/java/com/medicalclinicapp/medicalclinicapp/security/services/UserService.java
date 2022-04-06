@@ -1,56 +1,48 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
-import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
-import com.medicalclinicapp.medicalclinicapp.security.models.Role;
+import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.math3.ml.distance.CanberraDistance;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private HospitalizationRepository hospitalizationRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerUser(User user) throws IOException {
-            //verificam daca un user cu email-ul respectiv se gaseste deja
-            Optional<User> userOptional = userRepository.findByCnp(user.getCnp());
-            if (userOptional.isPresent()) {
-                throw new IllegalStateException("Cnp taken");
-            }
-            if(user.getImageUser() == null || user.getImageUser().trim().isEmpty()){
-                user.setImageUser("");
-            }
+    @Override
+    public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException {
 
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(!userRepository.existsById(cnp)){
+            throw new UsernameNotFoundException(
+                    String.format("username with cnp %s not found", cnp));
+        }
+        return userRepository.findByCnp(cnp);
+    }
+    public User loginUser(String cnp, String password){
+        if (!userRepository.existsById(cnp)) {
+            throw new IllegalStateException("Cnp doesnt exist");
+        }
 
-            userRepository.saveAndFlush(user);
-            return "Register done";
-        };
-    /*public void changePhoto(String file, Principal principal){
+        User userProfile = userRepository.findByCnp(cnp);
+        String pass = userProfile.getPassword();
+        if (!bCryptPasswordEncoder.matches(password, pass)) {
+            throw new IllegalStateException("Cnp doesnt exist");
+
+        }
+        return userProfile;
+    }
+   /*  /* public void changePhoto(String file, Principal principal){
 
             String username =principal.getName();
             User currentUser = this.userRepository.findUserByCnp(username);
@@ -61,40 +53,18 @@ public class UserService implements UserDetailsService {
                 e.printStackTrace();
             }
         }*/
-    @Override
-    public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException{
-
-        return userRepository.findByCnp(cnp).orElseThrow(() ->
-                new UsernameNotFoundException(
-                        String.format("username with cnp %s not found", cnp)
-                ));
-    }
-    public User loginUser(String cnp, String password){
-        if (!userRepository.existsByCnp(cnp)) {
-            throw new IllegalStateException("Cnp doesnt exist");
-        }
-        System.out.println( userRepository.findUserByCnp(cnp).getHospitalizationList());
-        User user = userRepository.findUserByCnp(cnp);
-        String pass = user.getPassword();
-        if (!bCryptPasswordEncoder.matches(password, pass)) {
-            throw new IllegalStateException("Cnp doesnt exist");
-
-        }
-        System.out.println(user.getHospitalizationList());
-        return user;
-    }
-    public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
+ /*  public UserProfile changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
         System.out.println("Old pass" + oldPass);
         System.out.println("New pass" + newPass);
 
         String username =principal.getName();
-        User currentUser = this.userRepository.findUserByCnp(username);
+        UserProfile currentUser = this.userProfileRepository.findUserProfileByCnp(username);
 
         if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
         {
             System.out.println("pass write is the same with the user pass");
             currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
-            this.userRepository.save(currentUser);
+            this.userProfileRepository.save(currentUser);
             System.out.println("Pass change");
         }
         else
@@ -104,15 +74,16 @@ public class UserService implements UserDetailsService {
         return currentUser;
 
     }
-    public List<User> getAllEmployees(){
-        List<User> userList =  userRepository.findAll();
-        return userList;
-    }
-    public List<User> getAllDoctors(){
-        List<User> doctorList = new ArrayList<>();
-        for(int i=0; i<userRepository.findAll().size(); i++){
-            if(userRepository.findAll().get(i).getRole().equals(Role.DOCTOR)){
-                doctorList.add(userRepository.findAll().get(i));
+    public List<UserProfile> getAllEmployees(){
+        List<UserProfile> userProfilesList =  userProfileRepository.findAllUserProfile();
+        return userProfilesList;
+    }*/
+    /*
+    public List<UserProfile> getAllDoctors(){
+        List<UserProfile> userProfileArrayList = new ArrayList<>();
+        for(int i=0; i<userProfileRepository.findAll().size(); i++){
+            if(userProfileRepository.findAll().get(i).get().equals(Role.DOCTOR)){
+                userProfileArrayList.add(userProfileRepository.findAll().get(i));
             }}
         return doctorList;
     }
@@ -168,5 +139,5 @@ public class UserService implements UserDetailsService {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
-
+*/
 }
