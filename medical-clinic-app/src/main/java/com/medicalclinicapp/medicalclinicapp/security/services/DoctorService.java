@@ -20,12 +20,9 @@ public class DoctorService  {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @Autowired
-    private UserService userService;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerUser(Doctor doctor) throws IOException {
+    public String registerDoctor(Doctor doctor) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
         Optional<Doctor> doctorOptional = doctorRepository.findById(doctor.getCnp());
         if (doctorOptional.isPresent()) {
@@ -36,9 +33,9 @@ public class DoctorService  {
         }
 
         doctor.setPassword(bCryptPasswordEncoder.encode(doctor.getPassword()));
-
+        doctor.setRole("DOCTOR");
         doctorRepository.saveAndFlush(doctor);
-        return "Register done";
+        return "Register doctor done";
     };
 
 

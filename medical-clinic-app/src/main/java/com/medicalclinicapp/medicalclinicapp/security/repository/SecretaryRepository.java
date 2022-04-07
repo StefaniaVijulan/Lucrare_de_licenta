@@ -1,11 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.repository;
 
 import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
+import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.print.Doc;
-import java.util.Optional;
-
-public interface DoctorRepository extends JpaRepository<Doctor, String> {
+public interface SecretaryRepository extends JpaRepository<Secretary, String> {
 }

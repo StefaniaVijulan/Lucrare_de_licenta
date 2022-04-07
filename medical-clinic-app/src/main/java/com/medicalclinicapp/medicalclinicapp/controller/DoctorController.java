@@ -30,10 +30,10 @@ public class DoctorController {
 
 
     // add user - that can be used just if the user is moderator
-    @PostMapping(path = "/register")
-    public String registerUser(@RequestBody Doctor userProfile) throws IOException {
-        System.out.println(userProfile);
-        return doctorService.registerUser(userProfile);
+    @PostMapping(path = "/moderator/registerDoctor")
+    public String registerDoctor(@RequestBody Doctor doctor) throws IOException {
+        System.out.println(doctor);
+        return doctorService.registerDoctor(doctor);
 
     }
 
