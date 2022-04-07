@@ -29,12 +29,6 @@ public class DoctorController {
     private DoctorService doctorService;
 
 
-    // add user - that can be used just if the user is moderator
-    @PostMapping(path = "/moderator/registerDoctor")
-    public String registerDoctor(@RequestBody Doctor doctor) throws IOException {
-        System.out.println(doctor);
-        return doctorService.registerDoctor(doctor);
 
-    }
 
 }

@@ -24,19 +24,5 @@ public class SecretaryService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerSecretary(Secretary secretary) throws IOException {
-        //verificam daca un user cu email-ul respectiv se gaseste deja
-        Optional<Secretary> secretaryOptional = secretaryRepository.findById(secretary.getCnp());
-        if (secretaryOptional.isPresent()) {
-            throw new IllegalStateException("Cnp taken");
-        }
-        if(secretary.getImageUser() == null || secretary.getImageUser().trim().isEmpty()){
-            secretary.setImageUser("");
-        }
 
-        secretary.setPassword(bCryptPasswordEncoder.encode(secretary.getPassword()));
-        secretary.setRole("SECRETARY");
-        secretaryRepository.saveAndFlush(secretary);
-        return "Register secretary done";
-    };
 }

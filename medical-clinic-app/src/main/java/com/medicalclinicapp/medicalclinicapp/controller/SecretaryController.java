@@ -20,10 +20,5 @@ public class SecretaryController {
     @Autowired
     private SecretaryService secretaryService;
     // add user - that can be used just if the user is moderator
-    @PostMapping(path = "/moderator/registerSecretary")
-    public String registerSecretary(@RequestBody Secretary secretary) throws IOException {
-        System.out.println(secretary);
-        return secretaryService.registerSecretary(secretary);
 
-    }
 }

@@ -4,12 +4,18 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.security.Principal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,66 +48,32 @@ public class UserService implements UserDetailsService {
         }
         return userProfile;
     }
-   /*  /* public void changePhoto(String file, Principal principal){
-
-            String username =principal.getName();
-            User currentUser = this.userRepository.findUserByCnp(username);
-            try {
-                byte[] fileContent =FileUtils.readFileToByteArray(new File(file));
-                currentUser.setImage(Base64.getEncoder().encodeToString(fileContent));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
- /*  public UserProfile changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession){
+    public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession) throws Exception {
         System.out.println("Old pass" + oldPass);
         System.out.println("New pass" + newPass);
 
         String username =principal.getName();
-        UserProfile currentUser = this.userProfileRepository.findUserProfileByCnp(username);
+        User currentUser = this.userRepository.findByCnp(username);
 
         if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
         {
             System.out.println("pass write is the same with the user pass");
             currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
-            this.userProfileRepository.save(currentUser);
-            System.out.println("Pass change");
+            this.userRepository.save(currentUser);
+            System.out.println("Password change");
         }
         else
         {
             System.out.println("pass write is not the same with the user pass");
+            throw new Exception("Incorrect username or password");
         }
         return currentUser;
 
     }
-    public List<UserProfile> getAllEmployees(){
-        List<UserProfile> userProfilesList =  userProfileRepository.findAllUserProfile();
-        return userProfilesList;
-    }*/
+
     /*
-    public List<UserProfile> getAllDoctors(){
-        List<UserProfile> userProfileArrayList = new ArrayList<>();
-        for(int i=0; i<userProfileRepository.findAll().size(); i++){
-            if(userProfileRepository.findAll().get(i).get().equals(Role.DOCTOR)){
-                userProfileArrayList.add(userProfileRepository.findAll().get(i));
-            }}
-        return doctorList;
-    }
-    public List<User> getAllSecretaries(){
-        List<User> doctorList = new ArrayList<>();
-        for(int i=0; i<userRepository.findAll().size(); i++){
-            if(userRepository.findAll().get(i).getRole().equals(Role.SECRETARY)){
-                doctorList.add(userRepository.findAll().get(i));
-            }}
-        return doctorList;
-    }
-    public User getUserCnp(String cnp){
-        System.out.println(!userRepository.existsByCnp(cnp));
-        if(!userRepository.existsByCnp(cnp))
-            throw  new IllegalStateException("User not found for this cnp :: " + cnp);
-        else
-            return userRepository.findUserByCnp(cnp);
-    }
+
+
     public List<Hospitalization> getAllHospitalizationByUser(Principal principal){
         String username = principal.getName();
         User currentUser = this.userRepository.findUserByCnp(username);

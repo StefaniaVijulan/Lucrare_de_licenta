@@ -15,6 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -47,37 +51,15 @@ public class UserController {
         return ResponseEntity.ok(new LoginResponse(jwt, currentUser));
     }
 
-      /*  @PostMapping(path = "/changeUserPhoto")
-        public void changePhoto(@ModelAttribute("file") String file, Principal principal)
-        {
-            userService.changePhoto(file,principal);
-        }*/
+    @PostMapping(path="/user/changePass")
+    public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, Principal principal, HttpSession httpSession) throws Exception {
+        return userService.changePassword(oldPass, newPass, principal, httpSession);
+    }
 
-/*
-        @PostMapping(path="/allUser/changePass")
-        public UserProfile changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, Principal principal, HttpSession httpSession){
-            return userService.changePassword(oldPass, newPass, principal, httpSession);
-        }
-        @GetMapping("/moderator/allUsers")
-        public List<UserProfile> getEmployees(){
-            return userService.getAllEmployees();
-        }
 
-        @GetMapping("/moderator/allDoctors")
-        public List<UserProfile> getAllDoctors(){
-                return userService.getAllEmployees();
-            }
+       /*
 
-        @GetMapping("/moderator/allSecretaries")
-        public List<UserProfile> getAllSecretaries(){
-            return userService.getAllSecretaries();
-        }
 
-        @GetMapping("/moderator/userCnp{cnp}")
-        public UserProfile getUserByCnp(@RequestParam(value = "cnp") String cnp){
-
-            return userService.getUserCnp(cnp);
-        }
 
         @GetMapping("/user/allHospitalizationCurrent")
         public List<Hospitalization> getAllHospitalizationCurrent(Principal principal){

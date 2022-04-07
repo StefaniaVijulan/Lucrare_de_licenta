@@ -8,4 +8,5 @@ import javax.print.Doc;
 import java.util.Optional;
 
 public interface DoctorRepository extends JpaRepository<Doctor, String> {
+    Doctor findByCnp(String username);
 }

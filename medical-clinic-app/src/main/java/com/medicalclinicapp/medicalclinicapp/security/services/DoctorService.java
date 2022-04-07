@@ -22,21 +22,7 @@ public class DoctorService  {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerDoctor(Doctor doctor) throws IOException {
-        //verificam daca un user cu email-ul respectiv se gaseste deja
-        Optional<Doctor> doctorOptional = doctorRepository.findById(doctor.getCnp());
-        if (doctorOptional.isPresent()) {
-            throw new IllegalStateException("Cnp taken");
-        }
-        if(doctor.getImageUser() == null || doctor.getImageUser().trim().isEmpty()){
-            doctor.setImageUser("");
-        }
 
-        doctor.setPassword(bCryptPasswordEncoder.encode(doctor.getPassword()));
-        doctor.setRole("DOCTOR");
-        doctorRepository.saveAndFlush(doctor);
-        return "Register doctor done";
-    };
 
 
 }

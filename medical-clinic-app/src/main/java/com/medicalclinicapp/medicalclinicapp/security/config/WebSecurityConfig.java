@@ -46,7 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/register","/login").permitAll()
-                .antMatchers("/moderator/registerSecretary", "/moderator/registerDoctor").hasAuthority("MODERATOR")
+                .antMatchers("/moderator/registerSecretary",
+                        "/moderator/registerDoctor",
+                        "/moderator/allUsers",
+                        "/moderator/allDoctors",
+                        "/moderator/allSecretaries",
+                        "/moderator/userCnp{cnp}",
+                        "/moderator/deleteDoctor{cnp}",
+                        "/moderator/deleteSecretary{cnp}").hasAuthority("MODERATOR")
+                .antMatchers("/hospitalization/addHospitalization",
+                        "/hospitalizationChangeEndData{registrationNoHospitalization}",
+                        "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}").hasAuthority("SECRETARY")
+                .antMatchers("/user/changePass").authenticated()
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
                 .and().sessionManagement()
