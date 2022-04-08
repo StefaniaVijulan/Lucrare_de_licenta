@@ -56,7 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/deleteSecretary{cnp}").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
-                        "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}").hasAuthority("SECRETARY")
+                        "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",
+                        "/secretary/allHospitalization",
+                        "/secretary/allDoctors",
+                        "/secretary/addPatient").hasAuthority("SECRETARY")
+
                 .antMatchers("/user/changePass").authenticated()
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()

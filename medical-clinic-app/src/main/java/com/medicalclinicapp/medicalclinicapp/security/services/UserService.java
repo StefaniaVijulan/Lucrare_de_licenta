@@ -1,10 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,9 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.security.Principal;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

@@ -1,16 +1,14 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
 
+import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -25,9 +23,11 @@ public class Doctor extends User {
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
     private String role;
-    /*
-        @OneToMany(mappedBy = "user")
-        private List<Hospitalization> hospitalizationList;*/
+
+    @OneToOne(mappedBy = "doctor")
+    private Hospitalization hospitalization;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =

@@ -24,8 +24,18 @@ public class Hospitalization {
     private String registrationNoHospitalization;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_cnp", nullable = false)
+    @JoinColumn(name = "secretary_cnp", nullable = false)
     Secretary secretary;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinColumn(name = "doctor_cnp", referencedColumnName = "cnp")
+    private Doctor doctor;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "patient_cnp",referencedColumnName = "cnp")
+    Patient patient;
 
     private Date startDateHospitalization;
     private Date endDateHospitalization;
