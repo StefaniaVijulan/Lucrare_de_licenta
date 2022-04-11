@@ -1,13 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
-import com.medicalclinicapp.medicalclinicapp.security.models.Moderator;
-import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
-import com.medicalclinicapp.medicalclinicapp.security.repository.DoctorRepository;
-import com.medicalclinicapp.medicalclinicapp.security.repository.ModeratorRepository;
-import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
-import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.*;
+import com.medicalclinicapp.medicalclinicapp.security.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,10 +22,16 @@ public class ModeratorService {
     private UserRepository userRepository;
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private CurantRepository curantRepository;
 
     @Autowired
     private SecretaryRepository secretaryRepository;
+
+    @Autowired
+    private ImagistRepository imagistRepository;
+
+    @Autowired
+    private HematologRepository hematologRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -50,20 +50,20 @@ public class ModeratorService {
         moderatorRepository.saveAndFlush(moderator);
         return "Register moderator done";
     };
-    public String registerDoctor(Doctor doctor) throws IOException {
+    public String registerCurant(Curant curant) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
-        Optional<Doctor> doctorOptional = doctorRepository.findById(doctor.getCnp());
-        if (doctorOptional.isPresent()) {
+        Optional<Curant> curantOptional = curantRepository.findById(curant.getCnp());
+        if (curantOptional.isPresent()) {
             return "Cnp taken";
         }
-        if(doctor.getImageUser() == null || doctor.getImageUser().trim().isEmpty()){
-            doctor.setImageUser("");
+        if(curant.getImageUser() == null || curant.getImageUser().trim().isEmpty()){
+            curant.setImageUser("");
         }
 
-        doctor.setPassword(bCryptPasswordEncoder.encode(doctor.getPassword()));
-        doctor.setRole("DOCTOR");
-        doctorRepository.saveAndFlush(doctor);
-        return "Register doctor done";
+        curant.setPassword(bCryptPasswordEncoder.encode(curant.getPassword()));
+        curant.setRole("CURANT");
+        curantRepository.save(curant);
+        return "Register generalist done";
     };
     public String registerSecretary(Secretary secretary) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
@@ -80,17 +80,50 @@ public class ModeratorService {
         secretaryRepository.saveAndFlush(secretary);
         return "Register secretary done";
     };
+    public String registerImagist(Imagist imagist) throws IOException {
+        //verificam daca un user cu email-ul respectiv se gaseste deja
+        Optional<Imagist> imagistOptional = imagistRepository.findById(imagist.getCnp());
+        if (imagistOptional.isPresent()) {
+            return "Cnp taken";
+        }
+        if(imagist.getImageUser() == null || imagist.getImageUser().trim().isEmpty()){
+            imagist.setImageUser("");
+        }
+
+        imagist.setPassword(bCryptPasswordEncoder.encode(imagist.getPassword()));
+        imagist.setRole("IMAGIST");
+        imagistRepository.saveAndFlush(imagist);
+        return "Register secretary done";
+    };
+    public String registerHematolog(Hematolog hematolog) throws IOException {
+        //verificam daca un user cu email-ul respectiv se gaseste deja
+        Optional<Hematolog> hematologOptional = hematologRepository.findById(hematolog.getCnp());
+        if (hematologOptional.isPresent()) {
+            return "Cnp taken";
+        }
+        if(hematolog.getImageUser() == null || hematolog.getImageUser().trim().isEmpty()){
+            hematolog.setImageUser("");
+        }
+
+        hematolog.setPassword(bCryptPasswordEncoder.encode(hematolog.getPassword()));
+        hematolog.setRole("HEMATOLOG");
+        hematologRepository.saveAndFlush(hematolog);
+        return "Register secretary done";
+    };
+
+
     public List<User> getAllEmployees(){
         List<User> userList =  userRepository.findAll();
         return userList;
     }
-    public List<Doctor> getAllDoctors(){
-        List<Doctor> doctorList = new ArrayList<>();
-        for(int i=0; i<doctorRepository.findAll().size(); i++){
-            if(doctorRepository.findAll().get(i).getRole().equals("DOCTOR")){
-                doctorList.add(doctorRepository.findAll().get(i));
+    public List<Curant> getAllCurant(){
+        List<Curant> generalistList = new ArrayList<>();
+
+        for(int i=0; i<curantRepository.findAll().size(); i++){
+            if(curantRepository.findAll().get(i).getRole().equals("GENERALIST")){
+                generalistList.add(curantRepository.findAll().get(i));
             }}
-        return doctorList;
+        return generalistList;
     }
     public List<Secretary> getAllSecretaries(){
         List<Secretary> secretaryList = new ArrayList<>();
@@ -107,11 +140,11 @@ public class ModeratorService {
         else
             return userRepository.findByCnp(cnp);
     }
-    public String deleteDoctor(String cnp){
-        if(!doctorRepository.existsById(cnp))
+    public String deleteCurant(String cnp){
+        if(!curantRepository.existsById(cnp))
             throw new IllegalStateException("User not found for this cnp :: " + cnp);
-        Doctor doctor = doctorRepository.findByCnp(cnp);
-        doctorRepository.delete(doctor);
+        Curant curant = curantRepository.findByCnp(cnp);
+        curantRepository.delete(curant);
 
         return "Doctor deleted";
     }

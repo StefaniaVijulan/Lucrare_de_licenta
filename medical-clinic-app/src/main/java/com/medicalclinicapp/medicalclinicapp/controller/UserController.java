@@ -3,7 +3,6 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.List;
 
 
 @RestController

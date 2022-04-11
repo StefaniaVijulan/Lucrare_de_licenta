@@ -47,13 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register","/login").permitAll()
                 .antMatchers("/moderator/registerSecretary",
-                        "/moderator/registerDoctor",
+                        "/moderator/registerCurant",
                         "/moderator/allUsers",
-                        "/moderator/allDoctors",
+                        "/moderator/allCurant",
                         "/moderator/allSecretaries",
                         "/moderator/userCnp{cnp}",
-                        "/moderator/deleteDoctor{cnp}",
-                        "/moderator/deleteSecretary{cnp}").hasAuthority("MODERATOR")
+                        "/moderator/deleteCurant",
+                        "/moderator/deleteSecretary").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

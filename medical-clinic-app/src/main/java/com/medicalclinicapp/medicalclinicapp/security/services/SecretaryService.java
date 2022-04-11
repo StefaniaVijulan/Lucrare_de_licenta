@@ -4,9 +4,9 @@ import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
 import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
-import com.medicalclinicapp.medicalclinicapp.security.repository.DoctorRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.User;
+import com.medicalclinicapp.medicalclinicapp.security.repository.CurantRepository;
 import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class SecretaryService {
     private SecretaryRepository secretaryRepository;
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private CurantRepository curantRepository;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -46,14 +46,14 @@ public class SecretaryService {
         }
         return hospitalizationList;
     }
-    public List<Doctor> seeAllDoctors(){
-        List<Doctor> doctorList = new ArrayList<>();
-        for(int i=0; i<doctorRepository.findAll().size(); i++){
+    public List<User> seeAllCurant(){
+        List<User> generalists = new ArrayList<>();
+        for(int i=0; i<curantRepository.findAll().size(); i++){
             {
-                doctorList.add(doctorRepository.findAll().get(i));
+                generalists.add(curantRepository.findAll().get(i));
             }
         }
-        return doctorList;
+        return generalists;
     }
 
 
@@ -82,9 +82,9 @@ public class SecretaryService {
         hospitalization.setPatient(patient);
 
 
-        if(!doctorRepository.existsById(cnp))
+        if(!curantRepository.existsById(cnp))
             throw new Exception("You cant assign this doctor because he doesnt exist");
-        hospitalization.setDoctor(doctorRepository.findByCnp(cnp));
+        hospitalization.setCurant(curantRepository.findByCnp(cnp));
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
     }

@@ -1,14 +1,11 @@
 package com.medicalclinicapp.medicalclinicapp.models;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
+import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
 import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,8 +26,8 @@ public class Hospitalization {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "doctor_cnp", referencedColumnName = "cnp")
-    private Doctor doctor;
+    @JoinColumn(name = "curant_cnp", referencedColumnName = "cnp")
+    private Curant curant;
 
     @JsonIgnore
     @ManyToOne

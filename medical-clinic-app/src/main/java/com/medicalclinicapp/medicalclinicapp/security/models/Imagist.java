@@ -1,6 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
-
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,25 +7,21 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Collections;
+
 
 @Entity
 @Getter
 @Setter
-@Table(name = "doctor")
+@Table(name = "imagist")
 @RequiredArgsConstructor
-public class Doctor extends User {
+public class Imagist extends User {
 
-    //cardiology, radiology
-    @Enumerated(EnumType.STRING)
-    private Specialty specialty;
     private String role;
-
-    @OneToOne(mappedBy = "doctor")
-    private Hospitalization hospitalization;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -34,5 +29,4 @@ public class Doctor extends User {
                 new SimpleGrantedAuthority(role);
         return Collections.singletonList(authority);
     }
-
 }

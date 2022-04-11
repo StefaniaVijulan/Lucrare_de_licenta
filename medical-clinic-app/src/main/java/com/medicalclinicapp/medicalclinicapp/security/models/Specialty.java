@@ -6,5 +6,4 @@ public enum Specialty {
     CT,
     CORONOGRAPHY,
     HEMOGRAMA,
-    GENERAL
 }

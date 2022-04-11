@@ -2,17 +2,13 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
-import com.medicalclinicapp.medicalclinicapp.security.models.Doctor;
-import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
+import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.SecretaryService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.util.List;
@@ -57,9 +53,9 @@ public class SecretaryController {
     public List<Hospitalization> getAllHospitalization(Principal principal){
         return secretaryService.getAllHospitalization(principal);
     }
-    @GetMapping("/secretary/allDoctors")
-    public List<Doctor> getAllDoctors(){
-        return secretaryService.seeAllDoctors();
+    @GetMapping("/secretary/allCurants")
+    public List<User> getAllCurants(){
+        return secretaryService.seeAllCurant();
     }
 
 }
