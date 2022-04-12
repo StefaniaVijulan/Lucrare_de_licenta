@@ -17,7 +17,7 @@ import java.util.Collections;
 @Entity
 @Getter
 @Setter
-@Table(name = "curant")
+@Table(name = "hematolog")
 @RequiredArgsConstructor
 public class Hematolog extends User {
 

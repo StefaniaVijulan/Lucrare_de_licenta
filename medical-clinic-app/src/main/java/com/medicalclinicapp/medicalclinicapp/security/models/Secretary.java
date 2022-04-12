@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +24,7 @@ public class Secretary extends User {
     private String role;
 
 
-    @OneToMany(mappedBy = "secretary")
+    @OneToMany(mappedBy = "secretary", cascade = CascadeType.REFRESH)
     private List<Hospitalization> hospitalizationList;
 
     @Override

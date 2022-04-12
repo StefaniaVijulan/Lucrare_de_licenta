@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
 
+import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ public class Curant extends User {
     @OneToOne(mappedBy = "curant")
     private Hospitalization hospitalization;
 
+    @OneToOne(mappedBy = "curant")
+    private Appointment appointment;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +36,11 @@ public class ModeratorService {
     @Autowired
     private HematologRepository hematologRepository;
 
+    @Autowired
+    private HospitalizationRepository hospitalizationRepository;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public String registerModerator(Moderator moderator) throws IOException {
@@ -63,7 +71,7 @@ public class ModeratorService {
         curant.setPassword(bCryptPasswordEncoder.encode(curant.getPassword()));
         curant.setRole("CURANT");
         curantRepository.save(curant);
-        return "Register generalist done";
+        return "Register curant done";
     };
     public String registerSecretary(Secretary secretary) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
@@ -93,7 +101,7 @@ public class ModeratorService {
         imagist.setPassword(bCryptPasswordEncoder.encode(imagist.getPassword()));
         imagist.setRole("IMAGIST");
         imagistRepository.saveAndFlush(imagist);
-        return "Register secretary done";
+        return "Register imagist done";
     };
     public String registerHematolog(Hematolog hematolog) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
@@ -108,7 +116,7 @@ public class ModeratorService {
         hematolog.setPassword(bCryptPasswordEncoder.encode(hematolog.getPassword()));
         hematolog.setRole("HEMATOLOG");
         hematologRepository.saveAndFlush(hematolog);
-        return "Register secretary done";
+        return "Register hematolog done";
     };
 
 
@@ -144,6 +152,14 @@ public class ModeratorService {
         if(!curantRepository.existsById(cnp))
             throw new IllegalStateException("User not found for this cnp :: " + cnp);
         Curant curant = curantRepository.findByCnp(cnp);
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getCurant().getCnp().equals(cnp)){
+                hospitalizationRepository.findAll().get(i).setCurant(curantRepository.findByCnp("5981023189682"));
+            }}
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            if(appointmentRepository.findAll().get(i).getCurant().getCnp().equals(cnp)){
+                appointmentRepository.findAll().get(i).setCurant(curantRepository.findByCnp("5981023189682"));
+            }}
         curantRepository.delete(curant);
 
         return "Doctor deleted";
@@ -152,6 +168,10 @@ public class ModeratorService {
         if(!secretaryRepository.existsById(cnp))
             throw new IllegalStateException("User not found for this cnp :: " + cnp);
         Secretary secretary = secretaryRepository.findByCnp(cnp);
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getSecretary().getCnp().equals(cnp)){
+                hospitalizationRepository.findAll().get(i).setSecretary(secretaryRepository.findByCnp("5981023189682"));
+            }}
         secretaryRepository.delete(secretary);
 
         return "Secretary deleted";

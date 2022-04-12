@@ -48,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register","/login").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCurant",
+                        "/moderator/registerHematolog",
+        "/moderator/registerImgist",
                         "/moderator/allUsers",
                         "/moderator/allCurant",
                         "/moderator/allSecretaries",
@@ -60,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/allHospitalization",
                         "/secretary/allDoctors",
                         "/secretary/addPatient").hasAuthority("SECRETARY")
-
+                .antMatchers("/curant/addAppointment").hasAuthority("CURANT")
                 .antMatchers("/user/changePass").authenticated()
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
