@@ -1,6 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
+import com.medicalclinicapp.medicalclinicapp.models.Hematology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
+import com.medicalclinicapp.medicalclinicapp.models.Radiology;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,6 +22,9 @@ import java.util.Collections;
 @Table(name = "imagist")
 @RequiredArgsConstructor
 public class Imagist extends User {
+
+    @OneToOne(mappedBy = "imagist")
+    private Radiology radiology;
 
     private String role;
 

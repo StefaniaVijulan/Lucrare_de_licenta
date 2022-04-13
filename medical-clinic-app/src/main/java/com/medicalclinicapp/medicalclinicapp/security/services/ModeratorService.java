@@ -1,7 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
@@ -39,8 +37,8 @@ public class ModeratorService {
     @Autowired
     private HospitalizationRepository hospitalizationRepository;
 
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public String registerModerator(Moderator moderator) throws IOException {
@@ -155,10 +153,6 @@ public class ModeratorService {
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             if(hospitalizationRepository.findAll().get(i).getCurant().getCnp().equals(cnp)){
                 hospitalizationRepository.findAll().get(i).setCurant(curantRepository.findByCnp("5981023189682"));
-            }}
-        for(int i=0; i<appointmentRepository.findAll().size(); i++){
-            if(appointmentRepository.findAll().get(i).getCurant().getCnp().equals(cnp)){
-                appointmentRepository.findAll().get(i).setCurant(curantRepository.findByCnp("5981023189682"));
             }}
         curantRepository.delete(curant);
 

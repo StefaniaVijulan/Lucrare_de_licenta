@@ -1,11 +1,13 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
 
-import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -27,8 +29,12 @@ public class Curant extends User {
     @OneToOne(mappedBy = "curant")
     private Hospitalization hospitalization;
 
+
     @OneToOne(mappedBy = "curant")
-    private Appointment appointment;
+    private AppointmentHematology appointmentHematology;
+
+    @OneToOne(mappedBy = "curant")
+    private AppointmentRadiology appointmentRadiology;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

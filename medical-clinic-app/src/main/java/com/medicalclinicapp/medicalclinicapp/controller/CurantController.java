@@ -1,8 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 
-import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.security.services.CurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,15 @@ public class CurantController {
 
     @Autowired
     private CurantService curantService;
-    @PostMapping("/curant/addAppointment")
-    public Appointment addAppoitment(@RequestBody Appointment appointment, Principal principal) throws Exception {
 
-        return curantService.addAppointment(appointment, principal);
+    @PostMapping("/curant/addAppointmentHematology")
+    public AppointmentHematology addAppointmentHematology(@RequestBody AppointmentHematology appointment, Principal principal) throws Exception {
+
+        return curantService.addAppointmentHematology(appointment, principal);
     }
+    @PostMapping("/curant/addAppointmentRadiology")
+    public AppointmentRadiology addAppointmentRadiology(@RequestBody AppointmentRadiology appointment, Principal principal) throws Exception {
 
+        return curantService.addAppointmentRadiology(appointment, principal);
+    }
 }

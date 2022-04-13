@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
 
+import com.medicalclinicapp.medicalclinicapp.models.Hematology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,10 @@ import java.util.Collections;
 @Table(name = "hematolog")
 @RequiredArgsConstructor
 public class Hematolog extends User {
+
+
+    @OneToOne(mappedBy = "hematolog")
+    private Hematology hematology;
 
     private String role;
 

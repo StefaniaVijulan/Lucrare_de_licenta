@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
 import lombok.Getter;
@@ -15,12 +16,15 @@ import java.util.Date;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="appointment")
-public class Appointment {
+@Table(name="appointmentHematology")
+public class AppointmentHematology {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "curant_cnp", referencedColumnName = "cnp")
     private Curant curant;
+
+    @OneToOne(mappedBy = "appointmentHematology")
+    private Hematology hematology;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,9 +52,4 @@ public class Appointment {
     private Boolean t3;
     private Boolean t4;
     private Boolean tsh;
-    //Imagistica
-    private Boolean eco;
-    private Boolean ekg;
-    private Boolean ct;
-    private Boolean irm;
 }

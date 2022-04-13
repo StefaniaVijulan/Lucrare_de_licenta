@@ -62,7 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/allHospitalization",
                         "/secretary/allDoctors",
                         "/secretary/addPatient").hasAuthority("SECRETARY")
-                .antMatchers("/curant/addAppointment").hasAuthority("CURANT")
+                .antMatchers("/curant/addAppointmentHematology",
+                "/curant/addAppointmentRadiology").hasAuthority("CURANT")
                 .antMatchers("/user/changePass").authenticated()
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
