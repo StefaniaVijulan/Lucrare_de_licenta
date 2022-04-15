@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { AuthService } from './services/auth.service';
+import { ModeratorComponent } from './pages/moderator/moderator.component';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -31,4 +32,5 @@ export class AppComponent implements AfterViewInit  {
       }
     });
   }
+
 }

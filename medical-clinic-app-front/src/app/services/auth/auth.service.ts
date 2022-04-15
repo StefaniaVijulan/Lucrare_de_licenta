@@ -20,7 +20,11 @@ export class AuthService {
   }
   logoutUser(){
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    localStorage.removeItem('user')
     this._router.navigate(['/home'])
   }
- 
+  getRole(){
+    return localStorage.getItem('role')
+  }
 }

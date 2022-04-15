@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginDto } from 'src/app/interfaces/login-dto';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 
 @Component({
@@ -32,11 +32,17 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response.jwt);
         localStorage.setItem('role', response.user.role)
         localStorage.setItem('user', JSON.stringify(response.user))
-        
-        this._router.navigate(['/dashboard']);
+        if(response.user.role == "MODERATOR"){
+          this._router.navigate(['/moderator']);
+        }
+        else{
+          this._router.navigate(['/dashboard']);
+        }
+
       }
     })
   }
+ 
   doLoginUserPatient() {
     this._service.loginUser(this.userDto).subscribe((response: any) => {
       console.log(response.user);

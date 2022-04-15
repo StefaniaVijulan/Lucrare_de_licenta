@@ -16,12 +16,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ModeratorComponent } from './pages/moderator/moderator.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ModeratorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatOptionModule,
 
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
