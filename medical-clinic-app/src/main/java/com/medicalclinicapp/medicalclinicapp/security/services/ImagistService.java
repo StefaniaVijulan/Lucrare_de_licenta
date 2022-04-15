@@ -29,20 +29,4 @@ public class ImagistService {
     private ImagistRepository imagistRepository;
 
 
-    public Radiology addConsultationRadiology(Long idAppointment, Radiology Radiology, Principal principal) throws Exception {
-        if(radiologyRepository.existsById(hematology.getId()))
-            throw new Exception("Din consultation it was done");
-        String username = principal.getName();
-        Hematolog hematolog = this.hematologRepository.findByCnp(username);
-        hematology.setHematolog(hematolog);
-
-        for(int i=0; i<appointmentHematologyRepository.findAll().size(); i++){
-            if(appointmentHematologyRepository.findAll().get(i).getId().equals(idAppointment)){
-                hematology.setAppointmentHematology(appointmentHematologyRepository.findAll().get(i));
-            }}
-
-
-        hematologyRepository.save(hematology);
-        return hematology;
-    }
 }
