@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
+import { ModeratorGuard } from './guard/moderator.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -29,7 +30,7 @@ const routes: Routes = [
   {
     path:"moderator",
     component: ModeratorComponent,
-    canActivate : [AuthGuard]
+    canActivate : [AuthGuard, ModeratorGuard]
   }
 ]
 @NgModule({
