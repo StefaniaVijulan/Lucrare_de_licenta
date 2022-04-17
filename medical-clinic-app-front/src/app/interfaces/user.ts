@@ -5,5 +5,5 @@ export interface User {
     emailUser: String,
     numberUser: String,
     role: String,
-    image: string,
+    imageUser: String;
 }

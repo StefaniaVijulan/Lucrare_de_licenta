@@ -126,7 +126,7 @@ public class ModeratorService {
         List<Curant> generalistList = new ArrayList<>();
 
         for(int i=0; i<curantRepository.findAll().size(); i++){
-            if(curantRepository.findAll().get(i).getRole().equals("GENERALIST")){
+            if(curantRepository.findAll().get(i).getRole().equals("CURANT")){
                 generalistList.add(curantRepository.findAll().get(i));
             }}
         return generalistList;

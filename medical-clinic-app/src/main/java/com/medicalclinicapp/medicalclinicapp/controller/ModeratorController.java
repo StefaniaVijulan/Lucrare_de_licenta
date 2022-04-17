@@ -52,7 +52,7 @@ public class ModeratorController {
 
     @GetMapping("/moderator/allUsers")
     public List<User> getEmployees(){
-        System.out.println("intra aici din fata");
+
         return moderatorService.getAllEmployees();
     }
     @GetMapping("/moderator/allCurant")

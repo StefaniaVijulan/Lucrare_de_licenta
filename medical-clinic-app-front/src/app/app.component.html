@@ -19,17 +19,17 @@
   <mat-sidenav-container >
   <mat-sidenav #sidenav="matSidenav" >
     <div *ngIf="(_service.loggedIn() && _service.getRole() == 'MODERATOR')">
-      <button  mat-button class="menu-button">
-          <mat-icon>home</mat-icon>
-          <span >See All Employees</span>
+      <button  mat-button class="menu-button" (click)="_moderator.seeEmployee()">
+          <mat-icon>people</mat-icon>
+          <span >Vezi angajatii</span>
       </button>
-      <button mat-button class="menu-button">
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
+      <button mat-button class="menu-button" (click)="_moderator.seeCurant()">
+          <mat-icon>people</mat-icon>
+          <span>Vezi doctorii curanti</span>
       </button>
-      <button mat-button class="menu-button">
-          <mat-icon>info</mat-icon>
-          <span>About</span>
+      <button mat-button class="menu-button" (click)="_moderator.seeSecretaries()">
+          <mat-icon>people</mat-icon>
+          <span>Vezi toti secretarii</span>
       </button>
 
       <mat-divider></mat-divider>

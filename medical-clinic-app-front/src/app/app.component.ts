@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular
 import { MatSidenav } from '@angular/material';
 import { ModeratorComponent } from './pages/moderator/moderator.component';
 import { AuthService } from './services/auth/auth.service';
+import { ModeratorService } from './services/moderator/moderator.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements AfterViewInit  {
   @ViewChild(MatSidenav,  {static: false})
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private cdr: ChangeDetectorRef, public _service:AuthService){
+  constructor(public _moderator:ModeratorService, private observer: BreakpointObserver, private cdr: ChangeDetectorRef, public _service:AuthService){
 
   }
   ngAfterViewInit(){

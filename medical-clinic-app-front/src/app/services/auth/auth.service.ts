@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
+  
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json'})
   };
@@ -27,4 +28,5 @@ export class AuthService {
   getRole(){
     return localStorage.getItem('role')
   }
+
 }
