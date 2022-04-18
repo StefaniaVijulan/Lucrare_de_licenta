@@ -49,10 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCurant",
                         "/moderator/registerHematolog",
-        "/moderator/registerImgist",
+                        "/moderator/registerImgist",
                         "/moderator/allUsers",
+                        "/moderator/allImagist",
                         "/moderator/allCurant",
                         "/moderator/allSecretaries",
+                        "/moderator/allImagists",
                         "/moderator/userCnp{cnp}",
                         "/moderator/deleteCurant",
                         "/moderator/deleteSecretary").hasAuthority("MODERATOR")

@@ -20,15 +20,18 @@ export class ModeratorService {
 
   getAllUsers(){
     return this._http.get(this.baseUrl + '/moderator/allUsers', this.publicHttpHeaders);
-  
   }
   getAllCurant(){
-  //  console.log('aici')
     return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
   }
   getAllSecretaries(){
-    return this._http.get(this.baseUrl + '/moderator/allSecretaries', this.publicHttpHeaders);
-  
+    return this._http.get(this.baseUrl + '/moderator/allSecretaries', this.publicHttpHeaders); 
+  }
+  getAllimagists(){
+    return this._http.get(this.baseUrl + '/moderator/allImagist', this.publicHttpHeaders); 
+  }
+  getAllHematolog(){
+    return this._http.get(this.baseUrl + '/moderator/allHematologs', this.publicHttpHeaders); 
   }
   addCurant(){
     return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
@@ -46,6 +49,16 @@ export class ModeratorService {
   seeSecretaries(){
     console.log("see secr")
     this.count = 3;
+    console.log(this.count)
+  }
+  seeImagist(){
+    console.log("see imagist")
+    this.count = 4;
+    console.log(this.count)
+  }
+  seeHematolog(){
+    console.log("see hema")
+    this.count = 5;
     console.log(this.count)
   }
   getCount(){

@@ -63,6 +63,17 @@ public class ModeratorController {
     public List<Secretary> getAllSecretaries(){
         return moderatorService.getAllSecretaries();
     }
+    @GetMapping("/moderator/allImagist")
+    public List<Imagist> getAllImagists(){
+        return moderatorService.getAllImagists();
+    }
+    @GetMapping("/moderator/allHematologs")
+    public List<Hematolog> getAllHematologs(){
+        return moderatorService.getAllHematologs();
+    }
+
+
+
     @GetMapping("/moderator/userCnp")
     public User getUserByCnp(@RequestParam(value = "cnp") String cnp){
 

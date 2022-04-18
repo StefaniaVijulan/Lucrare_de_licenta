@@ -139,6 +139,24 @@ public class ModeratorService {
             }}
         return secretaryList;
     }
+    public List<Imagist> getAllImagists(){
+        List<Imagist> imagistList = new ArrayList<>();
+        for(int i=0; i<imagistRepository.findAll().size(); i++){
+            if(imagistRepository.findAll().get(i).getRole().equals("IMAGIST")){
+                imagistList.add(imagistRepository.findAll().get(i));
+            }}
+        return imagistList;
+    }
+    public List<Hematolog> getAllHematologs(){
+        List<Hematolog> hematologList = new ArrayList<>();
+        for(int i=0; i<hematologRepository.findAll().size(); i++){
+            if(hematologRepository.findAll().get(i).getRole().equals("HEMATOLOG")){
+                hematologList.add(hematologRepository.findAll().get(i));
+            }}
+        return hematologList;
+    }
+
+
     public User getUserCnp(String cnp){
 
         if(!userRepository.existsById(cnp))

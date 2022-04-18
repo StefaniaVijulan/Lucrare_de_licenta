@@ -8,64 +8,71 @@
       close
     </mat-icon>
   </button>
- Medical Clinic App
+  Medical Clinic App
   <div style="margin-left: auto; margin-right: 1vw;">
-    <mat-icon  *ngIf="(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
-   
+    <mat-icon *ngIf="(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
+
   </div>
- 
-  </mat-toolbar>
-  
-  <mat-sidenav-container >
-  <mat-sidenav #sidenav="matSidenav" >
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
     <div *ngIf="(_service.loggedIn() && _service.getRole() == 'MODERATOR')">
-      <button  mat-button class="menu-button" (click)="_moderator.seeEmployee()">
-          <mat-icon>people</mat-icon>
-          <span >Vezi angajatii</span>
+      <button mat-button class="menu-button" (click)="_moderator.seeEmployee()">
+        <mat-icon>people</mat-icon>
+        <span>Angajati</span>
       </button>
       <button mat-button class="menu-button" (click)="_moderator.seeCurant()">
-          <mat-icon>people</mat-icon>
-          <span>Vezi doctorii curanti</span>
+        <mat-icon>people</mat-icon>
+        <span>Cardiologi</span>
       </button>
       <button mat-button class="menu-button" (click)="_moderator.seeSecretaries()">
-          <mat-icon>people</mat-icon>
-          <span>Vezi toti secretarii</span>
+        <mat-icon>people</mat-icon>
+        <span>Secretari</span>
       </button>
-
+      <button mat-button class="menu-button" (click)="_moderator.seeImagist()">
+        <mat-icon>people</mat-icon>
+        <span>Imagisti</span>
+      </button>
+      <button mat-button class="menu-button" (click)="_moderator.seeHematolog()">
+        <mat-icon>people</mat-icon>
+        <span>Hematologi</span>
+      </button>
       <mat-divider></mat-divider>
 
       <button mat-button class="menu-button">
-          <mat-icon>help</mat-icon>
-          <span>Help</span>
+        <mat-icon>help</mat-icon>
+        <span>Help</span>
       </button>
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole() != 'MODERATOR')">
-      <button  mat-button class="menu-button">
-          <mat-icon>home</mat-icon>
-          <span >Da</span>
+      <button mat-button class="menu-button">
+        <mat-icon>home</mat-icon>
+        <span>Da</span>
       </button>
       <button mat-button class="menu-button">
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
       </button>
       <button mat-button class="menu-button">
-          <mat-icon>info</mat-icon>
-          <span>About</span>
+        <mat-icon>info</mat-icon>
+        <span>About</span>
       </button>
 
       <mat-divider></mat-divider>
 
       <button mat-button class="menu-button">
-          <mat-icon>help</mat-icon>
-          <span>Help</span>
+        <mat-icon>help</mat-icon>
+        <span>Help</span>
       </button>
     </div>
   </mat-sidenav>
-  
-      <mat-sidenav-content>
-          <div class="content mat-elevation-z4">
-            <router-outlet></router-outlet>
 
-          </div>
-      </mat-sidenav-content>
-  </mat-sidenav-container>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4">
+      <router-outlet></router-outlet>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
