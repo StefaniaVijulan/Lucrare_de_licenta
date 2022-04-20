@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatTableModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material';
@@ -43,7 +43,8 @@ import { ModeratorComponent } from './pages/moderator/moderator.component';
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
-
+    MatDialogModule,
+    MatFormFieldModule
   ],
 
   providers: [],
