@@ -3,6 +3,7 @@ package com.medicalclinicapp.medicalclinicapp.security.services;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
+import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +38,9 @@ public class ModeratorService {
     @Autowired
     private HospitalizationRepository hospitalizationRepository;
 
+    @Autowired
+    private EmailService emailService;
+
 
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,6 +56,7 @@ public class ModeratorService {
         }
 
         moderator.setPassword(bCryptPasswordEncoder.encode(moderator.getPassword()));
+        emailService.sendmail("vijulandumitru@gmail.com","test","body test");
         moderator.setRole("MODERATOR");
         moderatorRepository.saveAndFlush(moderator);
         return "Register moderator done";
@@ -84,6 +89,9 @@ public class ModeratorService {
         secretary.setPassword(bCryptPasswordEncoder.encode(secretary.getPassword()));
         secretary.setRole("SECRETARY");
         secretaryRepository.saveAndFlush(secretary);
+        System.out.println(secretary.getEmailUser());
+        System.out.println(secretary.getEmailUser().getClass().getSimpleName());
+        emailService.sendmail(secretary.getEmailUser(),"test","sper ca merge");
         return "Register secretary done";
     };
     public String registerImagist(Imagist imagist) throws IOException {

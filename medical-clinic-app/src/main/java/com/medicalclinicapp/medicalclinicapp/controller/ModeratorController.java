@@ -3,6 +3,7 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.HematologRepository;
 import com.medicalclinicapp.medicalclinicapp.security.services.ModeratorService;
+import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class ModeratorController {
+
+
     @Autowired
     private ModeratorService moderatorService;
 
