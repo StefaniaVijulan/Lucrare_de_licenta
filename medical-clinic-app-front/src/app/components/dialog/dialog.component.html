@@ -1,0 +1,34 @@
+<form #registerform="ngForm" (ngSubmit)="register('curant')">
+<mat-form-field hintLabel="Intoduceti cele 13 caractere: " appearance="fill">
+    <mat-label>Introduceti CNP</mat-label>
+    <input matInput maxlength="13" placeholder="ex. 619991011191111" [formControl]="cnp"  [formControl]="text" required>
+
+    <mat-error *ngIf="cnp.invalid">{{getErrorCnp()}}</mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Introduceti numele de familie</mat-label>
+    <input matInput #input maxlength="20" placeholder="ex. Popescu">
+   
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Introduceti prenumele</mat-label>
+    <input matInput #input maxlength="40" placeholder="ex. Popescu" required>
+    
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="pat@example.com" [formControl]="email" [formControl]="text" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>
+<mat-form-field hintLabel="Intoduceti cele 10 caractere: " appearance="fill">
+    <mat-label>Introduceti numarul de telefon</mat-label>
+    <input matInput #input maxlength="10" placeholder="ex. 0784777666"  required>
+    <mat-hint> {{input.value?.length || 0}}/10</mat-hint>
+
+</mat-form-field>
+<br>
+
+<div mat-dialog-actions align="center">
+    <button mat-button [disabled]="registerform.form.invalid" type="submit" class="btn" color="primary">Add cardiolog</button>
+</div>
+</form>

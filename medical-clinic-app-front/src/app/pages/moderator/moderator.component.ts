@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ModeratorService } from 'src/app/services/moderator/moderator.service';
 import { environment } from 'src/environments/environment';
-import {MatTableDataSource} from "@angular/material/table";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import { MatDialog, MatPaginator, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-moderator',
@@ -24,16 +26,27 @@ export class ModeratorComponent implements OnInit {
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json'})
   };
-  constructor(public _moderator: ModeratorService, private _http: HttpClient, public _service: AuthService) { }
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  @ViewChild(MatPaginator,{static:true})
+  paginatorCurant: MatPaginator;
+  paginator: MatPaginator;
+  paginatorSecretary: MatPaginator;
+  paginatorImagist: MatPaginator;
+  paginatorHematolog: MatPaginator;
+  constructor(private dialog: MatDialog, public _moderator: ModeratorService, private _http: HttpClient, public _service: AuthService) { }
 
   ngOnInit() {
-    this.allUsers()
-    this.allSecretaries()
-    this.allCurants()
-    this.allImagists()
-    this.allHematolog()
+    this.allUsers();
+    this.dataSource.paginator = this.paginator;
+    this.allSecretaries();
+    this.secretariesSource.paginator = this.paginatorSecretary
+    this.allCurants();
+    this.curantsSource.paginator = this.paginatorCurant;
+    this.allImagists();
+    this.imagistSource.paginator = this.paginatorImagist;
+    this.allHematolog();
+    this.hematologSource.paginator = this.paginatorHematolog;
   }
-  
   setRoleCase(data){
     for(let item of data){
       item.role = item.role.substring(0,1)+ item.role.substring(1).toLowerCase()
@@ -80,11 +93,21 @@ export class ModeratorComponent implements OnInit {
         return true
       else
         return false
-    };
+  };
+
     displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role'];
     public dataSource = new MatTableDataSource<User>();
     public curantsSource = new MatTableDataSource<User>()
     public secretariesSource = new MatTableDataSource<User>()
     public imagistSource = new MatTableDataSource<User>()
     public hematologSource = new MatTableDataSource<User> ()
+
+    openDialog(){
+     this.dialog.open(DialogComponent,{
+      width: '30%'
+     });
+
+    }
 }
+
+

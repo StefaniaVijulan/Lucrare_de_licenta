@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { pipeFromArray } from 'rxjs/internal/util/pipe';
+import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
@@ -33,8 +34,8 @@ export class ModeratorService {
   getAllHematolog(){
     return this._http.get(this.baseUrl + '/moderator/allHematologs', this.publicHttpHeaders); 
   }
-  addCurant(){
-    return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
+  addCurant(user: User){
+    return this._http.post<any>(this.baseUrl + '/moderator/registerCurant', user, this.publicHttpHeaders);
   }
   seeEmployee(){
     console.log("see empl")
