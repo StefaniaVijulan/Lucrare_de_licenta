@@ -1,13 +1,11 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
-
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -20,20 +18,20 @@ import java.util.Collections;
 @Entity
 @Getter
 @Setter
-@Table(name = "curant")
+@Table(name = "cardiolog")
 @RequiredArgsConstructor
-public class Curant extends User {
+public class Cardiolog extends User {
 
     private String role;
 
-    @OneToOne(mappedBy = "curant")
+    @OneToOne(mappedBy = "cardiolog")
     private Hospitalization hospitalization;
 
 
-    @OneToOne(mappedBy = "curant")
+    @OneToOne(mappedBy = "cardiolog")
     private AppointmentHematology appointmentHematology;
 
-    @OneToOne(mappedBy = "curant")
+    @OneToOne(mappedBy = "cardiolog")
     private AppointmentRadiology appointmentRadiology;
 
     @Override

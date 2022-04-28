@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatSlideToggleModule, MatTableModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material';
@@ -18,6 +18,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModeratorComponent } from './pages/moderator/moderator.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogEdituserComponent } from './components/dialog-edituser/dialog-edituser.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     LoginComponent,
     DashboardComponent,
     ModeratorComponent,
-    DialogComponent
+    DialogComponent,
+    DialogEdituserComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatDialogModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    MatSortModule
   ],
   entryComponents: [DialogComponent],
   providers: [],

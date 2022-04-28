@@ -6,6 +6,5 @@ export class User {
     emailUser: String;
     numberUser: String;
     role: String;
-    imageUser: String;
     constructor(){}
 }

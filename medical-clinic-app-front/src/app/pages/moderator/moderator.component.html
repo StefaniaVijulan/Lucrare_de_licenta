@@ -1,228 +1,336 @@
 <div [hidden]="_moderator.getCount()==1 || _moderator.getCount()==2 || _moderator.getCount()==3 || _moderator.getCount()==4  || _moderator.getCount()==5">
-  
-  <table mat-table [dataSource]="dataSource">
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+    <button mat-raised-button color="warn" (click)="openDialog()">Adaugă angajat</button>
+ </div>
+  <table mat-table [dataSource]="dataSource" matSort >
     <ng-container matColumnDef="cnp">
-      <th mat-header-cell *matHeaderCellDef> CNP </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
       <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
     </ng-container>
 
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
       <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
       <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
     </ng-container>
+
     <ng-container matColumnDef="emailUser">
-      <th mat-header-cell *matHeaderCellDef> Email User </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
       <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
     </ng-container>
 
     <ng-container matColumnDef="numberUser">
-      <th mat-header-cell *matHeaderCellDef> Phone number </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
       <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
     </ng-container>
 
     <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
       <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click) = "editUser(element)" color="primary">
+          <mat-icon>
+            edit
+          </mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>
+            delete
+          </mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5,10] "></mat-paginator>
 </div>
 
 <div *ngIf="_moderator.getCount()==1">
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+    <button mat-raised-button color="warn" (click)="openDialog()">Adaugă angajat</button>
+ </div>
+ <table mat-table [dataSource]="dataSource" matSort >
+  <ng-container matColumnDef="cnp">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
+    <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
+  </ng-container>
 
-  <table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="cnp">
-      <th mat-header-cell *matHeaderCellDef> CNP </th>
-      <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
-    </ng-container>
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
+  <ng-container matColumnDef="emailUser">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
+    <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
-    </ng-container>
-    <ng-container matColumnDef="emailUser">
-      <th mat-header-cell *matHeaderCellDef> Email User </th>
-      <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
-    </ng-container>
+  <ng-container matColumnDef="numberUser">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
+    <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="numberUser">
-      <th mat-header-cell *matHeaderCellDef> Phone number </th>
-      <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
-    </ng-container>
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+    <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Role </th>
-      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-    </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click) = "editUser(element)" color="primary">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-icon-button color="warn">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 </div>
 
 <div *ngIf="_moderator.getCount()==2">
-  <button mat-raised-button color="warn" (click)="openDialog()">Add cardiolog</button>
-  <table mat-table [dataSource]="curantsSource" #mytable >
-
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+     <button mat-raised-button color="warn" (click)="openDialog()">Adaugă cardiolog</button>
+  </div>
+  <table mat-table [dataSource]="curantsSource" matSort >
     <ng-container matColumnDef="cnp">
-      <th mat-header-cell *matHeaderCellDef> CNP </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
       <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
       <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
       <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
     </ng-container>
+
     <ng-container matColumnDef="emailUser">
-      <th mat-header-cell *matHeaderCellDef> Email User </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
       <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="numberUser">
-      <th mat-header-cell *matHeaderCellDef> Phone number </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
       <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
       <td mat-cell *matCellDef="let element"> {{element.role}} </td>
     </ng-container>
-     
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click) = "editUser(element)" color="primary">
+          <mat-icon>
+            edit
+          </mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>
+            delete
+          </mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
 </div>
 
 <div *ngIf="_moderator.getCount()==3">
-<table mat-table [dataSource]="secretariesSource">
-
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+    <button mat-raised-button color="warn" (click)="openDialog()">Adaugă secretar</button>
+ </div>
+ <table mat-table [dataSource]="secretariesSource" matSort >
   <ng-container matColumnDef="cnp">
-    <th mat-header-cell *matHeaderCellDef> CNP </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
     <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
   </ng-container>
 
   <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
     <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
   </ng-container>
+
   <ng-container matColumnDef="emailUser">
-    <th mat-header-cell *matHeaderCellDef> Email User </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
     <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="numberUser">
-    <th mat-header-cell *matHeaderCellDef> Phone number </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
     <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
     <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click) = "editUser(element)" color="primary">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-icon-button color="warn">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
 </div>
 
 <div *ngIf="_moderator.getCount()==4">
-<table mat-table [dataSource]="imagistSource" >
-
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+    <button mat-raised-button color="warn" (click)="openDialog()">Adaugă imagist</button>
+ </div>
+ <table mat-table [dataSource]="imagistSource" matSort >
   <ng-container matColumnDef="cnp">
-    <th mat-header-cell *matHeaderCellDef> CNP </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
     <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
   </ng-container>
 
   <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
     <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
   </ng-container>
+
   <ng-container matColumnDef="emailUser">
-    <th mat-header-cell *matHeaderCellDef> Email User </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
     <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="numberUser">
-    <th mat-header-cell *matHeaderCellDef> Phone number </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
     <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
     <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click) = "editUser(element)" color="primary">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-icon-button color="warn">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
 </div>
 
 <div *ngIf="_moderator.getCount()==5">
-<table mat-table [dataSource]="hematologSource" >
+  <div mat-dialog-actions class="addButton" [align]="'center'" >
+    <button mat-raised-button color="warn" (click)="openDialog()">Adaugă hematolog</button>
+ </div>
+ <table mat-table [dataSource]="hematologSource" matSort >
   <ng-container matColumnDef="cnp">
-    <th mat-header-cell *matHeaderCellDef> CNP </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CNP </th>
     <td mat-cell *matCellDef="let element"> {{element.cnp}} </td>
   </ng-container>
 
   <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
     <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
     <td mat-cell *matCellDef="let element"> {{element.lastName }} </td>
   </ng-container>
+
   <ng-container matColumnDef="emailUser">
-    <th mat-header-cell *matHeaderCellDef> Email User </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email User </th>
     <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="numberUser">
-    <th mat-header-cell *matHeaderCellDef> Phone number </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone number </th>
     <td mat-cell *matCellDef="let element"> {{element.numberUser}} </td>
   </ng-container>
 
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
     <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click) = "editUser(element)" color="primary">
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button mat-icon-button color="warn">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons></mat-paginator>
 </div>

@@ -37,6 +37,10 @@ export class ModeratorService {
   addCurant(user: User){
     return this._http.post<any>(this.baseUrl + '/moderator/registerCurant', user, this.publicHttpHeaders);
   }
+  editUser(roleInfo: string, cnp: string, user: User){
+    console.log("intra in edit data")
+    return this._http.put<any>(this.baseUrl + '/moderator/editUser?role='+roleInfo+'&cnp='+ cnp, user, this.publicHttpHeaders);
+  }
   seeEmployee(){
     console.log("see empl")
     this.count = 1;

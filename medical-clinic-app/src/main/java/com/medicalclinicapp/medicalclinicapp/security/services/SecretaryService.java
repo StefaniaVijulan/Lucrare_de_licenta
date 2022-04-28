@@ -6,7 +6,7 @@ import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepositor
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
-import com.medicalclinicapp.medicalclinicapp.security.repository.CurantRepository;
+import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class SecretaryService {
     private SecretaryRepository secretaryRepository;
 
     @Autowired
-    private CurantRepository curantRepository;
+    private CardiologRepository cardiologRepository;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -48,9 +48,9 @@ public class SecretaryService {
     }
     public List<User> seeAllCurant(){
         List<User> generalists = new ArrayList<>();
-        for(int i=0; i<curantRepository.findAll().size(); i++){
+        for(int i=0; i<cardiologRepository.findAll().size(); i++){
             {
-                generalists.add(curantRepository.findAll().get(i));
+                generalists.add(cardiologRepository.findAll().get(i));
             }
         }
         return generalists;
@@ -82,9 +82,9 @@ public class SecretaryService {
         hospitalization.setPatient(patient);
 
 
-        if(!curantRepository.existsById(cnp))
+        if(!cardiologRepository.existsById(cnp))
             throw new Exception("You cant assign this doctor because he doesnt exist");
-        hospitalization.setCurant(curantRepository.findByCnp(cnp));
+        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnp));
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
     }

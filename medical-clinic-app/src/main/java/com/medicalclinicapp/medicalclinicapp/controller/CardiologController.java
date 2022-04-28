@@ -3,29 +3,32 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
-import com.medicalclinicapp.medicalclinicapp.security.services.CurantService;
+import com.medicalclinicapp.medicalclinicapp.security.services.CardiologService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
-public class CurantController {
+public class CardiologController {
 
     @Autowired
-    private CurantService curantService;
+    private CardiologService cardiologService;
 
-    @PostMapping("/curant/addAppointmentHematology")
+    @PostMapping("/cardiolog/addAppointmentHematology")
     public AppointmentHematology addAppointmentHematology(@RequestBody AppointmentHematology appointment, Principal principal) throws Exception {
 
-        return curantService.addAppointmentHematology(appointment, principal);
+        return cardiologService.addAppointmentHematology(appointment, principal);
     }
-    @PostMapping("/curant/addAppointmentRadiology")
+    @PostMapping("/cardiolog/addAppointmentRadiology")
     public AppointmentRadiology addAppointmentRadiology(@RequestBody AppointmentRadiology appointment, Principal principal) throws Exception {
 
-        return curantService.addAppointmentRadiology(appointment, principal);
+        return cardiologService.addAppointmentRadiology(appointment, principal);
     }
 }

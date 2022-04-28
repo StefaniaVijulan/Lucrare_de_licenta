@@ -1,7 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
 import com.medicalclinicapp.medicalclinicapp.security.models.Hematolog;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

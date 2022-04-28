@@ -2,7 +2,7 @@ package com.medicalclinicapp.medicalclinicapp.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,8 +20,8 @@ import java.util.Date;
 public class AppointmentHematology {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "curant_cnp", referencedColumnName = "cnp")
-    private Curant curant;
+    @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
+    private Cardiolog cardiolog;
 
     @OneToOne(mappedBy = "appointmentHematology")
     private Hematology hematology;

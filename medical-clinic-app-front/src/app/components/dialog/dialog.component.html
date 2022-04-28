@@ -1,34 +1,40 @@
-<form #registerform="ngForm" (ngSubmit)="register('curant')">
-<mat-form-field hintLabel="Intoduceti cele 13 caractere: " appearance="fill">
-    <mat-label>Introduceti CNP</mat-label>
-    <input matInput maxlength="13" placeholder="ex. 619991011191111" [formControl]="cnp"  [formControl]="text" required>
+<div>
+    <div mat-dialog-actions style="margin-top: -3vh;" [align]="'end'">
+        <button mat-dialog-close mat-button class="btn" color="primary">
+          <mat-icon>
+            close
+          </mat-icon>
+        </button>
+      </div>
+  <form #registerform="ngForm" [formGroup]="myForm">
+    <small class="alert-danger">{{msg}}</small>
 
-    <mat-error *ngIf="cnp.invalid">{{getErrorCnp()}}</mat-error>
-</mat-form-field>
-<mat-form-field appearance="fill">
-    <mat-label>Introduceti numele de familie</mat-label>
-    <input matInput #input maxlength="20" placeholder="ex. Popescu">
-   
-</mat-form-field>
-<mat-form-field appearance="fill">
-    <mat-label>Introduceti prenumele</mat-label>
-    <input matInput #input maxlength="40" placeholder="ex. Popescu" required>
-    
-</mat-form-field>
-<mat-form-field appearance="fill">
-    <mat-label>Enter your email</mat-label>
-    <input matInput placeholder="pat@example.com" [formControl]="email" [formControl]="text" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-</mat-form-field>
-<mat-form-field hintLabel="Intoduceti cele 10 caractere: " appearance="fill">
-    <mat-label>Introduceti numarul de telefon</mat-label>
-    <input matInput #input maxlength="10" placeholder="ex. 0784777666"  required>
-    <mat-hint> {{input.value?.length || 0}}/10</mat-hint>
+    <mat-form-field appearance="fill">
+      <mat-label>CNP</mat-label>
+      <input formControlName="cnp" matInput placeholder="ex. 6001100110000" [(ngModel)]="user.cnp" name="cnp" required>
 
-</mat-form-field>
-<br>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Introduceti numele de familie</mat-label>
+      <input formControlName="lastName" matInput placeholder="ex. Popescu" [(ngModel)]="user.lastName" name="lastname" required>
 
-<div mat-dialog-actions align="center">
-    <button mat-button [disabled]="registerform.form.invalid" type="submit" class="btn" color="primary">Add cardiolog</button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Introduceti prenumele</mat-label>
+      <input formControlName="firstName" matInput placeholder="ex. Ion" [(ngModel)]="user.firstName" name="firstname" required>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input formControlName="emailUser" matInput placeholder="pat@example.com" [(ngModel)]="user.emailUser" name="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Introduceti numarul de telefon</mat-label>
+      <input formControlName="numberUser" matInput placeholder="ex. 0766666666" [(ngModel)]="user.numberUser" name="phone" required>
+    </mat-form-field>
+  </form>
 </div>
-</form>
+<div mat-dialog-actions [align]="'center'">
+    <button mat-raised-button [disabled]="registerform.form.invalid" type="submit" class="btn"
+      color="primary" (click)="register('CARDIOLOG')">{{actionBtn}}</button>
+  </div>

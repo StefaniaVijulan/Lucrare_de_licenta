@@ -57,7 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/allImagists",
                         "/moderator/userCnp{cnp}",
                         "/moderator/deleteCurant",
-                        "/moderator/deleteSecretary").hasAuthority("MODERATOR")
+                        "/moderator/deleteSecretary",
+                        "/moderator/editUser").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

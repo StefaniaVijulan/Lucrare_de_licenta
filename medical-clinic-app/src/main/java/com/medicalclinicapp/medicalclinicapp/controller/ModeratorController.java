@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
+import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.HematologRepository;
 import com.medicalclinicapp.medicalclinicapp.security.services.ModeratorService;
@@ -34,9 +35,10 @@ public class ModeratorController {
 
     }
     @PostMapping(path = "/moderator/registerCurant")
-    public String registerCurant(@RequestBody Curant curant) throws IOException {
-        System.out.println(curant);
-        return moderatorService.registerCurant(curant);
+    public Cardiolog registerCardiolog(@RequestBody Cardiolog cardiolog) throws IOException {
+        System.out.println(cardiolog);
+        System.out.println("poate");
+        return moderatorService.registerCardiolog(cardiolog);
 
     }
     @PostMapping(path = "/moderator/registerImagist")
@@ -59,8 +61,8 @@ public class ModeratorController {
         return moderatorService.getAllEmployees();
     }
     @GetMapping("/moderator/allCurant")
-    public List<Curant> getAllGeneralists(){
-        return moderatorService.getAllCurant();
+    public List<Cardiolog> getAllCardiologs(){
+        return moderatorService.getAllCardiolog();
     }
     @GetMapping("/moderator/allSecretaries")
     public List<Secretary> getAllSecretaries(){
@@ -75,8 +77,12 @@ public class ModeratorController {
         return moderatorService.getAllHematologs();
     }
 
+    @PutMapping(path = "/moderator/editUser")
+    public Cardiolog editUser(@RequestParam(value = "role")  String role, @RequestParam(value = "cnp") String cnp, @RequestBody Cardiolog cardiolog) throws IOException {
+        System.out.println(cardiolog);
+        return moderatorService.editCardiolog(role,cnp,cardiolog);
 
-
+    }
     @GetMapping("/moderator/userCnp")
     public User getUserByCnp(@RequestParam(value = "cnp") String cnp){
 
@@ -84,7 +90,7 @@ public class ModeratorController {
     }
     @DeleteMapping("/moderator/deleteCurant")
     public String deleteCurant(@RequestParam(value = "cnp") String cnp){
-        return moderatorService.deleteCurant(cnp);
+        return moderatorService.deleteCardiolog(cnp);
     }
     @DeleteMapping("/moderator/deleteSecretary{cnp}")
     public String deleteSecretary(@RequestParam(value = "cnp") String cnp){

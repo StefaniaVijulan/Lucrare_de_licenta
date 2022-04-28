@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
     this._service.loginUser(this.userDto).subscribe((response: any) => {
       console.log(response.user);
       if (response.user.role=="PATIENT" && response && response.jwt) {
-        localStorage.setItem('token', response.jwt);
-        localStorage.setItem('role', response.user.role)
-        localStorage.setItem('user', JSON.stringify(response.user))
+        sessionStorage.setItem('token', response.jwt);
+        sessionStorage.setItem('role', response.user.role)
+        sessionStorage.setItem('user', JSON.stringify(response.user))
         
         this._router.navigate(['/dashboard']);
       }

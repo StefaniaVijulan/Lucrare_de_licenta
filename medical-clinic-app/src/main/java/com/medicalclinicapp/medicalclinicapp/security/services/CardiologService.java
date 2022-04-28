@@ -1,24 +1,22 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
-
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentHematologyRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRadiologyRepository;
-import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
-import com.medicalclinicapp.medicalclinicapp.security.repository.CurantRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
+import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-
 @Service
 @RequiredArgsConstructor
-public class CurantService {
+public class CardiologService {
 
     @Autowired
-    private CurantRepository curantRepository;
+    private CardiologRepository cardiologRepository;
 
     @Autowired
     private AppointmentHematologyRepository appointmentHematologyRepository;
@@ -33,8 +31,8 @@ public class CurantService {
                 appointmentHematologyRepository.existsByMinAppointment(appointment.getMinAppointment()))
             throw new Exception("Hospitalization exist");
         String username = principal.getName();
-        Curant curant = this.curantRepository.findByCnp(username);
-        appointment.setCurant(curant);
+        Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
+        appointment.setCardiolog(cardiolog);
 
         appointmentHematologyRepository.save(appointment);
         return appointment;
@@ -45,8 +43,8 @@ public class CurantService {
                 appointmentRadiologyRepository.existsByMinAppointment(appointment.getMinAppointment()))
             throw new Exception("Hospitalization exist");
         String username = principal.getName();
-        Curant curant = this.curantRepository.findByCnp(username);
-        appointment.setCurant(curant);
+        Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
+        appointment.setCardiolog(cardiolog);
 
         appointmentRadiologyRepository.save(appointment);
         return appointment;

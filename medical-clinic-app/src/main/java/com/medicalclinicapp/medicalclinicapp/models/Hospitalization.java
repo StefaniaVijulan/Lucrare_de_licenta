@@ -1,6 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Curant;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class Hospitalization {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "curant_cnp", referencedColumnName = "cnp")
-    private Curant curant;
+    @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
+    private Cardiolog cardiolog;
 
     @JsonIgnore
     @ManyToOne

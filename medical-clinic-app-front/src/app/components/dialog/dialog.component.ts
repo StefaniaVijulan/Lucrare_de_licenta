@@ -1,8 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
-import { ModeratorService } from 'src/app/services/moderator/moderator.service';
+import {
+  Component,
+  Inject,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
+import {
+  Router
+} from '@angular/router';
+import {
+  User
+} from 'src/app/interfaces/user';
+import {
+  ModeratorService
+} from 'src/app/services/moderator/moderator.service';
 
 @Component({
   selector: 'app-dialog',
@@ -10,54 +29,84 @@ import { ModeratorService } from 'src/app/services/moderator/moderator.service';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  
-  public myForm!:FormGroup;
-  email = new FormControl('', [Validators.required, Validators.email]);
-  cnp = new FormControl('', [Validators.required, Validators.pattern('^[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')]);
+
+  myForm!: FormGroup;
+
   user = new User()
-  msg='';
-  constructor(private _service:ModeratorService, private _router: Router, private formBuilder:FormBuilder) { }
+  msg = ''
+  actionBtn: string = "Save"
+  constructor(private _service: ModeratorService,
+    private _router: Router,
+    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA)
+    public editData: any,
+    private dialogref: MatDialogRef < DialogComponent >
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
-      cnp:["", Validators.required],
-      firstName:["", Validators.required],
-      lastName:["", Validators.required],
-      emailUser:["",[Validators.required, Validators.email]],
-      numberUser:["", Validators.required]
-    })
+      cnp: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      numberUser: ['', Validators.required],
+      emailUser: ['', Validators.compose([Validators.required, Validators.email])]
+    });
+    console.log("edit before")
+    console.log(this.editData);
+   if (this.editData) {
+
+      this.myForm.controls['cnp'].setValue(this.editData.cnp);
+      this.myForm.controls['firstName'].setValue(this.editData.firstName);
+      this.myForm.controls['lastName'].setValue(this.editData.lastName);
+      this.myForm.controls['numberUser'].setValue(this.editData.numberUser);
+      this.myForm.controls['emailUser'].setValue(this.editData.emailUser);
+    }
+    console.log("edit")
+    console.log(this.editData);
+    console.log(this.myForm.value.prenume)
   }
 
-  getErrorCnp(){
-    if (this.cnp.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return this.cnp.hasError('cnp') ? 'Not a valid cnp' : '';
-  }
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-  register(data:any){
-    if(data == "curant")
-    {
-      console.log("intra aici")
-    
-      this._service.addCurant(this.user).subscribe(
-        data =>{
-          console.log("response recive");
-          localStorage.setItem('token', JSON.stringify(data))
-          this.msg="Register successful";
-          this._router.navigate(['/moderator']);
-        },
-        error =>{
-          console.log("exception occured");
-          this.msg = error.error;
+ register(info: any) {
+    if (info == "CARDIOLOG") {
+
+      if (!this.editData) {
+      
+        if (this.myForm.valid) {
+          console.log("poate aici")
+          console.log(this.myForm.value)
+          this._service.addCurant(this.myForm.value).subscribe({
+              next: (data) => {
+
+                this._service.count = 1
+                this.myForm.reset();
+                this.dialogref.close();
+              },
+              error: () => {
+
+                this.msg = "Error while adding the product";
+              }
+            }
+
+          )
         }
-        
-      )
-}
+      } else {
+        console.log("edit else")
+        console.log(this.editData)
+        this.updateProduct(info)
+      }
+
+    }
   }
-}
+  updateProduct(info: any) {
+    console.log("update")
+    console.log(info)
+    console.log(this.editData.cnp)
+    console.log(this.editData)
+    this._service.editUser(info, this.editData.cnp, this.myForm.value).subscribe({    
+      next: (res) => {
+        console.log(res)
+        this.myForm.reset();
+        this.dialogref.close("update");
+      }
+    })
+  }}
