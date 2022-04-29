@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register","/login").permitAll()
                 .antMatchers("/moderator/registerSecretary",
-                        "/moderator/registerCurant",
+                        "/moderator/registerCardiolog",
                         "/moderator/registerHematolog",
                         "/moderator/registerImgist",
                         "/moderator/allUsers",
@@ -58,15 +58,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/userCnp{cnp}",
                         "/moderator/deleteCurant",
                         "/moderator/deleteSecretary",
-                        "/moderator/editUser").hasAuthority("MODERATOR")
+                        "/moderator/editUser",
+                        "/moderator/allHospitalizationCardiolog",
+                        "/moderator/deleteUser").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",
                         "/secretary/allHospitalization",
                         "/secretary/allDoctors",
-                        "/secretary/addPatient").hasAuthority("SECRETARY")
+                        "/secretary/addPatient").hasAuthority("SECRETAR")
                 .antMatchers("/curant/addAppointmentHematology",
-                "/curant/addAppointmentRadiology").hasAuthority("CURANT")
+                "/curant/addAppointmentRadiology").hasAuthority("CARDIOLOG")
                 .antMatchers("/user/changePass").authenticated()
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()

@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
@@ -64,7 +65,6 @@ public class ModeratorService {
     };
     public Cardiolog registerCardiolog(Cardiolog cardiolog) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
-        System.out.println(" intr-0");
         Optional<Cardiolog> cardiologOptional = cardiologRepository.findById(cardiolog.getCnp());
         if (cardiologOptional.isPresent()) {
             throw new IllegalStateException("Cnp exist!");
@@ -85,8 +85,8 @@ public class ModeratorService {
             secretary.setImageUser("");
         }
 
-        secretary.setPassword(bCryptPasswordEncoder.encode(secretary.getPassword()));
-        secretary.setRole("SECRETARY");
+        secretary.setPassword(bCryptPasswordEncoder.encode("parola"));
+        secretary.setRole("SECRETAR");
         secretaryRepository.saveAndFlush(secretary);
         System.out.println(secretary.getEmailUser());
         System.out.println(secretary.getEmailUser().getClass().getSimpleName());
@@ -163,6 +163,15 @@ public class ModeratorService {
         return hematologList;
     }
 
+    public List<Hospitalization> AllHospiyalizationCardiolog(String cnp){
+        List<Hospitalization> hospitalizationsList = new ArrayList<>();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp)){
+                hospitalizationsList.add(hospitalizationRepository.findAll().get(i));
+            }}
+        return hospitalizationsList;
+    }
+
     public Cardiolog editCardiolog(String role, String cnpCardiolog,Cardiolog cardiolog ){
         System.out.println("Intra in service edit");
         System.out.println(cardiolog.getCnp());
@@ -191,7 +200,23 @@ public class ModeratorService {
         else
             return userRepository.findByCnp(cnp);
     }
+
+    public String deleteUser(String cnp) throws Exception {
+
+        if(cardiologRepository.existsById(cnp))
+            cardiologRepository.delete(cardiologRepository.findByCnp(cnp));
+        else if(secretaryRepository.existsById(cnp))
+            secretaryRepository.delete(secretaryRepository.findByCnp(cnp));
+        else if(hematologRepository.existsById(cnp))
+            hematologRepository.delete(hematologRepository.findByCnp(cnp));
+        else if(imagistRepository.existsById(cnp))
+            imagistRepository.delete(imagistRepository.findByCnp(cnp));
+        System.out.println("intra aici");
+        return null;
+    }
+
     public String deleteCardiolog(String cnp){
+
         if(!cardiologRepository.existsById(cnp))
             throw new IllegalStateException("User not found for this cnp :: " + cnp);
         Cardiolog cardiolog = cardiologRepository.findByCnp(cnp);
@@ -200,8 +225,8 @@ public class ModeratorService {
                 hospitalizationRepository.findAll().get(i).setCardiolog(cardiologRepository.findByCnp("5981023189682"));
             }}
         cardiologRepository.delete(cardiolog);
-
-        return "Doctor deleted";
+        System.out.println("deleted");
+        return null;
     }
     public String deleteSecretary(String cnp){
         if(!secretaryRepository.existsById(cnp))

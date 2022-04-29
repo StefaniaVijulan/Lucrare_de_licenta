@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppRoutingModule } from './app-routing.module';
+import { MatRadioModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
@@ -18,7 +19,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ModeratorComponent } from './pages/moderator/moderator.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { DialogEdituserComponent } from './components/dialog-edituser/dialog-edituser.component';
+import { DialogAddUserComponent } from './components/dialog-add-user/dialog-add-user.component';
+import { DialogDeleteUserComponent } from './components/dialog-delete-user/dialog-delete-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { DialogEdituserComponent } from './components/dialog-edituser/dialog-edi
     DashboardComponent,
     ModeratorComponent,
     DialogComponent,
-    DialogEdituserComponent
+    DialogAddUserComponent,
+    DialogDeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +55,13 @@ import { DialogEdituserComponent } from './components/dialog-edituser/dialog-edi
     MatDialogModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, DialogAddUserComponent, DialogDeleteUserComponent],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

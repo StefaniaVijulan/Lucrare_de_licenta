@@ -1,35 +1,31 @@
-import {
-  Component,
-  Inject,
-  OnInit
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material';
-import {
-  Router
-} from '@angular/router';
-import {
-  User
-} from 'src/app/interfaces/user';
-import {
-  ModeratorService
-} from 'src/app/services/moderator/moderator.service';
+import {  Component,  Inject,  OnInit} from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { ModeratorService } from 'src/app/services/moderator/moderator.service';
+import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent {
 
+  newUsers: string = 'Imagist';
+  usersList: string[] = [ 'Imagist', 'Seretar','Cardiolog', 'Hematolog'];
+
+  constructor(
+    private _moderator: ModeratorService,
+    private dialogref: MatDialogRef < DialogComponent >,
+    private dialog: MatDialog ){}
+  openDialog(){
+    this._moderator.newUserS = this.newUsers;
+    this.dialogref.close("update");
+    this.dialog.open(DialogAddUserComponent,{
+     width: '30%'
+    });
+
+ };
+/*
   myForm!: FormGroup;
 
   user = new User()
@@ -109,4 +105,5 @@ export class DialogComponent implements OnInit {
         this.dialogref.close("update");
       }
     })
-  }}
+  }*/
+}

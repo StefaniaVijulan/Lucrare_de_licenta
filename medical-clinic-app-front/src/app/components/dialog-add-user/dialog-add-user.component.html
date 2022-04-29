@@ -1,0 +1,51 @@
+<div>
+    <div mat-dialog-actions style="margin-top: -3vh;" [align]="'end'">
+        <button mat-dialog-close mat-button class="btn" color="primary">
+          <mat-icon>
+            close
+          </mat-icon>
+        </button>
+      </div>
+      <br>
+      <br>
+  <form #registerform="ngForm" [formGroup]="myForm">
+ 
+
+    <mat-form-field appearance="fill">
+      <mat-label>CNP</mat-label>
+      <input matInput formControlName="cnp" placeholder="ex. 6001100110000"  value="{{editData?.cnp}}">
+      <mat-error  class="error" *ngIf="myForm.controls['cnp'].hasError('pattern')">
+          Introduceti un CNP valid
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nume</mat-label>
+      <input  matInput formControlName="lastName" placeholder="ex. Popescu" value="{{editData?.lastName}}">
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Prenume</mat-label>
+      <input matInput formControlName="firstName" placeholder="ex. Ion" value="{{editData?.firstName}}">
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input formControlName="emailUser" placeholder="pat@example.com"  matInput  value="{{editData?.emailUser}}">
+      <mat-error  class="error" *ngIf="myForm.controls['emailUser'].hasError('email')">
+        Nu este un email valid
+    </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Telefon</mat-label>
+      <input matInput formControlName="numberUser"  placeholder="ex. 0766666666" value="{{editData?.numberUser}}">
+      <mat-error  class="error" *ngIf="myForm.controls['numberUser'].hasError('pattern')">
+        Numarul de telefon nu este valid
+    </mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions [align]="'center'">
+    <button mat-raised-button type="submit" class="btn"
+      color="primary" (click)="register()">{{actionBtn}}</button>
+</div>

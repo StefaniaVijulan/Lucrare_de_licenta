@@ -1,40 +1,13 @@
-<div>
-    <div mat-dialog-actions style="margin-top: -3vh;" [align]="'end'">
-        <button mat-dialog-close mat-button class="btn" color="primary">
-          <mat-icon>
-            close
-          </mat-icon>
-        </button>
-      </div>
-  <form #registerform="ngForm" [formGroup]="myForm">
-    <small class="alert-danger">{{msg}}</small>
-
-    <mat-form-field appearance="fill">
-      <mat-label>CNP</mat-label>
-      <input formControlName="cnp" matInput placeholder="ex. 6001100110000" [(ngModel)]="user.cnp" name="cnp" required>
-
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Introduceti numele de familie</mat-label>
-      <input formControlName="lastName" matInput placeholder="ex. Popescu" [(ngModel)]="user.lastName" name="lastname" required>
-
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Introduceti prenumele</mat-label>
-      <input formControlName="firstName" matInput placeholder="ex. Ion" [(ngModel)]="user.firstName" name="firstname" required>
-
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your email</mat-label>
-      <input formControlName="emailUser" matInput placeholder="pat@example.com" [(ngModel)]="user.emailUser" name="email" required>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Introduceti numarul de telefon</mat-label>
-      <input formControlName="numberUser" matInput placeholder="ex. 0766666666" [(ngModel)]="user.numberUser" name="phone" required>
-    </mat-form-field>
-  </form>
+<label id="radio-group-label">Ce angajat doriță să adăugați?</label>
+<mat-radio-group
+  aria-labelledby="radio-group-label"
+  class="radio-group"
+  [(ngModel)]="newUsers" 
+  required>
+  <mat-radio-button class="radio-button" *ngFor="let user of usersList" [value]="user" >
+    {{user}}
+  </mat-radio-button>
+</mat-radio-group>
+<div mat-dialog-actions class="nextButton" [align]="'center'" >
+  <button mat-raised-button color="warn" (click)="openDialog()">Next</button>
 </div>
-<div mat-dialog-actions [align]="'center'">
-    <button mat-raised-button [disabled]="registerform.form.invalid" type="submit" class="btn"
-      color="primary" (click)="register('CARDIOLOG')">{{actionBtn}}</button>
-  </div>
