@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { ModeratorComponent } from './pages/moderator/moderator.component';
+
 import { AuthService } from './services/auth/auth.service';
 import { ModeratorService } from './services/moderator/moderator.service';
 

@@ -47,11 +47,11 @@ public class ModeratorService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String registerModerator(Moderator moderator) throws IOException {
+    public Moderator registerModerator(Moderator moderator) throws Exception {
         //verificam daca un user cu email-ul respectiv se gaseste deja
         Optional<Moderator> moderatorOptional = moderatorRepository.findById(moderator.getCnp());
         if (moderatorOptional.isPresent()) {
-            return "Cnp taken";
+            throw new IOException("Exista userul deja");
         }
         if(moderator.getImageUser() == null || moderator.getImageUser().trim().isEmpty()){
             moderator.setImageUser("");
@@ -61,7 +61,7 @@ public class ModeratorService {
         emailService.sendmail("vijulandumitru@gmail.com","test","body test");
         moderator.setRole("MODERATOR");
         moderatorRepository.saveAndFlush(moderator);
-        return "Register moderator done";
+        return moderator;
     };
     public Cardiolog registerCardiolog(Cardiolog cardiolog) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
@@ -75,11 +75,11 @@ public class ModeratorService {
         cardiologRepository.save(cardiolog);
         return cardiolog;
     };
-    public String registerSecretary(Secretary secretary) throws IOException {
+    public Secretary registerSecretary(Secretary secretary) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
         Optional<Secretary> secretaryOptional = secretaryRepository.findById(secretary.getCnp());
         if (secretaryOptional.isPresent()) {
-            return "Cnp taken";
+            throw new IllegalStateException("Cnp exist!");
         }
         if(secretary.getImageUser() == null || secretary.getImageUser().trim().isEmpty()){
             secretary.setImageUser("");
@@ -91,37 +91,39 @@ public class ModeratorService {
         System.out.println(secretary.getEmailUser());
         System.out.println(secretary.getEmailUser().getClass().getSimpleName());
         emailService.sendmail(secretary.getEmailUser(),"test","sper ca merge");
-        return "Register secretary done";
+        return secretary;
     };
-    public String registerImagist(Imagist imagist) throws IOException {
+    public Imagist registerImagist(Imagist imagist) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
         Optional<Imagist> imagistOptional = imagistRepository.findById(imagist.getCnp());
         if (imagistOptional.isPresent()) {
-            return "Cnp taken";
+            throw new IllegalStateException("Cnp exist!");
         }
         if(imagist.getImageUser() == null || imagist.getImageUser().trim().isEmpty()){
             imagist.setImageUser("");
         }
 
-        imagist.setPassword(bCryptPasswordEncoder.encode(imagist.getPassword()));
+        imagist.setPassword(bCryptPasswordEncoder.encode("parola"));
         imagist.setRole("IMAGIST");
         imagistRepository.saveAndFlush(imagist);
-        return "Register imagist done";
+        emailService.sendmail(imagist.getEmailUser(),"test","sper ca merge");
+        return imagist;
     };
-    public String registerHematolog(Hematolog hematolog) throws IOException {
+    public Hematolog registerHematolog(Hematolog hematolog) throws IOException {
         //verificam daca un user cu email-ul respectiv se gaseste deja
         Optional<Hematolog> hematologOptional = hematologRepository.findById(hematolog.getCnp());
         if (hematologOptional.isPresent()) {
-            return "Cnp taken";
+            throw new IllegalStateException("Cnp exist!");
         }
         if(hematolog.getImageUser() == null || hematolog.getImageUser().trim().isEmpty()){
             hematolog.setImageUser("");
         }
 
-        hematolog.setPassword(bCryptPasswordEncoder.encode(hematolog.getPassword()));
+        hematolog.setPassword(bCryptPasswordEncoder.encode("parola"));
         hematolog.setRole("HEMATOLOG");
         hematologRepository.saveAndFlush(hematolog);
-        return "Register hematolog done";
+        emailService.sendmail(hematolog.getEmailUser(),"test","sper ca merge");
+        return hematolog;
     };
 
 
@@ -141,7 +143,7 @@ public class ModeratorService {
     public List<Secretary> getAllSecretaries(){
         List<Secretary> secretaryList = new ArrayList<>();
         for(int i=0; i<secretaryRepository.findAll().size(); i++){
-            if(secretaryRepository.findAll().get(i).getRole().equals("SECRETARY")){
+            if(secretaryRepository.findAll().get(i).getRole().equals("SECRETAR")){
                 secretaryList.add(secretaryRepository.findAll().get(i));
             }}
         return secretaryList;
@@ -172,13 +174,12 @@ public class ModeratorService {
         return hospitalizationsList;
     }
 
-    public Cardiolog editCardiolog(String role, String cnpCardiolog,Cardiolog cardiolog ){
+    public User editCardiolog(String role, String cnpCardiolog,Cardiolog cardiolog ){
         System.out.println("Intra in service edit");
         System.out.println(cardiolog.getCnp());
         System.out.println(cardiolog.getEmailUser());
         System.out.println(cardiolog.getFirstName());
         if(role.equals("CARDIOLOG")){
-            System.out.println("intra si aici");
             Cardiolog cardiolog1 = cardiologRepository.findById(cnpCardiolog)
                     .orElseThrow(() -> new RuntimeException("Nu exista cardiolog cu acest cnp: " + cnpCardiolog));
             cardiolog1.setCnp(cnpCardiolog);
@@ -189,6 +190,42 @@ public class ModeratorService {
             cardiolog1.setRole("CARDIOLOG");
             cardiologRepository.save(cardiolog1);
                     return cardiolog1;
+        }
+        else if(role.equals("SECRETAR")){
+            Secretary secretary = secretaryRepository.findById(cnpCardiolog)
+                    .orElseThrow(() -> new RuntimeException("Nu exista cardiolog cu acest cnp: " + cnpCardiolog));
+            secretary.setCnp(cnpCardiolog);
+            secretary.setFirstName(cardiolog.getFirstName());
+            secretary.setLastName(cardiolog.getLastName());
+            secretary.setEmailUser(cardiolog.getEmailUser());
+            secretary.setNumberUser(cardiolog.getNumberUser());
+            secretary.setRole("SECRETAR");
+            secretaryRepository.save(secretary);
+            return secretary;
+        }
+        else if(role.equals("IMAGIST")){
+            Imagist imagist = imagistRepository.findById(cnpCardiolog)
+                    .orElseThrow(() -> new RuntimeException("Nu exista cardiolog cu acest cnp: " + cnpCardiolog));
+            imagist.setCnp(cnpCardiolog);
+            imagist.setFirstName(cardiolog.getFirstName());
+            imagist.setLastName(cardiolog.getLastName());
+            imagist.setEmailUser(cardiolog.getEmailUser());
+            imagist.setNumberUser(cardiolog.getNumberUser());
+            imagist.setRole("IMAGIST");
+            imagistRepository.save(imagist);
+            return imagist;
+        }
+        else if(role.equals("HEMATOLOG")){
+            Hematolog hematolog = hematologRepository.findById(cnpCardiolog)
+                    .orElseThrow(() -> new RuntimeException("Nu exista cardiolog cu acest cnp: " + cnpCardiolog));
+            hematolog.setCnp(cnpCardiolog);
+            hematolog.setFirstName(cardiolog.getFirstName());
+            hematolog.setLastName(cardiolog.getLastName());
+            hematolog.setEmailUser(cardiolog.getEmailUser());
+            hematolog.setNumberUser(cardiolog.getNumberUser());
+            hematolog.setRole("HEMATOLOG");
+            hematologRepository.save(hematolog);
+            return hematolog;
         }
         return null;
     }
@@ -239,5 +276,18 @@ public class ModeratorService {
         secretaryRepository.delete(secretary);
 
         return "Secretary deleted";
+    }
+    public User resetPassword(String cnp) throws Exception {
+        System.out.println("Intra in service resetPass");
+        User currentUser = this.userRepository.findByCnp(cnp);
+
+        String newPass = "parola1";
+        currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+        emailService.sendmail(currentUser.getEmailUser(),"test","Noua parola este " + newPass);
+        this.userRepository.save(currentUser);
+        System.out.println("Password change");
+
+        return currentUser;
+
     }
 }

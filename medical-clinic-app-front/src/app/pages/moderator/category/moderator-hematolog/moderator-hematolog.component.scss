@@ -13,3 +13,13 @@ mat-paginator{
 .addButton{
   margin-top: 2vh;
 }
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+th.mat-header-cell{
+  text-align: center;
+}
+td.mat-cell{
+  text-align: center;
+}

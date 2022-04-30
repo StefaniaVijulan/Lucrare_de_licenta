@@ -2,19 +2,16 @@
     <mat-card-content>
       <form #loginForm="ngForm" (ngSubmit)="doLoginUser()">
         <h2>Log In</h2>
-        <mat-error *ngIf="!isNotValid()">
-          The username and password were not recognized
-        </mat-error>
         <mat-form-field>
           <input matInput placeholder="Cnp" [(ngModel)]="userDto.username" name="cnp" required>
           <mat-error>
-            Please provide a valid email address
+            Introduceti un CNP valid
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput type="password" placeholder="Password" [(ngModel)]="userDto.password" name="password" required>
           <mat-error>
-            Please provide a valid password
+            Introduceti o parola
           </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>

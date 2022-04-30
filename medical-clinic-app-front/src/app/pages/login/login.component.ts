@@ -30,10 +30,18 @@ export class LoginComponent implements OnInit {
       console.log(response.user);
       if (response && response.jwt) {
         localStorage.setItem('token', response.jwt);
-        localStorage.setItem('role', response.user.role)
+        localStorage.setItem('role', response.user.role)  
         localStorage.setItem('user', JSON.stringify(response.user))
         if(response.user.role == "MODERATOR"){
-          this._router.navigate(['/moderator']);
+          console.log("/moderator => ")
+          console.log(response.jwt)
+          console.log(localStorage.getItem('token'))
+          this._router. navigate(['/moderator'])
+          . then(() => {
+          window. location. reload();
+          })
+          
+         // this._router.navigate(['/moderator']);
         }
         else{
           this._router.navigate(['/dashboard']);

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { pipeFromArray } from 'rxjs/internal/util/pipe';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
@@ -11,6 +12,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ModeratorService {
   public newUserS: string;
+
   public count;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
@@ -19,7 +21,6 @@ export class ModeratorService {
   };
 
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
-
   getAllUsers(){
     return this._http.get(this.baseUrl + '/moderator/allUsers', this.publicHttpHeaders);
   }
@@ -27,10 +28,14 @@ export class ModeratorService {
     return this._http.put<any>(this.baseUrl + '/moderator/editUser?role='+roleInfo+'&cnp='+ cnp, user, this.publicHttpHeaders);
   }
   deleteUser(data: any){
-    console.log("inntra aici")
     return this._http.delete(this.baseUrl + '/moderator/deleteUser?cnp='+ data, this.publicHttpHeaders);
   }
 
+  resetP(data: any){
+    console.log("intra in reset pass")
+    console.log(data)
+    return this._http.put<any>(this.baseUrl + '/moderator/resetPass?cnp='+ data, this.publicHttpHeaders);
+  }
 
   getAllCardiolog(){
     return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
@@ -67,31 +72,19 @@ export class ModeratorService {
 
 
   seeEmployee(){
-    console.log("see empl")
-    this.count = 1;
-    console.log(this.count)
+    this._router.navigate(['/moderator'])
   }
   seeCurant(){
-    console.log("see curant")
-    this.count = 2;
-    console.log(this.count)
+    this._router.navigate(['/moderatorCardiolog'])
   }
   seeSecretaries(){
-    console.log("see secr")
-    this.count = 3;
-    console.log(this.count)
+    this._router.navigate(['/moderatorSecretar'])
   }
   seeImagist(){
-    console.log("see imagist")
-    this.count = 4;
-    console.log(this.count)
+    this._router.navigate(['/moderatorImagist'])
   }
   seeHematolog(){
-    console.log("see hema")
-    this.count = 5;
-    console.log(this.count)
+    this._router.navigate(['/moderatorHematolog'])
   }
-  getCount(){
-    return this.count;
-  }
+
 }

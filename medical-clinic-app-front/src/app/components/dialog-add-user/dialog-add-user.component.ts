@@ -56,7 +56,6 @@ export class DialogAddUserComponent implements OnInit {
   register() {
     if (!this.editData) {
       if (this.myForm.valid) {
-         console.log(this._service.newUserS.toUpperCase())
         if (this._service.newUserS.toUpperCase() == "CARDIOLOG") {
           this._service.addCardiolog(this.myForm.value).subscribe({
               next: (data) => {
@@ -121,7 +120,8 @@ export class DialogAddUserComponent implements OnInit {
     }
   }
   updateProduct(info: any) {
-    this._service.editUser(info, this.editData.cnp, this.myForm.value).subscribe({
+    console.log(info)
+    this._service.editUser(info.toUpperCase(), this.editData.cnp, this.myForm.value).subscribe({
       next: (res) => {
         console.log(res)
         this.myForm.reset();

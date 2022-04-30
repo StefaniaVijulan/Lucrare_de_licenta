@@ -60,7 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/deleteSecretary",
                         "/moderator/editUser",
                         "/moderator/allHospitalizationCardiolog",
-                        "/moderator/deleteUser").hasAuthority("MODERATOR")
+                        "/moderator/deleteUser",
+                        "/moderator/resetPass").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

@@ -24,13 +24,13 @@ public class ModeratorController {
 
     // add users
     @PostMapping(path = "/registerModerator")
-    public String registerModerator(@RequestBody Moderator moderator) throws IOException {
+    public Moderator registerModerator(@RequestBody Moderator moderator) throws Exception {
         System.out.println(moderator);
         return moderatorService.registerModerator(moderator);
 
     }
     @PostMapping(path = "/moderator/registerSecretary")
-    public String registerSecretary(@RequestBody Secretary secretary) throws IOException {
+    public Secretary registerSecretary(@RequestBody Secretary secretary) throws IOException {
         System.out.println(secretary);
         return moderatorService.registerSecretary(secretary);
 
@@ -43,19 +43,23 @@ public class ModeratorController {
 
     }
     @PostMapping(path = "/moderator/registerImagist")
-    public String registerImagist(@RequestBody Imagist imagist) throws IOException {
+    public Imagist registerImagist(@RequestBody Imagist imagist) throws IOException {
         System.out.println(imagist);
         return moderatorService.registerImagist(imagist);
 
     }
     @PostMapping(path = "/moderator/registerHematolog")
-    public String registerHematolog(@RequestBody Hematolog hematolog) throws IOException {
+    public Hematolog registerHematolog(@RequestBody Hematolog hematolog) throws IOException {
         System.out.println(hematolog);
         return moderatorService.registerHematolog(hematolog);
 
     }
 
-
+    @PutMapping(path="/moderator/resetPass")
+    public User resetPass(@RequestParam("cnp") String cnp) throws Exception {
+        System.out.println("Intra in controller resetPass");
+        return moderatorService.resetPassword(cnp);
+    }
     @GetMapping("/moderator/allUsers")
     public List<User> getEmployees(){
 
@@ -84,7 +88,7 @@ public class ModeratorController {
     }
 
     @PutMapping(path = "/moderator/editUser")
-    public Cardiolog editUser(@RequestParam(value = "role")  String role, @RequestParam(value = "cnp") String cnp, @RequestBody Cardiolog cardiolog) throws IOException {
+    public User editUser(@RequestParam(value = "role")  String role, @RequestParam(value = "cnp") String cnp, @RequestBody Cardiolog cardiolog) throws IOException {
         System.out.println(cardiolog);
         return moderatorService.editCardiolog(role,cnp,cardiolog);
 
