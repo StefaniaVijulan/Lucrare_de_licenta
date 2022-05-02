@@ -252,31 +252,6 @@ public class ModeratorService {
         return null;
     }
 
-    public String deleteCardiolog(String cnp){
-
-        if(!cardiologRepository.existsById(cnp))
-            throw new IllegalStateException("User not found for this cnp :: " + cnp);
-        Cardiolog cardiolog = cardiologRepository.findByCnp(cnp);
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            if(hospitalizationRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp)){
-                hospitalizationRepository.findAll().get(i).setCardiolog(cardiologRepository.findByCnp("5981023189682"));
-            }}
-        cardiologRepository.delete(cardiolog);
-        System.out.println("deleted");
-        return null;
-    }
-    public String deleteSecretary(String cnp){
-        if(!secretaryRepository.existsById(cnp))
-            throw new IllegalStateException("User not found for this cnp :: " + cnp);
-        Secretary secretary = secretaryRepository.findByCnp(cnp);
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            if(hospitalizationRepository.findAll().get(i).getSecretary().getCnp().equals(cnp)){
-                hospitalizationRepository.findAll().get(i).setSecretary(secretaryRepository.findByCnp("5981023189682"));
-            }}
-        secretaryRepository.delete(secretary);
-
-        return "Secretary deleted";
-    }
     public User resetPassword(String cnp) throws Exception {
         System.out.println("Intra in service resetPass");
         User currentUser = this.userRepository.findByCnp(cnp);

@@ -55,11 +55,12 @@ public class ModeratorController {
 
     }
 
-    @PutMapping(path="/moderator/resetPass")
+    @GetMapping(path="/moderator/resetPass")
     public User resetPass(@RequestParam("cnp") String cnp) throws Exception {
         System.out.println("Intra in controller resetPass");
         return moderatorService.resetPassword(cnp);
     }
+
     @GetMapping("/moderator/allUsers")
     public List<User> getEmployees(){
 
@@ -98,16 +99,10 @@ public class ModeratorController {
 
         return moderatorService.getUserCnp(cnp);
     }
-    @DeleteMapping("/moderator/deleteCurant")
-    public String deleteCurant(@RequestParam(value = "cnp") String cnp){
-        return moderatorService.deleteCardiolog(cnp);
-    }
+
     @DeleteMapping("/moderator/deleteUser")
     public String deleteUser(@RequestParam(value = "cnp") String cnp) throws Exception {
         return moderatorService.deleteUser(cnp);
     }
-    @DeleteMapping("/moderator/deleteSecretary{cnp}")
-    public String deleteSecretary(@RequestParam(value = "cnp") String cnp){
-        return moderatorService.deleteSecretary(cnp);
-    }
+
 }

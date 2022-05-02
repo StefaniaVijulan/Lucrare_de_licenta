@@ -31,12 +31,11 @@ export class ModeratorService {
     return this._http.delete(this.baseUrl + '/moderator/deleteUser?cnp='+ data, this.publicHttpHeaders);
   }
 
-  resetP(data: any){
-    console.log("intra in reset pass")
-    console.log(data)
-    return this._http.put<any>(this.baseUrl + '/moderator/resetPass?cnp='+ data, this.publicHttpHeaders);
-  }
 
+  resetPassword(cnp: string)
+  {
+    return this._http.get<any>(this.baseUrl + '/moderator/resetPass?cnp='+ cnp, this.publicHttpHeaders);
+  }
   getAllCardiolog(){
     return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
   }

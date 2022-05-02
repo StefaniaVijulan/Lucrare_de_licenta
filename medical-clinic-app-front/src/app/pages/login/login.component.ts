@@ -42,6 +42,8 @@ export class LoginComponent implements OnInit {
           })
           
          // this._router.navigate(['/moderator']);
+        } else if(response.user.role == "SECRETAR"){
+          this._router.navigate(['/secretar']);
         }
         else{
           this._router.navigate(['/dashboard']);

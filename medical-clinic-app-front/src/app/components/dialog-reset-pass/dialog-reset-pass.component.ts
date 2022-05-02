@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { ModeratorService } from 'src/app/services/moderator/moderator.service';
 
 @Component({
@@ -8,9 +9,12 @@ import { ModeratorService } from 'src/app/services/moderator/moderator.service';
 })
 export class DialogResetPassComponent implements OnInit {
 
-  constructor(private _service: ModeratorService) { }
+  constructor( private dialogref: MatDialogRef < DialogResetPassComponent >) { }
 
   ngOnInit() {
+  }
+  closeDialog(){
+    this.dialogref.close("reset");
   }
   
 }

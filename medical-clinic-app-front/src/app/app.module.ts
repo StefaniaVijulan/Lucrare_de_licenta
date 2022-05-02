@@ -28,6 +28,7 @@ import { ModeratorSecretarComponent } from './pages/moderator/category/moderator
 import { ModeratorImagistComponent } from './pages/moderator/category/moderator-imagist/moderator-imagist.component';
 import { ModeratorHematologComponent } from './pages/moderator/category/moderator-hematolog/moderator-hematolog.component';
 import { DialogResetPassComponent } from './components/dialog-reset-pass/dialog-reset-pass.component';
+import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DialogResetPassComponent } from './components/dialog-reset-pass/dialog-
     ModeratorSecretarComponent,
     ModeratorImagistComponent,
     ModeratorHematologComponent,
-    DialogResetPassComponent
+    DialogResetPassComponent,
+    SecretarComponent
   ],
   imports: [
     BrowserModule,

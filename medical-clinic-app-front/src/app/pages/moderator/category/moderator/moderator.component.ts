@@ -113,6 +113,18 @@ deleteUser(data: any){
   })
 }
  
+resetPass(element: any){
+  console.log("Reset pass")
+  console.log(element)
+  return this._moderator.resetPassword(element).subscribe((res)=>{
+    console.log(res)
+    this.dialog.open(DialogResetPassComponent,{
+      width: '30%',
+      data:element
+     })
+  })
+
+}
   editUser(element: any){
     this.dialog.open(DialogAddUserComponent,{
       width: '30%',
@@ -124,12 +136,7 @@ deleteUser(data: any){
       }
     })
   }
-  resetPass(info: any) {
-    console.log(info)
-    this._moderator.resetP(info).subscribe((res)=>{
-      console.log(res)
-    })
-  }
+  
 }
 
 
