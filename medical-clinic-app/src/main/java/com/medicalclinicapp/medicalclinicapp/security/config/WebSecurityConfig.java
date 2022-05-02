@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/register","/login").permitAll()
+                .antMatchers("/register","/login","/changePass").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",
                         "/moderator/registerHematolog",
@@ -67,10 +67,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",
                         "/secretary/allHospitalization",
                         "/secretary/allDoctors",
-                        "/secretary/addPatient").hasAuthority("SECRETAR")
+                        "/secretary/addPatient",
+                        "/secretary/allPatients").hasAuthority("SECRETAR")
                 .antMatchers("/curant/addAppointmentHematology",
                 "/curant/addAppointmentRadiology").hasAuthority("CARDIOLOG")
-                .antMatchers("/user/changePass").authenticated()
+
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
                 .and().sessionManagement()

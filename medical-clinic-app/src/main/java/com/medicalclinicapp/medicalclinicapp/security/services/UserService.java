@@ -48,27 +48,30 @@ public class UserService implements UserDetailsService {
         }
         return userProfile;
     }
-    public User changePassword(String oldPass, String newPass, Principal principal, HttpSession httpSession) throws Exception {
+    public User changePassword(String oldPass, String newPass, String cnp) throws Exception {
         System.out.println("Old pass" + oldPass);
         System.out.println("New pass" + newPass);
-
-        String username =principal.getName();
+        String username;
+        username = userRepository.findByCnp(cnp).getCnp();
         User currentUser = this.userRepository.findByCnp(username);
-
         if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
         {
-            System.out.println("pass write is the same with the user pass");
-            currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
-            this.userRepository.save(currentUser);
-            System.out.println("Password change");
+            if(oldPass.equals(newPass))
+            {System.out.println("Noua parola este la fel cu parola curenta");
+            }
+            else{
+                currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+                this.userRepository.save(currentUser);
+                System.out.println("Password change");
+            }
+        } else if(!this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword())){
+            System.out.println("Parola curenta nu se potriveste ");
         }
         else
         {
-            System.out.println("pass write is not the same with the user pass");
             throw new Exception("Incorrect username or password");
         }
         return currentUser;
-
     }
 
     /*

@@ -49,9 +49,9 @@ public class UserController {
         return ResponseEntity.ok(new LoginResponse(jwt, currentUser));
     }
 
-    @PostMapping(path="/user/changePass")
-    public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, Principal principal, HttpSession httpSession) throws Exception {
-        return userService.changePassword(oldPass, newPass, principal, httpSession);
+    @GetMapping(path="/changePass")
+    public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("cnp")String cnp) throws Exception {
+        return userService.changePassword(oldPass, newPass, cnp);
     }
 
 

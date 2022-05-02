@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response.jwt);
         localStorage.setItem('role', response.user.role)  
         localStorage.setItem('user', JSON.stringify(response.user))
+        localStorage.setItem('cnp', response.user.cnp)
         if(response.user.role == "MODERATOR"){
           console.log("/moderator => ")
           console.log(response.jwt)

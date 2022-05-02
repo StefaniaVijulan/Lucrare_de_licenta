@@ -18,11 +18,15 @@ import {
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
-
+  private cnpUser: string;
   private publicHttpHeaders = {
     headers: new HttpHeaders({
       'content-type': 'application/json'
     })
+  };
+  private publicHttpHeadersAuth = {
+    headers: new HttpHeaders({'Content-type':'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')})
   };
   constructor(private _http: HttpClient, private _router: Router) {}
   loginUser(data: any) {
@@ -41,4 +45,13 @@ export class AuthService {
     return localStorage.getItem('role')
   }
 
+  changePass(oldPass: string, newPass: string){
+    
+      console.log("here")
+      console.log(oldPass)
+      console.log(newPass)
+      this.cnpUser =  localStorage.getItem('cnp')
+      console.log(localStorage.getItem('cnp'))
+      return this._http.get<any>(this.baseUrl + '/changePass?oldPass='+ oldPass + '&newPass=' + newPass + '&cnp=' + this.cnpUser, this.publicHttpHeaders);
+  }
 }

@@ -11,6 +11,7 @@ import { ModeratorHematologComponent } from './pages/moderator/category/moderato
 import { ModeratorImagistComponent } from './pages/moderator/category/moderator-imagist/moderator-imagist.component';
 import { ModeratorSecretarComponent } from './pages/moderator/category/moderator-secretar/moderator-secretar.component';
 import { ModeratorComponent } from './pages/moderator/category/moderator/moderator.component';
+import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
 import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
 
 import { ModeratorService } from './services/moderator/moderator.service';
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     path:"secretar",
     component: SecretarComponent,
+    canActivate : [AuthGuard, SecretarGuard]
+  },
+  {
+    path:"secretarPacient",
+    component: SecretarPacientiComponent,
     canActivate : [AuthGuard, SecretarGuard]
   }
 ]

@@ -1,0 +1,21 @@
+<h3>
+    Schimba parola
+</h3>
+<mat-form-field appearance="fill">
+    <mat-label>Parola veche</mat-label>
+    <input matInput [(ngModel)]="oldPass"  [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Parola noua</mat-label>
+    <input matInput [(ngModel)]="newPass" [type]="hideNew ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
+      <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div mat-dialog-actions [align]="'center'">
+    <button mat-raised-button type="submit" class="btn"
+      color="primary" (click)="changePass()">Save</button>
+</div>

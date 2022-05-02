@@ -1,9 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatDialog, MatSidenav } from '@angular/material';
+import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 
 import { AuthService } from './services/auth/auth.service';
 import { ModeratorService } from './services/moderator/moderator.service';
+import { SecretarService } from './services/secretar/secretar.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,13 @@ export class AppComponent implements AfterViewInit  {
     sessionStorage.removeItem('user')
     
   }
-  constructor(public _moderator:ModeratorService, private observer: BreakpointObserver, private cdr: ChangeDetectorRef, public _service:AuthService){
+  constructor(
+    private dialog: MatDialog, 
+    public _moderator:ModeratorService,
+    private observer: BreakpointObserver,
+    private cdr: ChangeDetectorRef,
+    public _service:AuthService,
+    public _secretar: SecretarService){
 
   }
   ngAfterViewInit(){
@@ -39,5 +47,17 @@ export class AppComponent implements AfterViewInit  {
       }
     });
   }
+  openDialog(){ 
+    this.dialog.open(DialogChangePassComponent,{
+     width: '30%'
+    }).afterClosed().subscribe(val=>{
+     console.log("nu aici")
+     console.log(val)
+     if(val === "change"){
+       console.log("open dialog ",val)
+     //  this.allUsers();
+     }
+   })
+ };
 
 }

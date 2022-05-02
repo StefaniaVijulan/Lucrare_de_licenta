@@ -64,11 +64,20 @@ public class SecretaryService {
             throw new Exception("Patient exist");
 
         }
-        patient.setRole("PATIENT");
+        patient.setRole("PACIENT");
         patient.setPassword(bCryptPasswordEncoder.encode("parola"));
         patientRepository.save(patient);
         System.out.println(patient);
         return patient;
+    }
+    public List<Patient> allPatient() {
+        List<Patient> patientList = new ArrayList<>();
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+            {
+                patientList.add(patientRepository.findAll().get(i));
+            }
+        }
+        return patientList;
     }
     public Hospitalization addHospitalization(String cnp, String cnpP, Hospitalization hospitalization, Principal principal) throws Exception {
         if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))

@@ -21,7 +21,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogAddUserComponent } from './components/dialog-add-user/dialog-add-user.component';
 import { DialogDeleteUserComponent } from './components/dialog-delete-user/dialog-delete-user.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 import { ModeratorComponent } from './pages/moderator/category/moderator/moderator.component';
 import { ModeratorCardiologComponent } from './pages/moderator/category/moderator-cardiolog/moderator-cardiolog.component';
 import { ModeratorSecretarComponent } from './pages/moderator/category/moderator-secretar/moderator-secretar.component';
@@ -29,6 +29,10 @@ import { ModeratorImagistComponent } from './pages/moderator/category/moderator-
 import { ModeratorHematologComponent } from './pages/moderator/category/moderator-hematolog/moderator-hematolog.component';
 import { DialogResetPassComponent } from './components/dialog-reset-pass/dialog-reset-pass.component';
 import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
+import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
+import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { SecretarComponent } from './pages/secretar/secretar/secretar.component'
     ModeratorImagistComponent,
     ModeratorHematologComponent,
     DialogResetPassComponent,
-    SecretarComponent
+    SecretarComponent,
+    SecretarPacientiComponent,
+    DialogChangePassComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +77,11 @@ import { SecretarComponent } from './pages/secretar/secretar/secretar.component'
     MatPaginatorModule,
     MatSortModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule,
+  
   ],
-  entryComponents: [DialogComponent, DialogAddUserComponent, DialogDeleteUserComponent,DialogResetPassComponent],
+  entryComponents: [DialogComponent, DialogAddUserComponent, DialogDeleteUserComponent,DialogResetPassComponent,DialogChangePassComponent],
   providers: [],
 
   bootstrap: [AppComponent]

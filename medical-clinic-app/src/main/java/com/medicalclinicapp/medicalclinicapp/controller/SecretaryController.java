@@ -34,6 +34,10 @@ public class SecretaryController {
         return secretaryService.addPatient(patient);
     }
 
+    @GetMapping("/secretary/allPatients")
+    public List<Patient> getAllPatient(){
+        return secretaryService.allPatient();
+    }
 
     @PostMapping(path = "/hospitalizationChangeEndData{registrationNoHospitalization}")
     public String changeHopEndDate(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody String endDate) throws ParseException {
@@ -57,5 +61,6 @@ public class SecretaryController {
     public List<User> getAllCurants(){
         return secretaryService.seeAllCurant();
     }
+
 
 }
