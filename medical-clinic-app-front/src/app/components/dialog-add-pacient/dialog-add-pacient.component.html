@@ -1,0 +1,205 @@
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Informatii generale</ng-template>
+        <mat-grid-list cols="3" rowHeight="250px">
+
+          <mat-grid-tile>
+            <div style="margin-top: 4vh;" class="controles-container">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Nume</mat-label>
+                <input matInput formControlName="lastName" placeholder="ex. Popescu">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Initiala tatalui</mat-label>
+                <input matInput formControlName="dadLetterPatient" placeholder="D.F.">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Prenume</mat-label>
+                <input matInput formControlName="firstName" placeholder="ex. Ion">
+              </mat-form-field>
+
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div style="margin-top: 4vh;" class="controles-container">
+              <mat-form-field appearance="fill">
+                <mat-label>CNP</mat-label>
+                <input matInput formControlName="cnp" placeholder="ex. 6001100110000">
+                <mat-error class="error" *ngIf="firstFormGroup.controls['cnp'].hasError('pattern')">
+                  Introduceti un CNP valid
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Seria buletinului</mat-label>
+                <input matInput formControlName="seriesPatient" placeholder="ex. GZ">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Numarul seriei</mat-label>
+                <input matInput formControlName="numberPatient" placeholder="ex. 717775">
+              </mat-form-field>
+
+
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div style="margin-top: 2vh;" class="controles-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Telefon</mat-label>
+                <input matInput formControlName="numberUser" placeholder="ex. 0766666666">
+                <mat-error class="error" *ngIf="firstFormGroup.controls['numberUser'].hasError('pattern')">
+                  Numarul de telefon nu este valid
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input formControlName="emailUser" placeholder="pat@example.com" matInput>
+              </mat-form-field>
+              <br>
+              <div class="add-bottom-padding">
+                <mat-radio-group formControlName="sexPatient">
+                  <mat-radio-button style="margin-right: 3vw; margin-top: 2vh;" value="masculin">Barbat</mat-radio-button>
+                  <mat-radio-button style="margin-top: 2vh;" value="feminin">Femeie</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+        <br>
+        <div>
+          <button class="button-first" mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Adresa</ng-template>
+
+
+        <div class="controles-container">
+          <mat-form-field style="margin-left:8vw; margin-top: 2vh;" appearance="fill">
+            <mat-label>Oras</mat-label>
+            <input matInput formControlName="cityPatient" placeholder="ex. Popescu">
+          </mat-form-field>
+          <mat-form-field style="margin-left:4vw; margin-top: 2vh;" appearance="fill">
+            <mat-label>Judet</mat-label>
+            <input matInput formControlName="townPatient" placeholder="ex. Popescu">
+          </mat-form-field>
+        </div>
+
+        <div style="margin-top: 4vh;" class="controles-container">
+          <mat-form-field style="margin-left:8vw; margin-top: 2vh;" appearance="fill">
+            <mat-label>Strada</mat-label>
+            <input matInput formControlName="streetPatient" placeholder="ex. Ion">
+          </mat-form-field>
+          <mat-form-field style="margin-left:4vw; margin-top: 2vh;" appearance="fill">
+            <mat-label>Numarul</mat-label>
+            <input matInput formControlName="noPatient" placeholder="ex. 56A">
+          </mat-form-field>
+        </div>
+
+
+        <div class="example-button-row">
+          <button class="button-second" color="primary" mat-raised-button matStepperPrevious>Back</button>
+          <button class="button-second-2" color="primary" mat-raised-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Informatii medicale</ng-template>
+        <mat-grid-list cols="3" rowHeight="250px">
+
+          <mat-grid-tile>
+            <div style="margin-top: 4vh;" class="controles-container">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Cetatenie</mat-label>
+                <input matInput formControlName="citizenshipPatient" placeholder="ex. Romana">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Angajat</mat-label>
+                <mat-select formControlName="jobPatient">
+                  <mat-option value="da">Da</mat-option>
+                  <mat-option value="nu">Nu</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Asigurare medicala</mat-label>
+                <mat-select formControlName="insurancePatient">
+                  <mat-option value="True">Da</mat-option>
+                  <mat-option value="False">Nu</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div style="margin-top: 4vh;" class="controles-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Grupa de sange</mat-label>
+                <mat-select formControlName="bloodTypePatient">
+                  <mat-option value="a">A</mat-option>
+                  <mat-option value="b">B</mat-option>
+                  <mat-option value="ab">AB</mat-option>
+                  <mat-option value="0">0</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Rh</mat-label>
+                <mat-select formControlName="rhPatient">
+                  <mat-option value="negativ">Negativ</mat-option>
+                  <mat-option value="pozitiv">Pozitiv</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Alergii</mat-label>
+                <input matInput formControlName="allergyPatient" placeholder="ex. Ion">
+              </mat-form-field>
+
+
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div style="margin-top: 2vh;" class="controles-container">
+
+
+              <div class="add-bottom-padding">
+                <mat-radio-group formControlName="placePatient">
+                  <mat-radio-button style="margin-right: 3vw; margin-top: 2vh;" value="rural">Rural</mat-radio-button>
+                  <mat-radio-button style="margin-top: 2vh;" value="urban">Urban</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+        <br>
+        
+            <div class="example-button-row">
+                <button class="button-second" color="primary" mat-raised-button matStepperPrevious>Back</button>
+                <button class="button-second-2" color="primary" mat-raised-button matStepperNext (click) = "addPacient()">Next</button>
+              </div>
+           
+      </form>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Date internare</ng-template>
+      <p>You are now done.</p>
+      <div class="example-button-row">
+        <button class="button-second" color="primary" mat-raised-button matStepperPrevious>Back</button>
+        <button class="button-second-2" color="primary" mat-raised-button matStepperNext>Next</button>
+      </div>
+      <!--<div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>-->
+    </mat-step>-->
+  </mat-horizontal-stepper>

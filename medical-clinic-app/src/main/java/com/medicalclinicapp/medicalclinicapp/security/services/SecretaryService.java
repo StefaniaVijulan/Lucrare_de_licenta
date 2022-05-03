@@ -14,10 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -58,7 +60,8 @@ public class SecretaryService {
 
 
     public Patient addPatient(Patient patient) throws Exception {
-
+        System.out.println("Intra aici in backend");
+    System.out.println(patient.getCnp());
         if (patientRepository.existsById(patient.getCnp()))
         {
             throw new Exception("Patient exist");
@@ -79,25 +82,52 @@ public class SecretaryService {
         }
         return patientList;
     }
-    public Hospitalization addHospitalization(String cnp, String cnpP, Hospitalization hospitalization, Principal principal) throws Exception {
+    public Hospitalization addHospitalization(String cnpS, String cnpD, String cnpP, Hospitalization hospitalization) throws Exception {
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        System.out.println(sdf.format(curentData));
+        hospitalization.setStartDateHospitalization(sdf.format(curentData));
         if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
             throw new Exception("Hospitalization exist");
-        String username = principal.getName();
+        String username = secretaryRepository.findByCnp(cnpS).getCnp();
         Secretary secretary = this.secretaryRepository.findByCnp(username);
         hospitalization.setSecretary(secretary);
+
         if(!patientRepository.existsById(cnpP))
             throw new Exception("Patient doesnt exist");
         Patient patient = this.patientRepository.findByCnp(cnpP);
         hospitalization.setPatient(patient);
 
 
-        if(!cardiologRepository.existsById(cnp))
+        if(!cardiologRepository.existsById(cnpD))
             throw new Exception("You cant assign this doctor because he doesnt exist");
-        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnp));
+        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnpD));
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
     }
-    public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
+    public Hospitalization editHospitalization(String id) throws ParseException {
+        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(id);
+        Date currentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        System.out.println(sdf.format(currentData));
+        hospitalization.setEndDateHospitalization(sdf.format(currentData));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
+
+        System.out.println(formatter.parse(hospitalization.getStartDateHospitalization()));
+        System.out.println(formatter.parse(sdf.format(currentData)));
+        Date startDate = formatter.parse(hospitalization.getStartDateHospitalization());
+        long diff = currentData.getTime() - startDate.getTime();
+        System.out.println(diff);
+        Integer difference_In_Days
+                = Math.toIntExact((diff
+                / (1000 * 60 * 60 * 24))
+                % 365);
+        System.out.println(difference_In_Days+1);
+        hospitalization.setNumberOfHospitalization(difference_In_Days+1);
+        return hospitalization;
+    }
+  /*  public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
 
         Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
         if(!hospitalizationOptional.isPresent()){
@@ -109,8 +139,8 @@ public class SecretaryService {
         hospitalization.setEndDateHospitalization(dateEnd);
         hospitalizationRepository.save(hospitalization);
         return "Change Hospitalization Data End";
-    }
-    public String changeHospitalizationNumberOfHospitalization(String registrationNoHospitalization, Integer numberOfHospitalization){
+    }*/
+   /* public String changeHospitalizationNumberOfHospitalization(String registrationNoHospitalization, Integer numberOfHospitalization){
         Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
         if(!hospitalizationOptional.isPresent()){
             return "This hospitalization doesnt exist";
@@ -118,5 +148,5 @@ public class SecretaryService {
         Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
         hospitalization.setNumberOfHospitalization(numberOfHospitalization);
         return "Change Hospitalization Data End";
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pacient } from 'src/app/interfaces/pacient';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 
@@ -21,5 +22,8 @@ export class SecretarService {
   getAllPacients(){
     return this._http.get(this.baseUrl + '/secretary/allPatients', this.publicHttpHeaders);
   }
-  
+  addPacient(pacient: Pacient){
+    console.log("in service")
+    return this._http.post<any>(this.baseUrl + '/secretary/addPatient', pacient, this.publicHttpHeaders);
+  }
 }

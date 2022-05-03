@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 
 import { AuthService } from './services/auth/auth.service';
@@ -30,7 +31,8 @@ export class AppComponent implements AfterViewInit  {
     private observer: BreakpointObserver,
     private cdr: ChangeDetectorRef,
     public _service:AuthService,
-    public _secretar: SecretarService){
+    public _secretar: SecretarService,
+    private _router: Router){
 
   }
   ngAfterViewInit(){
@@ -51,11 +53,9 @@ export class AppComponent implements AfterViewInit  {
     this.dialog.open(DialogChangePassComponent,{
      width: '30%'
     }).afterClosed().subscribe(val=>{
-     console.log("nu aici")
-     console.log(val)
      if(val === "change"){
-       console.log("open dialog ",val)
-     //  this.allUsers();
+       this._router. navigate(['/secretar'])
+       
      }
    })
  };

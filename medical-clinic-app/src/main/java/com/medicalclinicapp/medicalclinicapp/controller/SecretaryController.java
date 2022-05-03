@@ -22,9 +22,8 @@ public class SecretaryController {
 
     @Transactional
     @PostMapping("/hospitalization/addHospitalization")
-    public Hospitalization addHospitalization(@RequestParam String cnp,@RequestParam String cnpPatient, @RequestBody Hospitalization hospitalization, Principal principal) throws Exception {
-
-        return secretaryService.addHospitalization(cnp,cnpPatient, hospitalization, principal);
+    public Hospitalization addHospitalization(@RequestParam(value = "cnpS") String cnpS, @RequestParam(value = "cnpD") String cnpD,@RequestParam(value = "cnpP") String cnpPatient, @RequestBody Hospitalization hospitalization) throws Exception {
+        return secretaryService.addHospitalization(cnpS, cnpD,cnpPatient, hospitalization);
     }
 
     @Transactional
@@ -34,6 +33,10 @@ public class SecretaryController {
         return secretaryService.addPatient(patient);
     }
 
+    @PutMapping("/secretary/editHospitalization")
+    public Hospitalization editHosp(@RequestParam("idHospitalization") String id) throws ParseException {
+        return secretaryService.editHospitalization(id);
+    }
     @GetMapping("/secretary/allPatients")
     public List<Patient> getAllPatient(){
         return secretaryService.allPatient();
@@ -47,11 +50,11 @@ public class SecretaryController {
         return "da";
         // return hospitalizationService.changeHospitalizationDataEnd(registrationNoHospitalization, endDate);
     }
-    @Transactional
+  /*  @Transactional
     @PostMapping("/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}")
     public String numberOfH(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody Integer NumberOfHospitalization){
         return secretaryService.changeHospitalizationNumberOfHospitalization(registrationNoHospitalization, NumberOfHospitalization);
-    }
+    }*/
 
     @GetMapping("/secretary/allHospitalization")
     public List<Hospitalization> getAllHospitalization(Principal principal){

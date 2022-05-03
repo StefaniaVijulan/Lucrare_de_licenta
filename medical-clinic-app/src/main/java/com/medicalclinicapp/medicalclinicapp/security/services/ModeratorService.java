@@ -174,7 +174,7 @@ public class ModeratorService {
         return hospitalizationsList;
     }
 
-    public User editCardiolog(String role, String cnpCardiolog,Cardiolog cardiolog ){
+    public User editCardiolog(String role, String cnpCardiolog, Cardiolog cardiolog ){
         System.out.println("Intra in service edit");
         System.out.println(cardiolog.getCnp());
         System.out.println(cardiolog.getEmailUser());

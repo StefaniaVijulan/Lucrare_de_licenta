@@ -7,9 +7,9 @@ import { ModeratorService } from 'src/app/services/moderator/moderator.service';
 import { environment } from 'src/environments/environment';
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import { MatDialog, MatPaginator, MatSort, MAT_DIALOG_DATA, Sort } from '@angular/material';
-import { DialogComponent } from 'src/app/components/dialog/dialog.component';
-import { DialogAddUserComponent } from 'src/app/components/dialog-add-user/dialog-add-user.component';
-import { DialogDeleteUserComponent } from 'src/app/components/dialog-delete-user/dialog-delete-user.component';
+import { DialogComponent } from 'src/app/components/moderator/dialog/dialog.component';
+import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-user/dialog-add-user.component';
+import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
 
 @Component({

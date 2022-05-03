@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +20,7 @@ import java.util.List;
 @Setter
 @Table(name = "patient")
 @RequiredArgsConstructor
+@DiscriminatorValue("Patient")
 public class Patient extends User {
     private String dadLetterPatient;
     private String seriesPatient;
