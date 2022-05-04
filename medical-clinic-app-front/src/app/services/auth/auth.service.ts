@@ -39,6 +39,7 @@ export class AuthService {
     localStorage.removeItem('token')
     localStorage.removeItem('role')
     localStorage.removeItem('user')
+    localStorage.removeItem('cnp')
     this._router.navigate(['/home'])
   }
   getRole() {

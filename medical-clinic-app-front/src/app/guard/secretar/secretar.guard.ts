@@ -16,7 +16,9 @@ export class SecretarGuard implements CanActivate {
     if(this._service.getRole()=="SECRETAR") {
         return true;
       } else {
+        this._service.logoutUser()
         this.router.navigate(['/home'])
+
         return false;
       }
   

@@ -32,6 +32,7 @@ import { SecretarComponent } from './pages/secretar/secretar/secretar.component'
 import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 import { DialogAddPacientComponent } from './components/dialog-add-pacient/dialog-add-pacient.component';
+import { FlexModule } from '@angular/flex-layout';
 
 
 
@@ -53,7 +54,8 @@ import { DialogAddPacientComponent } from './components/dialog-add-pacient/dialo
     SecretarComponent,
     SecretarPacientiComponent,
     DialogChangePassComponent,
-    DialogAddPacientComponent
+    DialogAddPacientComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ import { DialogAddPacientComponent } from './components/dialog-add-pacient/dialo
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+    
   ],
   entryComponents: [
     DialogComponent, 

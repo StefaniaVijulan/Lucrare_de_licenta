@@ -69,6 +69,11 @@ export class SecretarPacientiComponent implements OnInit {
   openAddDialog(){ 
     this.dialog.open(DialogAddPacientComponent,{
      width: '50%'
-    })
+    }).afterClosed().subscribe(val=>{
+      console.log(val)
+      if(val === "saveP"){
+        this.allPatients();
+      }
+    });
  };
 }

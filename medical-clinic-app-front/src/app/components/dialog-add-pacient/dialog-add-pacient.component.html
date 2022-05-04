@@ -190,16 +190,24 @@
       </form>
 
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Date internare</ng-template>
-      <p>You are now done.</p>
-      <div class="example-button-row">
-        <button class="button-second" color="primary" mat-raised-button matStepperPrevious>Back</button>
-        <button class="button-second-2" color="primary" mat-raised-button matStepperNext>Next</button>
-      </div>
-      <!--<div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>-->
+    <mat-step [stepControl]="hospitalizationGroup">
+      <form [formGroup]="hospitalizationGroup">
+        <ng-template matStepLabel>Date internare</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Numarul de inregistrare</mat-label>
+          <input matInput formControlName="registrationNoHospitalization" placeholder="ex. 147">
+        </mat-form-field> </form>
+        <mat-form-field appearance="fill">
+          <mat-label>Cardiolog</mat-label>
+          <mat-select [(ngModel)]="selectedCardio" name="food">
+            <mat-option *ngFor="let food of cardiologList" [value]="food.cnp">
+              {{food.firstName}} {{food.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="example-button-row">
+          <button class="button-second-2" color="primary" mat-raised-button matStepperNext (click)="addHospitalizatin()">Save</button>
+        </div>
+       
     </mat-step>-->
   </mat-horizontal-stepper>

@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('token', response.jwt);
         sessionStorage.setItem('role', response.user.role)
         sessionStorage.setItem('user', JSON.stringify(response.user))
-        
+        localStorage.setItem('cnp', response.user.cnp)
         this._router.navigate(['/dashboard']);
       }
     })

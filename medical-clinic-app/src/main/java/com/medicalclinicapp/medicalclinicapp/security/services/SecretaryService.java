@@ -8,6 +8,7 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
+import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,6 +37,10 @@ public class SecretaryService {
 
     @Autowired
     private HospitalizationRepository hospitalizationRepository;
+
+    @Autowired
+    private EmailService emailService;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<Hospitalization> getAllHospitalization(Principal principal){
@@ -69,6 +74,7 @@ public class SecretaryService {
         }
         patient.setRole("PACIENT");
         patient.setPassword(bCryptPasswordEncoder.encode("parola"));
+        emailService.sendmail(patient.getEmailUser(),"test","sper ca merge");
         patientRepository.save(patient);
         System.out.println(patient);
         return patient;
