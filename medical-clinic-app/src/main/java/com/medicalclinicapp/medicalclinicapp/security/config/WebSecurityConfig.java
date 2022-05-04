@@ -69,7 +69,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/allDoctors",
                         "/secretary/addPatient",
                         "/secretary/allPatients",
-                        "/secretary/editHospitalization").hasAuthority("SECRETAR")
+                        "/secretary/editHospitalization",
+                        "/secretary/infoPatient",
+                        "/secretary/infoHospitalization",
+                        "/secretary/specificP").hasAuthority("SECRETAR")
                 .antMatchers("/curant/addAppointmentHematology",
                 "/curant/addAppointmentRadiology").hasAuthority("CARDIOLOG")
 

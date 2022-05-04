@@ -33,7 +33,8 @@ import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/se
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 import { DialogAddPacientComponent } from './components/dialog-add-pacient/dialog-add-pacient.component';
 import { FlexModule } from '@angular/flex-layout';
-
+import { DialogMoreInfoPacientComponent } from './components/dialog-more-info-pacient/dialog-more-info-pacient.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { FlexModule } from '@angular/flex-layout';
     SecretarPacientiComponent,
     DialogChangePassComponent,
     DialogAddPacientComponent,
+    DialogMoreInfoPacientComponent,
     
   ],
   imports: [
@@ -86,7 +88,7 @@ import { FlexModule } from '@angular/flex-layout';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
-    
+    MatListModule
   ],
   entryComponents: [
     DialogComponent, 
@@ -94,7 +96,8 @@ import { FlexModule } from '@angular/flex-layout';
     DialogDeleteUserComponent,
     DialogResetPassComponent,
      DialogChangePassComponent,
-     DialogAddPacientComponent
+     DialogAddPacientComponent,
+     DialogMoreInfoPacientComponent
     ],
     
   providers: [],

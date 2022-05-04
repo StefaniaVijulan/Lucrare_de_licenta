@@ -11,6 +11,9 @@ import { Hospitalization } from 'src/app/interfaces/hospitalization';
   providedIn: 'root'
 })
 export class SecretarService {
+  pacient: Pacient;
+  hospitalization: Hospitalization;
+  cnpP: string;
   cnpS: string;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
@@ -36,5 +39,21 @@ export class SecretarService {
     console.log(localStorage.getItem('cnp'))
     this.cnpS = localStorage.getItem('cnp')
     return this._http.post<any>(this.baseUrl + '/hospitalization/addHospitalization?cnpS=' + this.cnpS + '&cnpD=' + cnpD + '&cnpP=' + cnpP, hospitalization, this.publicHttpHeaders);
+  }
+  moreInfoP(cnpP: string){
+    console.log("intra aici")
+    console.log(cnpP)
+    return this._http.get<Pacient>(this.baseUrl + '/secretary/infoPatient?cnpP=' + cnpP, this.publicHttpHeaders);
+  }
+  moreInfoH(cnpP: string){
+    console.log("intra aici")
+    console.log(cnpP)
+    return this._http.get<Hospitalization>(this.baseUrl + '/secretary/infoHospitalization?cnpP=' + cnpP, this.publicHttpHeaders);
+  }
+  getAllHospitalization(){
+    return this._http.get(this.baseUrl + '/secretary/allHospitalization', this.publicHttpHeaders);
+  }
+  getSpecificP(registrationNoHospitalization: string){
+    return this._http.get<Pacient>(this.baseUrl + '/secretary/specificP?registrationNoHospitalization=' + registrationNoHospitalization, this.publicHttpHeaders);
   }
 }

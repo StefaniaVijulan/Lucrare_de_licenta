@@ -53,6 +53,28 @@ public class SecretaryService {
         }
         return hospitalizationList;
     }
+    public Patient getSpecificPatient(String registrationNoHospitalization) {
+        Patient patient = new Patient();
+
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(registrationNoHospitalization))
+                    patient = hospitalizationRepository.findAll().get(i).getPatient();
+            }
+        }
+        return patient;
+    }
+
+    public List<Hospitalization> getHospitalizationBetweenData(String dateStart, String dataEnd){
+        List<Hospitalization> hospitalizationList = new ArrayList<>();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
+                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
+            }
+        }
+        return hospitalizationList;
+    }
     public List<User> seeAllCurant(){
         List<User> generalists = new ArrayList<>();
         for(int i=0; i<cardiologRepository.findAll().size(); i++){
@@ -63,6 +85,35 @@ public class SecretaryService {
         return generalists;
     }
 
+    public Patient moreInfo(String cnp){
+        System.out.println("Inainte de for");
+        System.out.println(cnp);
+        Patient patient = new Patient();
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+            {   System.out.println("in for");
+                System.out.println(cnp);
+                System.out.println(patientRepository.findAll().get(i).getCnp());
+                if(patientRepository.findAll().get(i).getCnp().equals(cnp))
+                {
+                    System.out.println("in if");
+                    System.out.println(patientRepository.findAll().get(i).getCnp());
+                    System.out.println(patientRepository.findAll().get(i));
+                    patient = patientRepository.findAll().get(i);
+                }
+            }
+        }
+        System.out.println(patient);
+        return patient;
+    }
+    public Hospitalization moreInfoHospitalization(String cnp){
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnp));
+            {
+                return hospitalizationRepository.findAll().get(i);
+            }
+        }
+        return null;
+    }
 
     public Patient addPatient(Patient patient) throws Exception {
         System.out.println("Intra aici in backend");

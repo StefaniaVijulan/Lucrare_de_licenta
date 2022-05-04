@@ -37,9 +37,19 @@ public class SecretaryController {
     public Hospitalization editHosp(@RequestParam("idHospitalization") String id) throws ParseException {
         return secretaryService.editHospitalization(id);
     }
+
     @GetMapping("/secretary/allPatients")
     public List<Patient> getAllPatient(){
         return secretaryService.allPatient();
+    }
+
+    @GetMapping("/secretary/infoPatient")
+    public Patient moreInfoP(@RequestParam(value = "cnpP")String cnpP){
+        return secretaryService.moreInfo(cnpP);
+    }
+    @GetMapping("/secretary/infoHospitalization")
+    public Hospitalization moreInfoH(@RequestParam(value = "cnpP")String cnpP){
+        return secretaryService.moreInfoHospitalization(cnpP);
     }
 
     @PostMapping(path = "/hospitalizationChangeEndData{registrationNoHospitalization}")
@@ -59,6 +69,10 @@ public class SecretaryController {
     @GetMapping("/secretary/allHospitalization")
     public List<Hospitalization> getAllHospitalization(Principal principal){
         return secretaryService.getAllHospitalization(principal);
+    }
+    @GetMapping("/secretary/specificP")
+    public Patient specificP(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
+        return secretaryService.getSpecificPatient(registrationNoHospitalization);
     }
     @GetMapping("/secretary/allCurants")
     public List<User> getAllCurants(){

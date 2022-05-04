@@ -1,0 +1,33 @@
+<h5 style="text-align: center;"><b>{{pacientI.firstName}} {{pacientI.dadLetterPatient}} {{pacientI.lastName}}</b></h5>
+
+<br>
+<div>
+  <p><i>Informatii despre internare</i></p>
+  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Data internarii: {{hospitalizationI.startDateHospitalization.split(" ")[0]}}</span><br>
+  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Ora internarii: {{hospitalizationI.startDateHospitalization.split(" ")[1]}}</span><br>
+  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Data externarii: {{dataEnd}}</span><br>
+  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Ora externarii: {{oraEnd}}</span><br>
+</div>
+<br>
+<div>
+    <p><i>Informatii despre pacient</i></p>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">CNP: {{pacientI.cnp}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Seria: {{pacientI.seriesPatient}}, nr. {{pacientI.numberPatient}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Adresa: str. {{pacientI.streetPatient}}, nr. {{pacientI.noPatient}}, loc. {{pacientI.cityPatient}}, jud.  {{pacientI.townPatient}}, mediul  {{pacientI.placePatient}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Cetatenie: {{pacientI.citizenshipPatient}}</span><br>
+
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Stare job: {{pacientI.jobPatient}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Grupa sange: {{grupaSange}}, RH {{rhSange}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Alergii: {{asigurare}}</span><br>
+  </div>

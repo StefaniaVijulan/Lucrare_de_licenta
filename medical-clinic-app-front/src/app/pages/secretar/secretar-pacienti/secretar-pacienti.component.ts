@@ -14,6 +14,7 @@ import { element } from 'protractor';
 import { DialogResetPassComponent } from 'src/app/components/moderator/dialog-reset-pass/dialog-reset-pass.component';
 import { SecretarService } from 'src/app/services/secretar/secretar.service';
 import { DialogAddPacientComponent } from 'src/app/components/dialog-add-pacient/dialog-add-pacient.component';
+import { DialogMoreInfoPacientComponent } from 'src/app/components/dialog-more-info-pacient/dialog-more-info-pacient.component';
 
 @Component({
   selector: 'app-secretar-pacienti',
@@ -74,6 +75,42 @@ export class SecretarPacientiComponent implements OnInit {
       if(val === "saveP"){
         this.allPatients();
       }
-    });
- };
+    });};
+
+    readMore(element: string){
+      this._secretar.cnpP = element
+      console.log(this._secretar.cnpP)
+      this._secretar.moreInfoH(this._secretar.cnpP).subscribe({
+        next: (data) => {
+          this._secretar.hospitalization = data
+          console.log("in readMore")
+          console.log(data)
+          console.log(this._secretar.hospitalization)
+        },
+        error: () => {
+          console.log("eroare")
+        }
+      });
+      console.log("dupa info H")
+      this._secretar.moreInfoP(this._secretar.cnpP).subscribe({
+        next: (data) => {
+          this._secretar.pacient = data
+          console.log(data)
+          this.dialog.open(DialogMoreInfoPacientComponent,{
+            width: '40%',
+            data:element
+           }).afterClosed().subscribe(val=>{
+            console.log(val)
+            if(val === "done"){
+              this.allPatients();
+            }
+          })
+        },
+        error: () => {
+          console.log("eroare")
+        }
+    
+     
+    })}
+ 
 }
