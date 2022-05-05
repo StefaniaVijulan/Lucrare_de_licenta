@@ -1,5 +1,11 @@
-<h5 style="text-align: center;"><b>{{pacientI.firstName}} {{pacientI.dadLetterPatient}} {{pacientI.lastName}}</b></h5>
-
+<h5 style="text-align: center; "><b>{{pacientI.firstName}} {{pacientI.dadLetterPatient}} {{pacientI.lastName}}</b></h5>
+<div>
+    <p><i>Date contact</i></p>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Telefon: {{pacientI.numberUser}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Email: {{pacientI.emailUser}}</span><br>
+  </div>
 <br>
 <div>
   <p><i>Informatii despre internare</i></p>
@@ -11,6 +17,8 @@
     class="aligned-with-icon">Data externarii: {{dataEnd}}</span><br>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
     class="aligned-with-icon">Ora externarii: {{oraEnd}}</span><br>
+  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Numar de zile spitalizare: {{hospitalizationI.numberOfHospitalization}}</span>
 </div>
 <br>
 <div>
@@ -29,5 +37,7 @@
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
       class="aligned-with-icon">Grupa sange: {{grupaSange}}, RH {{rhSange}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Alergii: {{asigurare}}</span><br>
+      class="aligned-with-icon">Asigurare: {{asigurare}}</span><br>
+    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+      class="aligned-with-icon">Alergii: {{pacientI.allergyPatient}}</span><br>
   </div>

@@ -25,7 +25,7 @@ public class Hospitalization {
     @JoinColumn(name = "secretary_cnp", nullable = false)
     Secretary secretary;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
     private Cardiolog cardiolog;

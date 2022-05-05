@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { pipeFromArray } from 'rxjs/internal/util/pipe';
+import { Cardiolog } from 'src/app/interfaces/cardiolog';
+import { Hematolog } from 'src/app/interfaces/hematolog';
+import { Imagist } from 'src/app/interfaces/imagist';
+import { Secretar } from 'src/app/interfaces/secretar';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
@@ -39,8 +43,8 @@ export class ModeratorService {
   getAllCardiolog(){
     return this._http.get(this.baseUrl + '/moderator/allCurant', this.publicHttpHeaders);
   }
-  addCardiolog(user: User){
-    return this._http.post<any>(this.baseUrl + '/moderator/registerCardiolog', user, this.publicHttpHeaders);
+  addCardiolog(cardiolog: Cardiolog){
+    return this._http.post<any>(this.baseUrl + '/moderator/registerCardiolog', cardiolog, this.publicHttpHeaders);
   }
   getAllHospitalizationCardiolog(data: any){
     return this._http.get(this.baseUrl + '/moderator/allHospitalizationCardiolog?cnp='+ data, this.publicHttpHeaders);
@@ -50,22 +54,22 @@ export class ModeratorService {
   getAllSecretaries(){
     return this._http.get(this.baseUrl + '/moderator/allSecretaries', this.publicHttpHeaders); 
   }
-  addSecretaries(user: User){
-    return this._http.post<any>(this.baseUrl + '/moderator/registerSecretary', user, this.publicHttpHeaders);
+  addSecretaries(secretar: Secretar){
+    return this._http.post<any>(this.baseUrl + '/moderator/registerSecretary', secretar, this.publicHttpHeaders);
   }
 
 
   getAllimagists(){
     return this._http.get(this.baseUrl + '/moderator/allImagist', this.publicHttpHeaders); 
   }
-  addImagists(user: User){
+  addImagists(user: Imagist){
     return this._http.post<any>(this.baseUrl + '/moderator/registerImagist', user, this.publicHttpHeaders);
   }
 
   getAllHematolog(){
     return this._http.get(this.baseUrl + '/moderator/allHematologs', this.publicHttpHeaders); 
   }
-  addHematolog(user: User){
+  addHematolog(user: Hematolog){
     return this._http.post<any>(this.baseUrl + '/moderator/registerHematolog', user, this.publicHttpHeaders);
   }
 

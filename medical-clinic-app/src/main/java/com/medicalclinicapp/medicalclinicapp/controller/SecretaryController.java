@@ -2,6 +2,7 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.SecretaryService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,9 @@ public class SecretaryController {
         return secretaryService.addPatient(patient);
     }
 
-    @PutMapping("/secretary/editHospitalization")
+    @GetMapping("/secretary/editHospitalization")
     public Hospitalization editHosp(@RequestParam("idHospitalization") String id) throws ParseException {
+
         return secretaryService.editHospitalization(id);
     }
 
@@ -52,19 +54,7 @@ public class SecretaryController {
         return secretaryService.moreInfoHospitalization(cnpP);
     }
 
-    @PostMapping(path = "/hospitalizationChangeEndData{registrationNoHospitalization}")
-    public String changeHopEndDate(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody String endDate) throws ParseException {
-        System.out.println("ana are mere");
-        System.out.println( endDate);
-        System.out.println();
-        return "da";
-        // return hospitalizationService.changeHospitalizationDataEnd(registrationNoHospitalization, endDate);
-    }
-  /*  @Transactional
-    @PostMapping("/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}")
-    public String numberOfH(@RequestParam(value = "registrationNoHospitalization")String registrationNoHospitalization, @RequestBody Integer NumberOfHospitalization){
-        return secretaryService.changeHospitalizationNumberOfHospitalization(registrationNoHospitalization, NumberOfHospitalization);
-    }*/
+
 
     @GetMapping("/secretary/allHospitalization")
     public List<Hospitalization> getAllHospitalization(Principal principal){
@@ -73,6 +63,10 @@ public class SecretaryController {
     @GetMapping("/secretary/specificP")
     public Patient specificP(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
         return secretaryService.getSpecificPatient(registrationNoHospitalization);
+    }
+    @GetMapping("/secretary/specificD")
+    public Cardiolog specificD(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
+        return secretaryService.getSpecificDoctor(registrationNoHospitalization);
     }
     @GetMapping("/secretary/allCurants")
     public List<User> getAllCurants(){

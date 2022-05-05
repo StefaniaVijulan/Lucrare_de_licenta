@@ -11,6 +11,7 @@ import { DialogComponent } from 'src/app/components/moderator/dialog/dialog.comp
 import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-user/dialog-add-user.component';
 import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
+import { Secretar } from 'src/app/interfaces/secretar';
 
 @Component({
   selector: 'app-moderator-secretar',
@@ -20,7 +21,7 @@ import { element } from 'protractor';
 export class ModeratorSecretarComponent implements OnInit {
 
   displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role', 'action'];
-  dataSource !: MatTableDataSource<User>;
+  dataSource !: MatTableDataSource<Secretar>;
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator!: MatPaginator;
@@ -49,7 +50,7 @@ export class ModeratorSecretarComponent implements OnInit {
   allSecretary(){
     return this._moderator.getAllSecretaries().subscribe((response: any) => {  
       this.setRoleCase(response)
-      this.dataSource = new MatTableDataSource<User>(response); 
+      this.dataSource = new MatTableDataSource<Secretar>(response); 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       })};

@@ -11,6 +11,7 @@ import { DialogComponent } from 'src/app/components/moderator/dialog/dialog.comp
 import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-user/dialog-add-user.component';
 import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
+import { Hematolog } from 'src/app/interfaces/hematolog';
 
 @Component({
   selector: 'app-moderator-hematolog',
@@ -20,7 +21,7 @@ import { element } from 'protractor';
 export class ModeratorHematologComponent  implements OnInit {
 
   displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role', 'action'];
-  dataSource !: MatTableDataSource<User>;
+  dataSource !: MatTableDataSource<Hematolog>;
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator!: MatPaginator;
@@ -49,7 +50,7 @@ export class ModeratorHematologComponent  implements OnInit {
   allHematolog(){
     return this._moderator.getAllHematolog().subscribe((response: any) => {  
       this.setRoleCase(response)
-      this.dataSource = new MatTableDataSource<User>( response); 
+      this.dataSource = new MatTableDataSource<Hematolog>( response); 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       })};

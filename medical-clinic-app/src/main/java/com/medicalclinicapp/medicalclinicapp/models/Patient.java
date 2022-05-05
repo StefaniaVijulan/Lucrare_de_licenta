@@ -20,7 +20,6 @@ import java.util.List;
 @Setter
 @Table(name = "patient")
 @RequiredArgsConstructor
-@DiscriminatorValue("Patient")
 public class Patient extends User {
     private String dadLetterPatient;
     private String seriesPatient;

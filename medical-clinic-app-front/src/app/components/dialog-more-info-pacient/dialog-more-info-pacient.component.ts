@@ -30,6 +30,7 @@ export class DialogMoreInfoPacientComponent implements OnInit {
   grupaSange: string;
   rhSange: string;
   asigurare: string;
+  nrH: string;
   constructor(private _formBuilder: FormBuilder,
     private _secretar: SecretarService,
     private dialogref: MatDialogRef < DialogMoreInfoPacientComponent >
@@ -61,6 +62,12 @@ export class DialogMoreInfoPacientComponent implements OnInit {
       this.asigurare = "da"
     } else {
       this.asigurare = "nu"
+    }
+    if (this.hospitalizationI.numberOfHospitalization == 0) {
+      console.log("intra aici null asigurare")
+      this.nrH = "0"
+    } else {
+      this.nrH = this.hospitalizationI.numberOfHospitalization
     }
   }
 

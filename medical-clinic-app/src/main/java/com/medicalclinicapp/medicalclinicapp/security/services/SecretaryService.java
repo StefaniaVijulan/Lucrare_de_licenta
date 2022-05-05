@@ -4,6 +4,7 @@ import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
@@ -63,6 +64,17 @@ public class SecretaryService {
             }
         }
         return patient;
+    }
+    public Cardiolog getSpecificDoctor(String registrationNoHospitalization) {
+        Cardiolog cardiolog = new Cardiolog();
+
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(registrationNoHospitalization))
+                    cardiolog = hospitalizationRepository.findAll().get(i).getCardiolog();
+            }
+        }
+        return cardiolog;
     }
 
     public List<Hospitalization> getHospitalizationBetweenData(String dateStart, String dataEnd){
@@ -182,6 +194,7 @@ public class SecretaryService {
                 % 365);
         System.out.println(difference_In_Days+1);
         hospitalization.setNumberOfHospitalization(difference_In_Days+1);
+        hospitalizationRepository.save(hospitalization);
         return hospitalization;
     }
   /*  public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){

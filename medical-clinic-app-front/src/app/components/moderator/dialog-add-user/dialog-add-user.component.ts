@@ -15,7 +15,7 @@ export class DialogAddUserComponent implements OnInit {
 
   myForm!: FormGroup;
   disabled = false;
-  user = new User()
+ 
   msg = ''
   actionBtn: string = "Save"
   constructor(private _service: ModeratorService,

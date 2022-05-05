@@ -1,6 +1,9 @@
+import { Pacient } from "./pacient";
+
 export class Hospitalization {
     
-    registrationNoHospitalization: String;
+    registrationNoHospitalization: string;
     
+    patient: Pacient;
     constructor(){}
 }

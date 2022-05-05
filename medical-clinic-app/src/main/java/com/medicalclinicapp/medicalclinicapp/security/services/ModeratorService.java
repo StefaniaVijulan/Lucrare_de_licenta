@@ -240,9 +240,10 @@ public class ModeratorService {
 
     public String deleteUser(String cnp) throws Exception {
 
-        if(cardiologRepository.existsById(cnp))
+        if(cardiologRepository.existsById(cnp)) {
+            System.out.println("here");
             cardiologRepository.delete(cardiologRepository.findByCnp(cnp));
-        else if(secretaryRepository.existsById(cnp))
+        } else if(secretaryRepository.existsById(cnp))
             secretaryRepository.delete(secretaryRepository.findByCnp(cnp));
         else if(hematologRepository.existsById(cnp))
             hematologRepository.delete(hematologRepository.findByCnp(cnp));

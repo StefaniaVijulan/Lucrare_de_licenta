@@ -1,3 +1,5 @@
+import { Hospitalization } from "./hospitalization";
+
 export class Pacient {
     
     cnp: String;
@@ -25,6 +27,8 @@ export class Pacient {
     insurancePatient: boolean;
 
     role: String;
+    
+    hospitalizationList: Hospitalization[];
     
     constructor(){}
 }

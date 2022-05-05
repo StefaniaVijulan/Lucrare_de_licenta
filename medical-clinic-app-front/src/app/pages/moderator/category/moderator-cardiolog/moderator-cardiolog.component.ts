@@ -11,6 +11,7 @@ import { DialogComponent } from 'src/app/components/moderator/dialog/dialog.comp
 import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-user/dialog-add-user.component';
 import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
+import { Cardiolog } from 'src/app/interfaces/cardiolog';
 
 @Component({
   selector: 'app-moderator-cardiolog',
@@ -20,7 +21,7 @@ import { element } from 'protractor';
 export class ModeratorCardiologComponent implements OnInit {
 
   displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role', 'action'];
-  dataSource !: MatTableDataSource<User>;
+  dataSource !: MatTableDataSource<Cardiolog>;
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator!: MatPaginator;
@@ -52,7 +53,7 @@ export class ModeratorCardiologComponent implements OnInit {
   allCurants(){
     return this._moderator.getAllCardiolog().subscribe((response: any) => {  
       this.setRoleCase(response)
-      this.dataSource = new MatTableDataSource<User>( response); 
+      this.dataSource = new MatTableDataSource<Cardiolog>( response); 
       this.dataSource.paginator = this.paginator;
      this.dataSource.sort = this.sort;
       })};

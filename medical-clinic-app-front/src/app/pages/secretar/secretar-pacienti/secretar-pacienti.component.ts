@@ -25,10 +25,7 @@ export class SecretarPacientiComponent implements OnInit {
 
   displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role', 'action'];
   dataSource !: MatTableDataSource<any>;
-  curantsSource !: MatTableDataSource<User>;
-  secretariesSource !: MatTableDataSource<User>;
-  imagistSource !: MatTableDataSource<User>;
-  hematologSource !: MatTableDataSource<User> ;
+
 
   @ViewChild(MatPaginator, {static: true}) 
   paginator!: MatPaginator;
@@ -43,7 +40,7 @@ export class SecretarPacientiComponent implements OnInit {
        }
 
   ngOnInit(): void {
-
+    
     this.allPatients();
   }
   setRoleCase(data){
@@ -67,15 +64,7 @@ export class SecretarPacientiComponent implements OnInit {
       else
         return false
   };
-  openAddDialog(){ 
-    this.dialog.open(DialogAddPacientComponent,{
-     width: '50%'
-    }).afterClosed().subscribe(val=>{
-      console.log(val)
-      if(val === "saveP"){
-        this.allPatients();
-      }
-    });};
+
 
     readMore(element: string){
       this._secretar.cnpP = element
@@ -105,7 +94,10 @@ export class SecretarPacientiComponent implements OnInit {
               this.allPatients();
             }
           })
+
+        
         },
+
         error: () => {
           console.log("eroare")
         }
