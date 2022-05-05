@@ -14,7 +14,7 @@ import {  DialogAddPacientComponent} from 'src/app/components/dialog-add-pacient
   styleUrls: ['./secretar.component.scss']
 })
 export class SecretarComponent implements OnInit {
-  listHospitalization: Hospitalization[]
+  listHospitalization: any
   currentList: any;
   pacientL: any;
 
@@ -40,6 +40,7 @@ export class SecretarComponent implements OnInit {
   allHospit() {
     this._secretar.getAllHospitalization().subscribe((response: any) => {
       this.listHospitalization = response
+      console.log(response[0].startDateHospitalization)
       this.pacientL = new Array < Pacient > (this.listHospitalization.length)
       for (let i = 0; i < this.listHospitalization.length; i++) {
         this._secretar.getSpecificP(this.listHospitalization[i].registrationNoHospitalization).subscribe((data: any) => {
@@ -51,7 +52,7 @@ export class SecretarComponent implements OnInit {
 
   readMore(element: string) {
     this._secretar.cnpP = element
-    console.log(this._secretar.cnpP)
+    
     this._secretar.moreInfoH(this._secretar.cnpP).subscribe({
       next: (data) => {
         this._secretar.hospitalization = data

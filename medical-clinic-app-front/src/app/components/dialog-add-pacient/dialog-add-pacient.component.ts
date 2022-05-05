@@ -17,10 +17,13 @@ import { SecretarService } from 'src/app/services/secretar/secretar.service';
 export class DialogAddPacientComponent implements OnInit {
 
   isLinear = false;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+
   selectedCardio: any;
+
   hospitalizationGroup: FormGroup;
   user: User;
   cardiologList: User[];
@@ -31,7 +34,6 @@ export class DialogAddPacientComponent implements OnInit {
     private dialogref: MatDialogRef < DialogAddPacientComponent >) {}
 
   ngOnInit() {
-    this.allCurants()
     this.firstFormGroup = this._formBuilder.group({
       cnp: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
       firstName: ['', Validators.required],
@@ -69,7 +71,7 @@ export class DialogAddPacientComponent implements OnInit {
     this.hospitalization.registrationNoHospitalization = this.hospitalizationGroup.value.registrationNoHospitalization
   }
   setPacient(){
-  this.newPacient.cnp = this.firstFormGroup.value.cnp
+   this.newPacient.cnp = this.firstFormGroup.value.cnp
    this.newPacient.firstName = this.firstFormGroup.value.firstName
    this.newPacient.lastName = this.firstFormGroup.value.lastName
    this.newPacient.numberUser = this.firstFormGroup.value.numberUser
@@ -91,6 +93,8 @@ export class DialogAddPacientComponent implements OnInit {
    this.newPacient.rhPatient = this.thirdFormGroup.value.rhPatient
    this.newPacient.allergyPatient = this.thirdFormGroup.value.allergyPatient
    this.newPacient.insurancePatient = this.thirdFormGroup.value.insurancePatient
+
+   
   }
   addPacient(){
     this.setPacient() 
@@ -103,19 +107,11 @@ export class DialogAddPacientComponent implements OnInit {
             
           }
         }
+      
 
   )
   }
-  allCurants(){
-    return this._secretar.allCardio().subscribe((response: any) => {  
-    
-      this.cardiologList = response
-    
-      })};
-  addHospitalizatin(){
-  
-
-   
+  addHospitalizatin(){ 
     this.setHospitalization()
     
     this._secretar.addHospitalization(this.selectedCardio, this.newPacient.cnp, this.hospitalization).subscribe({

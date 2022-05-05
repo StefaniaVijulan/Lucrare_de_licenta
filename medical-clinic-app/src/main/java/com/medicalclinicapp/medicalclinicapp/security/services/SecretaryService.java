@@ -44,6 +44,7 @@ public class SecretaryService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    //internarile active
     public List<Hospitalization> getAllHospitalization(Principal principal){
         List<Hospitalization> hospitalizationList = new ArrayList<>();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
@@ -54,6 +55,7 @@ public class SecretaryService {
         }
         return hospitalizationList;
     }
+
     public Patient getSpecificPatient(String registrationNoHospitalization) {
         Patient patient = new Patient();
 
@@ -65,12 +67,25 @@ public class SecretaryService {
         }
         return patient;
     }
-    public Cardiolog getSpecificDoctor(String registrationNoHospitalization) {
-        Cardiolog cardiolog = new Cardiolog();
 
+    // Date despre internarea specifica unui pacient
+    public Hospitalization getSpecificHospitalizationofPatient(String cnpP){
+        Hospitalization hospitalization= new Hospitalization();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             {
-                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(registrationNoHospitalization))
+                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
+                    hospitalization = hospitalizationRepository.findAll().get(i);
+            }
+        }
+        return hospitalization;
+    }
+
+    // Date despre doctorul specifica unui pacient internat
+    public Cardiolog getSpecificCardiologOfPatient(String cnpP){
+        Cardiolog cardiolog= new Cardiolog();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
                     cardiolog = hospitalizationRepository.findAll().get(i).getCardiolog();
             }
         }
@@ -129,7 +144,7 @@ public class SecretaryService {
 
     public Patient addPatient(Patient patient) throws Exception {
         System.out.println("Intra aici in backend");
-    System.out.println(patient.getCnp());
+        System.out.println(patient.getCnp());
         if (patientRepository.existsById(patient.getCnp()))
         {
             throw new Exception("Patient exist");
