@@ -12,6 +12,8 @@ import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryReposi
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -81,11 +83,11 @@ public class SecretaryService {
     }
 
     // Date despre doctorul specifica unui pacient internat
-    public Cardiolog getSpecificCardiologOfPatient(String cnpP){
+    public Cardiolog getSpecificCardiologOfPatient(String reg){
         Cardiolog cardiolog= new Cardiolog();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             {
-                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
+                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(reg))
                     cardiolog = hospitalizationRepository.findAll().get(i).getCardiolog();
             }
         }
@@ -157,6 +159,30 @@ public class SecretaryService {
         System.out.println(patient);
         return patient;
     }
+    public ResponseEntity<Patient> afisareP(String cnpP){
+        if (!patientRepository.existsById(cnpP))
+        {
+            return null;
+        } else {
+            Patient patient = patientRepository.findByCnp(cnpP);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+
+
+        }
+    }
+
+    public Patient deletePatient(String cnpP){
+        if (!patientRepository.existsById(cnpP))
+        {
+            return null;
+        }
+        else{
+            patientRepository.delete(patientRepository.findByCnp(cnpP));
+            return patientRepository.findByCnp(cnpP);
+        }
+
+    }
+
     public List<Patient> allPatient() {
         List<Patient> patientList = new ArrayList<>();
         for(int i=0; i<patientRepository.findAll().size(); i++){

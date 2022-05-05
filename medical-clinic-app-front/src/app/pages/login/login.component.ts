@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   };
   public message = '';
   public error: boolean | string = false;
+  msg: string;
 
   constructor(private _service: AuthService, private _router: Router) { }
 
@@ -27,22 +28,19 @@ export class LoginComponent implements OnInit {
   }
   doLoginUser() {
     this._service.loginUser(this.userDto).subscribe((response: any) => {
-      console.log(response.user);
+      console.log("doLogin")
+      console.log(response);
       if (response && response.jwt) {
         localStorage.setItem('token', response.jwt);
         localStorage.setItem('role', response.user.role)  
         localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('cnp', response.user.cnp)
         if(response.user.role == "MODERATOR"){
-          console.log("/moderator => ")
-          console.log(response.jwt)
-          console.log(localStorage.getItem('token'))
+          
           this._router. navigate(['/moderator'])
           . then(() => {
           window. location. reload();
           })
-          
-         // this._router.navigate(['/moderator']);
         } else if(response.user.role == "SECRETAR"){
           this._router.navigate(['/secretar']);
         }
@@ -50,6 +48,12 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/dashboard']);
         }
 
+      }
+      else{
+        console.log(response)
+        if(response ==  null){
+          this.msg ="CNP-ul sau parola este gresită!"
+        }
       }
     })
   }

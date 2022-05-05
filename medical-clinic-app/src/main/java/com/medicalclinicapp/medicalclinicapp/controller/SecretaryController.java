@@ -7,6 +7,7 @@ import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.SecretaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -54,6 +55,10 @@ public class SecretaryController {
         return secretaryService.moreInfoHospitalization(cnpP);
     }
 
+    @DeleteMapping("/secretary/deletePatient")
+    public Patient deleteP(@RequestParam("cnpP") String cnpP){
+        return secretaryService.deletePatient(cnpP);
+    }
 
 
     @GetMapping("/secretary/allHospitalization")
@@ -66,12 +71,17 @@ public class SecretaryController {
     }
     @GetMapping("/secretary/specificD")
     public Cardiolog specificD(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
-        return secretaryService.getSpecificDoctor(registrationNoHospitalization);
+        return secretaryService.getSpecificCardiologOfPatient(registrationNoHospitalization);
     }
+
     @GetMapping("/secretary/allCurants")
     public List<User> getAllCurants(){
         return secretaryService.seeAllCurant();
     }
 
+    @GetMapping("/secretary/afisare")
+    public ResponseEntity<?> afisP(@RequestParam String cnpP){
+        return  secretaryService.afisareP(cnpP);
+    }
 
 }

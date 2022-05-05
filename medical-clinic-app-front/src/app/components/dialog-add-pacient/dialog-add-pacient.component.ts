@@ -22,18 +22,21 @@ export class DialogAddPacientComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
-  selectedCardio: any;
+  selectedCardio: any= [];
 
   hospitalizationGroup: FormGroup;
   user: User;
-  cardiologList: User[];
+  cardiologList: any;
   hospitalization: Hospitalization= new Hospitalization()
   newPacient: Pacient = new Pacient();
+
   constructor(private _formBuilder: FormBuilder,
     private _secretar: SecretarService,
     private dialogref: MatDialogRef < DialogAddPacientComponent >) {}
 
   ngOnInit() {
+    this._secretar.allCardio().subscribe((res)=>{this.cardiologList = res
+    console.log(res)})
     this.firstFormGroup = this._formBuilder.group({
       cnp: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
       firstName: ['', Validators.required],
@@ -52,18 +55,18 @@ export class DialogAddPacientComponent implements OnInit {
       streetPatient: ['', Validators.required],
       noPatient: ['', Validators.required],
     });
-   this.thirdFormGroup = this._formBuilder.group({
-    placePatient: ['', Validators.required],
-    citizenshipPatient:['', Validators.required],
-    jobPatient:[''],
-    bloodTypePatient:[''],
-    rhPatient:[''],
-    allergyPatient:[''],
-    insurancePatient:['', Validators.required]
-   });
-   this.hospitalizationGroup = this._formBuilder.group({
-    registrationNoHospitalization: ['', Validators.required],
-   })
+    this.thirdFormGroup = this._formBuilder.group({
+      placePatient: ['', Validators.required],
+      citizenshipPatient:['', Validators.required],
+      jobPatient:[''],
+      bloodTypePatient:[''],
+      rhPatient:[''],
+      allergyPatient:[''],
+      insurancePatient:['', Validators.required]
+    });
+    this.hospitalizationGroup = this._formBuilder.group({
+      registrationNoHospitalization: ['', Validators.required],
+    })
    
   }
   setHospitalization(){
@@ -97,7 +100,8 @@ export class DialogAddPacientComponent implements OnInit {
    
   }
   addPacient(){
-    this.setPacient() 
+      this.setPacient() 
+      console.log("intra aici")
       this._secretar.addPacient(this.newPacient).subscribe({
           next: (data) => {
           console.log("Add pacient")
@@ -111,14 +115,19 @@ export class DialogAddPacientComponent implements OnInit {
 
   )
   }
+  deleteUser(data: any){
+
+    console.log("Delete user")
+    this.setPacient() 
+    this._secretar.deletePatient(this.newPacient.cnp).subscribe((res)=>{
+      
+    })
+  }
   addHospitalizatin(){ 
     this.setHospitalization()
     
     this._secretar.addHospitalization(this.selectedCardio, this.newPacient.cnp, this.hospitalization).subscribe({
       next: (data) => {
-        console.log("aici")
-        console.log(data)
-  
         this.firstFormGroup.reset();
         this.secondFormGroup.reset();
         this.thirdFormGroup.reset();

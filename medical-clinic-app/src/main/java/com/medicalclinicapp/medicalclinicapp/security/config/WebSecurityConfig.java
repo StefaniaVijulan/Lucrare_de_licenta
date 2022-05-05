@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/editUser",
                         "/moderator/allHospitalizationCardiolog",
                         "/moderator/deleteUser",
+
                         "/moderator/resetPass").hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
@@ -71,8 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/allPatients",
                         "/secretary/editHospitalization",
                         "/secretary/infoPatient",
+                        "/secretary/afisare",
                         "/secretary/infoHospitalization",
-                        "/secretary/specificP").hasAuthority("SECRETAR")
+                        "/secretary/specificP",
+                        "/secretary/deletePatient").hasAuthority("SECRETAR")
                 .antMatchers("/curant/addAppointmentHematology",
                 "/curant/addAppointmentRadiology").hasAuthority("CARDIOLOG")
 

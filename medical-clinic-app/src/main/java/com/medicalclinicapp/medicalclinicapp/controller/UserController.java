@@ -40,7 +40,7 @@ public class UserController {
                             loginRequest.getPassword()));
         }
         catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+            return null;
         }
         final UserDetails userDetails = userService
                 .loadUserByUsername(loginRequest.getUsername());

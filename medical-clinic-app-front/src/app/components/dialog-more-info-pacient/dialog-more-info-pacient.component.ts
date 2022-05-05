@@ -10,6 +10,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from '@angular/material';
+import { timeStamp } from 'console';
 import {
   Pacient
 } from 'src/app/interfaces/pacient';
@@ -25,6 +26,8 @@ import {
 export class DialogMoreInfoPacientComponent implements OnInit {
   pacientI: any;
   hospitalizationI: any;
+  doctorI: any;
+
   dataEnd: string;
   oraEnd: string;
   grupaSange: string;
@@ -41,6 +44,8 @@ export class DialogMoreInfoPacientComponent implements OnInit {
     console.log(this.pacientI)
     this.hospitalizationI = this._secretar.hospitalization;
     console.log(this.hospitalizationI)
+    this.doctorI = this._secretar.doctor;
+    console.log(this.doctorI)
     if (!this.hospitalizationI.endDateHospitalization) {
       console.log("intra aici null data")
       this.dataEnd = "-"
