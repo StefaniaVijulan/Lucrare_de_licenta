@@ -1,4 +1,4 @@
-package com.medicalclinicapp.medicalclinicapp.repository;
+/*package com.medicalclinicapp.medicalclinicapp.repository;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hematology;
 import com.medicalclinicapp.medicalclinicapp.models.Radiology;
@@ -9,3 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface RadiologyRepository  extends JpaRepository<Radiology, Long> {
 
 }
+*/

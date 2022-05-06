@@ -63,38 +63,25 @@ export class SecretarComponent implements OnInit {
         this._secretar.getSpecificP(this.listHospitalization[i].registrationNoHospitalization).subscribe((data: any) => {
           this.pacientL[i] = data
         })
-        this._secretar.getSpecificD(this.listHospitalization[i].registrationNoHospitalization).subscribe((res: any) => {
-          this.cardiologL[i] = res
-        })
+        
       }
       console.log("list hospi")
-      console.log(this.listHospitalization)
+      this._secretar.hospitaliationListService = this.listHospitalization;
+      console.log(this._secretar.hospitaliationListService)
       console.log("list pacient")
-      console.log(this.pacientL)
+      this._secretar.pacientListService = this.pacientL
+      console.log(this._secretar.pacientListService)
       console.log("list cardio")
-      console.log(this.cardiologL)
+      this._secretar.doctorListService = this.cardiologL
+      console.log(this._secretar.doctorListService)
     })
   };
 
   readMore(element: string) {
     this._secretar.cnpP = element
-
-    this._secretar.moreInfoH(this._secretar.cnpP).subscribe({
-      next: (data) => {
-        this._secretar.hospitalization = data
-      },
-      error: () => {
-        console.log("eroare")
-      }
-    });
-    this._secretar.getSpecificD(this._secretar.hospitalization.registrationNoHospitalization).subscribe({
-      next: (data) => {
-        this._secretar.doctor = data
-      },
-      error: () => {
-        console.log("eroare")
-      }
-    })
+    this._secretar.doctorListService = this._secretar.getSpecificD().subscribe((res)=>{})
+    console.log("doctor specific")
+    console.log(this._secretar.doctorListService)
     this._secretar.moreInfoP(this._secretar.cnpP).subscribe({
       next: (data) => {
         this._secretar.pacient = data

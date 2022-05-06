@@ -22,10 +22,10 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class Hematolog extends User {
 
-
+/*
     @OneToOne(mappedBy = "hematolog")
     private Hematology hematology;
-
+*/
     private String role;
 
     @Override

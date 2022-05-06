@@ -22,17 +22,14 @@ import java.util.List;
 public class Cardiolog extends User {
 
     private String role;
-
-    @OneToMany(mappedBy = "cardiolog")
-    private List<Hospitalization> hospitalization;
-
-
+/*
     @OneToOne(mappedBy = "cardiolog")
     private AppointmentHematology appointmentHematology;
-
+*/
+    /*
     @OneToOne(mappedBy = "cardiolog")
     private AppointmentRadiology appointmentRadiology;
-
+*/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =

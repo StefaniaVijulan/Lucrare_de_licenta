@@ -1,5 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
-
+/*
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
@@ -30,8 +30,8 @@ public class CardiologService {
     private HospitalizationRepository hospitalizationRepository;
 
     @Autowired
-    private AppointmentRadiologyRepository appointmentRadiologyRepository;
-
+    private AppointmentRadiologyRepository appointmentRadiologyRepository;*/
+/*
 
     public AppointmentHematology addAppointmentHematology(AppointmentHematology appointment, Principal principal) throws Exception {
         if(appointmentHematologyRepository.existsByDataAppointment(appointment.getDataAppointment()) &&
@@ -40,7 +40,7 @@ public class CardiologService {
             throw new Exception("Hospitalization exist");
         String username = principal.getName();
         Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
-        appointment.setCardiolog(cardiolog);
+       // appointment.setCardiolog(cardiolog);
 
         appointmentHematologyRepository.save(appointment);
         return appointment;
@@ -52,10 +52,10 @@ public class CardiologService {
             throw new Exception("Hospitalization exist");
         String username = principal.getName();
         Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
-        appointment.setCardiolog(cardiolog);
+        //appointment.setCardiolog(cardiolog);
 
         appointmentRadiologyRepository.save(appointment);
         return appointment;
     }
 
-}
+}*/

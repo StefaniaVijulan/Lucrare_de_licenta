@@ -54,13 +54,14 @@ export class ModeratorComponent implements OnInit {
     
     return this._moderator.getAllUsers()
     .subscribe((res:any)=>{
-     
-     console.log("in functie\n",localStorage.getItem('token'))
+    this.setRoleCase(res)
+     console.log("response in allUsers - moderator.ts")
      this.dataSource =  new MatTableDataSource(res);
      this.dataSource.paginator = this.paginator;
      this.dataSource.sort = this.sort;
     }
    )};
+   
   openDialog(){ 
      this.dialog.open(DialogComponent,{
       width: '20%'
@@ -73,33 +74,7 @@ export class ModeratorComponent implements OnInit {
       }
     })
   };
-  openAddDialog(data: any){
-    console.log(data)
-    this._moderator.newUserS = data;
-    this.dialog.open(DialogAddUserComponent,{
-     width: '30%'
-    });
-  }
- /* getNumberOfHospitalization(element: any){
-   console.log("all hospi")
-   console.log(element.cnp)
-   if(element.role == "CARDIOLOG")
-    return this._moderator.getAllHospitalizationCardiolog(element.cnp).subscribe((response: any) => {
-        if(response.length != 0){
-          console.log("da")
-          this.dialog.open(DialogDeleteUserComponent,{
-            width: '30%'
-          })
-        }
-        else{
-        this.deleteUser(element.cnp)
-        }
-    });
-  else{
-    this.deleteUser(element.cnp)
-  }
-
- }*/
+  
 deleteUser(data: any){
   console.log(data)
   this._moderator.deleteUser(data).subscribe((res)=>{
@@ -108,10 +83,8 @@ deleteUser(data: any){
 }
  
 resetPass(element: any){
-  console.log("Reset pass")
-  console.log(element)
+  
   return this._moderator.resetPassword(element).subscribe((res)=>{
-    console.log(res)
     this.dialog.open(DialogResetPassComponent,{
       width: '30%',
       data:element
@@ -119,7 +92,7 @@ resetPass(element: any){
   })
 
 }
-  editUser(element: any){
+editUser(element: any){
     this.dialog.open(DialogAddUserComponent,{
       width: '30%',
       data:element

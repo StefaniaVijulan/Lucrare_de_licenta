@@ -1,4 +1,4 @@
-package com.medicalclinicapp.medicalclinicapp.security.services;
+/*package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hematology;
 import com.medicalclinicapp.medicalclinicapp.models.Radiology;
@@ -30,3 +30,4 @@ public class ImagistService {
 
 
 }
+        */

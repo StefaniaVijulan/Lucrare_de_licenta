@@ -47,12 +47,8 @@ export class AuthService {
   }
 
   changePass(oldPass: string, newPass: string){
-    
-      console.log("here")
-      console.log(oldPass)
-      console.log(newPass)
+
       this.cnpUser =  localStorage.getItem('cnp')
-      console.log(localStorage.getItem('cnp'))
-      return this._http.get<any>(this.baseUrl + '/changePass?oldPass='+ oldPass + '&newPass=' + newPass + '&cnp=' + this.cnpUser, this.publicHttpHeaders);
+      return this._http.get<any>(this.baseUrl + '/changePass?oldPass='+ oldPass + '&newPass=' + newPass + '&cnpU=' + this.cnpUser, this.publicHttpHeaders);
   }
 }

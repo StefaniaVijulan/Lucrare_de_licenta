@@ -15,7 +15,7 @@ export class DialogAddUserComponent implements OnInit {
 
   myForm!: FormGroup;
   disabled = false;
- 
+
   msg = ''
   actionBtn: string = "Save"
   constructor(private _service: ModeratorService,
@@ -34,9 +34,6 @@ export class DialogAddUserComponent implements OnInit {
       numberUser: ['', Validators.compose([Validators.required, Validators.pattern('(\\d{3})(\\d{3})(\\d{4})')])],
       emailUser: ['', Validators.compose([Validators.required, Validators.email])]
     });
-    console.log("edit before")
-    console.log(this.editData);
-    console.log(this.myForm.value)
     if (this.editData) {
       this.myForm.controls['cnp'].setValue(this.editData.cnp);
       this.myForm.controls['cnp'].disable()
@@ -44,90 +41,99 @@ export class DialogAddUserComponent implements OnInit {
       this.myForm.controls['lastName'].setValue(this.editData.lastName);
       this.myForm.controls['numberUser'].setValue(this.editData.numberUser);
       this.myForm.controls['emailUser'].setValue(this.editData.emailUser);
-    }else{
-      
     }
-    console.log("edit")
-    console.log(this.editData);
-
-    console.log(this.myForm.value)
   }
-
   register() {
     if (!this.editData) {
       if (this.myForm.valid) {
-        if (this._service.newUserS.toUpperCase() == "CARDIOLOG") {
-          this._service.addCardiolog(this.myForm.value).subscribe({
-              next: (data) => {
+        console.log("Dialogul de adaugare a unui pacient este deschis!")
+        if (this._service.newUserRole.toUpperCase() == "CARDIOLOG") {
+          this._service.addCardiolog(this.myForm.value).subscribe((res) => {
+              if (res == null) {
+                console.log("Un cardiolog cu acest CNP exista deja!")
+                this.msg = "Un cardiolog cu acest CNP exista deja!"
+              } else {
+                console.log("Cardiolog adaugat")
+                //se reseteaza formularul
                 this.myForm.reset();
-                this.dialogref.close("save");    
-              },
-              error: () => {
-                this.msg = "Error while adding the product";
+                //se intoarce cu textul save
+                this.dialogref.close("save");
               }
+
+            }
+
+          )
+          this._service.getAllUsers()
+        } else if (this._service.newUserRole.toUpperCase() == "SECRETAR") {
+          this._service.addSecretaries(this.myForm.value).subscribe((res) => {
+              if (res == null) {
+                console.log("Un secretar cu acest CNP exista deja!")
+                this.msg = "Un secretar cu acest CNP exista deja!"
+              } else {
+                console.log("Secretar adaugat")
+                //se reseteaza formularul
+                this.myForm.reset();
+                //se intoarce cu textul save
+                this.dialogref.close("save");
+              }
+
+            }
+
+          )
+          this._service.getAllUsers()
+        }else if (this._service.newUserRole.toUpperCase() == "IMAGIST") {
+          this._service.addImagists(this.myForm.value).subscribe((res) => {
+              if (res == null) {
+                console.log("Un imagist cu acest CNP exista deja!")
+                this.msg = "Un imagist cu acest CNP exista deja!"
+              } else {
+                console.log("Imagist adaugat")
+                //se reseteaza formularul
+                this.myForm.reset();
+                //se intoarce cu textul save
+                this.dialogref.close("save");
+              }
+
+            }
+
+          )
+          this._service.getAllUsers()
+        } else if (this._service.newUserRole.toUpperCase() == "HEMATOLOG") {
+          this._service.addHematolog(this.myForm.value).subscribe((res) => {
+              if (res == null) {
+                console.log("Un hematolog cu acest CNP exista deja!")
+                this.msg = "Un hematolog cu acest CNP exista deja!"
+              } else {
+                console.log("Hematolog adaugat")
+                //se reseteaza formularul
+                this.myForm.reset();
+                //se intoarce cu textul save
+                this.dialogref.close("save");
+              }
+
             }
 
           )
           this._service.getAllUsers()
         }
-        else if(this._service.newUserS.toUpperCase() == "SECRETAR") {
-          this._service.addSecretaries(this.myForm.value).subscribe({
-              next: (data) => {
-                this._service.count = 1
-                this.myForm.reset();
-                this.dialogref.close("save");
-              },
-              error: () => {
-                this.msg = "Error while adding the product";
-              }
-            }
-
-          )
-        }
-        else if(this._service.newUserS.toUpperCase() == "IMAGIST") {
-          this._service.addImagists(this.myForm.value).subscribe({
-              next: (data) => {
-                this._service.count = 1
-                this.myForm.reset();
-                this.dialogref.close("save");
-              },
-              error: () => {
-                this.msg = "Error while adding the product";
-              }
-            }
-
-          )
-        }
-        else if(this._service.newUserS.toUpperCase() == "HEMATOLOG") {
-          this._service.addHematolog(this.myForm.value).subscribe({
-              next: (data) => {
-                this._service.count = 1
-                this.myForm.reset();
-                this.dialogref.close("save");
-              },
-              error: () => {
-                this.msg = "Error while adding the product";
-              }
-            }
-
-          )
-        }
+      } else {
+        this.msg = "Campurile obligatorii nu sunt completate"
       }
 
     } else {
-      this.updateProduct(this.editData.role) 
-      
+      this.updateProduct(this.editData.role)
+
     }
   }
   updateProduct(info: any) {
-    console.log(info)
+    // rolul, cnpul userului si noul user
     this._service.editUser(info.toUpperCase(), this.editData.cnp, this.myForm.value).subscribe({
       next: (res) => {
-        console.log(res)
+        console.log("Userul a fost editat!")
         this.myForm.reset();
         this.dialogref.close("update");
       },
-      error:()=>{
+      error: () => {
         alert("errroooor")
       }
     })

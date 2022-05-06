@@ -22,11 +22,13 @@ import java.util.Collections;
 @Table(name = "imagist")
 @RequiredArgsConstructor
 public class Imagist extends User {
+    private String role;
 
+/*
     @OneToOne(mappedBy = "imagist")
     private Radiology radiology;
+*/
 
-    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

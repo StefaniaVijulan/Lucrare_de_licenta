@@ -2,6 +2,7 @@ package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
+
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
@@ -29,24 +30,108 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 public class SecretaryService {
+
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private HospitalizationRepository hospitalizationRepository;
+
     @Autowired
     private SecretaryRepository secretaryRepository;
 
     @Autowired
     private CardiologRepository cardiologRepository;
 
-    @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
-    private HospitalizationRepository hospitalizationRepository;
-
-    @Autowired
-    private EmailService emailService;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //internarile active
+    public Patient addPatient(Patient patient) throws Exception {
+        if (patientRepository.existsByCnp(patient.getCnp()))
+        {
+            //pacientul exista
+            return null;
+
+        }
+        String parola = "parola";
+        patient.setPassword(bCryptPasswordEncoder.encode(parola));
+        String emailtext;
+        emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() +",\n\nIti multumim ca ai apelat la serviciile noastre." +
+                "Pentru a avea acces la toate informatiile despre investigatiile facute in cadrul acestei clinici te invitam sa accesezi contul creat automat pentru tine. Un nou cont bazat pe CNPul dumneavoastra a fost creat."
+                +"\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
+                "\n\tParola: " + parola +"\n\n" +
+                "Pentru orice nelamurire va stam la dispozitie.";
+
+        emailService.sendmail(patient.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+        patient.setRole("PACIENT");
+        patientRepository.save(patient);
+        return patient;
+    }
+
+    public Hospitalization addHospitalization(String cnpP, String cnpC, String cnpS, Hospitalization hospitalization){
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        System.out.println(sdf.format(curentData));
+        hospitalization.setStartDateHospitalization(sdf.format(curentData));
+        if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
+            //Numarul de inregistrare a acestei internari este deja luat
+            return null;
+
+        Secretary secretary = this.secretaryRepository.findByCnp(cnpS);
+        hospitalization.setSecretary(secretary);
+
+        Patient patient = this.patientRepository.findByCnp(cnpP);
+        hospitalization.setPatient(patient);
+
+        Cardiolog cardiolog = this.cardiologRepository.findByCnp(cnpC);
+        hospitalization.setCardiolog(cardiolog);
+
+        hospitalizationRepository.save(hospitalization);
+
+        return hospitalization;
+    }
+}
+ /*
+
+    public Hospitalization newHospitalization(String registrationNo, Patient patient){
+        System.out.println("newHospitalization");
+        System.out.println("\tAdaugam un pacient nou");
+        if (patientRepository.existsById(patient.getCnp()))
+        {
+            return null;
+
+        }
+
+        System.out.println("\tAdaugam internare");
+        Hospitalization hospitalization = new Hospitalization();
+
+        hospitalization.setRegistrationNoHospitalization(registrationNo);
+
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        hospitalization.setStartDateHospitalization(sdf.format(curentData));
+
+        if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
+            throw new Exception("Hospitalization exist");
+        String username = secretaryRepository.findByCnp(cnpS).getCnp();
+        Secretary secretary = this.secretaryRepository.findByCnp(username);
+        hospitalization.setSecretary(secretary);
+
+        if(!patientRepository.existsById(cnpP))
+            throw new Exception("Patient doesnt exist");
+        Patient patient = this.patientRepository.findByCnp(cnpP);
+        hospitalization.setPatient(patient);
+
+
+        if(!cardiologRepository.existsById(cnpD))
+            throw new Exception("You cant assign this doctor because he doesnt exist");
+        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnpD));
+        hospitalizationRepository.save(hospitalization);
+        return hospitalization;
+        return patient;
+    }*/
+ /*   //internarile active
     public List<Hospitalization> getAllHospitalization(Principal principal){
         List<Hospitalization> hospitalizationList = new ArrayList<>();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
@@ -83,11 +168,11 @@ public class SecretaryService {
     }
 
     // Date despre doctorul specifica unui pacient internat
-    public Cardiolog getSpecificCardiologOfPatient(String reg){
+    public Cardiolog getSpecificCardiologOfPatient(String cnp){
         Cardiolog cardiolog= new Cardiolog();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             {
-                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(reg))
+                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnp))
                     cardiolog = hospitalizationRepository.findAll().get(i).getCardiolog();
             }
         }
@@ -144,21 +229,7 @@ public class SecretaryService {
         return null;
     }
 
-    public Patient addPatient(Patient patient) throws Exception {
-        System.out.println("Intra aici in backend");
-        System.out.println(patient.getCnp());
-        if (patientRepository.existsById(patient.getCnp()))
-        {
-            throw new Exception("Patient exist");
 
-        }
-        patient.setRole("PACIENT");
-        patient.setPassword(bCryptPasswordEncoder.encode("parola"));
-        emailService.sendmail(patient.getEmailUser(),"test","sper ca merge");
-        patientRepository.save(patient);
-        System.out.println(patient);
-        return patient;
-    }
     public ResponseEntity<Patient> afisareP(String cnpP){
         if (!patientRepository.existsById(cnpP))
         {
@@ -237,7 +308,7 @@ public class SecretaryService {
         hospitalization.setNumberOfHospitalization(difference_In_Days+1);
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
-    }
+    }*/
   /*  public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
 
         Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
@@ -259,5 +330,6 @@ public class SecretaryService {
         Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
         hospitalization.setNumberOfHospitalization(numberOfHospitalization);
         return "Change Hospitalization Data End";
-    }*/
+    }
 }
+        */

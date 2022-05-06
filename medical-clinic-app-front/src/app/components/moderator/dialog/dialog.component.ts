@@ -20,8 +20,9 @@ export class DialogComponent {
     private dialogref: MatDialogRef < DialogComponent >,
     private dialog: MatDialog ){}
   openDialog(){
-    this._moderator.newUserS = this.newUsers;
-
+    
+    this._moderator.newUserRole = this.newUsers.toUpperCase();
+    console.log(this._moderator.newUserRole)
     this.dialogref.close("save");
     this.dialog.open(DialogAddUserComponent,{
      width: '30%'

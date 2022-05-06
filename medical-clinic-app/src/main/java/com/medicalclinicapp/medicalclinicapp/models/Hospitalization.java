@@ -19,24 +19,23 @@ import java.util.Date;
 public class Hospitalization {
     @Id
     private String registrationNoHospitalization;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "secretary_cnp", nullable = false)
-    Secretary secretary;
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
-    private Cardiolog cardiolog;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "patient_cnp",referencedColumnName = "cnp")
-    Patient patient;
-
     private String startDateHospitalization;
     private String endDateHospitalization;
     private Integer numberOfHospitalization;
+
+
+    @ManyToOne
+    @JoinColumn(name = "secretary_cnp", nullable = false)
+    private Secretary secretary;
+
+    @ManyToOne
+    @JoinColumn(name = "cardiolog_cnp")
+    private Cardiolog cardiolog;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_cnp")
+    private Patient patient;
+
+
 }
 

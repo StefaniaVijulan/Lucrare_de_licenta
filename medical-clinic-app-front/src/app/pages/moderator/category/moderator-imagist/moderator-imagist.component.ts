@@ -11,6 +11,8 @@ import { DialogComponent } from 'src/app/components/moderator/dialog/dialog.comp
 import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-user/dialog-add-user.component';
 import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
+import { Imagist } from 'src/app/interfaces/imagist';
+import { DialogResetPassComponent } from 'src/app/components/moderator/dialog-reset-pass/dialog-reset-pass.component';
 
 @Component({
   selector: 'app-moderator-imagist',
@@ -36,55 +38,71 @@ export class ModeratorImagistComponent  implements OnInit {
        
        }
 
-  ngOnInit(): void {
-    this.allImagist();
-  }
-  setRoleCase(data){
-    for(let item of data){
-      item.role = item.role.substring(0,1)+ item.role.substring(1).toLowerCase()
-      //console.log(item.role)
-    }
-  }
-
-  allImagist(){
-    return this._moderator.getAllimagists().subscribe((response: any) => {  
-      this.setRoleCase(response)
-      this.dataSource = new MatTableDataSource<User>( response); 
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      })};
-  
-  openAddDialog(data: any){
-
-    this._moderator.newUserS = data;
-    this.dialog.open(DialogAddUserComponent,{
-     width: '30%'
-    }).afterClosed().subscribe(val=>{
-
-      if(val === "save"){
+       ngOnInit(): void {
         this.allImagist();
       }
-    });
-  }
-  deleteUser(data: any){
-
-    this._moderator.deleteUser(data).subscribe((res)=>{
-      this.allImagist()
-    })
-  }
-   
-    editUser(element: any){
-      this.dialog.open(DialogAddUserComponent,{
-        width: '30%',
-        data:element
-       }).afterClosed().subscribe(val=>{
-
-        if(val === "update"){
-          this.allImagist();
+    
+      setRoleCase(data){
+        for(let item of data){
+          item.role = item.role.substring(0,1)+ item.role.substring(1).toLowerCase()
+          //console.log(item.role)
         }
-      })
-    }
-   
+      }
+    
+      allImagist(){
+    
+        return this._moderator.getAllimagists().subscribe((response: any) => {  
+          console.log("response in allImagist - moderator_imagist.ts")
+          console.log(response)
+          this.setRoleCase(response)
+          this.dataSource = new MatTableDataSource<Imagist>( response); 
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+      })}
+      //metoda destinata adaugarii Cardiolog
+      openAddDialog(data: any){
+        //In variabila ”data” avem rolul persoanei pe care vrem sa o adaugam (cardiolog, secretar etc)
+        this._moderator.newUserRole = data;
+    
+        this.dialog.open(DialogAddUserComponent,{
+         width: '30%'
+        }).afterClosed().subscribe(val=>{
+          //daca se intoarce cu save
+          if(val === "save"){
+            console.log("Imagistul a fost adaugat cu succes!")
+            this.allImagist();
+          }
+        });
+      }
+      editUser(element: any){
+        this.dialog.open(DialogAddUserComponent,{
+          width: '30%',
+          data:element
+         }).afterClosed().subscribe(val=>{
+          console.log("Cardiologul a fost editat cu succes!")
+          console.log(val)
+          if(val === "update"){
+            this.allImagist();
+          }
+        })
+      }
+      deleteUser(data: any){
+        console.log(data)
+        this._moderator.deleteUser(data).subscribe((res)=>{
+          this.allImagist()
+        })
+      }
+      resetPass(element: any){
+        console.log("aici")
+        return this._moderator.resetPassword(element).subscribe((res)=>{
+          console.log("ori d")
+          this.dialog.open(DialogResetPassComponent,{
+            width: '30%',
+            data:element
+           })
+        })
+      
+      }
   }
   
   

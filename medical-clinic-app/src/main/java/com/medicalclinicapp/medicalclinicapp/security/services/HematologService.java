@@ -1,5 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
-
+/*
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.Hematology;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
@@ -26,14 +26,14 @@ public class HematologService {
     private HematologyRepository hematologyRepository;
 
     @Autowired
-    private HematologRepository hematologRepository;
-
+    private HematologRepository hematologRepository;*/
+/*
     public Hematology addConsultationHematology(Long idAppointment, Hematology hematology, Principal principal) throws Exception {
         if(hematologyRepository.existsById(hematology.getId()))
             throw new Exception("Din consultation it was done");
         String username = principal.getName();
         Hematolog hematolog = this.hematologRepository.findByCnp(username);
-        hematology.setHematolog(hematolog);
+      //  hematology.setHematolog(hematolog);
 
         for(int i=0; i<appointmentHematologyRepository.findAll().size(); i++){
             if(appointmentHematologyRepository.findAll().get(i).getId().equals(idAppointment)){
@@ -45,3 +45,4 @@ public class HematologService {
         return hematology;
     }
 }
+        */

@@ -46,7 +46,7 @@
               delete
             </mat-icon>
           </button>
-          <button mat-icon-button color="primary" >
+          <button mat-icon-button color="primary"  (click) = "resetPass(element.cnp)" >
             <mat-icon>
               lock_reset
             </mat-icon>
@@ -57,5 +57,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5,10] "></mat-paginator>
+    <div class="footer">
+      <mat-paginator [pageSize]= "8"></mat-paginator></div>
   </div>

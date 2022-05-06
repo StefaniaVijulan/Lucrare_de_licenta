@@ -12,6 +12,10 @@ import { Cardiolog } from 'src/app/interfaces/cardiolog';
   providedIn: 'root'
 })
 export class SecretarService {
+  pacientListService: any;
+  hospitaliationListService: any;
+  doctorListService: any;
+
   pacient: Pacient;
   hospitalization: Hospitalization;
   doctor: Cardiolog;
@@ -39,10 +43,10 @@ export class SecretarService {
     return this._http.get(this.baseUrl + '/secretary/allCurants', this.publicHttpHeaders)
   }
   getSpecificP(registrationNoHospitalization: string){
-    return this._http.get<Pacient>(this.baseUrl + '/secretary/specificP?registrationNoHospitalization=' + registrationNoHospitalization, this.publicHttpHeaders);
+    return this._http.get<Pacient>(this.baseUrl + '/secretary/specificP?cnpP=' + registrationNoHospitalization, this.publicHttpHeaders);
   }
-  getSpecificD(registrationNoHospitalization: string){
-    return this._http.get<Cardiolog>(this.baseUrl + '/secretary/specificD?registrationNoHospitalization=' + registrationNoHospitalization, this.publicHttpHeaders);
+  getSpecificD(){
+    return this._http.get<Cardiolog>(this.baseUrl + '/secretary/specificD?registrationNoHospitalization=' + this.cnpP, this.publicHttpHeaders);
   }
 
   seePacient(){
@@ -54,8 +58,6 @@ export class SecretarService {
   getAllPacients(){
     return this._http.get(this.baseUrl + '/secretary/allPatients', this.publicHttpHeaders);
   }
-   
-
   moreInfoP(cnpP: string){
     return this._http.get<Pacient>(this.baseUrl + '/secretary/infoPatient?cnpP=' + cnpP, this.publicHttpHeaders);
   }

@@ -4,5 +4,8 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Moderator;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ModeratorRepository extends JpaRepository<Moderator, String> {
+import java.util.Optional;
+
+public interface ModeratorRepository extends JpaRepository<Moderator, Long> {
+    Optional<Moderator> findByCnp(String cnp);
 }

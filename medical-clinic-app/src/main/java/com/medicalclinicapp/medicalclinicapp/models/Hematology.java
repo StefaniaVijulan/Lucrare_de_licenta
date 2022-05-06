@@ -8,16 +8,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-
+/*
 @Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "hematology")
+@Table(name = "hematology")*/
 public class Hematology extends Consultation{
 
-    @OneToOne(cascade = CascadeType.ALL)
+   /* @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "hematolog_cnp", referencedColumnName = "cnp")
     private Hematolog hematolog;
@@ -50,5 +50,5 @@ public class Hematology extends Consultation{
     private Long hemoleucograma_completa;
     private Long t3;
     private Long t4;
-    private Long tsh;
+    private Long tsh;*/
 }

@@ -50,8 +50,8 @@ public class UserController {
     }
 
     @GetMapping(path="/changePass")
-    public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("cnp")String cnp) throws Exception {
-        return userService.changePassword(oldPass, newPass, cnp);
+    public User changePass(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("cnpU")String cnpC) throws Exception {
+        return userService.changePassword(oldPass, newPass, cnpC);
     }
 
 

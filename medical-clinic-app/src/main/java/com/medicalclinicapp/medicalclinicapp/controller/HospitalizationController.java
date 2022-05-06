@@ -1,5 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
-
+ /*
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.services.HospitalizationService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,9 @@ import java.text.ParseException;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class HospitalizationController {
-    @Autowired
+   @Autowired
     private HospitalizationService hospitalizationService;
 
 
 }
+*/

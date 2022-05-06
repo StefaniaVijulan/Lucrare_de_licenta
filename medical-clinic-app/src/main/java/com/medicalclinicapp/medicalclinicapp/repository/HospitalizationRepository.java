@@ -8,5 +8,4 @@ import java.util.List;
 @Repository
 public interface HospitalizationRepository extends JpaRepository<Hospitalization, String> {
 
-    Hospitalization findByRegistrationNoHospitalization(String id);
 }

@@ -1,4 +1,4 @@
-package com.medicalclinicapp.medicalclinicapp.repository;
+/*package com.medicalclinicapp.medicalclinicapp.repository;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +13,4 @@ public interface AppointmentHematologyRepository extends JpaRepository<Appointme
     boolean existsByHourAppointment(Number hourAppointment);
 
     boolean existsByMinAppointment(Number minAppointment);
-}
+}*/

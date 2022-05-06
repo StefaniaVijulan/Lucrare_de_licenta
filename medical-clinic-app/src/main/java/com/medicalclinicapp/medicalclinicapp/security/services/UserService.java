@@ -29,14 +29,14 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException {
 
-        if(!userRepository.existsById(cnp)){
+        if(!userRepository.existsByCnp(cnp)){
             throw new UsernameNotFoundException(
                     String.format("username with cnp %s not found", cnp));
         }
         return userRepository.findByCnp(cnp);
     }
     public User loginUser(String cnp, String password){
-        if (!userRepository.existsById(cnp)) {
+        if (!userRepository.existsByCnp(cnp)) {
             throw new IllegalStateException("Cnp doesnt exist");
         }
 
@@ -48,32 +48,35 @@ public class UserService implements UserDetailsService {
         }
         return userProfile;
     }
-    public User changePassword(String oldPass, String newPass, String cnp) throws Exception {
+    public User changePassword(String oldPass, String newPass, String cnpC) throws Exception {
         System.out.println("Old pass" + oldPass);
         System.out.println("New pass" + newPass);
         String username;
-        username = userRepository.findByCnp(cnp).getCnp();
+        username = userRepository.findByCnp(cnpC).getCnp();
         User currentUser = this.userRepository.findByCnp(username);
         if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
         {
             if(oldPass.equals(newPass))
+            //"Noua parola este la fel cu parola curenta");
             {System.out.println("Noua parola este la fel cu parola curenta");
-            }
-            else{
+                return null;}
+            else
+            {
                 currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+                String emailtext;
+                emailtext = "Buna " + currentUser.getLastName() + " " + currentUser.getFirstName() +",\n\n Parola ta a fost schimbata cu succes!" ;
+                emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Schimbare Parola",emailtext);
                 this.userRepository.save(currentUser);
                 System.out.println("Password change");
             }
-        } else if(!this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword())){
-            System.out.println("Parola curenta nu se potriveste ");
-        }
-        else
-        {
-            throw new Exception("Incorrect username or password");
-        }
+        } else
+            // Parola curenta nu se potriveste
+            {
+             System.out.println("Parola curenta nu se potriveste");
+            return null;}
+
         return currentUser;
     }
-
     /*
 
 

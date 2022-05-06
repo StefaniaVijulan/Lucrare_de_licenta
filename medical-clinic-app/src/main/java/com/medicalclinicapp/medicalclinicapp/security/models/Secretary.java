@@ -24,9 +24,6 @@ public class Secretary extends User {
     private String role;
 
 
-    @OneToMany(mappedBy = "secretary", cascade = CascadeType.REFRESH)
-    private List<Hospitalization> hospitalizationList;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =

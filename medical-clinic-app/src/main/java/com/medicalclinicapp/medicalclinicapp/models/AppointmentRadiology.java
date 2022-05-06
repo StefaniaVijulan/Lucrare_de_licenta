@@ -9,15 +9,15 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-
+/*
 @Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="appointmentRadiology")
+@Table(name="appointmentRadiology")*/
 public class AppointmentRadiology {
-    @OneToOne(cascade = CascadeType.ALL)
+   /* @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
     private Cardiolog cardiolog;
@@ -36,5 +36,5 @@ public class AppointmentRadiology {
     private Boolean eco;
     private Boolean ekg;
     private Boolean ct;
-    private Boolean irm;
+    private Boolean irm;*/
 }

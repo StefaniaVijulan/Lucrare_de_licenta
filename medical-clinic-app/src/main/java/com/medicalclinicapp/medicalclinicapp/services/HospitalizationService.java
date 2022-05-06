@@ -1,4 +1,4 @@
-package com.medicalclinicapp.medicalclinicapp.services;
+/*package com.medicalclinicapp.medicalclinicapp.services;
 
 
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HospitalizationService {
-    private final HospitalizationRepository hospitalizationRepository;
+public class HospitalizationService {*/
+   /* private final HospitalizationRepository hospitalizationRepository;
 
     @Autowired
-    private SecretaryRepository secretaryRepository;
+    private SecretaryRepository secretaryRepository;}*/
 
 
-}
+

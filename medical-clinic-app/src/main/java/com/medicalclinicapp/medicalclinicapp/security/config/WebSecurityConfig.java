@@ -50,19 +50,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/registerCardiolog",
                         "/moderator/registerHematolog",
                         "/moderator/registerImgist",
+
                         "/moderator/allUsers",
-                        "/moderator/allImagist",
-                        "/moderator/allCurant",
                         "/moderator/allSecretaries",
-                        "/moderator/allImagists",
+                        "/moderator/allCardiolog",
+                        "/moderator/allHematolog",
+                        "/moderator/allImagist",
+
+                        "/moderator/resetPass",
+
                         "/moderator/userCnp{cnp}",
                         "/moderator/deleteCurant",
                         "/moderator/deleteSecretary",
                         "/moderator/editUser",
                         "/moderator/allHospitalizationCardiolog",
-                        "/moderator/deleteUser",
+                        "/moderator/deleteUser"
 
-                        "/moderator/resetPass").hasAuthority("MODERATOR")
+                        ).hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

@@ -22,18 +22,19 @@ public class SecretaryController {
     @Autowired
     private SecretaryService secretaryService;
 
-    @Transactional
-    @PostMapping("/hospitalization/addHospitalization")
-    public Hospitalization addHospitalization(@RequestParam(value = "cnpS") String cnpS, @RequestParam(value = "cnpD") String cnpD,@RequestParam(value = "cnpP") String cnpPatient, @RequestBody Hospitalization hospitalization) throws Exception {
-        return secretaryService.addHospitalization(cnpS, cnpD,cnpPatient, hospitalization);
-    }
-
-    @Transactional
     @PostMapping("/secretary/addPatient")
     public Patient addPatient(@RequestBody Patient patient) throws Exception {
-    System.out.println("ana");
+        System.out.println("ana");
         return secretaryService.addPatient(patient);
     }
+
+    @PostMapping("/hospitalization/addHospitalization")
+    public Hospitalization addHospitalization(@RequestParam(value = "cnpS") String cnpS, @RequestParam(value = "cnpD") String cnpD, @RequestParam(value = "cnpP") String cnpPatient, @RequestBody Hospitalization hospitalization) throws Exception {
+        return secretaryService.addHospitalization(cnpS, cnpD, cnpPatient, hospitalization);
+    }
+}
+ /*
+
 
     @GetMapping("/secretary/editHospitalization")
     public Hospitalization editHosp(@RequestParam("idHospitalization") String id) throws ParseException {
@@ -70,8 +71,8 @@ public class SecretaryController {
         return secretaryService.getSpecificPatient(registrationNoHospitalization);
     }
     @GetMapping("/secretary/specificD")
-    public Cardiolog specificD(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
-        return secretaryService.getSpecificCardiologOfPatient(registrationNoHospitalization);
+    public Cardiolog specificD(@RequestParam("cnpP") String cnp){
+        return secretaryService.getSpecificCardiologOfPatient(cnp);
     }
 
     @GetMapping("/secretary/allCurants")
@@ -85,3 +86,4 @@ public class SecretaryController {
     }
 
 }
+        */

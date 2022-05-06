@@ -40,9 +40,6 @@ public class Patient extends User {
     private Boolean insurancePatient;
     private String role;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Hospitalization> hospitalizationList;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =

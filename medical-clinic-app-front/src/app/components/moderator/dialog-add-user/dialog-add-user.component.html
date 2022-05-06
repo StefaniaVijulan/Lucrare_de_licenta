@@ -11,33 +11,35 @@
   <form #registerform="ngForm" [formGroup]="myForm">
  
 
+    <mat-error style="text-align: center;">{{this.msg}}</mat-error>
+    <br>
     <mat-form-field appearance="fill">
       <mat-label>CNP</mat-label>
-      <input matInput formControlName="cnp" placeholder="ex. 6001100110000"  value="{{editData?.cnp}}">
+      <input matInput formControlName="cnp" placeholder="ex. 6001100110000"  value="{{editData?.cnp}}" required>
       <mat-error  class="error" *ngIf="myForm.controls['cnp'].hasError('pattern')">
           Introduceti un CNP valid
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Nume</mat-label>
-      <input  matInput formControlName="lastName" placeholder="ex. Popescu" value="{{editData?.lastName}}">
+      <input  matInput formControlName="lastName" placeholder="ex. Popescu" value="{{editData?.lastName}}" required>
 
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Prenume</mat-label>
-      <input matInput formControlName="firstName" placeholder="ex. Ion" value="{{editData?.firstName}}">
+      <input matInput formControlName="firstName" placeholder="ex. Ion" value="{{editData?.firstName}}" required>
 
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input formControlName="emailUser" placeholder="pat@example.com"  matInput  value="{{editData?.emailUser}}">
+      <input formControlName="emailUser" placeholder="pat@example.com"  matInput  value="{{editData?.emailUser}}" required>
       <mat-error  class="error" *ngIf="myForm.controls['emailUser'].hasError('email')">
         Nu este un email valid
     </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Telefon</mat-label>
-      <input matInput formControlName="numberUser"  placeholder="ex. 0766666666" value="{{editData?.numberUser}}">
+      <input matInput formControlName="numberUser"  placeholder="ex. 0766666666" value="{{editData?.numberUser}}" required>
       <mat-error  class="error" *ngIf="myForm.controls['numberUser'].hasError('pattern')">
         Numarul de telefon nu este valid
     </mat-error>
@@ -45,7 +47,9 @@
 
   </form>
 </div>
+<br>
 <div mat-dialog-actions [align]="'center'">
     <button mat-raised-button type="submit" class="btn"
       color="primary" (click)="register()">{{actionBtn}}</button>
 </div>
+<br>

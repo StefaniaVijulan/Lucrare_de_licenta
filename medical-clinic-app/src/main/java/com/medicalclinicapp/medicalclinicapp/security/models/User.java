@@ -16,6 +16,9 @@ import java.util.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User implements UserDetails{
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+
     private String cnp;
     @Column(name = "password")
     private String password;

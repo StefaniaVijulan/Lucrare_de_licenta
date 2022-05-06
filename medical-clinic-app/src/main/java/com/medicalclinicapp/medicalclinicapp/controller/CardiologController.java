@@ -1,5 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
-
+/*
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
@@ -34,3 +34,4 @@ public class CardiologController {
     }
 
 }
+*/

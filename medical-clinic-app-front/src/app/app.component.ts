@@ -54,7 +54,11 @@ export class AppComponent implements AfterViewInit  {
      width: '30%'
     }).afterClosed().subscribe(val=>{
      if(val === "change"){
-       this._router. navigate(['/secretar'])
+       if(localStorage.getItem("role")=="MODERATOR")
+        this._router.navigate(['/moderator'])
+        else{
+          this._router.navigate(['/secretar'])
+        }
        
      }
    })

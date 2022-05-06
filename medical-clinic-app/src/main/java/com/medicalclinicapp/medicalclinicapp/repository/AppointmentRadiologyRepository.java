@@ -1,4 +1,4 @@
-package com.medicalclinicapp.medicalclinicapp.repository;
+/*package com.medicalclinicapp.medicalclinicapp.repository;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
@@ -14,4 +14,4 @@ public interface AppointmentRadiologyRepository extends JpaRepository<Appointmen
     boolean existsByHourAppointment(Number hourAppointment);
 
     boolean existsByMinAppointment(Number minAppointment);
-}
+}*/
