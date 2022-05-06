@@ -1,22 +1,9 @@
-import {
-  Component,
-  Inject,
-  OnInit
-} from '@angular/core';
-import {
-  FormBuilder
-} from '@angular/forms';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material';
+import {  Component,  Inject,  OnInit} from '@angular/core';
+import {  FormBuilder} from '@angular/forms';
+import {  MatDialogRef,  MAT_DIALOG_DATA} from '@angular/material';
 import { timeStamp } from 'console';
-import {
-  Pacient
-} from 'src/app/interfaces/pacient';
-import {
-  SecretarService
-} from 'src/app/services/secretar/secretar.service';
+import {  Pacient} from 'src/app/interfaces/pacient';
+import {  SecretarService} from 'src/app/services/secretar/secretar.service';
 
 @Component({
   selector: 'app-dialog-more-info-pacient',
@@ -24,9 +11,8 @@ import {
   styleUrls: ['./dialog-more-info-pacient.component.scss']
 })
 export class DialogMoreInfoPacientComponent implements OnInit {
-  pacientI: any;
-  hospitalizationI: any;
-  doctorI: any;
+
+  hospitalizationInfo: any;
 
   dataEnd: string;
   oraEnd: string;
@@ -40,41 +26,47 @@ export class DialogMoreInfoPacientComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.pacientI = this._secretar.pacient;
-    console.log(this.pacientI)
-    this.hospitalizationI = this._secretar.hospitalization;
-    console.log(this.hospitalizationI)
-    this.doctorI = this._secretar.doctor;
-    console.log(this.doctorI)
-    if (!this.hospitalizationI.endDateHospitalization) {
-      console.log("intra aici null data")
-      this.dataEnd = "-"
-      this.oraEnd = "-"
-    } else {
-      this.dataEnd = this.hospitalizationI.endDateHospitalization.split(" ")[0]
-      this.oraEnd = this.hospitalizationI.endDateHospitalization.split(" ")[1]
-    }
-    if (!this.pacientI.grupaSange) {
-      console.log("intra aici null grupa")
-      this.grupaSange = "-"
-      this.rhSange = "-"
-    } else {
-      this.grupaSange = this.pacientI.bloodTypePatient
-      this.oraEnd = this.pacientI.rhPatient
-    }
-    if (this.pacientI.insurancePatient == "1") {
-      console.log("intra aici null asigurare")
-      this.asigurare = "da"
-    } else {
-      this.asigurare = "nu"
-    }
-    if (this.hospitalizationI.numberOfHospitalization == 0) {
-      console.log("intra aici null asigurare")
-      this.nrH = "0"
-    } else {
-      this.nrH = this.hospitalizationI.numberOfHospitalization
-    }
+    console.log("onInit in dialog-more-info-pacient")
+    this._secretar.getSpecificHospitalization().subscribe((res)=>{
+      this.hospitalizationInfo = res;
+      console.log("raspuns =>")
+      console.log(this.hospitalizationInfo)
+      if (!this.hospitalizationInfo.endDateHospitalization) {
+        console.log("intra aici null data")
+        this.dataEnd = "-"
+        this.oraEnd = "-"
+      } else {
+        this.dataEnd = this.hospitalizationInfo.endDateHospitalization.split(" ")[0]
+        this.oraEnd = this.hospitalizationInfo.endDateHospitalization.split(" ")[1]
+      }
+      console.log("blood")
+      console.log(this.hospitalizationInfo.patient.bloodTypePatient)
+      if (!this.hospitalizationInfo.patient.bloodTypePatient) {
+        console.log("intra aici null grupa")
+        this.grupaSange = "-"
+        this.rhSange = "-"
+      } else {
+        this.grupaSange = this.hospitalizationInfo.patient.bloodTypePatient
+        this.rhSange = this.hospitalizationInfo.patient.rhPatient
+      }
+      if (this.hospitalizationInfo.patient.insurancePatient == "1") {
+        console.log("intra aici null asigurare")
+        this.asigurare = "da"
+      } else {
+        this.asigurare = "nu"
+      }
+      console.log(this.hospitalizationInfo.numberOfHospitalization)
+      if (!this.hospitalizationInfo.numberOfHospitalization) {
+        console.log("intra aici null number ")
+        this.nrH = "0"
+      } else {
+        this.nrH = this.hospitalizationInfo.numberOfHospitalization
+      }
+    })
+    console.log("intra in if")
+    
   }
+
 
 
 }

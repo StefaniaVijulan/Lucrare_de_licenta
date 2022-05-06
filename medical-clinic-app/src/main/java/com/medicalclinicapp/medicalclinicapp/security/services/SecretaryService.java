@@ -69,26 +69,67 @@ public class SecretaryService {
         return patient;
     }
 
-    public Hospitalization addHospitalization(String cnpP, String cnpC, String cnpS, Hospitalization hospitalization){
+    public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
         Date curentData = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        System.out.println(sdf.format(curentData));
         hospitalization.setStartDateHospitalization(sdf.format(curentData));
+
         if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
             //Numarul de inregistrare a acestei internari este deja luat
             return null;
 
+
         Secretary secretary = this.secretaryRepository.findByCnp(cnpS);
+        System.out.println("Secretar");
+        System.out.println(cnpS);
+        System.out.println(secretary);
         hospitalization.setSecretary(secretary);
 
         Patient patient = this.patientRepository.findByCnp(cnpP);
+        System.out.println("Patient");
+        System.out.println((cnpP));
+        System.out.println(patient);
         hospitalization.setPatient(patient);
 
         Cardiolog cardiolog = this.cardiologRepository.findByCnp(cnpC);
+        System.out.println("Cardiolog");
+        System.out.println(cardiolog);
         hospitalization.setCardiolog(cardiolog);
 
         hospitalizationRepository.save(hospitalization);
 
+        return hospitalization;
+    }
+
+    public List<Hospitalization> getAllHospitalization(Principal principal){
+        List<Hospitalization> hospitalizationList = new ArrayList<>();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
+                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
+            }
+        }
+        return hospitalizationList;
+    }
+    public List<Cardiolog> seeAllCardiolog(){
+        List<Cardiolog> generalists = new ArrayList<>();
+        for(int i=0; i<cardiologRepository.findAll().size(); i++){
+            {
+                generalists.add(cardiologRepository.findAll().get(i));
+            }
+        }
+        return generalists;
+    }
+
+    // Date despre internarea specifica unui pacient
+    public Hospitalization getSpecificHospitalization(String noHosp){
+        Hospitalization hospitalization= new Hospitalization();
+        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
+            {
+                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(noHosp))
+                    hospitalization = hospitalizationRepository.findAll().get(i);
+            }
+        }
         return hospitalization;
     }
 }
@@ -132,16 +173,7 @@ public class SecretaryService {
         return patient;
     }*/
  /*   //internarile active
-    public List<Hospitalization> getAllHospitalization(Principal principal){
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
-                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
-            }
-        }
-        return hospitalizationList;
-    }
+
 
     public Patient getSpecificPatient(String registrationNoHospitalization) {
         Patient patient = new Patient();
@@ -188,15 +220,6 @@ public class SecretaryService {
             }
         }
         return hospitalizationList;
-    }
-    public List<User> seeAllCurant(){
-        List<User> generalists = new ArrayList<>();
-        for(int i=0; i<cardiologRepository.findAll().size(); i++){
-            {
-                generalists.add(cardiologRepository.findAll().get(i));
-            }
-        }
-        return generalists;
     }
 
     public Patient moreInfo(String cnp){

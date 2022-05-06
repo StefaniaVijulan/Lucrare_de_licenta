@@ -1,45 +1,45 @@
-<h5 style="text-align: center; "><b>{{pacientI.firstName}} {{pacientI.dadLetterPatient}} {{pacientI.lastName}}</b></h5>
+<h5 style="text-align: center; "><b>{{hospitalizationInfo?.patient.firstName}} {{hospitalizationInfo?.patient.dadLetterPatient}} {{hospitalizationInfo?.patient.lastName}}</b></h5>
 <div>
     <p><i>Date contact</i></p>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Telefon: {{pacientI.numberUser}}</span><br>
+      class="aligned-with-icon">Telefon: {{hospitalizationInfo?.patient.numberUser}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Email: {{pacientI.emailUser}}</span><br>
+      class="aligned-with-icon">Email: {{hospitalizationInfo?.patient.emailUser}}</span><br>
   </div>
 <br>
 <div>
   <p><i>Informatii despre internare</i></p>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Medic curant: {{doctorI.lastName}} {{doctorI.firstName}} </span><br>
+    class="aligned-with-icon">Medic curant: {{hospitalizationInfo?.cardiolog.lastName}} {{hospitalizationInfo?.cardiolog.firstName}} </span><br>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Data internarii: {{hospitalizationI.startDateHospitalization.split(" ")[0]}}</span><br>
+    class="aligned-with-icon">Data internarii: {{hospitalizationInfo?.startDateHospitalization.split(" ")[0]}}</span><br>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Ora internarii: {{hospitalizationI.startDateHospitalization.split(" ")[1]}}</span><br>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+    class="aligned-with-icon">Ora internarii: {{hospitalizationInfo?.startDateHospitalization.split(" ")[1]}}</span><br>
+ <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
     class="aligned-with-icon">Data externarii: {{dataEnd}}</span><br>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
     class="aligned-with-icon">Ora externarii: {{oraEnd}}</span><br>
   <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Numar de zile spitalizare: {{hospitalizationI.numberOfHospitalization}}</span>
+    class="aligned-with-icon">Numar de zile spitalizare: {{nrH}}</span>
 </div>
 <br>
 <div>
-    <p><i>Informatii despre pacient</i></p>
+    <p><i>Informatii despre patient</i></p>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">CNP: {{pacientI.cnp}}</span><br>
+      class="aligned-with-icon">CNP: {{hospitalizationInfo?.patient.cnp}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Seria: {{pacientI.seriesPatient}}, nr. {{pacientI.numberPatient}}</span><br>
+      class="aligned-with-icon">Seria: {{hospitalizationInfo?.patient.seriesPatient}}, nr. {{hospitalizationInfo?.patient.numberPatient}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Adresa: str. {{pacientI.streetPatient}}, nr. {{pacientI.noPatient}}, loc. {{pacientI.cityPatient}}, jud.  {{pacientI.townPatient}}, mediul  {{pacientI.placePatient}}</span><br>
+      class="aligned-with-icon">Adresa: str. {{hospitalizationInfo?.patient.streetPatient}}, nr. {{hospitalizationInfo?.patient.noPatient}}, loc. {{hospitalizationInfo?.patient.cityPatient}}, jud.  {{hospitalizationInfo?.patient.townPatient}}, mediul  {{hospitalizationInfo?.patient.placePatient}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Cetatenie: {{pacientI.citizenshipPatient}}</span><br>
+      class="aligned-with-icon">Cetatenie: {{hospitalizationInfo?.patient.citizenshipPatient}}</span><br>
 
       <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Stare job: {{pacientI.jobPatient}}</span><br>
+      class="aligned-with-icon">Stare job: {{hospitalizationInfo?.patient.jobPatient}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
       class="aligned-with-icon">Grupa sange: {{grupaSange}}, RH {{rhSange}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
       class="aligned-with-icon">Asigurare: {{asigurare}}</span><br>
     <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Alergii: {{pacientI.allergyPatient}}</span><br>
+      class="aligned-with-icon">Alergii: {{hospitalizationInfo?.patient.allergyPatient}}</span><br>
   </div>

@@ -35,7 +35,7 @@ export class DialogAddPacientComponent implements OnInit {
     private dialogref: MatDialogRef < DialogAddPacientComponent >) {}
 
   ngOnInit() {
-    this._secretar.allCardio().subscribe((res)=>{this.cardiologList = res
+    this._secretar.allCardiolog().subscribe((res)=>{this.cardiologList = res
     console.log(res)})
     this.firstFormGroup = this._formBuilder.group({
       cnp: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
@@ -45,8 +45,8 @@ export class DialogAddPacientComponent implements OnInit {
       emailUser: [''],
       dadLetterPatient: ['', Validators.required],
       
-      seriesPatient:['', Validators.required],
-      numberPatient: ['', Validators.required],
+      seriesPatient:['', Validators.compose([Validators.required, Validators.pattern('([A-Z][A-Z])')])],
+      numberPatient: ['', Validators.compose([Validators.required, Validators.pattern('([0-9]{6})')])],
       sexPatient: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({

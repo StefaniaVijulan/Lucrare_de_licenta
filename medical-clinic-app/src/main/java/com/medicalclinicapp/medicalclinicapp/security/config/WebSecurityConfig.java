@@ -68,11 +68,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                         ).hasAuthority("MODERATOR")
                 .antMatchers("/hospitalization/addHospitalization",
+                        "/secretary/allHospitalizationActive",
+                        "/secretary/addPatient",
+                        "/secretary/allCardiolog",
+                        "/secretary/specificHospitalization",
+
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",
                         "/secretary/allHospitalization",
                         "/secretary/allDoctors",
-                        "/secretary/addPatient",
                         "/secretary/allPatients",
                         "/secretary/editHospitalization",
                         "/secretary/infoPatient",

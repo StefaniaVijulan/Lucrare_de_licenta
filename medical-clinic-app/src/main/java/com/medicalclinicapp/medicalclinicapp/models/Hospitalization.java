@@ -25,7 +25,7 @@ public class Hospitalization {
 
 
     @ManyToOne
-    @JoinColumn(name = "secretary_cnp", nullable = false)
+    @JoinColumn(name = "secretary_cnp")
     private Secretary secretary;
 
     @ManyToOne

@@ -35,7 +35,7 @@ import { DialogAddPacientComponent } from './components/dialog-add-pacient/dialo
 import { FlexModule } from '@angular/flex-layout';
 import { DialogMoreInfoPacientComponent } from './components/dialog-more-info-pacient/dialog-more-info-pacient.component';
 import {MatListModule} from '@angular/material/list';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -88,7 +88,8 @@ import {MatListModule} from '@angular/material/list';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     DialogComponent, 

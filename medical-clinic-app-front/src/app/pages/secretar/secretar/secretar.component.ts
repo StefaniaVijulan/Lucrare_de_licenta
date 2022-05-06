@@ -37,9 +37,14 @@ export class SecretarComponent implements OnInit {
 
   ngOnInit() {
     this.allHospitalization();
-    // this.currentList = this.allHospit();
   }
 
+  allHospitalization() {
+    this._secretar.getAllHospitalization().subscribe((response: any) => {
+      console.log(response)
+      this.listHospitalization = response;
+    })
+  };
   openAddDialog() {
     this.dialog.open(DialogAddPacientComponent, {
       width: '50%'
@@ -49,44 +54,13 @@ export class SecretarComponent implements OnInit {
         this.allHospitalization();
       }
     });
-  };
+  }; 
 
-
-
-  allHospitalization() {
-
-    this._secretar.getAllHospitalization().subscribe((response: any) => {
-      this.listHospitalization = response
-      this.pacientL = new Array < Pacient > (this.listHospitalization.length)
-      this.cardiologL = new Array < Cardiolog > (this.listHospitalization.length)
-      for (let i = 0; i < this.listHospitalization.length; i++) {
-        this._secretar.getSpecificP(this.listHospitalization[i].registrationNoHospitalization).subscribe((data: any) => {
-          this.pacientL[i] = data
-        })
-        
-      }
-      console.log("list hospi")
-      this._secretar.hospitaliationListService = this.listHospitalization;
-      console.log(this._secretar.hospitaliationListService)
-      console.log("list pacient")
-      this._secretar.pacientListService = this.pacientL
-      console.log(this._secretar.pacientListService)
-      console.log("list cardio")
-      this._secretar.doctorListService = this.cardiologL
-      console.log(this._secretar.doctorListService)
-    })
-  };
-
-  readMore(element: string) {
-    this._secretar.cnpP = element
-    this._secretar.doctorListService = this._secretar.getSpecificD().subscribe((res)=>{})
-    console.log("doctor specific")
-    console.log(this._secretar.doctorListService)
-    this._secretar.moreInfoP(this._secretar.cnpP).subscribe({
-      next: (data) => {
-        this._secretar.pacient = data
-       
-        this.dialog.open(DialogMoreInfoPacientComponent, {
+  readMoreDialog(element: string) {
+    //salvam idul internarii pentru care vrem sa aflam mai multe detalii
+    this._secretar.hospitalizationNo = element
+    console.log("noHospit =>" + this._secretar.hospitalizationNo)
+    this.dialog.open(DialogMoreInfoPacientComponent, {
           width: '40%',
           data: element
         }).afterClosed().subscribe(val => {
@@ -95,12 +69,6 @@ export class SecretarComponent implements OnInit {
             this.allHospitalization();
           }
         })
-      },
-      error: () => {
-        console.log("eroare")
-      }
-    })
-  
   }
   externeazaPacient(element: string) {
     

@@ -32,6 +32,20 @@ public class SecretaryController {
     public Hospitalization addHospitalization(@RequestParam(value = "cnpS") String cnpS, @RequestParam(value = "cnpD") String cnpD, @RequestParam(value = "cnpP") String cnpPatient, @RequestBody Hospitalization hospitalization) throws Exception {
         return secretaryService.addHospitalization(cnpS, cnpD, cnpPatient, hospitalization);
     }
+
+    @GetMapping("/secretary/allHospitalizationActive")
+    public List<Hospitalization> getAllHospitalization(Principal principal){
+        return secretaryService.getAllHospitalization(principal);
+    }
+    @GetMapping("/secretary/allCardiolog")
+    public List<Cardiolog> getAllCardiolog(){
+        return secretaryService.seeAllCardiolog();
+    }
+
+    @GetMapping("/secretary/specificHospitalization")
+    public Hospitalization getSpecificHospit(@RequestParam("noHosp") String noHosp){
+        return secretaryService.getSpecificHospitalization(noHosp);
+    }
 }
  /*
 
@@ -62,10 +76,7 @@ public class SecretaryController {
     }
 
 
-    @GetMapping("/secretary/allHospitalization")
-    public List<Hospitalization> getAllHospitalization(Principal principal){
-        return secretaryService.getAllHospitalization(principal);
-    }
+
     @GetMapping("/secretary/specificP")
     public Patient specificP(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
         return secretaryService.getSpecificPatient(registrationNoHospitalization);
@@ -75,10 +86,7 @@ public class SecretaryController {
         return secretaryService.getSpecificCardiologOfPatient(cnp);
     }
 
-    @GetMapping("/secretary/allCurants")
-    public List<User> getAllCurants(){
-        return secretaryService.seeAllCurant();
-    }
+
 
     @GetMapping("/secretary/afisare")
     public ResponseEntity<?> afisP(@RequestParam String cnpP){
