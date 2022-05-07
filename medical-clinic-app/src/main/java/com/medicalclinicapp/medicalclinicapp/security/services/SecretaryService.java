@@ -13,18 +13,15 @@ import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryReposi
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
+
 import java.util.*;
-import java.util.concurrent.TimeUnit;
+
 
 
 @Service
@@ -47,7 +44,7 @@ public class SecretaryService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Patient addPatient(Patient patient) throws Exception {
+    public Patient addPatient(Patient patient) {
         if (patientRepository.existsByCnp(patient.getCnp()))
         {
             //pacientul exista

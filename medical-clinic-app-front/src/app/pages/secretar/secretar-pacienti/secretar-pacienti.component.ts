@@ -23,7 +23,7 @@ import { DialogMoreInfoPacientComponent } from 'src/app/components/dialog-more-i
 })
 export class SecretarPacientiComponent implements OnInit {
 
-  displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'role', 'action'];
+  displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'action'];
   dataSource !: MatTableDataSource<any>;
 
 
@@ -41,7 +41,7 @@ export class SecretarPacientiComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.allPatients();
+    this.allHospitalization();
   }
   setRoleCase(data){
     for(let item of data){
@@ -49,9 +49,9 @@ export class SecretarPacientiComponent implements OnInit {
       //console.log(item.role)
     }
   }
-  allPatients(){
+  allHospitalization(){
     
-    return this._secretar.getAllPacients()
+    return this._secretar.getAllHospitalization()
     .subscribe((res:any)=>{
      this.dataSource =  new MatTableDataSource(res);
      this.dataSource.paginator = this.paginator;
@@ -64,45 +64,20 @@ export class SecretarPacientiComponent implements OnInit {
       else
         return false
   };
-
-
-    readMore(element: string){
-      this._secretar.cnpP = element
-      console.log(this._secretar.cnpP)
-      this._secretar.moreInfoH(this._secretar.cnpP).subscribe({
-        next: (data) => {
-          this._secretar.hospitalization = data
-          console.log("in readMore")
-          console.log(data)
-          console.log(this._secretar.hospitalization)
-        },
-        error: () => {
-          console.log("eroare")
-        }
-      });
-      console.log("dupa info H")
-      this._secretar.moreInfoP(this._secretar.cnpP).subscribe({
-        next: (data) => {
-          this._secretar.pacient = data
-          console.log(data)
-          this.dialog.open(DialogMoreInfoPacientComponent,{
-            width: '40%',
-            data:element
-           }).afterClosed().subscribe(val=>{
-            console.log(val)
-            if(val === "done"){
-              this.allPatients();
-            }
-          })
-
-        
-        },
-
-        error: () => {
-          console.log("eroare")
-        }
-    
-     
-    })}
- 
+  readMoreDialog(element: any) {
+    console.log("element")
+    console.log(element.registrationNoHospitalization)
+    //salvam idul internarii pentru care vrem sa aflam mai multe detalii
+    this._secretar.hospitalizationNo = element.registrationNoHospitalization
+    console.log("noHospit =>" + this._secretar.hospitalizationNo)
+    this.dialog.open(DialogMoreInfoPacientComponent, {
+          width: '40%',
+          data: element
+        }).afterClosed().subscribe(val => {
+          
+          if (val === "done") {
+            this.allHospitalization();
+          }
+        })
+  }
 }
