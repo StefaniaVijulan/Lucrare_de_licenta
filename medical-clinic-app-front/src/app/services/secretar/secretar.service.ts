@@ -32,10 +32,14 @@ export class SecretarService {
   };
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
 
-  getAllHospitalization(){
+  getAllHospitalizationActive(){
     return this._http.get(this.baseUrl + '/secretary/allHospitalizationActive', this.publicHttpHeaders);
   }
-
+  
+  getAllHospitalization(){
+    return this._http.get(this.baseUrl + '/secretary/allHospitalization', this.publicHttpHeaders);
+  }
+  
   addPacient(pacient: Pacient){
     return this._http.post<any>(this.baseUrl + '/secretary/addPatient', pacient, this.publicHttpHeaders);
   }
@@ -47,6 +51,14 @@ export class SecretarService {
     console.log("in secretar service => " + this.hospitalizationNo)
     return this._http.get(this.baseUrl + '/secretary/specificHospitalization?noHosp=' + this.hospitalizationNo, this.publicHttpHeaders);
   }
+allCardiolog(){
+    return this._http.get(this.baseUrl + '/secretary/allCardiolog', this.publicHttpHeaders)
+  }
+  externarePacient(registrationNoHospitalization: string){
+    console.log("externeaza service")
+    console.log(registrationNoHospitalization)
+    return this._http.get<any>(this.baseUrl + '/secretary/editHospitalization?idHospitalization='+ registrationNoHospitalization, this.publicHttpHeaders);
+  }
 
 
 
@@ -56,15 +68,6 @@ export class SecretarService {
   }
 
 
- allCardiolog(){
-    return this._http.get(this.baseUrl + '/secretary/allCardiolog', this.publicHttpHeaders)
-  }
-  getSpecificP(registrationNoHospitalization: string){
-    return this._http.get<Pacient>(this.baseUrl + '/secretary/specificP?cnpP=' + registrationNoHospitalization, this.publicHttpHeaders);
-  }
-  getSpecificD(){
-    return this._http.get<Cardiolog>(this.baseUrl + '/secretary/specificD?registrationNoHospitalization=' + this.cnpP, this.publicHttpHeaders);
-  }
 
   seePacient(){
     this._router.navigate(['/secretarPacient'])
@@ -72,25 +75,6 @@ export class SecretarService {
   seeInternari(){
     this._router.navigate(['/secretar'])
   }
-  getAllPacients(){
-    return this._http.get(this.baseUrl + '/secretary/allPatients', this.publicHttpHeaders);
-  }
-  moreInfoP(cnpP: string){
-    return this._http.get<Pacient>(this.baseUrl + '/secretary/infoPatient?cnpP=' + cnpP, this.publicHttpHeaders);
-  }
-  moreInfoH(cnpP: string){
-    console.log("intra aici")
-    console.log(cnpP)
-    return this._http.get<Hospitalization>(this.baseUrl + '/secretary/infoHospitalization?cnpP=' + cnpP, this.publicHttpHeaders);
-  }
+  
 
-
-  externarePacient(registrationNoHospitalization: string){
-    console.log("externeaza service")
-    console.log(registrationNoHospitalization)
-    return this._http.get<any>(this.baseUrl + '/secretary/editHospitalization?idHospitalization='+ registrationNoHospitalization, this.publicHttpHeaders);
-  }
-  getAfis(elem: string){
-    return this._http.get<any>(this.baseUrl + '/secretary/afisare?cnpP=' + elem, this.publicHttpHeaders);
-  }
 }

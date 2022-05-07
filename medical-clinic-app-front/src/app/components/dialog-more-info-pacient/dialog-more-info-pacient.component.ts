@@ -37,7 +37,7 @@ export class DialogMoreInfoPacientComponent implements OnInit {
         this.oraEnd = "-"
       } else {
         this.dataEnd = this.hospitalizationInfo.endDateHospitalization.split(" ")[0]
-        this.oraEnd = this.hospitalizationInfo.endDateHospitalization.split(" ")[1]
+        this.oraEnd = this.hospitalizationInfo.endDateHospitalization.split(" ")[1] + " "+ this.hospitalizationInfo.endDateHospitalization.split(" ")[2]
       }
       console.log("blood")
       console.log(this.hospitalizationInfo.patient.bloodTypePatient)

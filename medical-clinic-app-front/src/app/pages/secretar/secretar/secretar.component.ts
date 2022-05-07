@@ -36,11 +36,11 @@ export class SecretarComponent implements OnInit {
   constructor(public _secretar: SecretarService, private dialog: MatDialog, ) {}
 
   ngOnInit() {
-    this.allHospitalization();
+    this.allHospitalizationActive();
   }
 
-  allHospitalization() {
-    this._secretar.getAllHospitalization().subscribe((response: any) => {
+  allHospitalizationActive() {
+    this._secretar.getAllHospitalizationActive().subscribe((response: any) => {
       console.log(response)
       this.listHospitalization = response;
     })
@@ -51,7 +51,7 @@ export class SecretarComponent implements OnInit {
     }).afterClosed().subscribe(val => {
       console.log(val)
       if (val === "saveP") {
-        this.allHospitalization();
+        this.allHospitalizationActive();
       }
     });
   }; 
@@ -66,7 +66,7 @@ export class SecretarComponent implements OnInit {
         }).afterClosed().subscribe(val => {
           
           if (val === "done") {
-            this.allHospitalization();
+            this.allHospitalizationActive();
           }
         })
   }
@@ -83,26 +83,6 @@ export class SecretarComponent implements OnInit {
     })
     location.reload()
   }
- 
-  onPageChange($event) {
-    this.currentList = this.listHospitalization.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
-  }
-  afis(elem: string) {
-    this._secretar.getAfis(elem).subscribe({
-      next: (res) => {
-        if (res == null) {
-          this.msg = " Pacientul nu exisat"
-          console.log(res)
-        } else {
-          console.log(res)
 
-        }
-      },
-      error: (err) => {
-        console.log(err)
-
-      }
-    })
-  }
 
 }

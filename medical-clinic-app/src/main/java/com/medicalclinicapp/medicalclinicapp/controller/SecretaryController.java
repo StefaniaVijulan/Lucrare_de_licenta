@@ -34,9 +34,15 @@ public class SecretaryController {
     }
 
     @GetMapping("/secretary/allHospitalizationActive")
+    public List<Hospitalization> getAllHospitalizationActive(Principal principal){
+        return secretaryService.getAllHospitalizationActive(principal);
+    }
+
+    @GetMapping("/secretary/allHospitalization")
     public List<Hospitalization> getAllHospitalization(Principal principal){
         return secretaryService.getAllHospitalization(principal);
     }
+
     @GetMapping("/secretary/allCardiolog")
     public List<Cardiolog> getAllCardiolog(){
         return secretaryService.seeAllCardiolog();
@@ -46,15 +52,16 @@ public class SecretaryController {
     public Hospitalization getSpecificHospit(@RequestParam("noHosp") String noHosp){
         return secretaryService.getSpecificHospitalization(noHosp);
     }
-}
- /*
-
 
     @GetMapping("/secretary/editHospitalization")
     public Hospitalization editHosp(@RequestParam("idHospitalization") String id) throws ParseException {
 
         return secretaryService.editHospitalization(id);
     }
+}
+ /*
+
+
 
     @GetMapping("/secretary/allPatients")
     public List<Patient> getAllPatient(){

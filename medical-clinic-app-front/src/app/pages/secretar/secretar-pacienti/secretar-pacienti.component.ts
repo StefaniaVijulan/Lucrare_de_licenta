@@ -23,7 +23,7 @@ import { DialogMoreInfoPacientComponent } from 'src/app/components/dialog-more-i
 })
 export class SecretarPacientiComponent implements OnInit {
 
-  displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'action'];
+  displayedColumns = ['startDateHospitalization','numberOfHospitalization','cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'action'];
   dataSource !: MatTableDataSource<any>;
 
 
@@ -40,7 +40,7 @@ export class SecretarPacientiComponent implements OnInit {
        }
 
   ngOnInit(): void {
-    
+    this.paginator._intl.itemsPerPageLabel="Numarul de elemente afisate:89";
     this.allHospitalization();
   }
   setRoleCase(data){
@@ -65,11 +65,9 @@ export class SecretarPacientiComponent implements OnInit {
         return false
   };
   readMoreDialog(element: any) {
-    console.log("element")
-    console.log(element.registrationNoHospitalization)
     //salvam idul internarii pentru care vrem sa aflam mai multe detalii
     this._secretar.hospitalizationNo = element.registrationNoHospitalization
-    console.log("noHospit =>" + this._secretar.hospitalizationNo)
+ 
     this.dialog.open(DialogMoreInfoPacientComponent, {
           width: '40%',
           data: element

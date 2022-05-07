@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/addPatient",
                         "/secretary/allCardiolog",
                         "/secretary/specificHospitalization",
+                        "/secretary/allHospitalization",
 
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

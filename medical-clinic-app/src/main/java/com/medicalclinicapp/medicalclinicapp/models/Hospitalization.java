@@ -23,6 +23,7 @@ public class Hospitalization {
     private String endDateHospitalization;
     private Integer numberOfHospitalization;
 
+    private String typeHospitalization;
 
     @ManyToOne
     @JoinColumn(name = "secretary_cnp")

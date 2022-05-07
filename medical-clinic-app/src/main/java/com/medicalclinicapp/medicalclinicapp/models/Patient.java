@@ -34,9 +34,8 @@ public class Patient extends User {
     private String placePatient; //rural/urban
     private String citizenshipPatient;
     private String jobPatient;
-    private String bloodTypePatient;
-    private String rhPatient;
-    private String allergyPatient;
+
+    private String levelSchoolPatient;
     private Boolean insurancePatient;
     private String role;
 

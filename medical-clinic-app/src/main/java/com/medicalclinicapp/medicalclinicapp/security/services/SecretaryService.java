@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.*;
@@ -68,7 +69,7 @@ public class SecretaryService {
 
     public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
         Date curentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
         hospitalization.setStartDateHospitalization(sdf.format(curentData));
 
         if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
@@ -98,7 +99,7 @@ public class SecretaryService {
         return hospitalization;
     }
 
-    public List<Hospitalization> getAllHospitalization(Principal principal){
+    public List<Hospitalization> getAllHospitalizationActive(Principal principal){
         List<Hospitalization> hospitalizationList = new ArrayList<>();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
             {
@@ -128,6 +129,36 @@ public class SecretaryService {
             }
         }
         return hospitalization;
+    }
+    public Hospitalization editHospitalization(String id) throws ParseException {
+        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(id);
+        Date currentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        System.out.println(sdf.format(currentData));
+        hospitalization.setEndDateHospitalization(sdf.format(currentData));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
+
+        System.out.println(formatter.parse(hospitalization.getStartDateHospitalization()));
+        System.out.println(formatter.parse(sdf.format(currentData)));
+        Date startDate = formatter.parse(hospitalization.getStartDateHospitalization());
+        long diff = currentData.getTime() - startDate.getTime();
+        System.out.println(diff);
+        Integer difference_In_Days
+                = Math.toIntExact((diff
+                / (1000 * 60 * 60 * 24))
+                % 365);
+        System.out.println(difference_In_Days+1);
+        hospitalization.setNumberOfHospitalization(difference_In_Days+1);
+        hospitalizationRepository.save(hospitalization);
+        return hospitalization;
+    }
+    public List<Hospitalization> getAllHospitalization(Principal principal){
+        List<Hospitalization> hospitalizationList = new ArrayList<>();
+        hospitalizationList = hospitalizationRepository.findAll();
+
+                return hospitalizationList;
     }
 }
  /*
@@ -306,29 +337,7 @@ public class SecretaryService {
         hospitalizationRepository.save(hospitalization);
         return hospitalization;
     }
-    public Hospitalization editHospitalization(String id) throws ParseException {
-        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(id);
-        Date currentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        System.out.println(sdf.format(currentData));
-        hospitalization.setEndDateHospitalization(sdf.format(currentData));
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
-
-        System.out.println(formatter.parse(hospitalization.getStartDateHospitalization()));
-        System.out.println(formatter.parse(sdf.format(currentData)));
-        Date startDate = formatter.parse(hospitalization.getStartDateHospitalization());
-        long diff = currentData.getTime() - startDate.getTime();
-        System.out.println(diff);
-        Integer difference_In_Days
-                = Math.toIntExact((diff
-                / (1000 * 60 * 60 * 24))
-                % 365);
-        System.out.println(difference_In_Days+1);
-        hospitalization.setNumberOfHospitalization(difference_In_Days+1);
-        hospitalizationRepository.save(hospitalization);
-        return hospitalization;
-    }*/
+   */
   /*  public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
 
         Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
