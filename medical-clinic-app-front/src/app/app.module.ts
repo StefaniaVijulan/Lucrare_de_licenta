@@ -36,6 +36,9 @@ import { FlexModule } from '@angular/flex-layout';
 import { DialogMoreInfoPacientComponent } from './components/dialog-more-info-pacient/dialog-more-info-pacient.component';
 import {MatListModule} from '@angular/material/list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { DialogAddAppointmentComponent } from './components/dialog-add-appointment/dialog-add-appointment.component';
+import { DialogAppointmentSuccessComponent } from './components/dialog-appointment-success/dialog-appointment-success.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     DialogChangePassComponent,
     DialogAddPacientComponent,
     DialogMoreInfoPacientComponent,
-    
+    DialogAddAppointmentComponent,
+    DialogAppointmentSuccessComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -98,7 +103,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     DialogResetPassComponent,
      DialogChangePassComponent,
      DialogAddPacientComponent,
-     DialogMoreInfoPacientComponent
+     DialogMoreInfoPacientComponent,
+     DialogAddAppointmentComponent,
+     DialogAppointmentSuccessComponent
     ],
     
   providers: [],

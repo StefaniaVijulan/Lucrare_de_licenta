@@ -51,7 +51,7 @@ export class SecretarService {
     console.log("in secretar service => " + this.hospitalizationNo)
     return this._http.get(this.baseUrl + '/secretary/specificHospitalization?noHosp=' + this.hospitalizationNo, this.publicHttpHeaders);
   }
-allCardiolog(){
+  allCardiolog(){
     return this._http.get(this.baseUrl + '/secretary/allCardiolog', this.publicHttpHeaders)
   }
   externarePacient(registrationNoHospitalization: string){

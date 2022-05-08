@@ -40,7 +40,11 @@ export class AuthService {
     localStorage.removeItem('role')
     localStorage.removeItem('user')
     localStorage.removeItem('cnp')
-    this._router.navigate(['/home'])
+    this._router.navigate(['/dashboard'])
+  }
+  logInUser(){
+    console.log("aici")
+    this._router.navigate(['/login'])
   }
   getRole() {
     return localStorage.getItem('role')

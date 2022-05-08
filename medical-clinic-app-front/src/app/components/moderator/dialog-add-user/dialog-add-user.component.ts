@@ -115,6 +115,7 @@ export class DialogAddUserComponent implements OnInit {
 
           )
           this._service.getAllUsers()
+         
         }
       } else {
         this.msg = "Campurile obligatorii nu sunt completate"
@@ -124,6 +125,7 @@ export class DialogAddUserComponent implements OnInit {
       this.updateProduct(this.editData.role)
 
     }
+   
   }
   updateProduct(info: any) {
     // rolul, cnpul userului si noul user

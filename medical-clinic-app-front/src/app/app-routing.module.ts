@@ -19,11 +19,11 @@ import { ModeratorService } from './services/moderator/moderator.service';
 
 const routes: Routes = [ 
   {
-    path:"home",
-    component: HomeComponent
+    path:"",
+    component: DashboardComponent
   },
   {
-    path:"",
+    path:"home",
     component: HomeComponent
   },
   {
