@@ -15,11 +15,13 @@ import { Cardiolog } from 'src/app/interfaces/cardiolog';
   styleUrls: ['./secretar.component.scss']
 })
 export class SecretarComponent implements OnInit {
-  listHospitalization: any
+  listAppointment: any
   currentList: any;
   pacientL: any;
   cardiologL: any;
-  msg: string="";
+
+ 
+  existaP: boolean;
   displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser', 'numberUser', 'role', 'action'];
   dataSource!: MatTableDataSource < any > ;
 
@@ -36,26 +38,33 @@ export class SecretarComponent implements OnInit {
   constructor(public _secretar: SecretarService, private dialog: MatDialog, ) {}
 
   ngOnInit() {
-    this.allHospitalizationActive();
+    this.allTodayAppointments();
   }
 
-  allHospitalizationActive() {
-    this._secretar.getAllHospitalizationActive().subscribe((response: any) => {
-      console.log(response)
-      this.listHospitalization = response;
-    })
-  };
+  
   openAddDialog() {
     this.dialog.open(DialogAddPacientComponent, {
       width: '50%'
     }).afterClosed().subscribe(val => {
       console.log(val)
       if (val === "saveP") {
-        this.allHospitalizationActive();
+     // this.allHospitalizationActive();
       }
     });
   }; 
-
+  allTodayAppointments(){
+    return this._secretar.getAllTodayAppointments().subscribe((res)=>{
+      this.listAppointment = res
+      console.log(res)
+    })
+  }
+  checkPatientA(element: any){
+    return this._secretar.checkPatient(element).subscribe((res)=>{
+      console.log(res)
+     
+    })
+  }
+/*
   readMoreDialog(element: string) {
     //salvam idul internarii pentru care vrem sa aflam mai multe detalii
     this._secretar.hospitalizationNo = element
@@ -83,6 +92,6 @@ export class SecretarComponent implements OnInit {
     })
     location.reload()
   }
-
+*/
 
 }

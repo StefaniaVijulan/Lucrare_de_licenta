@@ -49,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login",
                         "/changePass",
                         "/blockDate",
+                        "/deleteAppointment",
                         "/checkAvailabilityHour",
                         "addAppointment").permitAll()
                 .antMatchers("/moderator/registerSecretary",
@@ -72,12 +73,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/deleteUser"
 
                         ).hasAuthority("MODERATOR")
-                .antMatchers("/hospitalization/addHospitalization",
-                        "/secretary/allHospitalizationActive",
+                .antMatchers(
+                        "/secretary/allAppointments",
                         "/secretary/addPatient",
+                        "/secretary/todayAppointments",
                         "/secretary/allCardiolog",
                         "/secretary/specificHospitalization",
                         "/secretary/allHospitalization",
+                        "/secretary/checkPatient",
+
 
                         "/hospitalizationChangeEndData{registrationNoHospitalization}",
                         "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",

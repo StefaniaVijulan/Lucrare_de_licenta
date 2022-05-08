@@ -23,7 +23,7 @@ import { DialogMoreInfoPacientComponent } from 'src/app/components/dialog-more-i
 })
 export class SecretarPacientiComponent implements OnInit {
 
-  displayedColumns = ['startDateHospitalization','numberOfHospitalization','cnp', 'firstName', 'lastName', 'emailUser','numberUser', 'action'];
+  displayedColumns = ['dataA','hour','cnp','firstName', 'lastName', 'emailUser', 'numberUser'];
   dataSource !: MatTableDataSource<any>;
 
 
@@ -41,7 +41,7 @@ export class SecretarPacientiComponent implements OnInit {
 
   ngOnInit(): void {
     this.paginator._intl.itemsPerPageLabel="Numarul de elemente afisate:89";
-    this.allHospitalization();
+    this.allFutureAppointments();
   }
   setRoleCase(data){
     for(let item of data){
@@ -49,9 +49,9 @@ export class SecretarPacientiComponent implements OnInit {
       //console.log(item.role)
     }
   }
-  allHospitalization(){
+  allFutureAppointments(){
     
-    return this._secretar.getAllHospitalization()
+    return this._secretar.getAllCurrentAppointments()
     .subscribe((res:any)=>{
      this.dataSource =  new MatTableDataSource(res);
      this.dataSource.paginator = this.paginator;
@@ -64,7 +64,7 @@ export class SecretarPacientiComponent implements OnInit {
       else
         return false
   };
-  readMoreDialog(element: any) {
+ /* readMoreDialog(element: any) {
     //salvam idul internarii pentru care vrem sa aflam mai multe detalii
     this._secretar.hospitalizationNo = element.registrationNoHospitalization
  
@@ -77,5 +77,5 @@ export class SecretarPacientiComponent implements OnInit {
             this.allHospitalization();
           }
         })
-  }
+  }*/
 }

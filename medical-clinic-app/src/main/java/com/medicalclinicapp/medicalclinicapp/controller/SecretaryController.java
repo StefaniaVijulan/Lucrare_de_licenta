@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
+import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
@@ -22,6 +23,25 @@ public class SecretaryController {
     @Autowired
     private SecretaryService secretaryService;
 
+    @GetMapping("/secretary/allAppointments")
+    public List<Appointment> getAllAppointment() throws ParseException {
+        return secretaryService.currentAppointments();
+    }
+    @GetMapping("/secretary/todayAppointments")
+    public List<Appointment> getAllTodayAppointment() throws ParseException {
+        return secretaryService.todayAppointments();
+    }
+    @PostMapping("/secretary/addPatient")
+    public Patient addPatient(@RequestBody Patient patient) throws Exception {
+        System.out.println("ana");
+        return secretaryService.addPatient(patient);
+    }
+    @GetMapping("/secretary/checkPatient")
+    public Patient getcheckPatient(@RequestParam("cnp")String cnp) throws ParseException {
+        return secretaryService.checkPatient(cnp);
+    }
+}
+/*
     @PostMapping("/secretary/addPatient")
     public Patient addPatient(@RequestBody Patient patient) throws Exception {
         System.out.println("ana");

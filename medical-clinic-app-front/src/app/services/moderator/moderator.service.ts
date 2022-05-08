@@ -52,7 +52,7 @@ export class ModeratorService {
   }
 
   getAllHematolog(){
-    return this._http.get(this.baseUrl + '/moderator/allHematologs', this.publicHttpHeaders); 
+    return this._http.get(this.baseUrl + '/moderator/allHematolog', this.publicHttpHeaders); 
   }
   addHematolog(user: Hematolog){
     return this._http.post<any>(this.baseUrl + '/moderator/registerHematolog', user, this.publicHttpHeaders);

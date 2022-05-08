@@ -1,8 +1,10 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 
+import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
@@ -11,6 +13,7 @@ import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,13 +44,51 @@ public class SecretaryService {
     private SecretaryRepository secretaryRepository;
 
     @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
     private CardiologRepository cardiologRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public List<Appointment> currentAppointments() throws ParseException {
+        List<Appointment> appointmentList = new ArrayList<>();
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                Date currentD;
+                currentD = new Date();
+                boolean stare = (sdf.parse(appointmentRepository.findAll().get(i).getDataA())).before(currentD);
+                System.out.println("Viitoare");
+                System.out.println(stare);
+                System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
+                System.out.println(currentD);
+                if(!stare){
+                    appointmentList.add(appointmentRepository.findAll().get(i));
+                }
+            }
+        }
+        return appointmentList;
+    }
+    public List<Appointment> todayAppointments() throws ParseException {
+        List<Appointment> appointmentList = new ArrayList<>();
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            {
+
+
+                Date curentData = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                System.out.println("Current");
+                System.out.println(sdf.format(curentData));
+                System.out.println(appointmentRepository.findAll().get(i).getDataA());
+                if(sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())){
+                    appointmentList.add(appointmentRepository.findAll().get(i));
+                }
+            }
+        }
+        return appointmentList;
+    }
     public Patient addPatient(Patient patient) {
-        if (patientRepository.existsByCnp(patient.getCnp()))
-        {
+        if (patientRepository.existsByCnp(patient.getCnp())) {
             //pacientul exista
             return null;
 
@@ -55,49 +96,61 @@ public class SecretaryService {
         String parola = "parola";
         patient.setPassword(bCryptPasswordEncoder.encode(parola));
         String emailtext;
-        emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() +",\n\nIti multumim ca ai apelat la serviciile noastre." +
+        emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() + ",\n\nIti multumim ca ai apelat la serviciile noastre." +
                 "Pentru a avea acces la toate informatiile despre investigatiile facute in cadrul acestei clinici te invitam sa accesezi contul creat automat pentru tine. Un nou cont bazat pe CNPul dumneavoastra a fost creat."
-                +"\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
-                "\n\tParola: " + parola +"\n\n" +
+                + "\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
+                "\n\tParola: " + parola + "\n\n" +
                 "Pentru orice nelamurire va stam la dispozitie.";
 
-        emailService.sendmail(patient.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+        emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);
         patient.setRole("PACIENT");
         patientRepository.save(patient);
         return patient;
     }
 
-    public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
-        Date curentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-        hospitalization.setStartDateHospitalization(sdf.format(curentData));
-
-        if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
-            //Numarul de inregistrare a acestei internari este deja luat
-            return null;
-
-
-        Secretary secretary = this.secretaryRepository.findByCnp(cnpS);
-        System.out.println("Secretar");
-        System.out.println(cnpS);
-        System.out.println(secretary);
-        hospitalization.setSecretary(secretary);
-
-        Patient patient = this.patientRepository.findByCnp(cnpP);
-        System.out.println("Patient");
-        System.out.println((cnpP));
-        System.out.println(patient);
-        hospitalization.setPatient(patient);
-
-        Cardiolog cardiolog = this.cardiologRepository.findByCnp(cnpC);
-        System.out.println("Cardiolog");
-        System.out.println(cardiolog);
-        hospitalization.setCardiolog(cardiolog);
-
-        hospitalizationRepository.save(hospitalization);
-
-        return hospitalization;
+    public Patient checkPatient(String cnp){
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+            {
+                if(patientRepository.findAll().get(i).getCnp().equals(cnp))
+                    return null;
+            }}
+        return patientRepository.findByCnp(cnp);
     }
+
+}
+    /*
+        public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
+            Date curentData = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            hospitalization.setStartDateHospitalization(sdf.format(curentData));
+
+            if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
+                //Numarul de inregistrare a acestei internari este deja luat
+                return null;
+
+
+            Secretary secretary = this.secretaryRepository.findByCnp(cnpS);
+            System.out.println("Secretar");
+            System.out.println(cnpS);
+            System.out.println(secretary);
+            hospitalization.setSecretary(secretary);
+
+            Patient patient = this.patientRepository.findByCnp(cnpP);
+            System.out.println("Patient");
+            System.out.println((cnpP));
+            System.out.println(patient);
+            hospitalization.setPatient(patient);
+
+            Cardiolog cardiolog = this.cardiologRepository.findByCnp(cnpC);
+            System.out.println("Cardiolog");
+            System.out.println(cardiolog);
+            hospitalization.setCardiolog(cardiolog);
+
+            hospitalizationRepository.save(hospitalization);
+
+            return hospitalization;
+        }
+
 
     public List<Hospitalization> getAllHospitalizationActive(Principal principal){
         List<Hospitalization> hospitalizationList = new ArrayList<>();
@@ -109,17 +162,17 @@ public class SecretaryService {
         }
         return hospitalizationList;
     }
-    public List<Cardiolog> seeAllCardiolog(){
+    public List<Cardiolog> seeAllCardiolog() {
         List<Cardiolog> generalists = new ArrayList<>();
-        for(int i=0; i<cardiologRepository.findAll().size(); i++){
+        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
             {
                 generalists.add(cardiologRepository.findAll().get(i));
             }
         }
         return generalists;
     }
-
-    // Date despre internarea specifica unui pacient
+}
+   /* // Date despre internarea specifica unui pacient
     public Hospitalization getSpecificHospitalization(String noHosp){
         Hospitalization hospitalization= new Hospitalization();
         for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
@@ -129,8 +182,8 @@ public class SecretaryService {
             }
         }
         return hospitalization;
-    }
-    public Hospitalization editHospitalization(String id) throws ParseException {
+    }*/
+ /*   public Hospitalization editHospitalization(String id) throws ParseException {
         Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(id);
         Date currentData = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
@@ -160,7 +213,7 @@ public class SecretaryService {
 
                 return hospitalizationList;
     }
-}
+}*/
  /*
 
     public Hospitalization newHospitalization(String registrationNo, Patient patient){
@@ -200,98 +253,7 @@ public class SecretaryService {
         return hospitalization;
         return patient;
     }*/
- /*   //internarile active
-
-
-    public Patient getSpecificPatient(String registrationNoHospitalization) {
-        Patient patient = new Patient();
-
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(registrationNoHospitalization))
-                    patient = hospitalizationRepository.findAll().get(i).getPatient();
-            }
-        }
-        return patient;
-    }
-
-    // Date despre internarea specifica unui pacient
-    public Hospitalization getSpecificHospitalizationofPatient(String cnpP){
-        Hospitalization hospitalization= new Hospitalization();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
-                    hospitalization = hospitalizationRepository.findAll().get(i);
-            }
-        }
-        return hospitalization;
-    }
-
-    // Date despre doctorul specifica unui pacient internat
-    public Cardiolog getSpecificCardiologOfPatient(String cnp){
-        Cardiolog cardiolog= new Cardiolog();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnp))
-                    cardiolog = hospitalizationRepository.findAll().get(i).getCardiolog();
-            }
-        }
-        return cardiolog;
-    }
-
-    public List<Hospitalization> getHospitalizationBetweenData(String dateStart, String dataEnd){
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
-                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
-            }
-        }
-        return hospitalizationList;
-    }
-
-    public Patient moreInfo(String cnp){
-        System.out.println("Inainte de for");
-        System.out.println(cnp);
-        Patient patient = new Patient();
-        for(int i=0; i<patientRepository.findAll().size(); i++){
-            {   System.out.println("in for");
-                System.out.println(cnp);
-                System.out.println(patientRepository.findAll().get(i).getCnp());
-                if(patientRepository.findAll().get(i).getCnp().equals(cnp))
-                {
-                    System.out.println("in if");
-                    System.out.println(patientRepository.findAll().get(i).getCnp());
-                    System.out.println(patientRepository.findAll().get(i));
-                    patient = patientRepository.findAll().get(i);
-                }
-            }
-        }
-        System.out.println(patient);
-        return patient;
-    }
-    public Hospitalization moreInfoHospitalization(String cnp){
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            if(hospitalizationRepository.findAll().get(i).getPatient().getCnp().equals(cnp));
-            {
-                return hospitalizationRepository.findAll().get(i);
-            }
-        }
-        return null;
-    }
-
-
-    public ResponseEntity<Patient> afisareP(String cnpP){
-        if (!patientRepository.existsById(cnpP))
-        {
-            return null;
-        } else {
-            Patient patient = patientRepository.findByCnp(cnpP);
-            return new ResponseEntity<>(patient, HttpStatus.OK);
-
-
-        }
-    }
+/*
 
     public Patient deletePatient(String cnpP){
         if (!patientRepository.existsById(cnpP))

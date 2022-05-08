@@ -31,5 +31,9 @@ public class AppointmentController {
     public Appointment addAppointment(@RequestBody Appointment appointment){
         return appointmentService.addAppointment(appointment);
     }
+    @DeleteMapping("/deleteAppointment")
+    public Appointment deleteAppointment(@RequestParam(value = "idA")Long idA){
+        return appointmentService.deleteAppointment(idA);
+    }
 
 }

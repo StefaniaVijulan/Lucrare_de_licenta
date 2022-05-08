@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         //    excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
-        // System.out.println("Intra");
+        System.out.println("Intra");
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
@@ -46,6 +46,7 @@ public class UserController {
                 .loadUserByUsername(loginRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         User currentUser= userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
+        System.out.println(new LoginResponse(jwt, currentUser));
         return ResponseEntity.ok(new LoginResponse(jwt, currentUser));
     }
 

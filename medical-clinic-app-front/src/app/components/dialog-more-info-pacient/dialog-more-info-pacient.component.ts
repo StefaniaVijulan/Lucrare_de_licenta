@@ -27,7 +27,7 @@ export class DialogMoreInfoPacientComponent implements OnInit {
 
   ngOnInit() {
     console.log("onInit in dialog-more-info-pacient")
-    this._secretar.getSpecificHospitalization().subscribe((res)=>{
+  /* this._secretar.getSpecificHospitalization().subscribe((res)=>{
       this.hospitalizationInfo = res;
       console.log("raspuns =>")
       console.log(this.hospitalizationInfo)
@@ -64,7 +64,7 @@ export class DialogMoreInfoPacientComponent implements OnInit {
       }
     })
     console.log("intra in if")
-    
+    */
   }
 
 

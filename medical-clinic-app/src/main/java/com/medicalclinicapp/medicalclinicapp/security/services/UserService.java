@@ -4,6 +4,7 @@ import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException(
                     String.format("username with cnp %s not found", cnp));
         }
+
         return userRepository.findByCnp(cnp);
     }
     public User loginUser(String cnp, String password){
@@ -46,6 +49,7 @@ public class UserService implements UserDetailsService {
             throw new IllegalStateException("Cnp doesnt exist");
 
         }
+        System.out.println(userProfile);
         return userProfile;
     }
     public User changePassword(String oldPass, String newPass, String cnpC) throws Exception {
@@ -70,9 +74,9 @@ public class UserService implements UserDetailsService {
                 System.out.println("Password change");
             }
         } else
-            // Parola curenta nu se potriveste
-            {
-             System.out.println("Parola curenta nu se potriveste");
+        // Parola curenta nu se potriveste
+        {
+            System.out.println("Parola curenta nu se potriveste");
             return null;}
 
         return currentUser;

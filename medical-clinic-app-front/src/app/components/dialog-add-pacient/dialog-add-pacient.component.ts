@@ -123,21 +123,6 @@ export class DialogAddPacientComponent implements OnInit {
       
     })
   }
-  addHospitalizatin(){ 
-    this.setHospitalization()
-    
-    this._secretar.addHospitalization(this.selectedCardio, this.newPacient.cnp, this.hospitalization).subscribe({
-      next: (data) => {
-        this.firstFormGroup.reset();
-        this.secondFormGroup.reset();
-        this.thirdFormGroup.reset();
-        this.dialogref.close("saveP");    
-      },
-      error: () => {
-        console.log("eroare")
-        
-      }
-    })
-  }
+
 }
 

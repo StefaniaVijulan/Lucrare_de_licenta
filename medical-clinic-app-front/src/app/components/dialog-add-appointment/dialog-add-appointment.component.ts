@@ -19,6 +19,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   tomorrowD:any = new Date().getDate()+1;
   blockedData: any
   dateP: string;
+  ziua: string;
   hourP:string;
   dataEdit: string;
   hourInterval: any;
@@ -65,7 +66,14 @@ export class DialogAddAppointmentComponent implements OnInit {
      else{
        this.luna = formatedDate.split(",")[0].split("/")[0]
      }
-     this.dataEdit = formatedDate.split(",")[0].split("/")[1] +"-"+ this.luna + "-"+formatedDate.split(",")[0].split("/")[2]
+     if(formatedDate.split(",")[0].split("/")[1].length ==1)
+     {
+       this.ziua = "0"+ formatedDate.split(",")[0].split("/")[1];
+     }
+     else{
+       this.ziua = formatedDate.split(",")[0].split("/")[1]
+     }
+     this.dataEdit = this.ziua +"-"+ this.luna + "-"+formatedDate.split(",")[0].split("/")[2]
      console.log(this.dataEdit)
      this._appointment.getValidationData(this.dataEdit).subscribe((res)=>{
        this.hourInterval = res
