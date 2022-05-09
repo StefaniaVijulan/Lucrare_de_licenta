@@ -1,14 +1,15 @@
 import {  Component,  OnInit,  ViewChild} from '@angular/core';
 import {  FormGroup,  FormControl} from '@angular/forms';
 import {  FlexLayoutModule} from '@angular/flex-layout';
-import {  Hospitalization} from 'src/app/interfaces/hospitalization';
+
 import {  SecretarService} from 'src/app/services/secretar/secretar.service';
-import {  Pacient} from 'src/app/interfaces/pacient';
+;
 import {  timeStamp} from 'console';
 import {  DialogMoreInfoPacientComponent} from 'src/app/components/dialog-more-info-pacient/dialog-more-info-pacient.component';
 import {  MatDialog,  MatPaginator,  MatSort,  MatTableDataSource} from '@angular/material';
 import {  DialogAddPacientComponent} from 'src/app/components/dialog-add-pacient/dialog-add-pacient.component';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
+import { Patient } from 'src/app/interfaces/patient';
 @Component({
   selector: 'app-secretar',
   templateUrl: './secretar.component.html',
@@ -18,13 +19,10 @@ export class SecretarComponent implements OnInit {
   listAppointment: any
   currentList: any;
   pacientL: any;
-  cardiologL: any;
-
+  listCardiolog: any;
+  newPacient: Patient = new Patient();
  
   existaP: boolean;
-  displayedColumns = ['cnp', 'firstName', 'lastName', 'emailUser', 'numberUser', 'role', 'action'];
-  dataSource!: MatTableDataSource < any > ;
-
 
   @ViewChild(MatPaginator, {
     static: true
@@ -39,23 +37,52 @@ export class SecretarComponent implements OnInit {
 
   ngOnInit() {
     this.allTodayAppointments();
+    this. allCardiolog();
   }
 
-  
-  openAddDialog() {
-    this.dialog.open(DialogAddPacientComponent, {
-      width: '50%'
-    }).afterClosed().subscribe(val => {
-      console.log(val)
-      if (val === "saveP") {
-     // this.allHospitalizationActive();
+
+  openAddDialog(element: any) {
+    console.log(element.cnp)
+    this._secretar.pacientService.cnp = element.cnp;
+    this._secretar.pacientService.firstName = element.firstName;
+    this._secretar.pacientService.lastName = element.lastName;
+    this._secretar.pacientService.numberUser = element.numberUser;
+    this._secretar.pacientService.emailUser = element.emailUser;
+    console.log("Service pacient")
+    console.log(this._secretar.pacientService)
+    console.log("intra mai jos")
+    this._secretar.checkPatient(element.cnp).subscribe((res)=>{
+      
+      if(res == null){
+        this._secretar.existaPacient = false;
+        this.dialog.open(DialogAddPacientComponent, {
+          width: '35%'
+        }).afterClosed().subscribe(val => {
+          console.log(val)
+          if (val === "saveP") {
+         // this.allHospitalizationActive();
+          }
+        });
+      }else{
+        console.log("aia e")
+        this.dialog.open(DialogAddPacientComponent, {
+          width: '35%'
+        })
+        this._secretar.existaPacient = true;
       }
-    });
+    })
+    
   }; 
   allTodayAppointments(){
     return this._secretar.getAllTodayAppointments().subscribe((res)=>{
       this.listAppointment = res
       console.log(res)
+    })
+  }
+  allCardiolog(){
+    return this._secretar.allCardiolog().subscribe((res)=>{
+      this._secretar.doctorListService = res;
+      console.log(this._secretar.doctorListService)
     })
   }
   checkPatientA(element: any){

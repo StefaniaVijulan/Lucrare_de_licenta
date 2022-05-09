@@ -19,3 +19,17 @@
 .example-full-width {
   width: 100%;
 }
+.example-container .mat-form-field + .mat-form-field {
+  margin: 0 auto
+ 
+}
+.mat-form-field{
+  width: 20vw;
+  margin-left: 3.6vw;
+}
+.button{
+  text-align: center;
+}
+.p{
+  text-align: center;
+}

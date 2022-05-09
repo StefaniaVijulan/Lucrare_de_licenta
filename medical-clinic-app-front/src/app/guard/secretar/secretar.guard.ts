@@ -17,7 +17,7 @@ export class SecretarGuard implements CanActivate {
         return true;
       } else {
         this._service.logoutUser()
-        this.router.navigate(['/home'])
+        this.router.navigate(['/dashboard'])
 
         return false;
       }

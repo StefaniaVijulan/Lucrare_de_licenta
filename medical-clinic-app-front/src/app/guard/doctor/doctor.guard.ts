@@ -3,11 +3,10 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class ModeratorGuard implements CanActivate {
+export class DoctorGuard  implements CanActivate {
   constructor(private _service: AuthService, private router: Router) {
   }
 
@@ -15,10 +14,9 @@ export class ModeratorGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree | Observable < boolean | UrlTree > | Promise < boolean | UrlTree > {
     
-    if(this._service.getRole()=="MODERATOR") {
+    if(this._service.getRole()=="CARDIOLOG") {
         return true;
       } else {
-        this._service.logoutUser()
         this.router.navigate(['/dashboard'])
         return false;
       }

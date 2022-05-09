@@ -38,6 +38,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DialogAddAppointmentComponent } from './components/dialog-add-appointment/dialog-add-appointment.component';
 import { DialogAppointmentSuccessComponent } from './components/dialog-appointment-success/dialog-appointment-success.component';
+import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doctor-programari.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { DialogAppointmentSuccessComponent } from './components/dialog-appointme
     DialogMoreInfoPacientComponent,
     DialogAddAppointmentComponent,
     DialogAppointmentSuccessComponent,
+    DoctorProgramariComponent,
   
   ],
   imports: [

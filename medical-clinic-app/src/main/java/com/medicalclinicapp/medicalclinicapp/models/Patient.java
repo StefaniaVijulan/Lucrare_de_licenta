@@ -7,10 +7,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -25,18 +22,18 @@ public class Patient extends User {
     private String seriesPatient;
     private String numberPatient;
     private String sexPatient;
+    private String citizenshipPatient;
     //Address
     private String cityPatient;
     private String townPatient;
     private String streetPatient;
     private String noPatient;
+    private String placePatient;
 
-    private String placePatient; //rural/urban
-    private String citizenshipPatient;
-    private String jobPatient;
-
-    private String levelSchoolPatient;
-    private Boolean insurancePatient;
+    @Column(length = 65555)
+    private String jobTypePatient;
+    @Column(length = 65555)
+    private String insurancePatient;
     private String role;
 
     @Override

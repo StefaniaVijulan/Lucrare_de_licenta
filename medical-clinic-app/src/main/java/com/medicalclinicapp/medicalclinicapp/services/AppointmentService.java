@@ -1,12 +1,15 @@
 package com.medicalclinicapp.medicalclinicapp.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.apache.poi.util.ArrayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -18,9 +21,14 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Autowired
     private EmailService emailService;
+
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<String> verificaDisponibilitate() {
         List<Appointment> appointmentList = appointmentRepository.findAll();
@@ -71,14 +79,43 @@ public class AppointmentService {
         System.out.println(allHours);
         return allHours;
     }
+    public Patient addPatient(Patient patient) {
+        if (patientRepository.existsByCnp(patient.getCnp())) {
+            //pacientul exista
+            return null;
 
+        }
+        String parola = "parola";
+        patient.setPassword(bCryptPasswordEncoder.encode(parola));
+        String emailtext;
+        emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() + ",\n\nIti multumim ca ai apelat la serviciile noastre." +
+                "Pentru a avea acces la toate informatiile despre investigatiile facute in cadrul acestei clinici te invitam sa accesezi contul creat automat pentru tine. Un nou cont bazat pe CNPul dumneavoastra a fost creat."
+                + "\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
+                "\n\tParola: " + parola + "\n\n" +
+                "Pentru orice nelamurire va stam la dispozitie.";
+
+        emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);
+        patient.setRole("PACIENT");
+        patientRepository.save(patient);
+        return patient;
+    }
     public Appointment addAppointment(Appointment appointment) {
+        System.out.println("Add appointment");
         String emailtext;
         emailtext = "Buna ziua, \n" +
                 "Va multumim ca ati apelat la serviciile noastre. Va asteptam pe data de " + appointment.getDataA() + ", la ora " + appointment.getHour() + "." +
                 "\n\nPentru orice alta informatie nu ezitati sa ne contactati la numarul de telefon: 0760774768. ";
         emailService.sendmail(appointment.getEmailUser(), "Medical Clinic App - Detalii programare", emailtext);
-        return appointmentRepository.save(appointment);
+       // Patient patient = new Patient();
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
+            if(patientRepository.findAll().get(i).getCnp().equals(appointment.getCnp()))
+            {   System.out.println(patientRepository.findAll().get(i));
+                appointment.setPatient(patientRepository.findAll().get(i));
+
+            }
+        }
+        appointmentRepository.save(appointment);
+        return appointment;
     }
 
     public Appointment deleteAppointment(Long idA) {

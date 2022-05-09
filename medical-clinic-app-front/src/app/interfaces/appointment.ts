@@ -1,4 +1,6 @@
 import { StringifyOptions } from "querystring";
+import { Patient } from "./patient";
+
 
 export class Appointment {
     
@@ -10,5 +12,7 @@ export class Appointment {
     dataA: string;
     hour: string;
     
+    patient: Patient;
+
     constructor(){}
 }

@@ -40,7 +40,7 @@ export class SecretarPacientiComponent implements OnInit {
        }
 
   ngOnInit(): void {
-    this.paginator._intl.itemsPerPageLabel="Numarul de elemente afisate:89";
+    this.paginator._intl.itemsPerPageLabel="Numarul de elemente afisate:";
     this.allFutureAppointments();
   }
   setRoleCase(data){
@@ -64,6 +64,10 @@ export class SecretarPacientiComponent implements OnInit {
       else
         return false
   };
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
  /* readMoreDialog(element: any) {
     //salvam idul internarii pentru care vrem sa aflam mai multe detalii
     this._secretar.hospitalizationNo = element.registrationNoHospitalization

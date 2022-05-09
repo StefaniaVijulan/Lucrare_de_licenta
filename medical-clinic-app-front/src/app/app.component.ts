@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 
 import { AuthService } from './services/auth/auth.service';
+import { DoctorService } from './services/doctor/doctor.service';
 import { ModeratorService } from './services/moderator/moderator.service';
 import { SecretarService } from './services/secretar/secretar.service';
 
@@ -32,6 +33,7 @@ export class AppComponent implements AfterViewInit  {
     private cdr: ChangeDetectorRef,
     public _service:AuthService,
     public _secretar: SecretarService,
+    public _doctor: DoctorService,
     private _router: Router){
 
   }

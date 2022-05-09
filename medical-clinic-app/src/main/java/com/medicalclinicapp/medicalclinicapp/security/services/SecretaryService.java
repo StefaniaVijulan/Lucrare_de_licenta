@@ -1,26 +1,21 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
+import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
-import com.medicalclinicapp.medicalclinicapp.repository.HospitalizationRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.FisaPatientRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
-import com.medicalclinicapp.medicalclinicapp.security.models.Secretary;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
-import com.medicalclinicapp.medicalclinicapp.security.repository.SecretaryRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -37,14 +32,14 @@ public class SecretaryService {
 
     @Autowired
     private EmailService emailService;
-    @Autowired
-    private HospitalizationRepository hospitalizationRepository;
 
     @Autowired
-    private SecretaryRepository secretaryRepository;
+    private FisaPatientRepository fisaPatientRepository;
+
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+
     @Autowired
     private CardiologRepository cardiologRepository;
 
@@ -52,7 +47,7 @@ public class SecretaryService {
 
     public List<Appointment> currentAppointments() throws ParseException {
         List<Appointment> appointmentList = new ArrayList<>();
-        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+        for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
             {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 Date currentD;
@@ -62,16 +57,17 @@ public class SecretaryService {
                 System.out.println(stare);
                 System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
                 System.out.println(currentD);
-                if(!stare){
+                if (!stare) {
                     appointmentList.add(appointmentRepository.findAll().get(i));
                 }
             }
         }
         return appointmentList;
     }
+
     public List<Appointment> todayAppointments() throws ParseException {
         List<Appointment> appointmentList = new ArrayList<>();
-        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+        for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
             {
 
 
@@ -80,13 +76,14 @@ public class SecretaryService {
                 System.out.println("Current");
                 System.out.println(sdf.format(curentData));
                 System.out.println(appointmentRepository.findAll().get(i).getDataA());
-                if(sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())){
+                if (sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())) {
                     appointmentList.add(appointmentRepository.findAll().get(i));
                 }
             }
         }
         return appointmentList;
     }
+
     public Patient addPatient(Patient patient) {
         if (patientRepository.existsByCnp(patient.getCnp())) {
             //pacientul exista
@@ -104,19 +101,61 @@ public class SecretaryService {
 
         emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);
         patient.setRole("PACIENT");
+        for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
+            {
+                if (appointmentRepository.findAll().get(i).getCnp().equals(patient.getCnp()))
+                    appointmentRepository.findAll().get(i).setPatient(patient);
+            }
+        }
         patientRepository.save(patient);
         return patient;
     }
 
-    public Patient checkPatient(String cnp){
-        for(int i=0; i<patientRepository.findAll().size(); i++){
+    public Patient checkPatient(String cnp) {
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
             {
-                if(patientRepository.findAll().get(i).getCnp().equals(cnp))
-                    return null;
-            }}
-        return patientRepository.findByCnp(cnp);
+                if (patientRepository.findAll().get(i).getCnp().equals(cnp))
+                    return patientRepository.findAll().get(i);
+            }
+        }
+        return null;
     }
 
+    public Patient deletePatient(String firstName) {
+
+        patientRepository.delete(patientRepository.findByFirstName(firstName));
+        return patientRepository.findByFirstName(firstName);
+    }
+
+
+    public List<Cardiolog> seeAllCardiolog() {
+        List<Cardiolog> generalists = new ArrayList<>();
+        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
+            {
+                generalists.add(cardiologRepository.findAll().get(i));
+            }
+        }
+        return generalists;
+    }
+    public Cardiolog getSpecificCardiologOfPatient(String cnp){
+        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
+            {
+               if(cardiologRepository.findAll().get(i).getCnp().equals(cnp))
+                   return cardiologRepository.findAll().get(i);
+            }
+        }
+        return null;
+    }
+    public FisaPatient addFisa(String cnpP, FisaPatient fisa){
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
+            {
+                if(patientRepository.findAll().get(i).getCnp().equals(cnpP))
+                    fisa.setPatient(patientRepository.findAll().get(i));
+            }
+        }
+        fisaPatientRepository.save(fisa);
+        return fisa;
+    }
 }
     /*
         public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
@@ -162,15 +201,7 @@ public class SecretaryService {
         }
         return hospitalizationList;
     }
-    public List<Cardiolog> seeAllCardiolog() {
-        List<Cardiolog> generalists = new ArrayList<>();
-        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
-            {
-                generalists.add(cardiologRepository.findAll().get(i));
-            }
-        }
-        return generalists;
-    }
+
 }
    /* // Date despre internarea specifica unui pacient
     public Hospitalization getSpecificHospitalization(String noHosp){
@@ -255,17 +286,7 @@ public class SecretaryService {
     }*/
 /*
 
-    public Patient deletePatient(String cnpP){
-        if (!patientRepository.existsById(cnpP))
-        {
-            return null;
-        }
-        else{
-            patientRepository.delete(patientRepository.findByCnp(cnpP));
-            return patientRepository.findByCnp(cnpP);
-        }
 
-    }
 
     public List<Patient> allPatient() {
         List<Patient> patientList = new ArrayList<>();

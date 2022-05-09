@@ -45,7 +45,12 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/secretar']). then(() => {
             window. location. reload()});
         }
+        else if(response.user.role == "CARDIOLOG"){
+          console.log("aici cardiolog")
+          this._router.navigate(['/doctorProgramari'])
+        }
         else{
+          this._service.logoutUser()
           this._router.navigate(['/dashboard']);
         }
 

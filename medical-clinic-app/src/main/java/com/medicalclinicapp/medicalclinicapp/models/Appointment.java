@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,12 @@ public class Appointment implements Comparable<Appointment> {
     private String dataA;
     private String hour;
 
+    @OneToOne
+    private Patient patient;
+
+    @OneToOne
+    private Cardiolog cardiolog;
+    
     @Override
     public int compareTo(Appointment o) {
         return this.getDataA().compareTo(o.getDataA());

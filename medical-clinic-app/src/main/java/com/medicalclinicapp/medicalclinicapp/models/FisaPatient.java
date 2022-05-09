@@ -1,14 +1,17 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
-import org.apache.logging.log4j.message.StringFormattedMessage;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-public class Fisa {
-
+@Entity
+@Getter
+@Setter
+@Table(name = "fisaPatient")
+@RequiredArgsConstructor
+public class FisaPatient {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long noFile;
@@ -34,5 +37,6 @@ public class Fisa {
     //doctorul de familie
     private String presumptiveDiagnostic;
 
+    @OneToOne
     private Patient patient;
 }

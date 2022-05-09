@@ -61,6 +61,19 @@
           <span>Resetare parola</span>
       </button>
     </div>
+    <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'CARDIOLOG')">
+      <button mat-button class="menu-button" (click)="_doctor.seeProgramari()">
+        <mat-icon>people</mat-icon>
+        <span>Internari</span>
+      </button>
+      
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button" (click)="openDialog()">
+          <mat-icon>lock_reset</mat-icon>
+          <span>Resetare parola</span>
+      </button>
+    </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole() != 'MODERATOR' && _service.getRole() != 'SECRETAR')">
       <button mat-button class="menu-button">
         <mat-icon>home</mat-icon>

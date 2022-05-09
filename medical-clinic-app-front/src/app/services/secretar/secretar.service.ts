@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pacient } from 'src/app/interfaces/pacient';
+import { Patient } from 'src/app/interfaces/patient';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { Hospitalization } from 'src/app/interfaces/hospitalization';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
 import { StringifyOptions } from 'querystring';
 
@@ -14,14 +13,16 @@ import { StringifyOptions } from 'querystring';
 })
 export class SecretarService {
   cnpS: string;
+  existaPacient: boolean;
   pacientListService: any;
   hospitaliationListService: any;
   doctorListService: any;
 
-  pacient: Pacient;
+
   doctor: Cardiolog;
   cnpP: string;
 
+  pacientService: Patient =  new Patient();;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
@@ -30,8 +31,8 @@ export class SecretarService {
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
 
   
-  addPacient(pacient: Pacient){
-    return this._http.post<any>(this.baseUrl + '/secretary/addPatient', pacient, this.publicHttpHeaders);
+  addPatient(patient: Patient){
+    return this._http.post<any>(this.baseUrl + '/secretary/addPatient', patient, this.publicHttpHeaders);
   }
  
   allCardiolog(){

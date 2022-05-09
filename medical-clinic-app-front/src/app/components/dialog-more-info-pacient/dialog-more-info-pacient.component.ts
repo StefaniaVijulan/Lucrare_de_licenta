@@ -2,7 +2,7 @@ import {  Component,  Inject,  OnInit} from '@angular/core';
 import {  FormBuilder} from '@angular/forms';
 import {  MatDialogRef,  MAT_DIALOG_DATA} from '@angular/material';
 import { timeStamp } from 'console';
-import {  Pacient} from 'src/app/interfaces/pacient';
+
 import {  SecretarService} from 'src/app/services/secretar/secretar.service';
 
 @Component({

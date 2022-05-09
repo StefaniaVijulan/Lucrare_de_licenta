@@ -1,18 +1,14 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
+import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
-import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.SecretaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
-import java.security.Principal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -40,6 +36,23 @@ public class SecretaryController {
     public Patient getcheckPatient(@RequestParam("cnp")String cnp) throws ParseException {
         return secretaryService.checkPatient(cnp);
     }
+    @DeleteMapping("/secretary/deletePatient")
+    public Patient deleteP(@RequestParam("cnpP") String cnpP){
+        return secretaryService.deletePatient(cnpP);
+    }
+    @GetMapping("/secretary/allCardiolog")
+    public List<Cardiolog> getAllCardiolog(){
+        return secretaryService.seeAllCardiolog();
+    }
+    @GetMapping("/secretary/specificD")
+    public Cardiolog specificD(@RequestParam("cnpP") String cnp){
+        return secretaryService.getSpecificCardiologOfPatient(cnp);
+    }
+
+    @PostMapping("/secretary/addFisa")
+    public FisaPatient addFisa1(@RequestParam("cnpP") String cnpP, @RequestBody FisaPatient fisa){
+        return secretaryService.addFisa(cnpP, fisa);
+    }
 }
 /*
     @PostMapping("/secretary/addPatient")
@@ -63,10 +76,6 @@ public class SecretaryController {
         return secretaryService.getAllHospitalization(principal);
     }
 
-    @GetMapping("/secretary/allCardiolog")
-    public List<Cardiolog> getAllCardiolog(){
-        return secretaryService.seeAllCardiolog();
-    }
 
     @GetMapping("/secretary/specificHospitalization")
     public Hospitalization getSpecificHospit(@RequestParam("noHosp") String noHosp){
@@ -97,20 +106,12 @@ public class SecretaryController {
         return secretaryService.moreInfoHospitalization(cnpP);
     }
 
-    @DeleteMapping("/secretary/deletePatient")
-    public Patient deleteP(@RequestParam("cnpP") String cnpP){
-        return secretaryService.deletePatient(cnpP);
-    }
 
 
 
     @GetMapping("/secretary/specificP")
     public Patient specificP(@RequestParam("registrationNoHospitalization") String registrationNoHospitalization){
         return secretaryService.getSpecificPatient(registrationNoHospitalization);
-    }
-    @GetMapping("/secretary/specificD")
-    public Cardiolog specificD(@RequestParam("cnpP") String cnp){
-        return secretaryService.getSpecificCardiologOfPatient(cnp);
     }
 
 
