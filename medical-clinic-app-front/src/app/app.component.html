@@ -8,10 +8,11 @@
       close
     </mat-icon>
   </button>
-  Medical Clinic App
+  <div *ngIf ="_router.url == '/login' " (click) = "goDashboard()"> Medical Clinic App</div>
+  <div *ngIf ="_router.url != '/login' "> Medical Clinic App</div>
   <div style="margin-left: auto; margin-right: 1vw;">
-    <mat-icon *ngIf="(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
-    <button mat-button color="white" style="font-size: 1.3rem;" *ngIf="(!_service.loggedIn())" (click)="_service.logInUser()">Log In</button>
+    <mat-icon *ngIf= "(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
+    <button mat-button color="white" style="font-size: 1.3rem;" *ngIf= "(!_service.loggedIn()) && _router.url != '/login'" (click)="_service.logInUser()">Log In</button>
   </div>
 
 </mat-toolbar>

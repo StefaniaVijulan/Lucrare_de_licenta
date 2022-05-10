@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit  {
     public _service:AuthService,
     public _secretar: SecretarService,
     public _doctor: DoctorService,
-    private _router: Router){
+    public _router: Router){
 
   }
   ngAfterViewInit(){
@@ -51,6 +51,9 @@ export class AppComponent implements AfterViewInit  {
       }
     });
   }
+  goDashboard(){
+    this._router.navigate(['/dashboard'])
+  }
   openDialog(){ 
     this.dialog.open(DialogChangePassComponent,{
      width: '30%'
@@ -64,6 +67,7 @@ export class AppComponent implements AfterViewInit  {
        
      }
    })
+
  };
 
 }
