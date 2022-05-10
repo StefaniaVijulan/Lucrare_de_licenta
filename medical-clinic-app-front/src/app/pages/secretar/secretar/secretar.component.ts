@@ -57,12 +57,7 @@ export class SecretarComponent implements OnInit {
         this._secretar.existaPacient = false;
         this.dialog.open(DialogAddPacientComponent, {
           width: '35%'
-        }).afterClosed().subscribe(val => {
-          console.log(val)
-          if (val === "saveP") {
-         // this.allHospitalizationActive();
-          }
-        });
+        })
       }else{
         console.log("aia e")
         this.dialog.open(DialogAddPacientComponent, {

@@ -49,8 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login",
                         "/changePass",
                         "/blockDate",
-                        "/deleteAppointment",
-                        "/checkAvailabilityHour",
+                        "/deleteAppointmentCardio",
+                        "/checkAvailabilityHourCardio",
+                        "/allCardiolog",
                         "addAppointment").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",

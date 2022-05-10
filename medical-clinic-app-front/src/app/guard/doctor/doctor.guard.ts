@@ -17,6 +17,7 @@ export class DoctorGuard  implements CanActivate {
     if(this._service.getRole()=="CARDIOLOG") {
         return true;
       } else {
+        
         this.router.navigate(['/dashboard'])
         return false;
       }

@@ -1,4 +1,5 @@
 import { StringifyOptions } from "querystring";
+import { Cardiolog } from "./cardiolog";
 import { Patient } from "./patient";
 
 
@@ -14,5 +15,6 @@ export class Appointment {
     
     patient: Patient;
 
+    cardiolog: Cardiolog;
     constructor(){}
 }

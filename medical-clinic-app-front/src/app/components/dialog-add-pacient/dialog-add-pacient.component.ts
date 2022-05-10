@@ -25,7 +25,7 @@ export class DialogAddPacientComponent implements OnInit {
 
   hospitalizationGroup: FormGroup;
   user: User;
-  cardiologList: any;
+ 
 
   newPacient: Patient = new Patient();
 
@@ -34,9 +34,8 @@ export class DialogAddPacientComponent implements OnInit {
     private dialogref: MatDialogRef < DialogAddPacientComponent >) {}
 
   ngOnInit() {
-    console.log("Intra in on init")
-    this.cardiologList = this._secretar.doctorListService
-    console.log(this.cardiologList)
+   
+
     this.firstFormGroup = this._formBuilder.group({
       cnp: [this._secretar.pacientService.cnp, Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
       firstName: [this._secretar.pacientService.firstName, Validators.required],
@@ -97,6 +96,11 @@ export class DialogAddPacientComponent implements OnInit {
       console.log("intra aici")
       this._secretar.addPatient(this.newPacient).subscribe({
           next: (data) => {
+            this.firstFormGroup.reset();
+            this.secondFormGroup.reset();
+            this.thirdFormGroup.reset();
+            //se intoarce cu textul save
+            this.dialogref.close("add");
           console.log("Add pacient")
           },
           error: () => {

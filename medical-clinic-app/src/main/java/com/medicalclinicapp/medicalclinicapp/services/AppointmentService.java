@@ -4,6 +4,8 @@ import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
+import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.message.StringFormattedMessage;
@@ -27,79 +29,67 @@ public class AppointmentService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private CardiologRepository cardiologRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<String> verificaDisponibilitate() {
+    public List<Cardiolog> seeAllCardiolog() {
+        List<Cardiolog> generalists = new ArrayList<>();
+        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
+            {
+                generalists.add(cardiologRepository.findAll().get(i));
+            }
+        }
+        return generalists;
+    }
+
+    public List<String> verificaDisponibilitateDoctor(String cnpD){
         List<Appointment> appointmentList = appointmentRepository.findAll();
         List<String> newAppointment = new ArrayList<>();
         Collections.sort(appointmentList);
-        System.out.println("Appointment list =>");
-        System.out.println(appointmentList);
         long count = 0;
         for (int i = 0; i < appointmentList.size() - 1; i++) {
-            if (appointmentList.get(i).getDataA().equals(appointmentList.get(i + 1).getDataA()))
-                count += 1;
-            else {
-                count += 1;
-                if (count == 8) {
-
-                    newAppointment.add(appointmentList.get(i).getDataA());
-                } else {
-                    count = 0;
+            if(appointmentList.get(i).getCardiolog().getCnp().equals(cnpD))
+                //incepem sa calculam de  cate ori apare o zi in appointment-urile curente
+                if (appointmentList.get(i).getDataA().equals(appointmentList.get(i + 1).getDataA()))
+                    count += 1;
+                else {
+                    count += 1;
+                    if (count == 8) {
+                //Verificam ca daca o anumita data apare de 8 ori (numarul de programari posibile intr-o zi)
+                        newAppointment.add(appointmentList.get(i).getDataA());
+                    } else {
+                        count = 0;
+                    }
                 }
-            }
         }
-        System.out.println("Data block");
-        System.out.println(newAppointment);
+
         return newAppointment;
     }
-
-    public List<String> verificaHours(String dataD) {
-        System.out.println("intra aici");
+    public List<String> verificaHoursDoctor(String cnpC, String dataD) {
         List<Appointment> appointmentList = appointmentRepository.findAll();
         List<String> allHours = new ArrayList<>(Arrays.asList("09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00"));
-
+        System.out.println(appointmentList);
         for (int i = 0; i < appointmentList.size(); i++) {
             {
+                System.out.println(appointmentList.get(i).getCardiolog());
+                System.out.println(appointmentList.get(i).getCardiolog().getCnp());
+                if(appointmentList.get(i).getCardiolog().getCnp().equals(cnpC))
+                    if (appointmentList.get(i).getDataA().equals(dataD)) {
 
-                System.out.println(appointmentList.get(i).getDataA());
-                System.out.println(dataD);
-                if (appointmentList.get(i).getDataA().equals(dataD)) {
+                        String hourD = appointmentList.get(i).getHour();
 
-                    String hourD = appointmentList.get(i).getHour();
-                    System.out.println("Hour block =>");
-                    System.out.println(hourD);
-                    System.out.println(allHours);
-                    allHours.remove(hourD);
-                }
+                        allHours.remove(hourD);
+                    }
             }
         }
         System.out.println("all hours");
         System.out.println(allHours);
         return allHours;
     }
-    public Patient addPatient(Patient patient) {
-        if (patientRepository.existsByCnp(patient.getCnp())) {
-            //pacientul exista
-            return null;
 
-        }
-        String parola = "parola";
-        patient.setPassword(bCryptPasswordEncoder.encode(parola));
-        String emailtext;
-        emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() + ",\n\nIti multumim ca ai apelat la serviciile noastre." +
-                "Pentru a avea acces la toate informatiile despre investigatiile facute in cadrul acestei clinici te invitam sa accesezi contul creat automat pentru tine. Un nou cont bazat pe CNPul dumneavoastra a fost creat."
-                + "\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
-                "\n\tParola: " + parola + "\n\n" +
-                "Pentru orice nelamurire va stam la dispozitie.";
-
-        emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);
-        patient.setRole("PACIENT");
-        patientRepository.save(patient);
-        return patient;
-    }
-    public Appointment addAppointment(Appointment appointment) {
+    public Appointment addAppointment(String cnpC, Appointment appointment) {
         System.out.println("Add appointment");
         String emailtext;
         emailtext = "Buna ziua, \n" +
@@ -112,6 +102,15 @@ public class AppointmentService {
             {   System.out.println(patientRepository.findAll().get(i));
                 appointment.setPatient(patientRepository.findAll().get(i));
 
+            }
+        }
+        for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
+            if(cardiologRepository.findAll().get(i).getCnp().equals(cnpC))
+            {
+                System.out.println(cardiologRepository.findAll().get(i).getCnp());
+                System.out.println(cardiologRepository.findAll().get(i).getFirstName());
+                appointment.setCardiolog(cardiologRepository.findAll().get(i));
+                break;
             }
         }
         appointmentRepository.save(appointment);

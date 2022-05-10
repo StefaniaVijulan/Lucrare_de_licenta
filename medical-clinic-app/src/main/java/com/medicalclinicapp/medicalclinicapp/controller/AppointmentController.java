@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.services.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,22 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping("/blockDate")
-    public List<String> verificaDispDate(){
-        return appointmentService.verificaDisponibilitate();
+    @GetMapping("/allCardiolog")
+    public List<Cardiolog> getAllCardiolog(){
+        return appointmentService.seeAllCardiolog();
     }
-    @GetMapping("/checkAvailabilityHour")
-    public List<String> verificaDispHour(@RequestParam("date")String data){
+    @GetMapping("/blockDateForCardio")
+    public List<String> verificaDispDateCardio(@RequestParam (value = "cnpC") String cnpC){
+        return appointmentService.verificaDisponibilitateDoctor(cnpC);
+    }
+    @GetMapping("/checkAvailabilityHourCardio")
+    public List<String> verificaDispHourCardio(@RequestParam(value = "cnpC") String cnpC,@RequestParam("date")String data){
         System.out.println("Inta in controller");
-        return appointmentService.verificaHours(data);
+        return appointmentService.verificaHoursDoctor(cnpC, data);
     }
     @PostMapping("/addAppointment")
-    public Appointment addAppointment(@RequestBody Appointment appointment){
-        return appointmentService.addAppointment(appointment);
+    public Appointment addAppointment(@RequestParam (value = "cnpC")String cnpC, @RequestBody Appointment appointment){
+        return appointmentService.addAppointment(cnpC, appointment);
     }
     @DeleteMapping("/deleteAppointment")
     public Appointment deleteAppointment(@RequestParam(value = "idA")Long idA){

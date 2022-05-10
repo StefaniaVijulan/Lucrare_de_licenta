@@ -53,10 +53,6 @@ public class SecretaryService {
                 Date currentD;
                 currentD = new Date();
                 boolean stare = (sdf.parse(appointmentRepository.findAll().get(i).getDataA())).before(currentD);
-                System.out.println("Viitoare");
-                System.out.println(stare);
-                System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
-                System.out.println(currentD);
                 if (!stare) {
                     appointmentList.add(appointmentRepository.findAll().get(i));
                 }
@@ -156,6 +152,8 @@ public class SecretaryService {
         fisaPatientRepository.save(fisa);
         return fisa;
     }
+
+
 }
     /*
         public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){

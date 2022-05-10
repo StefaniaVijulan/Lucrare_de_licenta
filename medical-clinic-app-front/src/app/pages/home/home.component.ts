@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(public _moderator:AuthService) { }
 
   ngOnInit() {
-    this._moderator.logoutUser()
+   
   }
 
 }

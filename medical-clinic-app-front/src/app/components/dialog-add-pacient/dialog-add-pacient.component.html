@@ -138,14 +138,7 @@
             <mat-option value="neasigurat">Neasigurat</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Cardiolog</mat-label>
-          <mat-select [(ngModel)]="selectedCardio" name="food">
-            <mat-option *ngFor="let food of cardiologList" [value]="food.cnp">
-              {{food.firstName}} {{food.lastName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        
         <div class="example-button-row">
           <button [disabled]="thirdForm.form.invalid"  class="button-second-2" color="primary" mat-raised-button matStepperNext (click) = "addPacient()">Next</button>
         </div>
@@ -155,5 +148,14 @@
     </mat-step>
   </mat-horizontal-stepper></div>
   <div *ngIf="this._secretar.existaPacient">
-    <p>Exista cont pentru acest pacient!</p>
+    
+    <p style="text-align: center;font-size: 1.2rem;">Exista cont pentru acest pacient!</p>
+    <br>
+    <div mat-dialog-actions style="margin-top: -3vh;" [align]="'center'">
+      <button mat-dialog-close mat-button class="btn" color="primary">
+        <mat-icon>
+          close
+        </mat-icon>
+      </button>
+    </div>
   </div>

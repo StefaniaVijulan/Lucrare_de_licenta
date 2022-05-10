@@ -14,13 +14,8 @@ export class DialogAppointmentSuccessComponent implements OnInit {
   constructor(  private _appointment: AppointmentService,) { }
 
   ngOnInit() {
-    this.validationDate()
+   // this.validationDate()
   }
-  validationDate(){
-    this._appointment.getDataBlock().subscribe((res)=>{
-      this.blockedData = res
-      console.log(res)
-    })
-  }
+  
 
 }

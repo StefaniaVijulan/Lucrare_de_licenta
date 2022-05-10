@@ -36,12 +36,20 @@
             Numarul de telefon nu este valid
         </mat-error>-->
         </mat-form-field><br></form>
-        <mat-form-field class="example-full-width">
-          <input matInput [matDatepickerFilter]="myFilter" [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dataP" (dateChange)="hourCheck()">
+        <mat-form-field appearance="fill">
+          <mat-label>Cardiolog</mat-label>
+          <mat-select [(ngModel)]="selectedCardio" name="food">
+            <mat-option *ngFor="let food of cardiologList" [value]="food.cnp">
+              {{food.firstName}} {{food.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="selectedCardio" class="example-full-width">
+          <input matInput [matDatepickerFilter]="myFilter" [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker ></mat-datepicker>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field *ngIf="dateP" appearance="fill">
           <mat-label>Alege ora</mat-label>
           <mat-select  [(ngModel)]="hourP" name="hourP" required>
             <mat-option>--</mat-option>

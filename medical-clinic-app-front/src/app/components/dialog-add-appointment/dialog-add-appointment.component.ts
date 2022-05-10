@@ -26,9 +26,13 @@ export class DialogAddAppointmentComponent implements OnInit {
   private luna: string
   appointment: Appointment = new Appointment();
   firstFormGroup!: FormGroup;
+  selectedCardio: any;
+  cardiologList: any;
   constructor(private _formBuilder: FormBuilder, private _http: HttpClient, private dialog: MatDialog, private _appointment: AppointmentService, private dialogref: MatDialogRef < DialogAddAppointmentComponent >) { }
 
   ngOnInit() {
+    console.log("Intra in on init")
+    this.cardiologList = this._appointment.doctorListService
     this.validationDate()
     this.firstFormGroup = this._formBuilder.group({
       cnp: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
@@ -46,7 +50,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   };
 
   validationDate(){
-    this._appointment.getDataBlock().subscribe((res)=>{
+    this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
       console.log(res)
       this.blockedData = new Array();
       for(let dat in res){
@@ -75,7 +79,7 @@ export class DialogAddAppointmentComponent implements OnInit {
      }
      this.dataEdit = this.ziua +"-"+ this.luna + "-"+formatedDate.split(",")[0].split("/")[2]
      console.log(this.dataEdit)
-     this._appointment.getValidationData(this.dataEdit).subscribe((res)=>{
+     this._appointment.getValidationData(this.selectedCardio, this.dataEdit).subscribe((res)=>{
        this.hourInterval = res
        console.log(res)
      })
@@ -91,8 +95,10 @@ export class DialogAddAppointmentComponent implements OnInit {
   }
   addAppointment(){
     this.setAppointment()
+    console.log("selectedCardio")
+    console.log(this.selectedCardio)
     console.log(this.appointment)
-    return this._appointment.addAppointment(this.appointment).subscribe((res)=>{
+    return this._appointment.addAppointment(this.selectedCardio,this.appointment).subscribe((res)=>{
       console.log(res)
       this.dialogref.close("save");
       this.dialog.open(DialogAppointmentSuccessComponent,{

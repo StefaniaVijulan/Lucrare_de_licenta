@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class AppointmentService {
-
+  doctorListService: any;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
@@ -19,14 +19,18 @@ export class AppointmentService {
   };
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
 
-  getDataBlock(): Observable<any>{
-    return this._http.get(this.baseUrl + '/blockDate');
+  getDataBlock(cnpC: string): Observable<any>{
+    return this._http.get(this.baseUrl + '/blockDateForCardio?cnpC=' + cnpC );
   }
-  getValidationData(element: string){
-    console.log(element)
-    return this._http.get(this.baseUrl + '/checkAvailabilityHour?date=' + element);
+  getValidationData(cnpC: string, element: string){
+    return this._http.get(this.baseUrl + '/checkAvailabilityHourCardio?cnpC=' + cnpC + '&date=' + element);
   }
-  addAppointment(element: Appointment){
-    return this._http.post(this.baseUrl + '/addAppointment', element);
+  addAppointment(cnpC: string, element: Appointment){
+    return this._http.post(this.baseUrl + '/addAppointment?cnpC='+cnpC, element);
   }
+  allCardiolog(){
+    console.log("intra ins ervice")
+    return this._http.get(this.baseUrl + '/allCardiolog')
+  }
+
 }

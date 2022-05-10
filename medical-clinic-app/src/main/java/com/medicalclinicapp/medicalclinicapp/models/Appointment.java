@@ -33,7 +33,7 @@ public class Appointment implements Comparable<Appointment> {
 
     @OneToOne
     private Cardiolog cardiolog;
-    
+
     @Override
     public int compareTo(Appointment o) {
         return this.getDataA().compareTo(o.getDataA());
