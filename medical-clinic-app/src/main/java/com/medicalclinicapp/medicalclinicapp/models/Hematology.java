@@ -1,13 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Hematolog;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
 /*
 @Entity
 @Getter
@@ -15,7 +7,7 @@ import javax.persistence.*;
 @ToString
 @RequiredArgsConstructor
 @Table(name = "hematology")*/
-public class Hematology extends Consultation{
+public class Hematology {
 
    /* @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore

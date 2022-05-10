@@ -39,6 +39,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DialogAddAppointmentComponent } from './components/dialog-add-appointment/dialog-add-appointment.component';
 import { DialogAppointmentSuccessComponent } from './components/dialog-appointment-success/dialog-appointment-success.component';
 import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doctor-programari.component';
+import { DialogEditFisaComponent } from './components/dialog-edit-fisa/dialog-edit-fisa.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doct
     DialogAddAppointmentComponent,
     DialogAppointmentSuccessComponent,
     DoctorProgramariComponent,
+    DialogEditFisaComponent,
   
   ],
   imports: [
@@ -107,7 +109,8 @@ import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doct
      DialogAddPacientComponent,
      DialogMoreInfoPacientComponent,
      DialogAddAppointmentComponent,
-     DialogAppointmentSuccessComponent
+     DialogAppointmentSuccessComponent,
+     DialogEditFisaComponent
     ],
     
   providers: [],

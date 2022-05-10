@@ -1,8 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.models;
 
-import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
-import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Getter

@@ -1,51 +1,84 @@
-<h5 style="text-align: center; "><b>{{hospitalizationInfo?.patient.firstName}} {{hospitalizationInfo?.patient.dadLetterPatient}} {{hospitalizationInfo?.patient.lastName}}</b></h5>
-<mat-dialog-content>
-<div>
-    <p><i>Date contact</i></p>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Telefon: {{hospitalizationInfo?.patient.numberUser}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Email: {{hospitalizationInfo?.patient.emailUser}}</span><br>
-  </div>
-<br>
-<div>
-  <p><i>Informatii despre internare</i></p>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Medic curant: {{hospitalizationInfo?.cardiolog.lastName}} {{hospitalizationInfo?.cardiolog.firstName}} </span><br>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Data internarii: {{hospitalizationInfo?.startDateHospitalization.split(" ")[0]}}</span><br>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Ora internarii: {{hospitalizationInfo?.startDateHospitalization.split(" ")[1]}} {{hospitalizationInfo?.startDateHospitalization.split(" ")[2]}}</span><br>
- <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Data externarii: {{dataEnd}}</span><br>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Ora externarii: {{oraEnd}}</span><br>
-  <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-    class="aligned-with-icon">Numar de zile spitalizare: {{nrH}}</span>
-</div>
-<br>
-<div>
-    <p><i>Informatii despre patient</i></p>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">CNP: {{hospitalizationInfo?.patient.cnp}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Seria: {{hospitalizationInfo?.patient.seriesPatient}}, nr. {{hospitalizationInfo?.patient.numberPatient}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Adresa: str. {{hospitalizationInfo?.patient.streetPatient}}, nr. {{hospitalizationInfo?.patient.noPatient}}, loc. {{hospitalizationInfo?.patient.cityPatient}}, jud.  {{hospitalizationInfo?.patient.townPatient}}, mediul  {{hospitalizationInfo?.patient.placePatient}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Cetatenie: {{hospitalizationInfo?.patient.citizenshipPatient}}</span><br>
+<h5 style="text-align: center; "><b>{{fisaInfo?.patient.firstName}} {{fisaInfo?.patient.dadLetterPatient}}
+    {{fisaInfo?.patient.lastName}}</b></h5>
 
+<mat-dialog-content>
+  <mat-vertical-stepper orientation="vertical">
+    <ng-template matStepperIcon="edit">
+      <mat-icon>done</mat-icon>
+    </ng-template>
+    <mat-step>
+      <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
       <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Stare job: {{hospitalizationInfo?.patient.jobPatient}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Grupa sange: {{grupaSange}}, RH {{rhSange}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Asigurare: {{asigurare}}</span><br>
-    <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-      class="aligned-with-icon">Alergii: {{hospitalizationInfo?.patient.allergyPatient}}</span><br>
-  </div>
+        class="aligned-with-icon"><ins>CNP</ins>: {{fisaInfo?.patient.cnp}}</span><br>
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+        class="aligned-with-icon"><ins>Seria</ins>: {{fisaInfo?.patient.seriesPatient}}, nr.
+        {{fisaInfo?.patient.numberPatient}}</span><br>
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+        class="aligned-with-icon"><ins>Cetatenie</ins>: {{fisaInfo?.patient.citizenshipPatient}}</span><br>
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+        class="aligned-with-icon"><ins>Alergii</ins>: {{fisaInfo?.allergyPatient}}</span><br>
+
+      <mat-icon *ngIf="fisaInfo?.bloodTypePatient" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.bloodTypePatient" class="aligned-with-icon"> <ins>Grupa de sange</ins>:
+        {{fisaInfo?.bloodTypePatient}}, Rh: {{fisaInfo?.rhPatient}}</span><br>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Anamneza</ng-template>
+      <mat-icon *ngIf="fisaInfo?.familyHistory" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.familyHistory" class="aligned-with-icon"><ins>Istoric medical</ins>:
+        {{fisaInfo?.familyHistory}} <br></span>
+      <mat-icon *ngIf="fisaInfo?.personalHistory" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.personalHistory" class="aligned-with-icon"><ins>Antecendente personale,
+          fiziologice si patologice</ins>:
+        {{fisaInfo?.personalHistory}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.lifeAndWorkConditional" class="icon-display" matListIcon inline=true>
+        fiber_manual_record</mat-icon><span *ngIf="fisaInfo?.lifeAndWorkConditional"
+        class="aligned-with-icon"><ins>Conditii de viata si munca</ins>:
+        {{fisaInfo?.lifeAndWorkConditional}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.behavior" class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon>
+      <span *ngIf="fisaInfo?.behavior" class="aligned-with-icon"><ins>Comportament (fumator, alooclic)</ins>:
+        {{fisaInfo?.behavior}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.pillsHistory" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.pillsHistory" class="aligned-with-icon"><ins>Medicatie</ins>:
+        {{fisaInfo?.pillsHistory}}<br></span>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Examen obiectiv</ng-template>
+      <mat-icon *ngIf="fisaInfo?.generalCondition" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.generalCondition" class="aligned-with-icon"><ins>Stare generala</ins>:
+        {{fisaInfo?.generalCondition}} <br></span>
+      <mat-icon *ngIf="fisaInfo?.waist" class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon>
+      <span *ngIf="fisaInfo?.waist" class="aligned-with-icon"><ins>Greutate</ins>:
+        {{fisaInfo?.waist}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.weight" class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon>
+      <span *ngIf="fisaInfo?.weight" class="aligned-with-icon"><ins>Talie</ins>:
+        {{fisaInfo?.weight}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.nutritionalStatus" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.nutritionalStatus" class="aligned-with-icon"><ins>Starea de nutritie</ins>:
+        {{fisaInfo?.nutritionalStatus}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.ganglionSystem" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.ganglionSystem" class="aligned-with-icon"><ins>Sistemul ganglionar</ins>:
+        {{fisaInfo?.ganglionSystem}}<br></span>
+      <mat-icon *ngIf="fisaInfo?.connectiveTissue" class="icon-display" matListIcon inline=true>fiber_manual_record
+      </mat-icon><span *ngIf="fisaInfo?.connectiveTissue" class="aligned-with-icon"><ins>Tesutul conjunctiv</ins>:
+        {{fisaInfo?.connectiveTissue}}<br></span>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Aparatul cardivascular</ng-template>
+      <span class="aligned-with-icon"> {{fisaInfo?.cardiovascularSystem}}</span><br>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Date contact</ng-template>
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+        class="aligned-with-icon"><ins>Telefon</ins>: {{fisaInfo?.patient.numberUser}}</span><br>
+      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
+        class="aligned-with-icon"><ins>Email</ins>: {{fisaInfo?.patient.emailUser}}</span><br>
+    </mat-step>
+  </mat-vertical-stepper>
 </mat-dialog-content>
 
 <div mat-dialog-actions [align]="'end'">
-  <button color="primary" mat-raised-button  mat-dialog-close >Cancel</button>
-  </div>
+  <button color="primary" mat-raised-button (click)="openDialog()">Edit</button>
+  <button color="primary" mat-raised-button mat-dialog-close>Cancel</button>
+</div>

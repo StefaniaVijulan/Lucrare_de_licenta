@@ -1,0 +1,113 @@
+<p>Informatii pacient</p>
+<mat-dialog-content>
+  <mat-vertical-stepper orientation="vertical">
+    <ng-template matStepperIcon="edit">
+        <mat-icon>done</mat-icon>
+      </ng-template> 
+    <mat-step> <form [formGroup]="formG">
+      <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
+      <mat-form-field style="width: 96%" appearance="fill">
+        <mat-label>CNP</mat-label>
+        <input matInput disabled formControlName="cnp" >
+      </mat-form-field>
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Prenume</mat-label>
+          <input matInput disabled formControlName="firstName" >
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nume</mat-label>
+          <input matInput disabled formControlName="lastName" >
+        </mat-form-field></td>
+      </tr></table>
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Grupa de sange</mat-label>
+          <input matInput formControlName="bloodTypePatient" >
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Rh</mat-label>
+          <input matInput formControlName="rhPatient" >
+        </mat-form-field></td>
+      </tr></table>
+      <mat-form-field style="width: 96%"  appearance="fill">
+        <mat-label>Alergii</mat-label>
+        <textarea matInput formControlName="allergyPatient" ></textarea>
+      </mat-form-field>
+    </form></mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Anamneza</ng-template>
+      <form [formGroup]="formG2">
+        <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
+        <mat-form-field style="width: 96%" appearance="fill">
+          <mat-label>Istoric medical</mat-label>
+          <textarea matInput disabled formControlName="familyHistory" ></textarea>
+        </mat-form-field>
+        <mat-form-field style="width: 96%"  appearance="fill">
+          <mat-label>Antecendente personale, fiziologice si patologice</mat-label>
+          <textarea matInput formControlName="personalHistory" ></textarea>
+        </mat-form-field>
+        <mat-form-field style="width: 96%" appearance="fill">
+            <mat-label>Conditii de viata si munca</mat-label>
+            <textarea matInput disabled formControlName="lifeAndWorkConditional" ></textarea>
+          </mat-form-field>
+          <mat-form-field style="width: 96%"  appearance="fill">
+            <mat-label>Comportament (fumator, alooclic)</mat-label>
+            <textarea matInput formControlName="behavior" ></textarea>
+          </mat-form-field>
+          <mat-form-field style="width: 96%"  appearance="fill">
+            <mat-label>Medicatie</mat-label>
+            <textarea matInput formControlName="pillsHistory" ></textarea>
+          </mat-form-field>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Examen obiectiv</ng-template>
+      <form [formGroup]="formG3">
+        <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
+        <mat-form-field style="width: 96%" appearance="fill">
+          <mat-label>Stare generala</mat-label>
+          <textarea matInput formControlName="generalCondition" ></textarea>
+        </mat-form-field>
+        <table class="example-full-width" cellspacing="0"><tr>
+            <td><mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Greutate</mat-label>
+              <input matInput formControlName="waist" >
+            </mat-form-field></td>
+            <td><mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Talie</mat-label>
+              <input matInput formControlName="weight" >
+            </mat-form-field></td>
+          </tr></table>
+        <mat-form-field style="width: 96%"  appearance="fill">
+          <mat-label>Starea de nutritie</mat-label>
+          <textarea matInput formControlName="nutritionalStatus" ></textarea>
+        </mat-form-field>
+        <mat-form-field style="width: 96%" appearance="fill">
+            <mat-label>Sistemul ganglionar</mat-label>
+            <textarea matInput formControlName="ganglionSystem" ></textarea>
+          </mat-form-field>
+          <mat-form-field style="width: 96%"  appearance="fill">
+            <mat-label>Tesutul conjunctiv</mat-label>
+            <textarea matInput formControlName="connectiveTissue" ></textarea>
+          </mat-form-field>
+          
+      </form>
+     
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Aparatul cardiovascular</ng-template>
+      <form [formGroup]="formG4">
+        <mat-form-field style="width: 96%" appearance="fill">
+            <textarea matInput formControlName="cardiovascularSystem" ></textarea>
+        </mat-form-field>
+      </form>
+    </mat-step>
+
+  </mat-vertical-stepper>
+</mat-dialog-content>
+
+<div mat-dialog-actions [align]="'end'">
+  <button color="primary" mat-raised-button (click)= "editFisaPatient()">Edit</button>
+  <button color="primary" mat-raised-button mat-dialog-close>Cancel</button>
+</div>

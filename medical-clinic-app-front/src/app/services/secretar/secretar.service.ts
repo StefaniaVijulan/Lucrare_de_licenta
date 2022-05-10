@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
 import { StringifyOptions } from 'querystring';
+import { FisaPatient } from 'src/app/interfaces/fisaPatient';
 
 
 @Injectable({
@@ -22,7 +23,8 @@ export class SecretarService {
   doctor: Cardiolog;
   cnpP: string;
 
-  pacientService: Patient =  new Patient();;
+  fisaService: FisaPatient= new FisaPatient();
+  pacientService: Patient =  new Patient();
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
@@ -55,6 +57,11 @@ export class SecretarService {
     return this._http.get(this.baseUrl + '/secretary/checkPatient?cnp='+cnp, this.publicHttpHeaders)
   }
 
+
+  addFisa(cnpP: string){
+
+    return this._http.post<any>(this.baseUrl + '/secretary/addFisa?cnpP=' + cnpP, this.fisaService, this.publicHttpHeaders);
+  }
 
 
   seePacient(){

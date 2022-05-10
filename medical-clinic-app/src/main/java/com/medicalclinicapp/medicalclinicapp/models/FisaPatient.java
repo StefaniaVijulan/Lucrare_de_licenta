@@ -32,11 +32,13 @@ public class FisaPatient {
     private String generalCondition;
     private String waist;
     private String weight;
+    private String nutritionalStatus;
+    private String ganglionSystem;
+    private String connectiveTissue;
 
-
-    //doctorul de familie
-    private String presumptiveDiagnostic;
+    private String cardiovascularSystem;
 
     @OneToOne
     private Patient patient;
+
 }

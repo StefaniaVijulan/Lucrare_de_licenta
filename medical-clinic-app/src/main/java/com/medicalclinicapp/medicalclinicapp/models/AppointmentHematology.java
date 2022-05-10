@@ -10,27 +10,23 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-/*
+
 @Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="appointmentHematology")*/
+@Table(name="appointmentHematology")
 public class AppointmentHematology {
-  /*  @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinColumn(name = "cardiolog_cnp", referencedColumnName = "cnp")
-    private Cardiolog cardiolog;
-
-    @OneToOne(mappedBy = "appointmentHematology")
-    private Hematology hematology;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String dataAppointmentHematology;
+    private String hourAppointmentHematology;
+
     //Analize de sange
-    private Date dataAppointment;
     private Number hourAppointment;
     private Number minAppointment;
     private Boolean colesterol_seric_total;
@@ -51,5 +47,12 @@ public class AppointmentHematology {
     private Boolean hemoleucograma_completa;
     private Boolean t3;
     private Boolean t4;
-    private Boolean tsh;*/
+    private Boolean tsh;
+
+    @OneToOne
+    private Cardiolog cardiolog;
+
+    @OneToOne
+    private Patient patient;
+
 }

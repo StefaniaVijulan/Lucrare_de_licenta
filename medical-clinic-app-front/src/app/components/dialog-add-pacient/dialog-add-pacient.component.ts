@@ -96,11 +96,15 @@ export class DialogAddPacientComponent implements OnInit {
       console.log("intra aici")
       this._secretar.addPatient(this.newPacient).subscribe({
           next: (data) => {
-            this.firstFormGroup.reset();
-            this.secondFormGroup.reset();
-            this.thirdFormGroup.reset();
-            //se intoarce cu textul save
-            this.dialogref.close("add");
+            this._secretar.addFisa(this.newPacient.cnp).subscribe((res)=>{
+              this.firstFormGroup.reset();
+              this.secondFormGroup.reset();
+              this.thirdFormGroup.reset();
+              //se intoarce cu textul save
+              this.dialogref.close("add");
+              console.log("add fisa")
+            })
+
           console.log("Add pacient")
           },
           error: () => {

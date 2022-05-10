@@ -1,16 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.medicalclinicapp.medicalclinicapp.security.models.Hematolog;
-import com.medicalclinicapp.medicalclinicapp.security.models.Imagist;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.util.Date;
 /*
 @Entity
 @Getter
@@ -18,7 +8,7 @@ import java.util.Date;
 @ToString
 @RequiredArgsConstructor
 @Table(name = "radiology")*/
-public class Radiology extends Consultation{
+public class Radiology {
 /*
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore

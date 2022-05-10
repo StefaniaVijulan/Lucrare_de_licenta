@@ -1,8 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
-import com.medicalclinicapp.medicalclinicapp.models.Hospitalization;
-
-import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;

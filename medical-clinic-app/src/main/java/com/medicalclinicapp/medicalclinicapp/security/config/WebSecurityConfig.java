@@ -84,19 +84,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/checkPatient",
                         "/secretary/addFisa",
                         "/secretary/specificD",
-                        "/hospitalizationChangeEndData{registrationNoHospitalization}",
-                        "/hospitalizationChangeNumberOfHospitalization{registrationNoHospitalization}",
-                        "/secretary/allHospitalization",
                         "/secretary/allDoctors",
                         "/secretary/allPatients",
-                        "/secretary/editHospitalization",
                         "/secretary/infoPatient",
                         "/secretary/afisare",
-                        "/secretary/infoHospitalization",
                         "/secretary/specificP",
                         "/secretary/deletePatient").hasAuthority("SECRETAR")
-                .antMatchers("/curant/addAppointmentHematology",
-                "/curant/addAppointmentRadiology").hasAuthority("CARDIOLOG")
+                .antMatchers("/cardiolog/allSpecificAppointment",
+                        "/cardiolog/editFisaP",
+                        "/deleteFisa","/cardiolog/specificFisa"
+                        ).hasAuthority("CARDIOLOG")
 
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
