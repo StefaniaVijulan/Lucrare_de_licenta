@@ -5,6 +5,7 @@ import { timeStamp } from 'console';
 import { DoctorService } from 'src/app/services/doctor/doctor.service';
 
 import {  SecretarService} from 'src/app/services/secretar/secretar.service';
+import { DialogAddAppointmentsHrComponent } from '../dialog-add-appointments-hr/dialog-add-appointments-hr.component';
 import { DialogEditFisaComponent } from '../dialog-edit-fisa/dialog-edit-fisa.component';
 
 @Component({
@@ -43,7 +44,12 @@ export class DialogMoreInfoPacientComponent implements OnInit {
     this.dialog.open(DialogEditFisaComponent,{
      width: '30%'
     })}
-
+  openAppointmentsDialog(){
+      this.dialogref.close("addAppointments");
+      this.dialog.open(DialogAddAppointmentsHrComponent,{
+       width: '30%'
+      })}
+  
 
 
 }

@@ -1,0 +1,97 @@
+<p>dialog-add-appointments-hematology works!</p>
+<mat-vertical-stepper orientation="vertical">
+  <ng-template matStepperIcon="edit">
+    <mat-icon>done</mat-icon>
+  </ng-template>
+
+  <mat-step>
+    <ng-template matStepLabel>Selectează analizele dorite</ng-template>
+    <mat-dialog-content>
+      <section class="programare" [formGroup]="appointmentHematolohy">
+        <p>
+          <mat-checkbox formControlName="colesterol_seric_total">Colesterol seric total</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="hemoleucograma_completa">Hemoleucograma completa</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="trigliceride_serice">Trigliceride serice</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="inr_cu_interpretare">INR cu interpretare</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="calciu_ionic_seric">Calciu ionic seric</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="calciu_seric_total">Calciu seric total</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="creatina_serica">Creatina serica</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="magneziu_seric">Magneziu seric</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="hdl_colesterol">HDL colesterol</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="ldl_colesterol">LDL colesterol</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="potasiu_seric">Potasiu seric</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="uree_serica">Uree serica</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="acid_uric">Acid uric</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="glicemie">Glicemie</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="tgo">TGO</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="tgp">TGP</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="t3">T3</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="t4">T4</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="tsh">THS</mat-checkbox>
+        </p>
+
+
+      </section>
+    </mat-dialog-content>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Anamneza</ng-template>
+    <mat-form-field class="example-full-width">
+        <input matInput [matDatepickerFilter]="myFilter" [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field *ngIf="dateP" appearance="fill">
+        <mat-label>Alege ora</mat-label>
+        <mat-select  [(ngModel)]="hourP" name="hourP" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let hour of hourInterval" [value]="hour">
+            {{hour}}
+          </mat-option>
+        </mat-select>
+       
+      </mat-form-field>
+
+  </mat-step>
+
+</mat-vertical-stepper>
+<div mat-dialog-actions [align]="'center'">
+    <button color="primary" *ngIf= "_doctor.appointmensRadio == true" mat-raised-button (click)= "openAddRadiology()">Programare radiologie</button>
+    <button color="primary" *ngIf= "_doctor.appointmensRadio != true" mat-raised-button mat-dialog-close (click) = "addHematologyAppointment()">Programeaza</button>
+  </div>

@@ -17,7 +17,7 @@ import java.util.Date;
 @ToString
 @RequiredArgsConstructor
 @Table(name="appointmentHematology")
-public class AppointmentHematology {
+public class AppointmentHematology implements Comparable<AppointmentHematology> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,6 @@ public class AppointmentHematology {
     private String hourAppointmentHematology;
 
     //Analize de sange
-    private Number hourAppointment;
-    private Number minAppointment;
     private Boolean colesterol_seric_total;
     private Boolean hdl_colesterol;
     private Boolean ldl_colesterol;
@@ -50,9 +48,11 @@ public class AppointmentHematology {
     private Boolean tsh;
 
     @OneToOne
-    private Cardiolog cardiolog;
-
-    @OneToOne
     private Patient patient;
 
+
+    @Override
+    public int compareTo(AppointmentHematology o) {
+        return this.getDataAppointmentHematology().compareTo(o.getDataAppointmentHematology());
+    }
 }

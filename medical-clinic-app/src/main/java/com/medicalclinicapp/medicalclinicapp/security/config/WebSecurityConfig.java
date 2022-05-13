@@ -92,8 +92,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/deletePatient").hasAuthority("SECRETAR")
                 .antMatchers("/cardiolog/allSpecificAppointment",
                         "/cardiolog/editFisaP",
-                        "/deleteFisa","/cardiolog/specificFisa"
+                        "/deleteFisa",
+                        "/cardiolog/specificFisa",
+                        "/cardiolog/addAppointmentHematology",
+                        "/cardiolog/addAppointmentRadiology"
                         ).hasAuthority("CARDIOLOG")
+                .antMatchers("/hematolog/allAppointmentHematology",
+                        "/hematolog/allTodayAppointmentHematology").hasAuthority("HEMATOLOG")
+                .antMatchers("/imagist/allAppointmentRadiology",
+                        "/imagist/allTodayAppointmentRadiology").hasAuthority("IMAGIST")
 
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()

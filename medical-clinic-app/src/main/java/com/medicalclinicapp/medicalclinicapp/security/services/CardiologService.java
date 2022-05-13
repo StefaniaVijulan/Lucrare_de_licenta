@@ -2,8 +2,7 @@ package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.*;
 
-import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
-import com.medicalclinicapp.medicalclinicapp.repository.FisaPatientRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.*;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.CardiologRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,7 +23,17 @@ public class CardiologService {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
+    private AppointmentHematologyRepository appointmentHematologyRepository;
+
+    @Autowired
+    private AppointmentRadiologyRepository appointmentRadiologyRepository;
+
+    @Autowired
     private FisaPatientRepository fisaPatientRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
+
 
     public List<Appointment> getAllSpecificAppointment(String cnp){
         List<Appointment> appointmentList = new ArrayList<>();
@@ -64,29 +75,7 @@ public class CardiologService {
                 break;
             }
         }
-       /* fisaPatient1.setBloodTypePatient(fisaPatient.getBloodTypePatient());
-        fisaPatient1.setRhPatient(fisaPatient.getRhPatient());
-        fisaPatient1.setAllergyPatient(fisaPatient.getAllergyPatient());
 
-        //Anamneza
-        fisaPatient1.setFamilyHistory(fisaPatient.getFamilyHistory());
-        fisaPatient1.setPersonalHistory(fisaPatient.getPersonalHistory());
-        fisaPatient1.setLifeAndWorkConditional(fisaPatient.getLifeAndWorkConditional());
-        fisaPatient1.setBehavior(fisaPatient.getBehavior());
-        fisaPatient1.setPillsHistory(fisaPatient.getPillsHistory());
-
-       //Examen obiectiv
-        fisaPatient1.setGeneralCondition(fisaPatient.getGeneralCondition());
-        fisaPatient1.setWaist(fisaPatient.getWaist());
-        fisaPatient1.setWeight(fisaPatient.getWeight());
-        fisaPatient1.setNutritionalStatus(fisaPatient.getNutritionalStatus());
-        fisaPatient1.setGanglionSystem(fisaPatient.getGanglionSystem());
-        fisaPatient1.setConnectiveTissue(fisaPatient.getConnectiveTissue());
-
-        fisaPatient1.setCardiovascularSystem(fisaPatient.getCardiovascularSystem());
-
-
-        fisaPatientRepository.save(fisaPatient1);*/
         return fisaPatient;
 
 
@@ -108,41 +97,120 @@ public class CardiologService {
         }
         return null;
     }
-}
-    /*
-    @Autowired
-    private AppointmentHematologyRepository appointmentHematologyRepository;
 
-    @Autowired
-    private HospitalizationRepository hospitalizationRepository;
+    public List<String> verificaDisponibilitateHematology(){
+        List<AppointmentHematology> appointmentList = appointmentHematologyRepository.findAll();
+        List<String> newAppointment = new ArrayList<>();
+        Collections.sort(appointmentList);
+        long count = 0;
+        for (int i = 0; i < appointmentList.size() - 1; i++) {
+                //incepem sa calculam de  cate ori apare o zi in appointment-urile curente
+                if (appointmentList.get(i).getDataAppointmentHematology().equals(appointmentList.get(i + 1).getDataAppointmentHematology()))
+                    count += 1;
+                else {
+                    count += 1;
+                    if (count == 8) {
+                        //Verificam ca daca o anumita data apare de 8 ori (numarul de programari posibile intr-o zi)
+                        newAppointment.add(appointmentList.get(i).getDataAppointmentHematology());
+                    } else {
+                        count = 0;
+                    }
+                }
+        }
 
-    @Autowired
-    private AppointmentRadiologyRepository appointmentRadiologyRepository;*/
-/*
-
-    public AppointmentHematology addAppointmentHematology(AppointmentHematology appointment, Principal principal) throws Exception {
-        if(appointmentHematologyRepository.existsByDataAppointment(appointment.getDataAppointment()) &&
-                appointmentHematologyRepository.existsByHourAppointment(appointment.getHourAppointment()) &&
-                appointmentHematologyRepository.existsByMinAppointment(appointment.getMinAppointment()))
-            throw new Exception("Hospitalization exist");
-        String username = principal.getName();
-        Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
-       // appointment.setCardiolog(cardiolog);
-
-        appointmentHematologyRepository.save(appointment);
-        return appointment;
+        return newAppointment;
     }
-    public AppointmentRadiology addAppointmentRadiology(AppointmentRadiology appointment, Principal principal) throws Exception {
-        if(appointmentRadiologyRepository.existsByDataAppointment(appointment.getDataAppointment()) &&
-                appointmentRadiologyRepository.existsByHourAppointment(appointment.getHourAppointment()) &&
-                appointmentRadiologyRepository.existsByMinAppointment(appointment.getMinAppointment()))
-            throw new Exception("Hospitalization exist");
-        String username = principal.getName();
-        Cardiolog cardiolog = this.cardiologRepository.findByCnp(username);
-        //appointment.setCardiolog(cardiolog);
+    public List<String> verificaHoursHematology(String dataD) {
+        List<AppointmentHematology> appointmentList = appointmentHematologyRepository.findAll();
+        List<String> allHours = new ArrayList<>(Arrays.asList("09:00","09:15","09:30","09:45",
+                "10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45",
+                "12:00","12:15","12:30","12:45","14:00","14:15","14:30","14:45",
+                "15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45",
+                "17:00","17:15","17:30","17:45","18:00"));
+        System.out.println(allHours);
+        for (int i = 0; i < appointmentList.size(); i++) {
+            {
+                if (appointmentList.get(i).getDataAppointmentHematology().equals(dataD)) {
+                    String hourD = appointmentList.get(i).getHourAppointmentHematology();
+                    allHours.remove(hourD);
+                }
+            }
+        }
+        return allHours;
+    }
 
+    public List<String> verificaDisponibilitateRadiology(){
+        List<AppointmentRadiology> appointmentList = appointmentRadiologyRepository.findAll();
+        List<String> newAppointment = new ArrayList<>();
+        Collections.sort(appointmentList);
+        long count = 0;
+        for (int i = 0; i < appointmentList.size() - 1; i++) {
+            //incepem sa calculam de  cate ori apare o zi in appointment-urile curente
+            if (appointmentList.get(i).getDataAppointmentRadiology().equals(appointmentList.get(i + 1).getDataAppointmentRadiology()))
+                count += 1;
+            else {
+                count += 1;
+                if (count == 8) {
+                    //Verificam ca daca o anumita data apare de 8 ori (numarul de programari posibile intr-o zi)
+                    newAppointment.add(appointmentList.get(i).getDataAppointmentRadiology());
+                } else {
+                    count = 0;
+                }
+            }
+        }
+
+        return newAppointment;
+    }
+    public List<String> verificaHoursRadiology(String dataD) {
+        List<AppointmentRadiology> appointmentList = appointmentRadiologyRepository.findAll();
+        List<String> allHours = new ArrayList<>(Arrays.asList("09:00","09:15","09:30","09:45",
+                "10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45",
+                "12:00","12:15","12:30","12:45","14:00","14:15","14:30","14:45",
+                "15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45",
+                "17:00","17:15","17:30","17:45","18:00"));
+        System.out.println(allHours);
+        for (int i = 0; i < appointmentList.size(); i++) {
+            {
+                if (appointmentList.get(i).getDataAppointmentRadiology().equals(dataD)) {
+                    String hourD = appointmentList.get(i).getDataAppointmentRadiology();
+                    allHours.remove(hourD);
+                }
+            }
+        }
+        return allHours;
+    }
+
+    public AppointmentHematology addAppointmentHematology(String cnpP, AppointmentHematology appointment) throws Exception {
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
+            if (patientRepository.findAll().get(i).getCnp().equals(cnpP)) {
+                appointment.setPatient(patientRepository.findAll().get(i));
+                break;
+            }
+        }
+            appointmentHematologyRepository.save(appointment);
+            return appointment;
+    }
+    public AppointmentRadiology addAppointmentRadiology(String cnpP, AppointmentRadiology appointment) throws Exception {
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
+            if (patientRepository.findAll().get(i).getCnp().equals(cnpP)) {
+                appointment.setPatient(patientRepository.findAll().get(i));
+                break;
+            }
+        }
         appointmentRadiologyRepository.save(appointment);
         return appointment;
-    }
 
-}*/
+    }
+    public String deltete(){
+        for (int i = 0; i < appointmentHematologyRepository.findAll().size(); i++) {
+
+                if (appointmentHematologyRepository.findAll().get(i).getDataAppointmentHematology() == null){
+                    appointmentHematologyRepository.delete(appointmentHematologyRepository.findAll().get(i));
+                }
+
+        }
+        return "done";
+            }
+}
+
+

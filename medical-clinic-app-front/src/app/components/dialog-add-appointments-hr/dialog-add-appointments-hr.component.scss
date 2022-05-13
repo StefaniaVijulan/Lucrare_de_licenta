@@ -1,0 +1,7 @@
+mat-checkbox{
+    margin-left: 7%;
+
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(4, 4, 185);
+  }

@@ -44,8 +44,38 @@ public class CardiologController {
     public FisaPatient getSpecificF (@RequestParam("cnpP") String cnpP){
         return cardiologService.getInfoFisa(cnpP);
     }
+    @GetMapping("/blockDateHematology")
+    public List<String> verificaDisp(){
+        return cardiologService.verificaDisponibilitateHematology();
+    }
+    @GetMapping("/checkAvailabilityHematology")
+    public List<String> verificaDispHour(@RequestParam("dateA")String data){
+        System.out.println("Inta in controller");
+        return cardiologService.verificaHoursHematology(data);
+    }
 
+    @GetMapping("/blockDateRadiology")
+    public List<String> verificaDispRad(){
+        return cardiologService.verificaDisponibilitateRadiology();
+    }
+    @GetMapping("/checkAvailabilityRadiology")
+    public List<String> verificaDispHourRad(@RequestParam("dateA")String data){
+        System.out.println("Inta in controller");
+        return cardiologService.verificaHoursRadiology(data);
+    }
 
+    @DeleteMapping("/appointmentD")
+    public String deleteA(){
+        return cardiologService.deltete();
+    }
+    @PostMapping("/cardiolog/addAppointmentHematology")
+    public AppointmentHematology addAppointment(@RequestParam (value = "cnpP")String cnpP, @RequestBody AppointmentHematology appointment) throws Exception {
+        return cardiologService.addAppointmentHematology(cnpP, appointment);
+    }
+    @PostMapping("/cardiolog/addAppointmentRadiology")
+    public AppointmentRadiology addAppointment(@RequestParam (value = "cnpP")String cnpP, @RequestBody AppointmentRadiology appointment) throws Exception {
+        return cardiologService.addAppointmentRadiology(cnpP, appointment);
+    }
 }
 
 /*

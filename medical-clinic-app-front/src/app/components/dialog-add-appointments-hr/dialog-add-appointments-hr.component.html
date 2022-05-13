@@ -1,0 +1,16 @@
+<section class="programare" [formGroup]="appointmens">
+  <h4>Selectează tipul de programare dorit</h4>
+  <p>
+    <mat-checkbox formControlName="appointmensRadiology">Imagistica</mat-checkbox>
+  </p>
+  <p>
+    <mat-checkbox formControlName="appointmensHematology">Hematologie</mat-checkbox>
+  </p>
+</section>
+<div mat-dialog-actions [align]="'end'">
+  <button color="primary" *ngIf="appointmens.get('appointmensHematology').value == true" mat-raised-button
+    (click)="addAppointmentHematology()">Adauga programare</button>
+  <button color="primary"
+    *ngIf="appointmens.get('appointmensRadiology').value == true && appointmens.get('appointmensHematology').value != true"
+    mat-raised-button (click)="openAddRadiology()">Adauga programare</button>
+</div>

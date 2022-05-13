@@ -40,6 +40,9 @@ import { DialogAddAppointmentComponent } from './components/dialog-add-appointme
 import { DialogAppointmentSuccessComponent } from './components/dialog-appointment-success/dialog-appointment-success.component';
 import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doctor-programari.component';
 import { DialogEditFisaComponent } from './components/dialog-edit-fisa/dialog-edit-fisa.component';
+import { DialogAddAppointmentsHrComponent } from './components/dialog-add-appointments-hr/dialog-add-appointments-hr.component';
+import { DialogAddAppointmentsHematologyComponent } from './components/dialog-add-appointments-hematology/dialog-add-appointments-hematology.component';
+import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add-appointments-radiology/dialog-add-appointments-radiology.component';
 
 
 @NgModule({
@@ -66,6 +69,9 @@ import { DialogEditFisaComponent } from './components/dialog-edit-fisa/dialog-ed
     DialogAppointmentSuccessComponent,
     DoctorProgramariComponent,
     DialogEditFisaComponent,
+    DialogAddAppointmentsHrComponent,
+    DialogAddAppointmentsHematologyComponent,
+    DialogAddAppointmentsRadiologyComponent,
   
   ],
   imports: [
@@ -110,7 +116,10 @@ import { DialogEditFisaComponent } from './components/dialog-edit-fisa/dialog-ed
      DialogMoreInfoPacientComponent,
      DialogAddAppointmentComponent,
      DialogAppointmentSuccessComponent,
-     DialogEditFisaComponent
+     DialogEditFisaComponent,
+     DialogAddAppointmentsHrComponent,
+     DialogAddAppointmentsHematologyComponent,
+     DialogAddAppointmentsRadiologyComponent
     ],
     
   providers: [],

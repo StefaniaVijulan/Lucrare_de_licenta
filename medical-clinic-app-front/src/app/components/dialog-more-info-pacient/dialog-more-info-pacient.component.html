@@ -78,7 +78,8 @@
   </mat-vertical-stepper>
 </mat-dialog-content>
 
-<div mat-dialog-actions [align]="'end'">
-  <button color="primary" mat-raised-button (click)="openDialog()">Edit</button>
-  <button color="primary" mat-raised-button mat-dialog-close>Cancel</button>
+<div mat-dialog-actions [align]="'center'">
+  <button color="primary" mat-raised-button (click)= "openDialog()">Informatii noi</button>
+  <button color="primary" mat-raised-button (click)= "openAppointmentsDialog()">Programeaza</button>
+  <button color="primary" mat-raised-button mat-dialog-close >Cancel</button>
 </div>

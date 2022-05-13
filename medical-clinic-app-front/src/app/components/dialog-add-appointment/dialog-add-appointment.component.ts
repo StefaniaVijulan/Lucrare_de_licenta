@@ -23,7 +23,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   hourP:string;
   dataEdit: string;
   hourInterval: any;
-  private luna: string
+  luna: string
   appointment: Appointment = new Appointment();
   firstFormGroup!: FormGroup;
   selectedCardio: any;
