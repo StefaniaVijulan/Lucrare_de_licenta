@@ -1,6 +1,6 @@
   <div *ngIf="!this._secretar.existaPacient">
-  <mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+  <mat-horizontal-stepper #stepper  [linear]="true">
+    <mat-step [stepControl]="firstFormGroup" [completed]="false">
       <mat-dialog-content>
       <form  #registerform="ngForm"  [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Informatii generale</ng-template> 
@@ -112,7 +112,7 @@
       </form>
     </mat-dialog-content>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
+    <mat-step [stepControl]="thirdFormGroup"  [completed]="false">
       <mat-dialog-content>
       <form #thirdForm="ngForm"  [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Alte informatii</ng-template>

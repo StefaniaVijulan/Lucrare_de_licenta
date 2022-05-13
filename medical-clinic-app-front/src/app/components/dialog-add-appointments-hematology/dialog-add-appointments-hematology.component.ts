@@ -13,7 +13,7 @@ import { DialogAddAppointmentsRadiologyComponent } from '../dialog-add-appointme
 })
 export class DialogAddAppointmentsHematologyComponent implements OnInit {
   tomorrowD:any = new Date().getDate();
-  appointmentHematolohy: FormGroup;
+  appointmentHematology: FormGroup;
 
   blockedData: any; // zilele in care nu se fac programari
   hourInterval: any;//orele in care nu se fac programari
@@ -35,7 +35,7 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
   ngOnInit() {
     console.log("validate data=>")
     this.validationDate()
-    this.appointmentHematolohy = this._formBuilder.group({
+    this.appointmentHematology = this._formBuilder.group({
 
       colesterol_seric_total: false,
       hdl_colesterol: false,
@@ -61,25 +61,25 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
   }
 
   setAppointmentHema(){
-    this.appointment.colesterol_seric_total= this.appointmentHematolohy.value.colesterol_seric_total,
-    this.appointment.hdl_colesterol= this.appointmentHematolohy.value.hdl_colesterol,
-    this.appointment.ldl_colesterol= this.appointmentHematolohy.value.ldl_colesterol,
-    this.appointment.trigliceride_serice= this.appointmentHematolohy.value.trigliceride_serice,
-    this.appointment.glicemie= this.appointmentHematolohy.value.glicemie,
-    this.appointment.tgo= this.appointmentHematolohy.value.tgo,
-    this.appointment.tgp= this.appointmentHematolohy.value.tgp,
-    this.appointment.uree_serica= this.appointmentHematolohy.value.uree_serica,
-    this.appointment.creatina_serica= this.appointmentHematolohy.value.creatina_serica,
-    this.appointment.potasiu_seric= this.appointmentHematolohy.value.potasiu_seric,
-    this.appointment.magneziu_seric= this.appointmentHematolohy.value.magneziu_seric,
-    this.appointment.acid_uric= this.appointmentHematolohy.value.acid_uric,
-    this.appointment.calciu_ionic_seric= this.appointmentHematolohy.value.calciu_ionic_seric,
-    this.appointment.calciu_seric_total= this.appointmentHematolohy.value.calciu_seric_total,
-    this.appointment.inr_cu_interpretare= this.appointmentHematolohy.value.inr_cu_interpretare,
-    this.appointment.hemoleucograma_completa= this.appointmentHematolohy.value.hemoleucograma_completa,
-    this.appointment.t3= this.appointmentHematolohy.value.t3,
-    this.appointment.t4= this.appointmentHematolohy.value.t4,
-    this.appointment.tsh= this.appointmentHematolohy.value.tsh,
+    this.appointment.colesterol_seric_total= this.appointmentHematology.value.colesterol_seric_total,
+    this.appointment.hdl_colesterol= this.appointmentHematology.value.hdl_colesterol,
+    this.appointment.ldl_colesterol= this.appointmentHematology.value.ldl_colesterol,
+    this.appointment.trigliceride_serice= this.appointmentHematology.value.trigliceride_serice,
+    this.appointment.glicemie= this.appointmentHematology.value.glicemie,
+    this.appointment.tgo= this.appointmentHematology.value.tgo,
+    this.appointment.tgp= this.appointmentHematology.value.tgp,
+    this.appointment.uree_serica= this.appointmentHematology.value.uree_serica,
+    this.appointment.creatina_serica= this.appointmentHematology.value.creatina_serica,
+    this.appointment.potasiu_seric= this.appointmentHematology.value.potasiu_seric,
+    this.appointment.magneziu_seric= this.appointmentHematology.value.magneziu_seric,
+    this.appointment.acid_uric= this.appointmentHematology.value.acid_uric,
+    this.appointment.calciu_ionic_seric= this.appointmentHematology.value.calciu_ionic_seric,
+    this.appointment.calciu_seric_total= this.appointmentHematology.value.calciu_seric_total,
+    this.appointment.inr_cu_interpretare= this.appointmentHematology.value.inr_cu_interpretare,
+    this.appointment.hemoleucograma_completa= this.appointmentHematology.value.hemoleucograma_completa,
+    this.appointment.t3= this.appointmentHematology.value.t3,
+    this.appointment.t4= this.appointmentHematology.value.t4,
+    this.appointment.tsh= this.appointmentHematology.value.tsh,
     
     this.appointment.dataAppointmentHematology = this.dataEdit,
     this.appointment.hourAppointmentHematology = this.hourP

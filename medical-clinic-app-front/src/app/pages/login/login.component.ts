@@ -35,23 +35,21 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', response.user.role)  
         localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('cnp', response.user.cnp)
-        if(response.user.role == "MODERATOR"){
-          
-          this._router. navigate(['/moderator'])
-          . then(() => {
-          window. location. reload();
-          })
+        if(localStorage.getItem("role") == "MODERATOR"){
+          window.location.href = "/moderator"
         } else if(response.user.role == "SECRETAR"){
-          this._router.navigate(['/secretar']). then(() => {
-            window. location. reload()});
+          window.location.href = "/secretar"
+
         }
         else if(response.user.role == "CARDIOLOG"){
           console.log("aici cardiolog")
-          this._router.navigate(['/doctorProgramari'])
+          window.location.href = "/doctorProgramari"
+
         }
         else{
           this._service.logoutUser()
-          this._router.navigate(['/dashboard']);
+          window.location.href = "/dashboard"
+
         }
 
       }

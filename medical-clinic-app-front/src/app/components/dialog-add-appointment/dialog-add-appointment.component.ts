@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { DialogAddUserComponent } from '../moderator/dialog-add-user/dialog-add-user.component';
@@ -22,6 +22,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   ziua: string;
   hourP:string;
   dataEdit: string;
+  acordGDPR: boolean = false;
   hourInterval: any;
   luna: string
   appointment: Appointment = new Appointment();
@@ -39,10 +40,19 @@ export class DialogAddAppointmentComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       numberUser: ['', Validators.compose([Validators.required, Validators.pattern('(\\d{3})(\\d{3})(\\d{4})')])],
-      emailUser: ['']})
-      
+      emailUser: [''],
+      acordGDPR: [false, Validators.required],
+      selectedCardio: ['', Validators.required],
+      hourP: ['', Validators.required],
+      dateP: ['', Validators.required],
+    })
   }
-  
+
+  onCardioChange(event) {
+    this.dateP = ""
+    this.hourP = ""
+  }
+
   myFilter = (d: Date): boolean => {
     const time=d.getTime()
     const day = d.getDay();
@@ -51,7 +61,6 @@ export class DialogAddAppointmentComponent implements OnInit {
 
   validationDate(){
     this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
-      console.log(res)
       this.blockedData = new Array();
       for(let dat in res){
         this.blockedData.add(new Date(dat).getTime())
