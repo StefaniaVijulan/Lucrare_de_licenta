@@ -77,6 +77,9 @@ public class SecretaryService {
                 }
             }
         }
+        Comparator<Appointment> compareByHour =
+                (Appointment o1, Appointment o2) -> o1.getHour().compareTo( o2.getHour() );
+        Collections.sort(appointmentList, compareByHour);
         return appointmentList;
     }
 

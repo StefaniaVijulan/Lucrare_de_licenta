@@ -42,12 +42,12 @@ export class DialogMoreInfoPacientComponent implements OnInit {
   openDialog(){
     this.dialogref.close("save");
     this.dialog.open(DialogEditFisaComponent,{
-     width: '30%'
+     width: '40%'
     })}
   openAppointmentsDialog(){
       this.dialogref.close("addAppointments");
       this.dialog.open(DialogAddAppointmentsHrComponent,{
-       width: '30%'
+       width: '40%'
       })}
   
 

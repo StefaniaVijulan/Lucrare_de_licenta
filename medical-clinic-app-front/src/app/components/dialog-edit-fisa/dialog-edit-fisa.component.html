@@ -21,14 +21,25 @@
         </mat-form-field></td>
       </tr></table>
       <table class="example-full-width" cellspacing="0"><tr>
-        <td><mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Grupa de sange</mat-label>
-          <input matInput formControlName="bloodTypePatient" >
-        </mat-form-field></td>
-        <td><mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Rh</mat-label>
-          <input matInput formControlName="rhPatient" >
-        </mat-form-field></td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Grupa de sange</mat-label>
+            <mat-select formControlName="bloodTypePatient">
+              <mat-option value="A">A</mat-option>
+              <mat-option value="B">B</mat-option>
+              <mat-option value="AB">AB</mat-option>
+              <mat-option value="01">01</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Rh</mat-label>
+            <mat-select formControlName="rhPatient">
+              <mat-option value="pozitiv">Pozitiv</mat-option>
+              <mat-option value="negativ">Negativ</mat-option>
+            </mat-select>
+          </mat-form-field>
       </tr></table>
       <mat-form-field style="width: 96%"  appearance="fill">
         <mat-label>Alergii</mat-label>

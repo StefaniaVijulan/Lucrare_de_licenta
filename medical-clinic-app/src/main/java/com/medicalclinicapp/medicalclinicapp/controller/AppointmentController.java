@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.services.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,12 @@ public class AppointmentController {
     public List<Cardiolog> getAllCardiolog(){
         return appointmentService.seeAllCardiolog();
     }
+
+    @GetMapping("/infoPatient")
+    public Patient getPatient(@RequestParam (value = "cnpP") String cnpP){
+        return appointmentService.getSpecificPatient(cnpP);
+    }
+
     @GetMapping("/blockDateForCardio")
     public List<String> verificaDispDateCardio(@RequestParam (value = "cnpC") String cnpC){
         return appointmentService.verificaDisponibilitateDoctor(cnpC);
@@ -40,5 +47,6 @@ public class AppointmentController {
     public Appointment deleteAppointment(@RequestParam(value = "idA")Long idA){
         return appointmentService.deleteAppointment(idA);
     }
+
 
 }

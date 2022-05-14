@@ -17,7 +17,7 @@ export class DoctorProgramariComponent implements OnInit {
     this.allAppointmentS();
   }
   allAppointmentS(){
-    this._doctor.allAppointementSpecifc().subscribe((res)=>{
+    this._doctor.allTodayAppointementSpecifc().subscribe((res)=>{
       this.listAppointmentsSpecific = res;
       console.log(res)
     })

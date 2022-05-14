@@ -1,1 +1,49 @@
-<p>dialog-add-appointments-radiology works!</p>
+<p>Programare hematologie</p>
+<mat-vertical-stepper orientation="vertical">
+  <ng-template matStepperIcon="edit">
+    <mat-icon>done</mat-icon>
+  </ng-template>
+
+  <mat-step>
+    <ng-template matStepLabel>Selectează analizele dorite</ng-template>
+    <mat-dialog-content>
+      <section class="programare" [formGroup]="appointmentRadiology">
+        <p>
+          <mat-checkbox formControlName="eco">ECO</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="ekg">EKG</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="ct">CT</mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="irm">IRM</mat-checkbox>
+        </p>
+      </section>
+    </mat-dialog-content>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Data</ng-template>
+    <mat-form-field class="example-full-width">
+        <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field *ngIf="dateP" appearance="fill">
+        <mat-label>Alege ora</mat-label>
+        <mat-select  [(ngModel)]="hourP" name="hourP" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let hour of hourInterval" [value]="hour">
+            {{hour}}
+          </mat-option>
+        </mat-select>
+       
+      </mat-form-field>
+
+  </mat-step>
+
+</mat-vertical-stepper>
+<div mat-dialog-actions [align]="'center'">
+    <button color="primary" mat-raised-button mat-dialog-close (click) = "addAppointmentRadio()">Programeaza</button>
+  </div>

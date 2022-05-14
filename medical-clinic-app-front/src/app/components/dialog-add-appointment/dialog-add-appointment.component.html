@@ -1,13 +1,11 @@
 <h5>Introduceti datele personale!</h5>
 <mat-dialog-content>
     <form #registerform="ngForm"  [formGroup]="firstFormGroup">
- 
-
       <!--  <mat-error style="text-align: center;">{{this.msg}}</mat-error>-->
         <br>
         <mat-form-field appearance="fill">
           <mat-label>CNP</mat-label>
-          <input matInput placeholder="ex. 6001100110000" formControlName="cnp"  required>
+          <input matInput placeholder="ex. 6001100110000" formControlName="cnp"  required (click)='getSpecificPatient($event)'>
          <!-- <mat-error  class="error" *ngIf="myForm.controls['cnp'].hasError('pattern')">
               Introduceti un CNP valid
           </mat-error>-->
@@ -38,14 +36,14 @@
         </mat-form-field><br></form>
         <mat-form-field appearance="fill">
           <mat-label>Cardiolog</mat-label>
-          <mat-select [(ngModel)]="selectedCardio" (ngModelChange)="onCardioChange($event)" name="food">
+          <mat-select [(ngModel)]="selectedCardio" (ngModelChange)="onCardioChange($event)" name="food" required>
             <mat-option *ngFor="let food of cardiologList" [value]="food.cnp">
               {{food.firstName}} {{food.lastName}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field *ngIf="selectedCardio" class="example-full-width">
-          <input matInput [matDatepickerFilter]="myFilter" [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
+          <input matInput  [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker ></mat-datepicker>
         </mat-form-field>
@@ -69,7 +67,7 @@
             </p><br>
 
             <div [align]="'center'">
-            <button  [disabled]="registerform.form.invalid"  mat-dialog-close mat-raised-button class="btn" color="primary" (click)="addAppointment()">
+            <button  [disabled]="registerform.form.invalid || acordGDPR"  mat-dialog-close mat-raised-button class="btn" color="primary" (click)="addAppointment()">
                 Add
             </button></div>
         </form>

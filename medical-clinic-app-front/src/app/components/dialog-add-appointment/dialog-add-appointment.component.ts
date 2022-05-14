@@ -40,11 +40,7 @@ export class DialogAddAppointmentComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       numberUser: ['', Validators.compose([Validators.required, Validators.pattern('(\\d{3})(\\d{3})(\\d{4})')])],
-      emailUser: [''],
-      acordGDPR: [false, Validators.required],
-      selectedCardio: ['', Validators.required],
-      hourP: ['', Validators.required],
-      dateP: ['', Validators.required],
+      emailUser: ['']
     })
   }
 
@@ -59,6 +55,13 @@ export class DialogAddAppointmentComponent implements OnInit {
     return !this.blockedData.find(x=>x==time) && day !==0 && day !==6;
   };
 
+  getSpecificPatient(){
+    console.log("ana")
+   
+    /*this._appointment.getPatient(cnpP).subscribe((res)=>{
+      console.log(res)
+    })*/
+  }
   validationDate(){
     this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
       this.blockedData = new Array();

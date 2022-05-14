@@ -15,12 +15,13 @@
         {{fisaInfo?.patient.numberPatient}}</span><br>
       <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
         class="aligned-with-icon"><ins>Cetatenie</ins>: {{fisaInfo?.patient.citizenshipPatient}}</span><br>
-      <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-        class="aligned-with-icon"><ins>Alergii</ins>: {{fisaInfo?.allergyPatient}}</span><br>
+      <mat-icon *ngIf="fisaInfo?.allergyPatient" class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon>
+      <span *ngIf="fisaInfo?.allergyPatient"
+        class="aligned-with-icon"><ins>Alergii</ins>: {{fisaInfo?.allergyPatient}}<br></span>
 
       <mat-icon *ngIf="fisaInfo?.bloodTypePatient" class="icon-display" matListIcon inline=true>fiber_manual_record
       </mat-icon><span *ngIf="fisaInfo?.bloodTypePatient" class="aligned-with-icon"> <ins>Grupa de sange</ins>:
-        {{fisaInfo?.bloodTypePatient}}, Rh: {{fisaInfo?.rhPatient}}</span><br>
+        {{fisaInfo?.bloodTypePatient}}, Rh: {{fisaInfo?.rhPatient}}<br></span>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Anamneza</ng-template>

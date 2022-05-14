@@ -43,6 +43,13 @@ public class AppointmentService {
         }
         return generalists;
     }
+    public Patient getSpecificPatient(String cnpP){
+        for (int i = 0; i < patientRepository.findAll().size(); i++) {
+            if(patientRepository.findAll().get(i).getCnp().equals(cnpP))
+                return patientRepository.findAll().get(i);
+        }
+        return null;
+    }
 
     public List<String> verificaDisponibilitateDoctor(String cnpD){
         List<Appointment> appointmentList = appointmentRepository.findAll();

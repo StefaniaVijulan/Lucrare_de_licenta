@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppointmentsHematology } from 'src/app/interfaces/appointmentHematology';
+import { AppointmentsRadiology } from 'src/app/interfaces/appointmentRadiology';
 import { FisaPatient } from 'src/app/interfaces/fisaPatient';
 import { Patient } from 'src/app/interfaces/patient';
 import { environment } from 'src/environments/environment';
@@ -26,6 +27,10 @@ export class DoctorService {
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
     return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
   }
+  allTodayAppointementSpecifc(){
+    this.cnpCurrantCardioService = localStorage.getItem("cnp")
+    return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
+  }
   infoSpecific(cnpP: any){
     return this._http.get(this.baseUrl + '/cardiolog/specificFisa?cnpP=' + cnpP, this.publicHttpHeaders)
   }
@@ -37,6 +42,9 @@ export class DoctorService {
   addAppointmenthematology( element: AppointmentsHematology ){
     return this._http.post(this.baseUrl + '/cardiolog/addAppointmentHematology?cnpP='+this.cnpCurrantpatientService, element, this.publicHttpHeaders);
   }
+  addAppointmentRadiologie( element: AppointmentsRadiology ){
+    return this._http.post(this.baseUrl + '/cardiolog/addAppointmentRadiology?cnpP='+this.cnpCurrantpatientService, element, this.publicHttpHeaders);
+  }
 
   getDataBlockHema(): Observable<any>{
     return this._http.get(this.baseUrl + '/blockDateHematology');
@@ -45,13 +53,13 @@ export class DoctorService {
     return this._http.get(this.baseUrl + '/checkAvailabilityHematology?dateA=' + element);
   }
 
-
-  getDataBlocKRadio(): Observable<any>{
+  getDataBlockRadio(): Observable<any>{
     return this._http.get(this.baseUrl + '/blockDateRadiology');
   }
   getValidationDataRadio( element: string){
     return this._http.get(this.baseUrl + '/checkAvailabilityRadiology?dateA=' + element);
   }
+
 
   seeProgramari(){
     this._router.navigate(['/doctorProgramari'])

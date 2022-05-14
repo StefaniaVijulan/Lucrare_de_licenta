@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/deleteAppointmentCardio",
                         "/checkAvailabilityHourCardio",
                         "/allCardiolog",
+                        "/infoPatient",
                         "addAppointment").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",
@@ -95,7 +96,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/deleteFisa",
                         "/cardiolog/specificFisa",
                         "/cardiolog/addAppointmentHematology",
-                        "/cardiolog/addAppointmentRadiology"
+                        "/cardiolog/addAppointmentRadiology",
+                        "/cardiolog/allTodaySpecificAppointment"
                         ).hasAuthority("CARDIOLOG")
                 .antMatchers("/hematolog/allAppointmentHematology",
                         "/hematolog/allTodayAppointmentHematology").hasAuthority("HEMATOLOG")

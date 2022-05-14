@@ -30,6 +30,10 @@ public class CardiologController {
     public List<Appointment> getSpecificAppointment(@RequestParam(value = "cnpC") String cnpC){
         return cardiologService.getAllSpecificAppointment(cnpC);
     }
+    @GetMapping("/cardiolog/allTodaySpecificAppointment")
+    public List<Appointment> getTodaySpecificAppointment(@RequestParam(value = "cnpC") String cnpC){
+        return cardiologService.todaySpecificAppointment(cnpC);
+    }
 
     @PutMapping(path = "/cardiolog/editFisaP")
     public FisaPatient editUser(@RequestParam(value = "cnpP")  String cnpP, @RequestBody FisaPatient fisaPatient) throws IOException {

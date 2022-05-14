@@ -32,5 +32,8 @@ export class AppointmentService {
     console.log("intra ins ervice")
     return this._http.get(this.baseUrl + '/allCardiolog')
   }
+  getPatient(cnpP: string){
+    return this._http.get(this.baseUrl + '/infoPatient?cnpP=' + cnpP );
+  }
 
 }

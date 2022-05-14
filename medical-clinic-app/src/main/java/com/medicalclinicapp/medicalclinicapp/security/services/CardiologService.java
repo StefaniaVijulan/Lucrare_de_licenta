@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +34,41 @@ public class CardiologService {
 
 
     public List<Appointment> getAllSpecificAppointment(String cnp){
+
+
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
         List<Appointment> appointmentList = new ArrayList<>();
         for(int i=0; i<appointmentRepository.findAll().size(); i++){
             if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp))
-                appointmentList.add(appointmentRepository.findAll().get(i));
+                if (sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())) {
+                    appointmentList.add(appointmentRepository.findAll().get(i));
+                }
         }
+        Comparator<Appointment> compareByHour =
+                (Appointment o1, Appointment o2) -> o1.getHour().compareTo( o2.getHour() );
+        Collections.sort(appointmentList, compareByHour);
+
+        return appointmentList;
+    }
+
+    public List<Appointment> todaySpecificAppointment(String cnp){
+
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        List<Appointment> appointmentList = new ArrayList<>();
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp))
+                if (sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())) {
+                    appointmentList.add(appointmentRepository.findAll().get(i));
+                }
+        }
+        Comparator<Appointment> compareByHour =
+                (Appointment o1, Appointment o2) -> o1.getHour().compareTo( o2.getHour() );
+        Collections.sort(appointmentList, compareByHour);
+
         return appointmentList;
     }
     public FisaPatient editFisaPatient(String cnpP, FisaPatient fisaPatient){
