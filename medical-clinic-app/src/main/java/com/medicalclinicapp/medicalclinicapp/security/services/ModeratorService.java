@@ -1,5 +1,9 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
+import com.medicalclinicapp.medicalclinicapp.models.Patient;
+import com.medicalclinicapp.medicalclinicapp.repository.FisaPatientRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
@@ -29,7 +33,14 @@ private ModeratorRepository moderatorRepository;
     private CardiologRepository cardiologRepository;
 
     @Autowired
+    private FisaPatientRepository fisaPatientRepository;
+
+    @Autowired
     private SecretaryRepository secretaryRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
+
 
     @Autowired
     private ImagistRepository imagistRepository;
@@ -53,7 +64,6 @@ private ModeratorRepository moderatorRepository;
       if (moderatorOptional.isPresent()) {
           throw new IOException("Exista userul deja");
       }
-
       String parola = "parola";
       moderator.setPassword(bCryptPasswordEncoder.encode(parola));
       String emailtext;
@@ -62,6 +72,23 @@ private ModeratorRepository moderatorRepository;
       emailService.sendmail(moderator.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
       moderator.setRole("MODERATOR");
       moderatorRepository.saveAndFlush(moderator);
+      Patient patient = new Patient();
+      patient.setCnp(moderator.getCnp());
+      patient.setPassword(bCryptPasswordEncoder.encode(parola));
+      patient.setFirstName(moderator.getFirstName());
+      patient.setLastName(moderator.getLastName());
+      patient.setEmailUser(moderator.getEmailUser());
+      patient.setNumberUser(moderator.getNumberUser());
+      patient.setRole("PACIENT");
+      patientRepository.save(patient);
+      FisaPatient fisaPatient = new FisaPatient();
+      for (int i = 0; i < patientRepository.findAll().size(); i++) {
+          {
+              if(patientRepository.findAll().get(i).getCnp().equals(moderator.getCnp()))
+                  fisaPatient.setPatient(patientRepository.findAll().get(i));
+          }
+      }
+      fisaPatientRepository.save(fisaPatient);
       return moderator;
   };
 

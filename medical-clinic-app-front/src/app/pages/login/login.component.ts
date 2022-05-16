@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('cnp', response.user.cnp)
         if(localStorage.getItem("role") == "MODERATOR"){
           window.location.href = "/moderator"
-        } else if(response.user.role == "SECRETAR"){
+        } else if(localStorage.getItem("role") == "SECRETAR"){
           window.location.href = "/secretar"
         }
-        else if(response.user.role == "CARDIOLOG"){
+        else if(localStorage.getItem("role") == "CARDIOLOG"){
           window.location.href = "/doctorProgramari"
         }
-        else if(response.user.role == "HEMATOLOG"){
+        else if(localStorage.getItem("role") == "HEMATOLOG"){
           window.location.href = "/hematolog"
 
         }
@@ -63,16 +63,65 @@ export class LoginComponent implements OnInit {
     })
   }
  
-  doLoginUserPatient() {
-    this._service.loginUser(this.userDto).subscribe((response: any) => {
-      console.log(response.user);
-      if (response.user.role=="PATIENT" && response && response.jwt) {
-        sessionStorage.setItem('token', response.jwt);
-        sessionStorage.setItem('role', response.user.role)
-        sessionStorage.setItem('user', JSON.stringify(response.user))
+  doLoginPatient() {
+    console.log("intra aici")
+  //  window.location.href = "/pacient"
+    this._service.loginPatient(this.userDto).subscribe((response: any) => {
+      console.log("doLogin")
+      console.log(response);
+      console.log(response.jwt)
+      if (response && response.jwt) {
+        console.log("intra in if")
+        localStorage.setItem('token', response.jwt)
+        localStorage.setItem('role', response.patient.role)
+        localStorage.setItem('patient', JSON.stringify(response.patient))
+        localStorage.setItem('cnp', response.patient.cnp) 
+        if(localStorage.getItem("role") == "PACIENT"){
+          window.location.href = "/pacient"
+        }else{
+          this._service.logoutUser()
+          window.location.href = "/dashboard"
+
+        }
+        console.log("dupa token")
+      }else{
+          console.log(response)
+          if(response ==  null){
+            this.msg ="CNP-ul sau parola este gresită!"
+          }
+        }
+      //window.location.href = "/pacient"
+     /* if (response && response.jwt) {
+        localStorage.setItem('token', response.jwt);
+        localStorage.setItem('role', response.user.role)  
+        localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('cnp', response.user.cnp)
-        this._router.navigate(['/dashboard']);
+        if(localStorage.getItem("role") == "MODERATOR"){
+          window.location.href = "/moderator"
+        } else if(localStorage.getItem("role") == "SECRETAR"){
+          window.location.href = "/secretar"
+        }
+        else if(localStorage.getItem("role") == "CARDIOLOG"){
+          window.location.href = "/doctorProgramari"
+        }
+        else if(localStorage.getItem("role") == "HEMATOLOG"){
+          window.location.href = "/hematolog"
+
+        }
+        else{
+          this._service.logoutUser()
+          window.location.href = "/dashboard"
+
+        }
+
       }
+      else{
+        console.log(response)
+        if(response ==  null){
+          this.msg ="CNP-ul sau parola este gresită!"
+        }
+      }*/
     })
+  
   }
 }

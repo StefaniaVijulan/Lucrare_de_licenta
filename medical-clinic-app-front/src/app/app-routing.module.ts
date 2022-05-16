@@ -16,6 +16,7 @@ import { ModeratorHematologComponent } from './pages/moderator/category/moderato
 import { ModeratorImagistComponent } from './pages/moderator/category/moderator-imagist/moderator-imagist.component';
 import { ModeratorSecretarComponent } from './pages/moderator/category/moderator-secretar/moderator-secretar.component';
 import { ModeratorComponent } from './pages/moderator/category/moderator/moderator.component';
+import { PacientComponent } from './pages/pacient/pacient/pacient.component';
 import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
 import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
 
@@ -83,6 +84,10 @@ const routes: Routes = [
     path:"hematolog",
     component: HematologComponent,
     canActivate : [AuthGuard, HematologGuard]
+  },
+  {
+    path:"pacient",
+    component: PacientComponent,
   }
 ]
 @NgModule({

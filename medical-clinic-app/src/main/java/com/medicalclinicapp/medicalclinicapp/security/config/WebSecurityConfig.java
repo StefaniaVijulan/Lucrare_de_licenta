@@ -53,7 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/checkAvailabilityHourCardio",
                         "/allCardiolog",
                         "/infoPatient",
-                        "/addAppointment").permitAll()
+                        "/addAppointment",
+                        "/loginPatient").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",
                         "/moderator/registerHematolog",

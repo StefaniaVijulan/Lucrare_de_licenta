@@ -45,6 +45,7 @@ import { DialogAddAppointmentsHematologyComponent } from './components/dialog-ad
 import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add-appointments-radiology/dialog-add-appointments-radiology.component';
 import { HematologComponent } from './pages/hematolog/hematolog/hematolog.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { PacientComponent } from './pages/pacient/pacient/pacient.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DialogAddAppointmentsHematologyComponent,
     DialogAddAppointmentsRadiologyComponent,
     HematologComponent,
+    PacientComponent,
   
   
   ],

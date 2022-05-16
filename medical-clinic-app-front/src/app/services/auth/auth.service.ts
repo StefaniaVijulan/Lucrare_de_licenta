@@ -24,16 +24,16 @@ export class AuthService {
       'content-type': 'application/json'
     })
   };
-  private publicHttpHeadersAuth = {
-    headers: new HttpHeaders({'Content-type':'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem('token')})
-  };
+
   constructor(private _http: HttpClient, private _router: Router) {}
   loginUser(data: any) {
     return this._http.post(this.baseUrl + "/login", data, this.publicHttpHeaders);
   }
   loggedIn() {
     return !!localStorage.getItem('token')
+  }
+  loginPatient(data: any){
+    return this._http.post(this.baseUrl + "/loginPatient", data, this.publicHttpHeaders);
   }
   logoutUser() {
     localStorage.removeItem('token')

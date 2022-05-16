@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
@@ -25,18 +26,25 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String cnp) throws UsernameNotFoundException {
 
-        if(!userRepository.existsByCnp(cnp)){
+        UserDetails user = userRepository.findByCnp(cnp);
+
+        if(user == null){
+            user = patientRepository.findByCnp(cnp);
+        }
+        if(user == null){
             throw new UsernameNotFoundException(
                     String.format("username with cnp %s not found", cnp));
         }
 
-        return userRepository.findByCnp(cnp);
+        return user;
     }
     public User loginUser(String cnp, String password){
         if (!userRepository.existsByCnp(cnp)) {
