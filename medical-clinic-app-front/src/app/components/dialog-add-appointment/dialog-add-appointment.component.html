@@ -67,7 +67,7 @@
             </p><br>
 
             <div [align]="'center'">
-            <button  [disabled]="registerform.form.invalid || acordGDPR"  mat-dialog-close mat-raised-button class="btn" color="primary" (click)="addAppointment()">
+            <button  [disabled]="registerform.form.invalid || !acordGDPR"  mat-dialog-close mat-raised-button class="btn" color="primary" (click)="addAppointment()">
                 Add
             </button></div>
         </form>

@@ -1,0 +1,42 @@
+<h2 style="margin-top: 2vh;">Consultatiile din aceasta zi</h2><br>
+<div>
+  <ng-container *ngFor="let appointment of listAppointmentsHema">
+    <div class="grid">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>{{appointment.hourAppointmentHematology}}</b>
+            </mat-panel-title>
+            <mat-panel-description>
+             <b>{{appointment.patient.firstName}} {{appointment.patient.lastName}}</b>
+              
+            </mat-panel-description>
+           
+          </mat-expansion-panel-header>
+          <div class="grid">
+            <p *ngIf="appointment.acid_uric">Acid uric</p>
+            <p *ngIf="appointment.calciu_ionic_seric">Calciu ionic</p>
+            <p *ngIf="appointment.calciu_seric_total">Calciu seric </p>
+            <p *ngIf="appointment.colesterol_seric_total">Colesterol seric</p>
+            <p *ngIf="appointment.creatina_serica">Creatina serica</p>
+            <p *ngIf="appointment.ldl_colesterol">LDL colesterol</p>
+            <p *ngIf="appointment.magneziu_seric">Magneziu seric</p>
+            <p *ngIf="appointment.trigliceride_serice">Trigliceride serice</p>
+            <p *ngIf="appointment.uree_serica">Uree serica</p>
+            <p *ngIf="appointment.potasiu_seric">Potasiu seric</p>
+            <p *ngIf="appointment.inr_cu_interpretare">INR</p>
+            <p *ngIf="appointment.t3">T3</p>
+            <p *ngIf="appointment.t4">T4</p>
+            <p *ngIf="appointment.tgo">TGO</p>
+            <p *ngIf="appointment.tgp">TGP</p>
+            <p *ngIf="appointment.tsh">TSH</p>
+          </div>
+          <mat-action-row>
+            <button style="margin-left:20%;"color="primary" mat-raised-button (click) = "adaugaR()">Rezultat</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </ng-container>
+</div>

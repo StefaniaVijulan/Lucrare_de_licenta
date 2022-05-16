@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guard/authentification/auth.guard';
 import { DoctorGuard } from './guard/doctor/doctor.guard';
+import { HematologGuard } from './guard/hematolog/hematolog.guard';
 import { ModeratorGuard } from './guard/moderator/moderator.guard';
 import { SecretarGuard } from './guard/secretar/secretar.guard';
+import { Hematolog } from './interfaces/hematolog';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doctor-programari.component';
+import { HematologComponent } from './pages/hematolog/hematolog/hematolog.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ModeratorCardiologComponent } from './pages/moderator/category/moderator-cardiolog/moderator-cardiolog.component';
@@ -75,6 +78,11 @@ const routes: Routes = [
     path:"doctorProgramari",
     component: DoctorProgramariComponent,
     canActivate : [AuthGuard, DoctorGuard]
+  },
+  {
+    path:"hematolog",
+    component: HematologComponent,
+    canActivate : [AuthGuard, HematologGuard]
   }
 ]
 @NgModule({

@@ -2,23 +2,20 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
+import com.medicalclinicapp.medicalclinicapp.models.RadiologyResult;
 import com.medicalclinicapp.medicalclinicapp.security.repository.ImagistRepository;
 import com.medicalclinicapp.medicalclinicapp.security.services.HematologService;
 import com.medicalclinicapp.medicalclinicapp.security.services.ImagistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class ImagistController {
 
-    @RestController
-    @CrossOrigin(origins = "http://localhost:4200")
-    @RequiredArgsConstructor
-    public class RadiologyController {
         @Autowired
         private ImagistService imagistService;
 
@@ -31,6 +28,12 @@ public class ImagistController {
         public List<AppointmentRadiology> getTodayAppointmentHematology(){
             return imagistService.getAllTodayAppointmentRadiology();
         }
-    }
+
+        @PostMapping("/imagist/addRadiologyResult")
+        public RadiologyResult getResult(@RequestBody RadiologyResult radiologyResult){
+
+            return imagistService.addRadiologyResult(radiologyResult);
+        }
+
 
 }

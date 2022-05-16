@@ -13,9 +13,9 @@ export class DashboardComponent implements OnInit {
   constructor(private dialog: MatDialog, public _appointment: AppointmentService ) { }
 
   ngOnInit() {
-    this.allCardiolog()
+  //  this.allCardiolog()
   }
-
+  /*
   allCardiolog(){
     this._appointment.allCardiolog().subscribe((res)=>{
       this._appointment.doctorListService = res
@@ -27,5 +27,5 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(DialogAddAppointmentComponent,{
      width: '40%'
     });
-  }
+  }*/
 }

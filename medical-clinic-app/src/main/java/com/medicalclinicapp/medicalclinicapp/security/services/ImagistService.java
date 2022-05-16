@@ -3,6 +3,7 @@ package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
+import com.medicalclinicapp.medicalclinicapp.models.RadiologyResult;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentHematologyRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRadiologyRepository;
 
@@ -45,5 +46,11 @@ public class ImagistService {
     }
 
 
+    public RadiologyResult addRadiologyResult(RadiologyResult radiologyResult){
+        if(radiologyResult.getCt() == null || radiologyResult.getCt().trim().isEmpty()){
+            radiologyResult.setCt("https://adminassets.devops.arabiaweather.com/sites/default/files/field/image/mountains.jpg");
+        }
+        return radiologyResult;
+    }
 
 }

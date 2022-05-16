@@ -39,11 +39,12 @@ export class LoginComponent implements OnInit {
           window.location.href = "/moderator"
         } else if(response.user.role == "SECRETAR"){
           window.location.href = "/secretar"
-
         }
         else if(response.user.role == "CARDIOLOG"){
-          console.log("aici cardiolog")
           window.location.href = "/doctorProgramari"
+        }
+        else if(response.user.role == "HEMATOLOG"){
+          window.location.href = "/hematolog"
 
         }
         else{

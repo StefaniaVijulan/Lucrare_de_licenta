@@ -1,5 +1,5 @@
 package com.medicalclinicapp.medicalclinicapp.models;
-/*
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "radiology")
+@Table(name = "radiologyResult")
 public class RadiologyResult {
 
     @Id
@@ -24,4 +24,3 @@ public class RadiologyResult {
     private String ct;
     private String irm;
 }
-*/

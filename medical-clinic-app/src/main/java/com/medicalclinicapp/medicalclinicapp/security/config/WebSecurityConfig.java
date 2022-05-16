@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/checkAvailabilityHourCardio",
                         "/allCardiolog",
                         "/infoPatient",
-                        "addAppointment").permitAll()
+                        "/addAppointment").permitAll()
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",
                         "/moderator/registerHematolog",
@@ -97,11 +97,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cardiolog/specificFisa",
                         "/cardiolog/addAppointmentHematology",
                         "/cardiolog/addAppointmentRadiology",
-                        "/cardiolog/allTodaySpecificAppointment"
+                        "/cardiolog/allTodaySpecificAppointment",
+                        "/cardiolog/PatientAppointmentRadiology",
+                        "/cardiolog/PatientAppointmentHematology"
                         ).hasAuthority("CARDIOLOG")
                 .antMatchers("/hematolog/allAppointmentHematology",
                         "/hematolog/allTodayAppointmentHematology").hasAuthority("HEMATOLOG")
                 .antMatchers("/imagist/allAppointmentRadiology",
+                        "/imagist/addRadiologyResult",
                         "/imagist/allTodayAppointmentRadiology").hasAuthority("IMAGIST")
 
                 .and().cors().and().csrf().disable()

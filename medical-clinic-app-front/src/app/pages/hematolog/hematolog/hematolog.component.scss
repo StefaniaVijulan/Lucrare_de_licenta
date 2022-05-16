@@ -1,0 +1,11 @@
+
+h2{
+    text-align: center;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
+}
+mat-expansion-panel {
+  width: 30vw;
+}

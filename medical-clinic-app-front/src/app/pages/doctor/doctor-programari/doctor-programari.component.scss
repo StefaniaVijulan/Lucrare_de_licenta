@@ -3,9 +3,12 @@
     grid-template-columns: 1fr 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
 }
 .container-style{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 5rem;
-    width: 19.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 6rem;
+  margin-right: 6rem;
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+  width: 19.5rem;
 }
 h2{
     text-align: center;

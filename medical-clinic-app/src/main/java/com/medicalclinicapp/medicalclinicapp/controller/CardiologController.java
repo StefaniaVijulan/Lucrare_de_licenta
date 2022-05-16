@@ -35,6 +35,15 @@ public class CardiologController {
         return cardiologService.todaySpecificAppointment(cnpC);
     }
 
+    @GetMapping("/cardiolog/PatientAppointmentRadiology")
+    public AppointmentRadiology AppointmentRadiology(@RequestParam(value = "cnpP") String cnpP){
+        return cardiologService.getPatientAppointmentsRadiology(cnpP);
+    }
+    @GetMapping("/cardiolog/PatientAppointmentHematology")
+    public AppointmentHematology AppointmentHematology (@RequestParam(value = "cnpP") String cnpP){
+        return cardiologService.getPatientAppointmentsHematology(cnpP);
+    }
+
     @PutMapping(path = "/cardiolog/editFisaP")
     public FisaPatient editUser(@RequestParam(value = "cnpP")  String cnpP, @RequestBody FisaPatient fisaPatient) throws IOException {
         return cardiologService.editFisaPatient(cnpP, fisaPatient);

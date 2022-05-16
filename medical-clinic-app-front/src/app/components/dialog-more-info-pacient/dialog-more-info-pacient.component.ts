@@ -34,8 +34,9 @@ export class DialogMoreInfoPacientComponent implements OnInit {
     console.log("fisa pacient")
     this._doctor.infoSpecific(this._doctor.cnpCurrantpatientService).subscribe((res)=>{
       this.fisaInfo = res
-      this._doctor.infoFisaService = res;
       console.log(res)
+      this._doctor.infoFisaService = res;
+      
     })
     
   }

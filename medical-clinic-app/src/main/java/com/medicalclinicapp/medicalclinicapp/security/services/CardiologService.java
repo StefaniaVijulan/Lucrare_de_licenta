@@ -238,7 +238,31 @@ public class CardiologService {
 
         }
         return "done";
+            };
+    public AppointmentHematology getPatientAppointmentsHematology(String cnpP){
+        for(int i=0; i<appointmentHematologyRepository.findAll().size(); i++){
+            if(appointmentHematologyRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
+            {
+
+                Date curentData = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                int dataC;
+                dataC = sdf.format(curentData).compareTo(appointmentHematologyRepository.findAll().get(i).getDataAppointmentHematology());
+                if(dataC < 0 || dataC == 0 )
+                    return appointmentHematologyRepository.findAll().get(i);
             }
+        }
+        return null;
+    }
+    public AppointmentRadiology getPatientAppointmentsRadiology(String cnpP){
+        for(int i=0; i<appointmentRadiologyRepository.findAll().size(); i++){
+            if(appointmentRadiologyRepository.findAll().get(i).getPatient().getCnp().equals(cnpP))
+            {
+                return appointmentRadiologyRepository.findAll().get(i);
+            }
+        }
+        return null;
+    }
 }
 
 

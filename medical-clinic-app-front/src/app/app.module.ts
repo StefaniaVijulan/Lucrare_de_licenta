@@ -43,7 +43,8 @@ import { DialogEditFisaComponent } from './components/dialog-edit-fisa/dialog-ed
 import { DialogAddAppointmentsHrComponent } from './components/dialog-add-appointments-hr/dialog-add-appointments-hr.component';
 import { DialogAddAppointmentsHematologyComponent } from './components/dialog-add-appointments-hematology/dialog-add-appointments-hematology.component';
 import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add-appointments-radiology/dialog-add-appointments-radiology.component';
-
+import { HematologComponent } from './pages/hematolog/hematolog/hematolog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,8 @@ import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add
     DialogAddAppointmentsHrComponent,
     DialogAddAppointmentsHematologyComponent,
     DialogAddAppointmentsRadiologyComponent,
+    HematologComponent,
+  
   
   ],
   imports: [
@@ -104,7 +107,8 @@ import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add
     MatNativeDateModule,
     MatStepperModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule
   ],
   entryComponents: [
     DialogComponent, 
@@ -122,7 +126,7 @@ import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add
      DialogAddAppointmentsRadiologyComponent
     ],
     
-  providers: [],
+  providers:[],
 
   bootstrap: [AppComponent]
 })

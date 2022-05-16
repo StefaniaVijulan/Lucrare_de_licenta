@@ -19,6 +19,7 @@ export class SecretarComponent implements OnInit {
   listAppointment: any
   currentList: any;
   pacientL: any;
+  currentItemsToShow: any;
   listCardiolog: any;
   newPacient: Patient = new Patient();
  
@@ -33,10 +34,11 @@ export class SecretarComponent implements OnInit {
     static: true
   })
   sort!: MatSort;
-  constructor(public _secretar: SecretarService, private dialog: MatDialog, ) {}
+  constructor(public _secretar: SecretarService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.allTodayAppointments();
+   
     this. allCardiolog();
   }
 
@@ -71,6 +73,7 @@ export class SecretarComponent implements OnInit {
   allTodayAppointments(){
     return this._secretar.getAllTodayAppointments().subscribe((res)=>{
       this.listAppointment = res
+      this.currentItemsToShow = res
       console.log(res)
     })
   }
@@ -86,34 +89,10 @@ export class SecretarComponent implements OnInit {
      
     })
   }
-/*
-  readMoreDialog(element: string) {
-    //salvam idul internarii pentru care vrem sa aflam mai multe detalii
-    this._secretar.hospitalizationNo = element
-    console.log("noHospit =>" + this._secretar.hospitalizationNo)
-    this.dialog.open(DialogMoreInfoPacientComponent, {
-          width: '40%',
-          data: element
-        }).afterClosed().subscribe(val => {
-          
-          if (val === "done") {
-            this.allHospitalizationActive();
-          }
-        })
+  /*onPageChange($event) {
+    this.listAppointment =  this.currentItemsToShow.slice($event.pageIndex*$event.pageSize, $event.pageIndex*$event.pageSize + $event.pageSize);
   }
-  externeazaPacient(element: string) {
-    
-    this._secretar.externarePacient(element).subscribe({
-      next: (res) => {
-        console.log(res)
-      },
-      error: (err) => {
-        console.log(err)
-
-      }
-    })
-    location.reload()
-  }
-*/
-
+  https://stackblitz.com/edit/angular-paginator-example-customized?file=app%2Fpaginator-overview-example.ts
+  
+  */
 }
