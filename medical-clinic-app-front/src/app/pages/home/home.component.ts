@@ -14,5 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
    
   }
-
+  uploadAvatar($event){
+    console.log("img=>", $event)
+  }
 }

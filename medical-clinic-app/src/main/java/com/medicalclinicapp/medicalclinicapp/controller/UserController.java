@@ -3,6 +3,7 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginResponse;
+import com.medicalclinicapp.medicalclinicapp.security.models.ChangeImg;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 
 @RestController
@@ -55,6 +57,15 @@ public class UserController {
         return userService.changePassword(oldPass, newPass, cnpC);
     }
 
+
+    @PutMapping("/changeimage")
+    public User changeI(@RequestParam String cnpU, @RequestBody ChangeImg changeImg){
+        return userService.changeImage(cnpU, changeImg);
+    }
+    @GetMapping("/allUsers")
+    public List<User> getEmployees(){
+        return userService.getAllEmployees();
+    }
 
        /*
 

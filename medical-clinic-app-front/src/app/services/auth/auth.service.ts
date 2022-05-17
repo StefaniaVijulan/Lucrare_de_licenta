@@ -9,6 +9,7 @@ import {
 import {
   Router
 } from '@angular/router';
+import { timeStamp } from 'console';
 import {
   environment
 } from 'src/environments/environment';
@@ -19,6 +20,7 @@ import {
 export class AuthService {
   private baseUrl = environment.baseUrl;
   private cnpUser: string;
+  userListService:any;
   private publicHttpHeaders = {
     headers: new HttpHeaders({
       'content-type': 'application/json'
@@ -40,6 +42,7 @@ export class AuthService {
     localStorage.removeItem('role')
     localStorage.removeItem('user')
     localStorage.removeItem('cnp')
+    localStorage.removeItem('patient')
     this._router.navigate(['/dashboard'])
   }
   logInUser(){
@@ -54,5 +57,12 @@ export class AuthService {
 
       this.cnpUser =  localStorage.getItem('cnp')
       return this._http.get<any>(this.baseUrl + '/changePass?oldPass='+ oldPass + '&newPass=' + newPass + '&cnpU=' + this.cnpUser, this.publicHttpHeaders);
+  }
+  changeImg(img: any){
+    this.cnpUser = localStorage.getItem("cnp")
+    return this._http.put(this.baseUrl + '/changeimage?cnpU='+ this.cnpUser, img, this.publicHttpHeaders);
+  }
+  getAllUsers(){
+    return this._http.get(this.baseUrl + '/allUsers', this.publicHttpHeaders);
   }
 }

@@ -6,9 +6,9 @@
         <mat-form-field appearance="fill">
           <mat-label>CNP</mat-label>
           <input matInput placeholder="ex. 6001100110000" formControlName="cnp"  required (click)='getSpecificPatient($event)'>
-         <!-- <mat-error  class="error" *ngIf="myForm.controls['cnp'].hasError('pattern')">
+          <mat-error  class="error" *ngIf="firstFormGroup.controls['cnp'].hasError('pattern')">
               Introduceti un CNP valid
-          </mat-error>-->
+          </mat-error>
         </mat-form-field><br>
         <mat-form-field appearance="fill">
           <mat-label>Nume</mat-label>
@@ -23,16 +23,16 @@
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input placeholder="exemplu@example.com" matInput formControlName="emailUser"  required>
-         <!-- <mat-error  class="error" *ngIf="myForm.controls['emailUser'].hasError('email')">
+          <mat-error  class="error" *ngIf="firstFormGroup.controls['emailUser'].hasError('email')">
             Nu este un email valid
-        </mat-error>-->
+        </mat-error>
         </mat-form-field><br>
         <mat-form-field appearance="fill">
           <mat-label>Telefon</mat-label>
           <input matInput  placeholder="ex. 0766666666" formControlName="numberUser"  required>
-         <!-- <mat-error  class="error" *ngIf="myForm.controls['numberUser'].hasError('pattern')">
+        <mat-error  class="error" *ngIf="firstFormGroup.controls['numberUser'].hasError('pattern')">
             Numarul de telefon nu este valid
-        </mat-error>-->
+        </mat-error>
         </mat-form-field><br></form>
         <mat-form-field appearance="fill">
           <mat-label>Cardiolog</mat-label>
@@ -60,14 +60,13 @@
         <form action="#" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Pentru a putea face o programare trebuie sa fii de acord cu conditiile GDPR'); return false; }">
         <div style="text-align: center;">
             <input type="checkbox" name="checkbox" [(ngModel)]="acordGDPR" value="check" id="agree" /> 
-            <b>  Acord GDPR</b><br></div>
-           <p style="margin-left:2vw; margin-right: 2vw;"> Prin completarea formularului declar ca sunt de acord cu folosirea datelor mele personale de catre clinica.
-            Puteti consulta mai multe detalii despre prelucrarea datelor dvs. personale in Politica de prelucrare disponibila in punctele de recoltare sau pe site.
-            Prezentul consimtamant este acordat de bunavoie si poate fi oricand revocat in scris la adresa cabinetului sau prin email la adresa gdpr@medicalclinicapp.com.
-            </p><br>
+            <b>  Acord GDPR</b><br>
+            <mat-icon class='infoCard' [matTooltip]="tooltipVariable">info_outline</mat-icon>
+
+        </div>
 
             <div [align]="'center'">
-            <button  [disabled]="registerform.form.invalid || !acordGDPR"  mat-dialog-close mat-raised-button class="btn" color="primary" (click)="addAppointment()">
+            <button  [disabled]="registerform.form.invalid || !acordGDPR"  mat-dialog-close mat-raised-button (click)="addAppointment()">
                 Add
             </button></div>
         </form>

@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
+import com.medicalclinicapp.medicalclinicapp.security.models.ChangeImg;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 
 @Service
@@ -88,6 +90,23 @@ public class UserService implements UserDetailsService {
             return null;}
 
         return currentUser;
+    }
+
+    public User changeImage(String cnpU, ChangeImg changeImg){
+        User user = userRepository.findByCnp(cnpU);
+        if(changeImg.getImageUser() == null){
+            return null;
+        }
+        else{
+            user.setImageUser(changeImg.getImageUser());
+            userRepository.save(user);
+        }
+        return user;
+    }
+
+    public List<User> getAllEmployees(){
+        List<User> userList =  userRepository.findAll();
+        return userList;
     }
     /*
 

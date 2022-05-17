@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { ChangeDetectorRef, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChangeImageComponent } from './components/change-image/change-image.component';
 import { AuthGuard } from './guard/authentification/auth.guard';
 import { DoctorGuard } from './guard/doctor/doctor.guard';
 import { HematologGuard } from './guard/hematolog/hematolog.guard';
@@ -19,9 +20,7 @@ import { ModeratorComponent } from './pages/moderator/category/moderator/moderat
 import { PacientComponent } from './pages/pacient/pacient/pacient.component';
 import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
 import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
-
-import { ModeratorService } from './services/moderator/moderator.service';
-
+import { UploadImgComponent } from './pages/upload-img/upload-img.component';
 
 const routes: Routes = [ 
   {
@@ -88,7 +87,16 @@ const routes: Routes = [
   {
     path:"pacient",
     component: PacientComponent,
+  },
+   {
+    path:"upload",
+    component: UploadImgComponent,
+  },
+  {
+    path: "change",
+    component: ChangeImageComponent
   }
+  
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

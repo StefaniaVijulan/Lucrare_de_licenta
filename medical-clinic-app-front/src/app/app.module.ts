@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppRoutingModule } from './app-routing.module';
-import { MatNativeDateModule, MatRadioModule, MatStepperModule } from '@angular/material';
+import { MatNativeDateModule, MatProgressSpinnerModule, MatRadioModule, MatStepperModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatSlideToggleModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
@@ -46,7 +46,13 @@ import { DialogAddAppointmentsRadiologyComponent } from './components/dialog-add
 import { HematologComponent } from './pages/hematolog/hematolog/hematolog.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PacientComponent } from './pages/pacient/pacient/pacient.component';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import 'firebase/storage';
+import { environment } from 'src/environments/environment.prod';
+import { UploadImgComponent } from './pages/upload-img/upload-img.component';
+import { ChangeImageComponent } from './components/change-image/change-image.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +82,8 @@ import { PacientComponent } from './pages/pacient/pacient/pacient.component';
     DialogAddAppointmentsRadiologyComponent,
     HematologComponent,
     PacientComponent,
-  
+    UploadImgComponent,
+    ChangeImageComponent,
   
   ],
   imports: [
@@ -110,7 +117,11 @@ import { PacientComponent } from './pages/pacient/pacient/pacient.component';
     MatStepperModule,
     MatListModule,
     MatAutocompleteModule,
-    MatExpansionModule
+    MatExpansionModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   entryComponents: [
     DialogComponent, 

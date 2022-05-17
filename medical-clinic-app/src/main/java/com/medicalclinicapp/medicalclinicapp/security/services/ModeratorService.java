@@ -71,6 +71,9 @@ private ModeratorRepository moderatorRepository;
               "\n\nParola corespunzatoare este: " + parola + ".";
       emailService.sendmail(moderator.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
       moderator.setRole("MODERATOR");
+      if(moderator.getImageUser() == null || moderator.getImageUser().trim().isEmpty()){
+          moderator.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+      }
       moderatorRepository.saveAndFlush(moderator);
       Patient patient = new Patient();
       patient.setCnp(moderator.getCnp());
@@ -105,7 +108,9 @@ private ModeratorRepository moderatorRepository;
                 "\n\nParola corespunzatoare este: " + parola + ".";
         emailService.sendmail(cardiolog.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
         cardiolog.setRole("CARDIOLOG");
-
+        if(cardiolog.getImageUser() == null || cardiolog.getImageUser().trim().isEmpty()){
+            cardiolog.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+        }
         cardiologRepository.save(cardiolog);
       Patient patient = new Patient();
       patient.setCnp(cardiolog.getCnp());
@@ -138,6 +143,9 @@ private ModeratorRepository moderatorRepository;
                  "\n\nParola corespunzatoare este: " + parola + ".";
          emailService.sendmail(secretary.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
          secretary.setRole("SECRETAR");
+      if(secretary.getImageUser() == null || secretary.getImageUser().trim().isEmpty()){
+          secretary.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+      }
          secretaryRepository.save(secretary);
       Patient patient = new Patient();
       patient.setCnp(secretary.getCnp());
@@ -171,7 +179,9 @@ private ModeratorRepository moderatorRepository;
                  "\n\nParola corespunzatoare este: " + parola + ".";
          emailService.sendmail(imagist.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
          imagist.setRole("IMAGIST");
-
+      if(imagist.getImageUser() == null || imagist.getImageUser().trim().isEmpty()){
+          imagist.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+      }
          imagistRepository.save(imagist);
       Patient patient = new Patient();
       patient.setCnp(imagist.getCnp());
@@ -205,7 +215,9 @@ private ModeratorRepository moderatorRepository;
                    "\n\nParola corespunzatoare este: " + parola + ".";
            emailService.sendmail(hematolog.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
            hematolog.setRole("HEMATOLOG");
-
+      if(hematolog.getImageUser() == null || hematolog.getImageUser().trim().isEmpty()){
+          hematolog.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+      }
            hematologRepository.save(hematolog);
       Patient patient = new Patient();
       patient.setCnp(hematolog.getCnp());

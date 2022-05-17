@@ -2,6 +2,7 @@ import { Component, OnInit,HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DialogAddAppointmentComponent } from 'src/app/components/dialog-add-appointment/dialog-add-appointment.component';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,24 +10,31 @@ import { AppointmentService } from 'src/app/services/appointment/appointment.ser
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  listDoctors: any;
-  constructor(private dialog: MatDialog, public _appointment: AppointmentService ) { }
+  listUsers: any;
+  constructor(private dialog: MatDialog, public _service: AuthService, public _appointment: AppointmentService) { }
 
   ngOnInit() {
-    this.allCardiolog()
+    this.allUsers()
+    this.allCardio()
   }
- 
-  allCardiolog(){
-    this._appointment.allCardiolog().subscribe((res)=>{
-      this._appointment.doctorListService = res
-      this.listDoctors = res;
-      console.log(this._appointment.doctorListService)
+ allCardio(){
+  this._appointment.allCardiolog().subscribe((res)=>{
+    this._appointment.doctorListService = res
+    console.log(this._appointment.doctorListService)
+  })
+ }
+  allUsers(){
+    this._service.getAllUsers().subscribe((res)=>{
+      this._service.userListService = res
+      this.listUsers = res;
+      console.log(this._service.userListService)
     })
   }
   openAppointmentDialog(){
     
     this.dialog.open(DialogAddAppointmentComponent,{
-     width: '40%'
+     width: '30%',
+     panelClass: 'my-panel'
     });
   }
 

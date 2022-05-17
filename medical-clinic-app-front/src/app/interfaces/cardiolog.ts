@@ -5,6 +5,7 @@ export class Cardiolog {
     lastName: String;
     emailUser: String;
     numberUser: String;
+    imageUser: string;
     role: String;
     
     constructor(){}

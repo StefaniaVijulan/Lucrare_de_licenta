@@ -16,6 +16,7 @@ import { DialogAppointmentSuccessComponent } from '../dialog-appointment-success
 })
 export class DialogAddAppointmentComponent implements OnInit {
   private baseUrl = environment.baseUrl;
+  tooltipVariable = "Prin completarea formularului declar ca sunt de acord cu folosirea datelor mele personale de catre clinica. Puteti consulta mai multe detalii despre prelucrarea datelor dvs. personale in Politica de prelucrare disponibila in punctele de recoltare sau pe site. Prezentul consimtamant este acordat de bunavoie si poate fi oricand revocat in scris la adresa cabinetului sau prin email la adresa gdpr@medicalclinicapp.com."
   tomorrowD:any = new Date().getDate()+1;
   blockedData: any
   dateP: string;
@@ -24,7 +25,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   dataEdit: string;
   acordGDPR: boolean = false;
   hourInterval: any;
-  luna: string
+  luna: string;
   appointment: Appointment = new Appointment();
   firstFormGroup!: FormGroup;
   selectedCardio: any;
@@ -40,7 +41,7 @@ export class DialogAddAppointmentComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       numberUser: ['', Validators.compose([Validators.required, Validators.pattern('(\\d{3})(\\d{3})(\\d{4})')])],
-      emailUser: ['']
+      emailUser:['', Validators.compose([Validators.required, Validators.email])]
     })
   }
 

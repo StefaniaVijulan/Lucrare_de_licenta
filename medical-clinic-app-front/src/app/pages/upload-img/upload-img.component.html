@@ -1,0 +1,11 @@
+<p>upload-img works!</p>
+<mat-spinner *ngIf="checkUploadImg"></mat-spinner>
+<div>
+  <input type="file" (change)="onFileChandes($event)"><br>
+  <button *ngIf="downloadURL?!selectedFile:selectedFile" mat-stroked-button
+    class="mat-button-toggle-group btn-outline-success"
+    (click)="onUpload()">Upload file</button>
+<div *ngIf="downloadURL" style="margin-bottom: 10px; margin-top:10px;">
+    <img [src]="downloadURL" style="width: 300px; height: auto;">
+</div>
+</div>
