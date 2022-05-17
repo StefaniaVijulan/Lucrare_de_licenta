@@ -1,4 +1,3 @@
-
 <!--
 <h1>Medical Clinic App</h1>
 <br>
@@ -10,87 +9,58 @@
 <br>
 <div [align]="'center'">
 <button mat-raised-button class="primary" (click) ="openAppointmentDialog()">Adauga o programare</button></div>-->
-
-<div class="main">
-    <header class="header">
-      <ul class="menu" #menu>
-        <li class="menu__item">
-          <a class="menu__link">Home</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link">About Us</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link">How it Works</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link">Benefits</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link">Testimonials</a>
-        </li>
-      </ul>
-      <ul class="menu menu-right" #menuSecond>
-        <li class="menu__item">
-          <a class="menu__link">Blog</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link">FAQ</a>
-        </li>
-      </ul>
-    </header>
-    <section class="first-section">
-      <div class="info">
-        <h1 class="heading-1">
-          Real estate advice for real locals.
-        </h1>
-        <p class="paragraph">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia adipisci
-          deserunt eaque.
-        </p>
-        <a class="btn btn--start">Get Started</a>
-      </div>
-      <div class="visuals">
-        <div class="image-container">
-          <img
-            #imageFirst
-            src="../assets/photo-1536179247184-595913ca4a28.jpeg"
-            alt=""
-          />
-        </div>
-        <div class="image-container">
-          <img
-            #imageSecond
-            src="../assets/photo-1469817805249-72b7df1c3c05.jpeg"
-            alt=""
-          />
-        </div>
-      </div>
-    </section>
-    <section class="second-section" #secondSection>
-      <div class="box"></div>
-      <h4 class="heading-4" id="about">About Us</h4>
-      <h1 class="heading-1" id="buy">Buying a home doesn't have to be a mystery.</h1>
-      <div class="info-1">
-        <div class="info-1__text">
-          <span class="quote">
-            "
-          </span>
-          <h2 class="heading-3">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </h2>
-          <p class="paragraph">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum labore
-            tempora eveniet adipisci sunt harum, eos nobis asperiores cumque
-            veniam fuga fugit eius ab reiciendis, culpa id recusandae illum
-            quisquam!
-          </p>
-          <a class="btn--learn">Learn More</a>
-        </div>
-        <div class="info-1__visual">
-          <img src="../assets/photo-1593016605825-8cfb409ca3b1.jpeg" alt="">
-        </div>
-      </div>
-  
-    </section>
+<div class="bg-img">
+  <div class="bgPosition" [class.bg]="bgVariable">
+    <!--<img src="/assets/dashboard/dashboard1.jpg">-->
   </div>
+</div>
+<section class="banner">
+  <div class="container">
+    <div class="banner-content">
+      <h1>
+        Your Heart Clinic
+      </h1>
+      <p><i>"Fiecare om este autorul propriei sale sănătăți sau boli" </i><b>- Buddha</b></p>
+      <ul>
+        <li>
+          <h2>Seriozitate</h2>
+          
+        </li>
+        <li>
+          <h2>Accebilitate</h2>
+       
+        </li>
+        <li>
+          <h2>Calitate</h2>
+  
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="container">
+    <div class="gallery-container">
+      <p>Ai probleme cardiace sau îți dorești să îți faci doar un control de rutină? <i style="color:#EF0D50;">Your Heart Clinic</i> vine în ajutorul tău. Noi suntem o echipă dornică de a îți răspunde la toate curiozitățile tale legate de problemele cardiologice care pot apărea, dar și de a îți pune la dispoziție servicii de calitate pentru investigații mai amănunțite.</p>
+      <br>
+      <h2><span>Echipa noastra</span></h2>
+      <div class="row">
+        
+        <div class="col-md-4" *ngFor="let appointment of listDoctors">
+          <img src="/assets/dashboard/dashboard2.jpeg">
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+        </div>
+        <div class="col-md-6">
+          <img src="/assets/dashboard/dashboard3.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

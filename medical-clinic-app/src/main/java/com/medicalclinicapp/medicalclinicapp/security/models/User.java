@@ -27,6 +27,7 @@ public abstract class User implements UserDetails{
     private String lastName;
     private String emailUser;
     private String numberUser;
+
     private String imageUser;
 
     @Override

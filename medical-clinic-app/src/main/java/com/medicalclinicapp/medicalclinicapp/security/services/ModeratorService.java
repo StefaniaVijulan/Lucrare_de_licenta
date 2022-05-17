@@ -107,6 +107,23 @@ private ModeratorRepository moderatorRepository;
         cardiolog.setRole("CARDIOLOG");
 
         cardiologRepository.save(cardiolog);
+      Patient patient = new Patient();
+      patient.setCnp(cardiolog.getCnp());
+      patient.setPassword(bCryptPasswordEncoder.encode(parola));
+      patient.setFirstName(cardiolog.getFirstName());
+      patient.setLastName(cardiolog.getLastName());
+      patient.setEmailUser(cardiolog.getEmailUser());
+      patient.setNumberUser(cardiolog.getNumberUser());
+      patient.setRole("PACIENT");
+      patientRepository.save(patient);
+      FisaPatient fisaPatient = new FisaPatient();
+      for (int i = 0; i < patientRepository.findAll().size(); i++) {
+          {
+              if(patientRepository.findAll().get(i).getCnp().equals(cardiolog.getCnp()))
+                  fisaPatient.setPatient(patientRepository.findAll().get(i));
+          }
+      }
+      fisaPatientRepository.save(fisaPatient);
         return cardiolog;
     };
   public Secretary registerSecretary(Secretary secretary) {
@@ -122,6 +139,23 @@ private ModeratorRepository moderatorRepository;
          emailService.sendmail(secretary.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
          secretary.setRole("SECRETAR");
          secretaryRepository.save(secretary);
+      Patient patient = new Patient();
+      patient.setCnp(secretary.getCnp());
+      patient.setPassword(bCryptPasswordEncoder.encode(parola));
+      patient.setFirstName(secretary.getFirstName());
+      patient.setLastName(secretary.getLastName());
+      patient.setEmailUser(secretary.getEmailUser());
+      patient.setNumberUser(secretary.getNumberUser());
+      patient.setRole("PACIENT");
+      patientRepository.save(patient);
+      FisaPatient fisaPatient = new FisaPatient();
+      for (int i = 0; i < patientRepository.findAll().size(); i++) {
+          {
+              if(patientRepository.findAll().get(i).getCnp().equals(secretary.getCnp()))
+                  fisaPatient.setPatient(patientRepository.findAll().get(i));
+          }
+      }
+      fisaPatientRepository.save(fisaPatient);
          return secretary;
     };
   public Imagist registerImagist(Imagist imagist) {
@@ -139,6 +173,23 @@ private ModeratorRepository moderatorRepository;
          imagist.setRole("IMAGIST");
 
          imagistRepository.save(imagist);
+      Patient patient = new Patient();
+      patient.setCnp(imagist.getCnp());
+      patient.setPassword(bCryptPasswordEncoder.encode(parola));
+      patient.setFirstName(imagist.getFirstName());
+      patient.setLastName(imagist.getLastName());
+      patient.setEmailUser(imagist.getEmailUser());
+      patient.setNumberUser(imagist.getNumberUser());
+      patient.setRole("PACIENT");
+      patientRepository.save(patient);
+      FisaPatient fisaPatient = new FisaPatient();
+      for (int i = 0; i < patientRepository.findAll().size(); i++) {
+          {
+              if(patientRepository.findAll().get(i).getCnp().equals(imagist.getCnp()))
+                  fisaPatient.setPatient(patientRepository.findAll().get(i));
+          }
+      }
+      fisaPatientRepository.save(fisaPatient);
          return imagist;
     };
   public Hematolog registerHematolog(Hematolog hematolog)  {
@@ -156,6 +207,23 @@ private ModeratorRepository moderatorRepository;
            hematolog.setRole("HEMATOLOG");
 
            hematologRepository.save(hematolog);
+      Patient patient = new Patient();
+      patient.setCnp(hematolog.getCnp());
+      patient.setPassword(bCryptPasswordEncoder.encode(parola));
+      patient.setFirstName(hematolog.getFirstName());
+      patient.setLastName(hematolog.getLastName());
+      patient.setEmailUser(hematolog.getEmailUser());
+      patient.setNumberUser(hematolog.getNumberUser());
+      patient.setRole("PACIENT");
+      patientRepository.save(patient);
+      FisaPatient fisaPatient = new FisaPatient();
+      for (int i = 0; i < patientRepository.findAll().size(); i++) {
+          {
+              if(patientRepository.findAll().get(i).getCnp().equals(hematolog.getCnp()))
+                  fisaPatient.setPatient(patientRepository.findAll().get(i));
+          }
+      }
+      fisaPatientRepository.save(fisaPatient);
            return hematolog;
         };
 
