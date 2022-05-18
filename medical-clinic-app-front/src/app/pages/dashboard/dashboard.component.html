@@ -22,65 +22,21 @@
       </h1>
       <p><i>"Fiecare om este autorul propriei sale sănătăți sau boli" </i><b>- Buddha</b></p>
       <button class="button-prog" role="button" (click) ="openAppointmentDialog()">Adaugă o programare</button>
-     <!-- <ul>
-        <li>
-          <h2>Seriozitate</h2>
-
-        </li>
-        <li>
-          <h2>Accebilitate</h2>
-
-        </li>
-        <li>
-          <h2>Calitate</h2>
-
-        </li>
-      </ul>-->
     </div>
   </div>
 </section>
-<!--
-<section class="gallery">
-  <div class="container">
-    <div class="gallery-container">
-      <p>Ai probleme cardiace sau îți dorești să îți faci doar un control de rutină? <i style="color:#EF0D50;">Your Heart Clinic</i> vine în ajutorul tău. Noi suntem o echipă dornică de a îți răspunde la toate curiozitățile tale legate de problemele cardiologice care pot apărea, dar și de a îți pune la dispoziție servicii de calitate pentru investigații mai amănunțite.</p>
-      <br>
-      <h2><span>Echipa noastra</span></h2>
-      <div class="row">
-        
-        <div class="col-md-3" *ngFor="let cardio of listDoctors">
-          <div style="background-color: blue;">
-            <img [src]="cardio.imageUser">
-          <p>{{cardio.cnp}}</p>
-          </div>
-        </div>
-        
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-        </div>
-        <div class="col-md-6">
-          <img src="/assets/dashboard/dashboard3.jpg">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>-->
-
 
 <section id="team">
   <div class="container">
 
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <p>Ai probleme cardiace sau îți dorești să îți faci doar un control de rutină? <i style="color:#EF0D50;">Your Heart Clinic</i> vine în ajutorul tău. 
-          Dispunem de echipament pentru depistarea, diagnosticarea și tratarea oricărei afecțiuni de cardiologie.</p>
+          <p>Ai probleme cardiace sau îți dorești să îți faci doar un control de rutină? <i style="color:#EE6F57;">Your Heart Clinic</i> vine în ajutorul tău. 
+          Dispunem de echipament pentru depistarea, diagnosticarea și tratarea oricărei afecțiuni de cardiologice.</p>
         </div>
           <div class="col-md-8">
             <h2>Cine suntem?</h2>
-            <p>Suntem o echipă dornică de a îți răspunde la toate curiozitățile tale legate de problemele cardiologice care pot apărea, dar și de a îți pune la dispoziție servicii de calitate pentru investigații mai amănunțite.
+            <p>Suntem o echipă dornică de a-ți răspunde la toate curiozitățile tale legate de problemele cardiologice care pot apărea, dar și de a îți pune la dispoziție servicii de calitate pentru investigații mai amănunțite.
         
             </p>
           </div>
@@ -89,11 +45,11 @@
           <div class="col-lg-3" *ngFor="let cardio of listUsers">
               <div class="member">
                 <div class="member-img">
-                    <img [src]="cardio.imageUser" class="img-fluid" alt="">
+                    <img [attr.src]="cardio?.imageUser" class="img-fluid" alt="">
                 </div>
                   <div class="member-info">
-                      <h4>{{cardio.firstName}} {{cardio.lastName}}</h4>
-                      <span>{{cardio.role}}</span>
+                      <h4>{{cardio?.firstName}} {{cardio?.lastName}}</h4>
+                      <span>{{cardio?.role}}</span>
                      
                   </div>
               </div>

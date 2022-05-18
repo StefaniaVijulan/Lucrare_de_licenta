@@ -1,0 +1,18 @@
+<h3>
+    Resetează parola!
+</h3>
+<br>
+
+<form [formGroup]="formPass">
+<mat-form-field appearance="fill">
+    <mat-label>CNP</mat-label>
+    <input matInput placeholder="ex. 6001100110000" formControlName="cnp" required>
+    <mat-error class="error" *ngIf="formPass.controls['cnp'].hasError('pattern')">
+      Introduceti un CNP valid
+    </mat-error>
+  </mat-form-field></form>
+  <div mat-dialog-actions [align]="'center'">
+    <button class="button-prog" role="button"
+    (click)="forgotPass()">Resetează</button>
+    
+</div>

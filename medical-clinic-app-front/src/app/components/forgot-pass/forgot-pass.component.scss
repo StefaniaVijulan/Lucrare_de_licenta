@@ -1,0 +1,35 @@
+mat-form-field {
+    width: 100%;;
+}
+h3, mat-label, mat-error{
+    font-family: 'Roboto', sans-serif;
+}
+h3{
+text-align: center;
+}
+.button-prog {
+    background: #EE6F57;
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 18px;
+    border: 0;
+  
+  }
+    /*Input color*/
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #EE6F57 !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #EE6F57 !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: #EE6F57 !important;;
+  }

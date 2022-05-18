@@ -1,14 +1,47 @@
 mat-card {
-    width: 26vw;
-    height: 35vh;
-    margin: 9em auto;
-    text-align: center;
-  }
-h2{
-    font-size: 3vh;
+  width: 26vw;
+  height: 50%;
+  margin: 9em auto;
+  text-align: center;
+ 
+
 }
+.first-box{
+  box-shadow: 0px 1px 6px 0px rgba(5,55,106,1);
+}
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 3.5vh;
+}
+
+mat-form-field {
+  display: block;
+  font-size: 2vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+/*Button*/
+.button-prog {
+  background: #EE6F57;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: #ededf0 ;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: 0;
+}  /*Input color*/
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #EE6F57 !important;
+   }
   
-  mat-form-field {
-    display: block;
-    font-size: 2vh;
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #EE6F57 !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: #EE6F57 !important;;
   }

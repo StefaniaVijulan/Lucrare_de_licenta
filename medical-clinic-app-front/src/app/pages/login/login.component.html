@@ -1,22 +1,26 @@
-<mat-card>
+<mat-card class="first-box">
     <mat-card-content>
-      <form #loginForm="ngForm" (ngSubmit)="doLoginUser()">
-        <h2>Log In</h2>
-        <mat-form-field>
-          <input matInput placeholder="Cnp" [(ngModel)]="userDto.username" name="cnp" required>
-          <mat-error>
+      <form #loginForm="ngForm"  [formGroup]="firstFormGroup">
+        <h2>Contul meu</h2>
+        <mat-error>{{msg}}</mat-error>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>CNP</mat-label>
+          <input matInput placeholder="ex. 6001100110000" formControlName="username" required>
+          <mat-error class="error" *ngIf="firstFormGroup.controls['username'].hasError('pattern')">
             Introduceti un CNP valid
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" placeholder="Password" [(ngModel)]="userDto.password" name="password" required>
-          <mat-error>
-            Introduceti o parola
-          </mat-error>
+        <mat-form-field appearance="fill">
+          <mat-label>Parola noua</mat-label>
+          <input matInput [type]="hideNew ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
+            <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
-        <mat-error>{{msg}}</mat-error>
-        <br>
-        <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
+
+        <p (click)="openForgotPassDialog()" > <u>Mi-am uitat parola</u></p>
+        <button class="button-prog" role="button" [disabled]="!loginForm.form.valid" (click)="doLoginUser()">Autentificare</button>
       </form>
     </mat-card-content>
   </mat-card>

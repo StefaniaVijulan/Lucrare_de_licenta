@@ -9,12 +9,11 @@
     </mat-icon>
   </button>
   <img src="/assets/logo.png" alt="image">
-  <div *ngIf ="_router.url == '/login' " (click) = "goDashboard()"> Medical Clinic App</div>
-  <div *ngIf ="_router.url != '/login' "> Medical Clinic App</div>
+  <div *ngIf="_router.url == '/login' " (click)="goDashboard()">Your Heart Clinic</div>
+  <div *ngIf="_router.url != '/login' ">Your Heart Clinic</div>
   <div style="margin-left: auto; margin-right: 1vw;">
-    <mat-icon *ngIf= "(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
-    <button mat-button color="white" style="font-size: 1.3rem;" *ngIf= "(!_service.loggedIn()) && _router.url != '/login'" (click)="_service.logInUser()">Log In</button>
-  </div>
+    <mat-icon *ngIf="(_service.loggedIn())" (click)="_service.logoutUser()">exit_to_app</mat-icon>
+    <button class="button-prog" role="button"  *ngIf="(!_service.loggedIn()) && _router.url != '/login'" (click)="_service.logInUser()">Log In</button></div>
 
 </mat-toolbar>
 
@@ -45,7 +44,7 @@
       <button mat-button class="menu-button" (click)="openDialog()">
         <mat-icon>lock_reset</mat-icon>
         <span>Resetare parola</span>
-    </button>
+      </button>
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'SECRETAR')">
       <button mat-button class="menu-button" (click)="_secretar.seeInternari()">
@@ -59,8 +58,8 @@
       <mat-divider></mat-divider>
 
       <button mat-button class="menu-button" (click)="openDialog()">
-          <mat-icon>lock_reset</mat-icon>
-          <span>Resetare parola</span>
+        <mat-icon>lock_reset</mat-icon>
+        <span>Resetare parola</span>
       </button>
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'CARDIOLOG')">
@@ -70,22 +69,22 @@
       </button>
       <mat-divider></mat-divider>
       <button mat-button class="menu-button" (click)="openDialog()">
-          <mat-icon>lock_reset</mat-icon>
-          <span>Resetare parola</span>
+        <mat-icon>lock_reset</mat-icon>
+        <span>Resetare parola</span>
       </button>
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'HEMATOLOG')">
-      <button mat-button class="menu-button" >
+      <button mat-button class="menu-button">
         <mat-icon>people</mat-icon>
         <span>Programari</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-button class="menu-button" (click)="openDialog()">
-          <mat-icon>lock_reset</mat-icon>
-          <span>Resetare parola</span>
+        <mat-icon>lock_reset</mat-icon>
+        <span>Resetare parola</span>
       </button>
     </div>
-    
+
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

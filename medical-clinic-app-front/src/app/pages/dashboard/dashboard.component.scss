@@ -1,9 +1,9 @@
 
 .bg-img{
-  background-image: url('/assets/dashboard/background.png');
+  background-image: url('/assets/dashboard/background10.jpg');
   background-size: cover;
 
-  width: 99.1%;
+  width: 98.9%;
   height: 100%;
   top: 5;
   left: 0;
@@ -11,16 +11,18 @@
   position: fixed;
 }
 .button-prog {
-  background: rgb(239, 13, 80, 0.7);
+  background: #EE6F57;
   border-radius: 999px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ededf0;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 21vh;
+  margin-left: -1vw;
   padding: 8px 18px;
-
   border: 0;
+  z-index: -1;
+  position: fixed;
 }
 
 
@@ -28,20 +30,29 @@
   padding: 80px 0 100px;
 }
 .banner-content h1{
+  font-family: 'Roboto', sans-serif;
+  z-index: -1;
+  position: fixed;
   font-size: 85px;
   font-weight: 600;
   color: transparent;
+  margin-top: -1vh;
+  margin-left: -1vw;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #EF0D50;
+  -webkit-text-stroke-color: #ededf0;
 
 }
 .banner-content p{
+  font-family: 'Roboto', sans-serif;
+  z-index: -1;
+  position: fixed;
   color: black;
   font-size: 16px;
   line-height: 24px;
   opacity: .7;
-  margin-top: 15px;
-  width: 500px;
+  margin-top: 15vh;
+  margin-left: -1vw;
+  width: 560px;
 }
 /*
 .banner-content ul{
@@ -68,23 +79,25 @@
 /* Our team */
 #team {
   padding: 60px 0;
+  margin-top: 25vh;
   text-align: center;
-  background-color: white;
-
+  background-color: #ededf0;
+  
 }
 #team h2 {
   position: relative;
+  font-family: 'Roboto', sans-serif;
   padding: 0px 0px 15px;
 }
 #team p {
   font-size: 15px;
   font-style: italic;
-
+  font-family: 'Roboto', sans-serif;
   margin: 20px 0px 40px;
 }
 #team h2::after {
   content: '';
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #EE6F57;
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -97,11 +110,11 @@
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: #ededf0;
   padding: 10px;
 
   border-radius: 15px 0px 15px 0px;
-  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 6px 0px rgb(238, 111, 87, 0.4);
 }
 
 #team .member img {
@@ -111,28 +124,33 @@
 
 }
 #team .member .member-info {
+  font-family: 'Roboto', sans-serif;
   display: block;
   position: absolute;
   bottom: 0px;
   left: -200px;
   transition: 0.4s;
   padding: 15px 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(5,55,106,0.7);
 }
 #team .member:hover .member-info {
+  font-family: 'Roboto', sans-serif;
   left: 0px;
   right: 0px;
 }
 #team .member h4 {
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   margin-bottom: 2px;
   font-size: 18px;
-  color: #fff;
+  color: #ededf0;
 }
+
 #team .member span {
+  font-family: 'Roboto', sans-serif;
   font-style: italic;
   display: block;
-  color: #fff;
+  color: #ededf0;
   font-size: 13px;
 }
 

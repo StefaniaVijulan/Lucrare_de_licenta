@@ -16,7 +16,7 @@ import { DialogAppointmentSuccessComponent } from '../dialog-appointment-success
 })
 export class DialogAddAppointmentComponent implements OnInit {
   private baseUrl = environment.baseUrl;
-  tooltipVariable = "Prin completarea formularului declar ca sunt de acord cu folosirea datelor mele personale de catre clinica. Puteti consulta mai multe detalii despre prelucrarea datelor dvs. personale in Politica de prelucrare disponibila in punctele de recoltare sau pe site. Prezentul consimtamant este acordat de bunavoie si poate fi oricand revocat in scris la adresa cabinetului sau prin email la adresa gdpr@medicalclinicapp.com."
+  tooltipVariable = "Prin completarea formularului declar ca sunt de acord cu folosirea datelor mele personale de catre clinica. Puteti consulta mai multe detalii despre prelucrarea datelor dvs. personale in Politica de prelucrare disponibila clinica noastră. Prezentul consimtamant este acordat de bunavoie si poate fi oricand revocat in scris la adresa cabinetului sau prin email la adresa gdpr@medicalclinicapp.com."
   tomorrowD:any = new Date().getDate()+1;
   blockedData: any
   dateP: string;
@@ -30,6 +30,8 @@ export class DialogAddAppointmentComponent implements OnInit {
   firstFormGroup!: FormGroup;
   selectedCardio: any;
   cardiologList: any;
+
+  loading = false;
   constructor(private _formBuilder: FormBuilder, private _http: HttpClient, private dialog: MatDialog, private _appointment: AppointmentService, private dialogref: MatDialogRef < DialogAddAppointmentComponent >) { }
 
   ngOnInit() {
@@ -113,10 +115,13 @@ export class DialogAddAppointmentComponent implements OnInit {
     console.log(this.appointment)
     return this._appointment.addAppointment(this.selectedCardio,this.appointment).subscribe((res)=>{
       console.log(res)
+      if(res){
+        this.loading = true;
+    setTimeout(() => this.loading = false, 2000);
       this.dialogref.close("save");
       this.dialog.open(DialogAppointmentSuccessComponent,{
       width: '30%'
-    })
+    })}
    })
   
   }

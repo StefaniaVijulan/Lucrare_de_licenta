@@ -6,7 +6,6 @@ import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.repository.UserRepository;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.List;
 
 
@@ -108,6 +105,21 @@ public class UserService implements UserDetailsService {
         List<User> userList =  userRepository.findAll();
         return userList;
     }
+
+    public User forgotPass(String cnpC) {
+        User currentUser = userRepository.findByCnp(cnpC);
+        System.out.println(currentUser);
+        String newParola = "parola2";
+        String emailtext;
+        emailtext = "Buna "  + " " + ",\n\n Parola ta a fost resetata cu succes!. Noua ta parola este: " + newParola +
+        ". Te încurajăm ca la prima conectare să îți schimbi parola.";
+        emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Mi-am uitat parola",emailtext);
+        currentUser.setPassword(this.bCryptPasswordEncoder.encode(newParola));
+        this.userRepository.save(currentUser);
+        System.out.println("Password reset");
+        return currentUser;
+    }
+
     /*
 
 

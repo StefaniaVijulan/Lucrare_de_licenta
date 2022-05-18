@@ -53,6 +53,7 @@ import { environment } from 'src/environments/environment.prod';
 import { UploadImgComponent } from './pages/upload-img/upload-img.component';
 import { ChangeImageComponent } from './components/change-image/change-image.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     PacientComponent,
     UploadImgComponent,
     ChangeImageComponent,
+    ForgotPassComponent,
   
   ],
   imports: [
@@ -136,7 +138,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
      DialogEditFisaComponent,
      DialogAddAppointmentsHrComponent,
      DialogAddAppointmentsHematologyComponent,
-     DialogAddAppointmentsRadiologyComponent
+     DialogAddAppointmentsRadiologyComponent,
+     ForgotPassComponent
     ],
     
   providers:[],

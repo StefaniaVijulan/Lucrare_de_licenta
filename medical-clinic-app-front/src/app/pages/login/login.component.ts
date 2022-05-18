@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { ForgotPassComponent } from 'src/app/components/forgot-pass/forgot-pass.component';
 import { LoginDto } from 'src/app/interfaces/login-dto';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -18,15 +21,26 @@ export class LoginComponent implements OnInit {
   public message = '';
   public error: boolean | string = false;
   msg: string;
-
-  constructor(private _service: AuthService, private _router: Router) { }
+  firstFormGroup: FormGroup;
+  hideNew = true;
+  constructor(private dialog: MatDialog, private _formBuilder: FormBuilder,private _service: AuthService, private _router: Router) { }
 
   ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      username: ['', Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
+      password: ['', Validators.required]})
+  }
+  setUser()
+  {
+    this.userDto.username = this.firstFormGroup.value.username
+    this.userDto.password = this.firstFormGroup.value.password
+
   }
   isNotValid(): boolean {
     return !this.userDto.username || !this.userDto.password;
   }
   doLoginUser() {
+    this.setUser()
     this._service.loginUser(this.userDto).subscribe((response: any) => {
       console.log("doLogin")
       console.log(response);
@@ -123,5 +137,12 @@ export class LoginComponent implements OnInit {
       }*/
     })
   
+  }
+  openForgotPassDialog(){
+    
+    this.dialog.open(ForgotPassComponent,{
+     width: '30%',
+     panelClass: 'my-panel'
+    });
   }
 }

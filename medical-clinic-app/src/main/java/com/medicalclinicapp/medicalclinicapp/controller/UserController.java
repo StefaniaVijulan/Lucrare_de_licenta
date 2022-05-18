@@ -67,6 +67,10 @@ public class UserController {
         return userService.getAllEmployees();
     }
 
+    @PutMapping(("/forgotPass"))
+    public User forgotPass(@RequestParam("cnpU")String cnpU)  {
+        return userService.forgotPass(cnpU);
+    }
        /*
 
 

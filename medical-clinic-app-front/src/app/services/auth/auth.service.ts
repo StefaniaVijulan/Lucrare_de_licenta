@@ -37,6 +37,10 @@ export class AuthService {
   loginPatient(data: any){
     return this._http.post(this.baseUrl + "/loginPatient", data, this.publicHttpHeaders);
   }
+  forgotPass(data: any){
+    console.log("in service => ", data)
+    return this._http.put(this.baseUrl + "/forgotPass?cnpU="+ data, this.publicHttpHeaders);
+  }
   logoutUser() {
     localStorage.removeItem('token')
     localStorage.removeItem('role')

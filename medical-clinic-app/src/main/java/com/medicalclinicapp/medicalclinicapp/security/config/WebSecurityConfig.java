@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/deleteAppointmentCardio",
                         "/checkAvailabilityHourCardio",
                         "/allCardiolog",
+                        "/forgotPass",
                         "/infoPatient",
                         "/addAppointment",
                         "/loginPatient","/changeimage","/allUsers").permitAll()
