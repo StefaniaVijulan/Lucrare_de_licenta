@@ -13,14 +13,14 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Parola noua</mat-label>
-          <input matInput [type]="hideNew ? 'password' : 'text'">
+          <input matInput [type]="hideNew ? 'password' : 'text'"  formControlName="password">
           <button mat-icon-button matSuffix (click)="hideNew = !hideNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
             <mat-icon>{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
 
         <p (click)="openForgotPassDialog()" > <u>Mi-am uitat parola</u></p>
-        <button class="button-prog" role="button" [disabled]="!loginForm.form.valid" (click)="doLoginUser()">Autentificare</button>
+        <button class="button-prog" role="button" (click)="doLoginUser()">Autentificare</button>
       </form>
     </mat-card-content>
   </mat-card>

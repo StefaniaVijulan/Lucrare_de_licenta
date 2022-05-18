@@ -99,10 +99,10 @@ public class AppointmentService {
     public Appointment addAppointment(String cnpC, Appointment appointment) {
         System.out.println("Add appointment");
         String emailtext;
-        emailtext = "Buna ziua, \n" +
+       /* emailtext = "Buna ziua, \n" +
                 "Va multumim ca ati apelat la serviciile noastre. Va asteptam pe data de " + appointment.getDataA() + ", la ora " + appointment.getHour() + "." +
                 "\n\nPentru orice alta informatie nu ezitati sa ne contactati la numarul de telefon: 0760774768. ";
-        emailService.sendmail(appointment.getEmailUser(), "Medical Clinic App - Detalii programare", emailtext);
+        emailService.sendmail(appointment.getEmailUser(), "Medical Clinic App - Detalii programare", emailtext);*/
        // Patient patient = new Patient();
         for (int i = 0; i < patientRepository.findAll().size(); i++) {
             if(patientRepository.findAll().get(i).getCnp().equals(appointment.getCnp()))

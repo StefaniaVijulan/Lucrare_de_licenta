@@ -14,7 +14,7 @@ export class ForgotPassComponent implements OnInit {
   constructor(private _service: AuthService,
     private formBuilder: FormBuilder,
     private dialogref: MatDialogRef < ForgotPassComponent >) { }
-
+    msg=""
 
   ngOnInit() {
     this.formPass = this.formBuilder.group({
@@ -28,8 +28,13 @@ export class ForgotPassComponent implements OnInit {
  this._service.forgotPass(this.formPass.value.cnp).subscribe({
     
     next: (res) => {
+      if(res == null){
+        console.log(res)
+        this.msg = "Acest cont nu exista"
+      }
+      else{
       console.log(res)
-      this.dialogref.close("change");
+      this.dialogref.close("change");}
     },
     error:(error)=>{
       console.log(error)

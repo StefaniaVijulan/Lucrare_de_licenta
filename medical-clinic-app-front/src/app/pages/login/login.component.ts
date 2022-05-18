@@ -33,7 +33,10 @@ export class LoginComponent implements OnInit {
   setUser()
   {
     this.userDto.username = this.firstFormGroup.value.username
+    console.log("username=>", this.userDto.username)
     this.userDto.password = this.firstFormGroup.value.password
+    console.log("password=>", this.userDto.password)
+
 
   }
   isNotValid(): boolean {
@@ -41,6 +44,7 @@ export class LoginComponent implements OnInit {
   }
   doLoginUser() {
     this.setUser()
+    console.log("intra in do login")
     this._service.loginUser(this.userDto).subscribe((response: any) => {
       console.log("doLogin")
       console.log(response);
@@ -76,7 +80,6 @@ export class LoginComponent implements OnInit {
       }
     })
   }
- 
   doLoginPatient() {
     console.log("intra aici")
   //  window.location.href = "/pacient"

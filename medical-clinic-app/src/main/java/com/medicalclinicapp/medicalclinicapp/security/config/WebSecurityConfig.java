@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/forgotPass",
                         "/infoPatient",
                         "/addAppointment",
-                        "/loginPatient","/changeimage","/allUsers").permitAll()
+                        "/loginPatient","/changeimage","/allUsers","/sendingEmail").permitAll()
 
                 .antMatchers("/moderator/registerSecretary",
                         "/moderator/registerCardiolog",

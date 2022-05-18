@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.dto.MailRequest;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.ChangeImg;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
@@ -13,7 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -74,9 +77,11 @@ public class UserService implements UserDetailsService {
             else
             {
                 currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+             /*
                 String emailtext;
+
                 emailtext = "Buna " + currentUser.getLastName() + " " + currentUser.getFirstName() +",\n\n Parola ta a fost schimbata cu succes!" ;
-                emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Schimbare Parola",emailtext);
+                emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Schimbare Parola",emailtext); */
                 this.userRepository.save(currentUser);
                 System.out.println("Password change");
             }
@@ -108,12 +113,20 @@ public class UserService implements UserDetailsService {
 
     public User forgotPass(String cnpC) {
         User currentUser = userRepository.findByCnp(cnpC);
+        if(currentUser == null)
+            return null;
         System.out.println(currentUser);
         String newParola = "parola2";
         String emailtext;
-        emailtext = "Buna "  + " " + ",\n\n Parola ta a fost resetata cu succes!. Noua ta parola este: " + newParola +
-        ". Te încurajăm ca la prima conectare să îți schimbi parola.";
-        emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Mi-am uitat parola",emailtext);
+        emailtext = "Resetarea parolei s-a realizat cu succes. \n\t Noua parolă corespunzătoare CNP-ului dumneavoastră este: " + newParola + "" +
+                ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+        MailRequest mailRequest = new MailRequest();
+        mailRequest.setTo(currentUser.getEmailUser());
+        mailRequest.setSubject("Your Heart Clinic - Resetare parolă");
+        Map<String, Object> model = new HashMap<>();
+        model.put("action","Resetare parolă");
+        model.put("body", emailtext);
+        emailService.sendmail(mailRequest, model);
         currentUser.setPassword(this.bCryptPasswordEncoder.encode(newParola));
         this.userRepository.save(currentUser);
         System.out.println("Password reset");

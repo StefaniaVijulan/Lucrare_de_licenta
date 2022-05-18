@@ -91,14 +91,14 @@ public class SecretaryService {
         }
         String parola = "parola";
         patient.setPassword(bCryptPasswordEncoder.encode(parola));
-        String emailtext;
+       /* String emailtext;
         emailtext = "Buna ziua " + patient.getLastName() + " " + patient.getFirstName() + ",\n\nIti multumim ca ai apelat la serviciile noastre." +
                 "Pentru a avea acces la toate informatiile despre investigatiile facute in cadrul acestei clinici te invitam sa accesezi contul creat automat pentru tine. Un nou cont bazat pe CNPul dumneavoastra a fost creat."
                 + "\n\nInformatii de conectare:\n\tNumele de utilizator: CNPul dumneavoastra" +
                 "\n\tParola: " + parola + "\n\n" +
                 "Pentru orice nelamurire va stam la dispozitie.";
 
-        emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);
+        emailService.sendmail(patient.getEmailUser(), "Medical Clinic App - Detalii cont", emailtext);*/
         patient.setRole("PACIENT");
         for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
             {

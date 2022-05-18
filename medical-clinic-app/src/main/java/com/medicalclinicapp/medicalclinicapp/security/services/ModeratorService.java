@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
+import com.medicalclinicapp.medicalclinicapp.dto.MailRequest;
 import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.FisaPatientRepository;
@@ -13,9 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -67,10 +66,17 @@ private ModeratorRepository moderatorRepository;
       String parola = "parola";
       moderator.setPassword(bCryptPasswordEncoder.encode(parola));
       String emailtext;
-      emailtext = "Buna ziua " + moderator.getLastName() + " " + moderator.getFirstName() +",\n\n Un nou cont bazat pe CNPul dumneavoastra a fost creat." +
-              "\n\nParola corespunzatoare este: " + parola + ".";
-      emailService.sendmail(moderator.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+      emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +
+              ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+      /*   emailService.sendmail(moderator.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);*/
       moderator.setRole("MODERATOR");
+      MailRequest mailRequest = new MailRequest();
+      mailRequest.setTo(moderator.getEmailUser());
+      mailRequest.setSubject("Your Heart Clinic - Cont nou");
+      Map<String, Object> model = new HashMap<>();
+      model.put("action","Creare cont");
+      model.put("body", emailtext);
+      emailService.sendmail(mailRequest, model);
       if(moderator.getImageUser() == null || moderator.getImageUser().trim().isEmpty()){
           moderator.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
       }
@@ -104,9 +110,15 @@ private ModeratorRepository moderatorRepository;
         String parola = "parola";
         cardiolog.setPassword(bCryptPasswordEncoder.encode(parola));
         String emailtext;
-        emailtext = "Buna ziua " + cardiolog.getLastName() + " " + cardiolog.getFirstName() +",\n\n Un nou cont bazat pe CNPul dumneavoastra a fost creat." +
-                "\n\nParola corespunzatoare este: " + parola + ".";
-        emailService.sendmail(cardiolog.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+      emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +
+              ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+      MailRequest mailRequest = new MailRequest();
+      mailRequest.setTo(cardiolog.getEmailUser());
+      mailRequest.setSubject("Your Heart Clinic - Cont nou");
+      Map<String, Object> model = new HashMap<>();
+      model.put("action","Creare cont");
+      model.put("body", emailtext);
+      emailService.sendmail(mailRequest, model);
         cardiolog.setRole("CARDIOLOG");
         if(cardiolog.getImageUser() == null || cardiolog.getImageUser().trim().isEmpty()){
             cardiolog.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
@@ -138,10 +150,16 @@ private ModeratorRepository moderatorRepository;
          }
          String parola = "parola";
          secretary.setPassword(bCryptPasswordEncoder.encode(parola));
-         String emailtext;
-         emailtext = "Buna ziua " + secretary.getLastName() + " " + secretary.getFirstName() +",\n\n Un nou cont bazat pe CNPul dumneavoastra a fost creat." +
-                 "\n\nParola corespunzatoare este: " + parola + ".";
-         emailService.sendmail(secretary.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+      String emailtext;
+      emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +
+              ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+      MailRequest mailRequest = new MailRequest();
+      mailRequest.setTo(secretary.getEmailUser());
+      mailRequest.setSubject("Your Heart Clinic - Cont nou");
+      Map<String, Object> model = new HashMap<>();
+      model.put("action","Creare cont");
+      model.put("body", emailtext);
+      emailService.sendmail(mailRequest, model);
          secretary.setRole("SECRETAR");
       if(secretary.getImageUser() == null || secretary.getImageUser().trim().isEmpty()){
           secretary.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
@@ -174,10 +192,16 @@ private ModeratorRepository moderatorRepository;
 
          String parola = "parola";
          imagist.setPassword(bCryptPasswordEncoder.encode(parola));
-         String emailtext;
-         emailtext = "Buna ziua " + imagist.getLastName() + " " + imagist.getFirstName() +",\n\n Un nou cont bazat pe CNPul dumneavoastra a fost creat." +
-                 "\n\nParola corespunzatoare este: " + parola + ".";
-         emailService.sendmail(imagist.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+      String emailtext;
+      emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +
+              ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+      MailRequest mailRequest = new MailRequest();
+      mailRequest.setTo(imagist.getEmailUser());
+      mailRequest.setSubject("Your Heart Clinic - Cont nou");
+      Map<String, Object> model = new HashMap<>();
+      model.put("action","Creare cont");
+      model.put("body", emailtext);
+      emailService.sendmail(mailRequest, model);
          imagist.setRole("IMAGIST");
       if(imagist.getImageUser() == null || imagist.getImageUser().trim().isEmpty()){
           imagist.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
@@ -210,10 +234,16 @@ private ModeratorRepository moderatorRepository;
 
            String parola = "parola";
            hematolog.setPassword(bCryptPasswordEncoder.encode(parola));
-           String emailtext;
-           emailtext = "Buna ziua " + hematolog.getLastName() + " " + hematolog.getFirstName() +",\n\n Un nou cont bazat pe CNPul dumneavoastra a fost creat." +
-                   "\n\nParola corespunzatoare este: " + parola + ".";
-           emailService.sendmail(hematolog.getEmailUser(),"Medical Clinic App - Detalii cont",emailtext);
+      String emailtext;
+      emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +
+              ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+      MailRequest mailRequest = new MailRequest();
+      mailRequest.setTo(hematolog.getEmailUser());
+      mailRequest.setSubject("Your Heart Clinic - Cont nou");
+      Map<String, Object> model = new HashMap<>();
+      model.put("action","Creare cont");
+      model.put("body", emailtext);
+      emailService.sendmail(mailRequest, model);
            hematolog.setRole("HEMATOLOG");
       if(hematolog.getImageUser() == null || hematolog.getImageUser().trim().isEmpty()){
           hematolog.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
@@ -353,11 +383,11 @@ private ModeratorRepository moderatorRepository;
 
         String newPass = "parola1";
         currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
-        String emailtext;
+       /* String emailtext;
         emailtext = "Buna ziua " + currentUser.getLastName() + " " + currentUser.getFirstName() +",\n\n Parola ta a fost resetata cu succes." +
                 "\n\nNoua parola este: " + newPass + ". Iti recomandam sa schimbi parola la prima accesare.";
         emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Resetare parola",emailtext);
-
+*/
         this.userRepository.save(currentUser);
         System.out.println("Password change");
 

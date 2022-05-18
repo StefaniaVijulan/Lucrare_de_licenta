@@ -1,9 +1,9 @@
 <h3>
     Resetează parola!
 </h3>
-<br>
 
 <form [formGroup]="formPass">
+<mat-error style="text-align: center;">{{msg}}</mat-error>
 <mat-form-field appearance="fill">
     <mat-label>CNP</mat-label>
     <input matInput placeholder="ex. 6001100110000" formControlName="cnp" required>
