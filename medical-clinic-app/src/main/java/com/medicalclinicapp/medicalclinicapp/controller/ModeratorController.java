@@ -1,5 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
+import com.medicalclinicapp.medicalclinicapp.models.Appointment;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
+import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 
 import com.medicalclinicapp.medicalclinicapp.security.services.ModeratorService;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -48,6 +52,27 @@ public class ModeratorController {
 
     }
 
+/*
+    @GetMapping("/moderator/betweenDate")
+    public List<Appointment> getDateBetween(@RequestParam(value = "dataStart") String dataS, @RequestParam(value = "dataEnd") String dataE ) throws ParseException {
+        return moderatorService.getAppointmentBetweenDate(dataS, dataE);
+    }
+*//*
+@GetMapping("/moderator/appointmentByDate")
+public List<Appointment> getAppointmentByDate(@RequestParam(value = "dataStart") String dataS) throws ParseException {
+    return moderatorService.getAppointmentByDate(dataS);
+}*/
+
+    @GetMapping("/moderator/allAppointment")
+    public List<Appointment> getAllAppointment() throws ParseException {
+        return moderatorService.getAllAppointments();}
+
+    @GetMapping("/moderator/allAppointmentHematology")
+    public List<AppointmentHematology> getAllAppointmentH() throws ParseException {
+        return moderatorService.getAllAppointmentsHematology();}
+    @GetMapping("/moderator/allAppointmentRadiology")
+    public List<AppointmentRadiology> getAllAppointmentR() throws ParseException {
+        return moderatorService.getAllAppointmentsRadiology();}
 
     @GetMapping("/moderator/allUsers")
     public List<User> getEmployees(){
@@ -79,7 +104,7 @@ public class ModeratorController {
 
     }
     @DeleteMapping("/moderator/deleteUser")
-    public String deleteUser(@RequestParam(value = "cnp") String cnp) throws Exception {
+    public User deleteUser(@RequestParam(value = "cnp") String cnp) throws Exception {
         return moderatorService.deleteUser(cnp);
     }
     @GetMapping(path="/moderator/resetPass")

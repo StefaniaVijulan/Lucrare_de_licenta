@@ -1,0 +1,13 @@
+<h5>Poza de profil</h5>
+<div class="row">
+  <div class="col-12">
+    <div [align]="'center'">
+      <div class="change-avatar">
+        <app-upload-img style="margin-left: 60%" (giveURLtoCreate)="uploadAvatar($event)"> </app-upload-img> <br>
+        <form class="change-avatar" (ngSubmit)="onSubmit()">
+
+          <button class="button-prog" role="button">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>

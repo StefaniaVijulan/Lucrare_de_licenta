@@ -13,6 +13,7 @@ export class DialogChangePassComponent implements OnInit {
   hideNew = true;
   oldPass: string;
   newPass: string;
+  loading: boolean=false;
   constructor(private _service: AuthService,
     private formBuilder: FormBuilder,
     private dialogref: MatDialogRef < DialogChangePassComponent >) { }
@@ -26,10 +27,16 @@ export class DialogChangePassComponent implements OnInit {
  this._service.changePass(this.oldPass, this.newPass).subscribe({
     
     next: (res) => {
-      console.log("intra in next")
+      if(res){
+      this.loading = true;
+      setTimeout(() => this.loading = false, 2000);
+        this.dialogref.close("save");
+        this.loading = false;
+        console.log("intra in next")
       console.log(this.oldPass)
       console.log(this.newPass)
       this.dialogref.close("change");
+    }
     },
     error:(error)=>{
       console.log(error)

@@ -63,3 +63,8 @@ td.mat-cell{
  /*change color of underline when focused*/
  background-color: #EE6F57 !important;;
 }
+.loader-container{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}

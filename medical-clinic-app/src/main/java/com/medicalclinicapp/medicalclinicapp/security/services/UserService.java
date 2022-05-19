@@ -76,11 +76,16 @@ public class UserService implements UserDetailsService {
             else
             {
                 currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPass));
-             /*
                 String emailtext;
-
-                emailtext = "Buna " + currentUser.getLastName() + " " + currentUser.getFirstName() +",\n\n Parola ta a fost schimbata cu succes!" ;
-                emailService.sendmail(currentUser.getEmailUser(),"Medical Clinic App - Schimbare Parola",emailtext); */
+                emailtext = "Resetarea parolei s-a realizat cu succes. \n\t Noua parola este: " + newPass + "" +
+                        ". Vă recomandăm să vă schimbați parola la prima accesare a contului.";
+                MailRequest mailRequest = new MailRequest();
+                mailRequest.setTo(currentUser.getEmailUser());
+                mailRequest.setSubject("Your Heart Clinic - Resetare parola");
+                Map<String, Object> model = new HashMap<>();
+                model.put("action","Resetare parola");
+                model.put("body", emailtext);
+                emailService.sendmail(mailRequest, model);
                 this.userRepository.save(currentUser);
                 System.out.println("Password change");
             }

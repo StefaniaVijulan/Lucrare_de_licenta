@@ -8,7 +8,7 @@ import { ModeratorService } from 'src/app/services/moderator/moderator.service';
   styleUrls: ['./dialog-reset-pass.component.scss']
 })
 export class DialogResetPassComponent implements OnInit {
-
+  loading = false;
   constructor( private dialogref: MatDialogRef < DialogResetPassComponent >) { }
 
   ngOnInit() {

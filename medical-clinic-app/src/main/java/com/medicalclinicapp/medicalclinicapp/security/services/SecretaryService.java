@@ -156,6 +156,27 @@ public class SecretaryService {
         return fisa;
     }
 
+    public Appointment editAppointment(Long id,  String cnpC, Appointment appointment){
+        for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
+            {
+                if (appointmentRepository.findAll().get(i).getId() == id) {
+                    Patient patient = appointmentRepository.findAll().get(i).getPatient();
+                    appointmentRepository.findAll().get(i).setId(id);
+                    appointmentRepository.findAll().get(i).setCnp(appointment.getCnp());
+                    appointmentRepository.findAll().get(i).setDataA(appointment.getDataA());
+                    appointmentRepository.findAll().get(i).setEmailUser(appointment.getEmailUser());
+                    appointmentRepository.findAll().get(i).setNumberUser(appointment.getNumberUser());
+                    appointmentRepository.findAll().get(i).setHour(appointment.getHour());
+                    appointmentRepository.findAll().get(i).setFirstName(appointment.getFirstName());
+                    appointmentRepository.findAll().get(i).setLastName(appointment.getLastName());
+                    appointmentRepository.findAll().get(i).setCardiolog(cardiologRepository.findByCnp(cnpC));
+                    appointmentRepository.findAll().get(i).setPatient(patient);
+                    appointmentRepository.save(appointmentRepository.findAll().get(i));
+                }
+            }
+        }
+        return appointment;
+    }
 
 }
     /*

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChangeImageComponent } from './components/change-image/change-image.component';
+
 import { AuthGuard } from './guard/authentification/auth.guard';
 import { DoctorGuard } from './guard/doctor/doctor.guard';
 import { HematologGuard } from './guard/hematolog/hematolog.guard';
@@ -12,15 +12,18 @@ import { DoctorProgramariComponent } from './pages/doctor/doctor-programari/doct
 import { HematologComponent } from './pages/hematolog/hematolog/hematolog.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AppointmentsComponent } from './pages/moderator/appointments/appointments.component';
 import { ModeratorCardiologComponent } from './pages/moderator/category/moderator-cardiolog/moderator-cardiolog.component';
 import { ModeratorHematologComponent } from './pages/moderator/category/moderator-hematolog/moderator-hematolog.component';
 import { ModeratorImagistComponent } from './pages/moderator/category/moderator-imagist/moderator-imagist.component';
-import { ModeratorSecretarComponent } from './pages/moderator/category/moderator-secretar/moderator-secretar.component';
+import { ModeratorSecretarComponent } from './pages/moderator/moderator-secretar/moderator-secretar.component';
 import { ModeratorComponent } from './pages/moderator/category/moderator/moderator.component';
 import { PacientComponent } from './pages/pacient/pacient/pacient.component';
 import { SecretarPacientiComponent } from './pages/secretar/secretar-pacienti/secretar-pacienti.component';
 import { SecretarComponent } from './pages/secretar/secretar/secretar.component';
 import { UploadImgComponent } from './pages/upload-img/upload-img.component';
+import { AppointmentsHematologyComponent } from './pages/moderator/appointments-hematology/appointments-hematology.component';
+import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-radiology/appointments-radiology.component';
 
 const routes: Routes = [ 
   {
@@ -45,23 +48,18 @@ const routes: Routes = [
     canActivate : [AuthGuard, ModeratorGuard]
   },
   {
-    path:"moderatorCardiolog",
-    component: ModeratorCardiologComponent,
+    path:"moderator/appointments",
+    component: AppointmentsComponent,
     canActivate : [AuthGuard, ModeratorGuard]
   },
   {
-    path:"moderatorSecretar",
-    component: ModeratorSecretarComponent,
+    path:"moderator/appointmentsHematology",
+    component: AppointmentsHematologyComponent,
     canActivate : [AuthGuard, ModeratorGuard]
   },
   {
-    path:"moderatorImagist",
-    component: ModeratorImagistComponent,
-    canActivate : [AuthGuard, ModeratorGuard]
-  },
-  {
-    path:"moderatorHematolog",
-    component: ModeratorHematologComponent,
+    path:"moderator/appointmentsRadiology",
+    component: AppointmentsRadiologyComponent,
     canActivate : [AuthGuard, ModeratorGuard]
   },
   {
@@ -92,11 +90,7 @@ const routes: Routes = [
     path:"upload",
     component: UploadImgComponent,
   },
-  {
-    path: "change",
-    component: ChangeImageComponent
-  }
-  
+
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

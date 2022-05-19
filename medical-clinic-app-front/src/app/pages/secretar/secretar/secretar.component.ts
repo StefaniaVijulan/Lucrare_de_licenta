@@ -10,12 +10,17 @@ import {  MatDialog,  MatPaginator,  MatSort,  MatTableDataSource} from '@angula
 import {  DialogAddPacientComponent} from 'src/app/components/dialog-add-pacient/dialog-add-pacient.component';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
 import { Patient } from 'src/app/interfaces/patient';
+import { Appointment } from 'src/app/interfaces/appointment';
+import { DialogEditAppointmentComponent } from 'src/app/components/dialog-edit-appointment/dialog-edit-appointment.component';
 @Component({
   selector: 'app-secretar',
   templateUrl: './secretar.component.html',
   styleUrls: ['./secretar.component.scss']
 })
 export class SecretarComponent implements OnInit {
+  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
+  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+  originally bred for hunting.`;
   listAppointment: any
   currentList: any;
   pacientL: any;
@@ -58,12 +63,14 @@ export class SecretarComponent implements OnInit {
       if(res == null){
         this._secretar.existaPacient = false;
         this.dialog.open(DialogAddPacientComponent, {
-          width: '35%'
+          width: '35%',
+          panelClass: 'my-panel'
         })
       }else{
         console.log("aia e")
         this.dialog.open(DialogAddPacientComponent, {
-          width: '35%'
+          width: '35%',
+          panelClass: 'my-panel'
         })
         this._secretar.existaPacient = true;
       }
@@ -87,6 +94,15 @@ export class SecretarComponent implements OnInit {
     return this._secretar.checkPatient(element).subscribe((res)=>{
       console.log(res)
      
+    })
+  }
+  openEditAppointmentDialog(element: any){
+    this._secretar.appointmentListService = element;
+    console.log("appointment =>", this._secretar.appointmentListService)
+    console.log("edit appointment")
+    this.dialog.open(DialogEditAppointmentComponent, {
+      width: '35%',
+      panelClass: 'my-panel'
     })
   }
   /*onPageChange($event) {

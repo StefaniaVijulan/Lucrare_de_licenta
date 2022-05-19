@@ -7,6 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
 import { StringifyOptions } from 'querystring';
 import { FisaPatient } from 'src/app/interfaces/fisaPatient';
+import { Appointment } from 'src/app/interfaces/appointment';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class SecretarService {
   pacientListService: any;
   hospitaliationListService: any;
   doctorListService: any;
-
+  appointmentListService: any;
 
   doctor: Cardiolog;
   cnpP: string;
@@ -56,7 +57,12 @@ export class SecretarService {
   checkPatient(cnp: any){
     return this._http.get(this.baseUrl + '/secretary/checkPatient?cnp='+cnp, this.publicHttpHeaders)
   }
-
+  editUser(id: any,cnpU: string, appointment: Appointment){
+    console.log("cnpU =>", cnpU)
+    console.log("id =>", id)
+    console.log("appointment", appointment)
+    return this._http.put<any>(this.baseUrl + '/secretary/editAppointment?id=' + id + '&cnpU=' + cnpU,appointment, this.publicHttpHeaders);
+  }
 
   addFisa(cnpP: string){
 

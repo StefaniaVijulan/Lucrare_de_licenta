@@ -1,10 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.dto.MailRequest;
-import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
-import com.medicalclinicapp.medicalclinicapp.models.Patient;
-import com.medicalclinicapp.medicalclinicapp.repository.FisaPatientRepository;
-import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
+import com.medicalclinicapp.medicalclinicapp.models.*;
+import com.medicalclinicapp.medicalclinicapp.repository.*;
 import com.medicalclinicapp.medicalclinicapp.security.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.repository.*;
 import com.medicalclinicapp.medicalclinicapp.services.EmailService;
@@ -14,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -39,7 +39,13 @@ private ModeratorRepository moderatorRepository;
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private AppointmentRadiologyRepository appointmentRadiologyRepository;
+    @Autowired
+    private AppointmentHematologyRepository appointmentHematologyRepository;
 
     @Autowired
     private ImagistRepository imagistRepository;
@@ -307,9 +313,56 @@ private ModeratorRepository moderatorRepository;
             }}
         return imagistList;
   }
+/*
+  public List<Appointment> getAppointmentBetweenDate(String startDate, String endDate) throws ParseException {
 
+      List<Appointment> appointmentList = new ArrayList<>();
+      SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+      Date dateS = formatter.parse(startDate);
+      System.out.println("DateS => "+ dateS);
+      SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+      Date dateE = formatter.parse(endDate);
+      System.out.println("DateE => "+ dateE);
+      for(int i=0; i<appointmentRepository.findAll().size(); i++){
+          SimpleDateFormat formatter3= new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+          Date appointmentData = formatter.parse(appointmentRepository.findAll().get(i).getDataA());
+          if(appointmentData.compareTo(dateS)>=0 && appointmentData.compareTo(dateE)<=0 ){
+              appointmentList.add(appointmentRepository.findAll().get(i));
+          }}
+      return appointmentList;
 
-    public User editUser(String role, String cnp, User user){
+  }
+*/
+/*
+    public List<Appointment> getAppointmentByDate(String startDate) throws ParseException {
+
+        List<Appointment> appointmentList = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Date dateS = formatter.parse(startDate);
+
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            Date appointmentData = formatter.parse(appointmentRepository.findAll().get(i).getDataA());
+            if(appointmentData.compareTo(dateS)==0){
+                appointmentList.add(appointmentRepository.findAll().get(i));
+            }}
+        return appointmentList;
+
+    }*/
+    public List<Appointment> getAllAppointments() throws ParseException {
+        List<Appointment> appointmentList = appointmentRepository.findAll();
+        return appointmentList;
+}
+    public List<AppointmentHematology> getAllAppointmentsHematology() throws ParseException {
+        List<AppointmentHematology> appointmentList = appointmentHematologyRepository.findAll();
+        return appointmentList;
+    }
+    public List<AppointmentRadiology> getAllAppointmentsRadiology() throws ParseException {
+
+        List<AppointmentRadiology> appointmentList = appointmentRadiologyRepository.findAll();
+
+        return appointmentList;
+    }
+  public User editUser(String role, String cnp, User user){
         if(role.equals("CARDIOLOG")){
             //Cardiologul cu acest cnp nu exista
             if(!cardiologRepository.existsByCnp(cnp))
@@ -366,19 +419,43 @@ private ModeratorRepository moderatorRepository;
         return null;
     }
 
-    public String deleteUser(String cnp) throws Exception {
+  public User deleteUser(String cnp) throws Exception {
 
         if (cardiologRepository.existsByCnp(cnp)) {
+            for(int i=0; i<appointmentRepository.findAll().size(); i++){
+                Date currentD;
+                currentD = new Date();
+                String appointmentD;
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                appointmentD = appointmentRepository.findAll().get(i).getDataA();
+                Date appoint = sdf.parse(appointmentD);
+                if(appoint.compareTo(currentD)>=0)
+                    return  appointmentRepository.findAll().get(i).getCardiolog();
+                else if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp)){
+
+                    appointmentRepository.delete(appointmentRepository.findAll().get(i));
+                    return  appointmentRepository.findAll().get(i).getCardiolog();
+                }
+
+            }
+
             cardiologRepository.delete(cardiologRepository.findByCnp(cnp));
-        } else if (secretaryRepository.existsByCnp(cnp))
+
+        } else if (secretaryRepository.existsByCnp(cnp)){
+
             secretaryRepository.delete(secretaryRepository.findByCnp(cnp));
+        }
+
         else if (hematologRepository.existsByCnp(cnp))
-            hematologRepository.delete(hematologRepository.findByCnp(cnp));
+        {
+            hematologRepository.delete(hematologRepository.findByCnp(cnp));}
         else if (imagistRepository.existsByCnp(cnp))
-            imagistRepository.delete(imagistRepository.findByCnp(cnp));
-        return null;
+        {
+            imagistRepository.delete(imagistRepository.findByCnp(cnp));}
+
+      return null;
     }
-    public User resetPassword(String cnp) throws Exception {
+  public User resetPassword(String cnp) throws Exception {
         User currentUser = this.userRepository.findByCnp(cnp);
 
         String newPass = "parola1";
@@ -393,5 +470,4 @@ private ModeratorRepository moderatorRepository;
 
         return currentUser;
     }
-
 }

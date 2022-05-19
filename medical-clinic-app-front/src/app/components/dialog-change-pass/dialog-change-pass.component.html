@@ -1,6 +1,7 @@
-<h3>
-    Schimba parola
-</h3>
+<h4>
+    Schimbă parola!
+</h4>
+<mat-spinner *ngIf="loading"></mat-spinner>
 <mat-form-field appearance="fill">
     <mat-label>Parola veche</mat-label>
     <input matInput [(ngModel)]="oldPass"  [type]="hide ? 'password' : 'text'">

@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } 
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
+import { PhotoChangeComponent } from './components/photo-change/photo-change.component';
 
 import { AuthService } from './services/auth/auth.service';
 import { DoctorService } from './services/doctor/doctor.service';
@@ -67,7 +68,16 @@ export class AppComponent implements AfterViewInit  {
        
      }
    })
+   
 
  };
+ openChangePhotoDialog(){ 
+  this.dialog.open(PhotoChangeComponent,{
+   width: '30%'
+  }).afterClosed().subscribe(val=>{
+    location.reload();
+ })
+ 
 
+};
 }

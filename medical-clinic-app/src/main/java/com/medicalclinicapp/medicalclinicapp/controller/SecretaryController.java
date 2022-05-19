@@ -4,6 +4,7 @@ import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
+import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.SecretaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,10 @@ public class SecretaryController {
     @PostMapping("/secretary/addFisa")
     public FisaPatient addFisa1(@RequestParam("cnpP") String cnpP, @RequestBody FisaPatient fisa){
         return secretaryService.addFisa(cnpP, fisa);
+    }
+    @PutMapping(("/secretary/editAppointment"))
+    public Appointment editAppointment(@RequestParam("id")Long id, @RequestParam("cnpU")String cnpU, @RequestBody Appointment appointment)  {
+        return secretaryService.editAppointment(id, cnpU, appointment);
     }
 }
 /*

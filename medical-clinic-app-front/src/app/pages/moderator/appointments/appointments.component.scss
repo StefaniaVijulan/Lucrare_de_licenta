@@ -1,0 +1,36 @@
+table {
+    margin-top: -13vh;
+    width: 94vw;
+    margin: 4vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+mat-paginator{
+  width: 94vw;
+    text-align: center;
+    margin: 4vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+th.mat-header-cell{
+  text-align: center;
+}
+td.mat-cell{
+  text-align: center;
+}
+.footer {
+  position: fixed;
+
+  bottom: 0;
+    color: white;
+  text-align: center;
+}
+.mat-form-field {
+  font-size: 14px;
+  margin-left: 4vh;
+  margin-right: 4vh;
+  width: 94vw;
+}

@@ -4,6 +4,9 @@ import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,6 +33,7 @@ public class Appointment implements Comparable<Appointment> {
 
     @OneToOne
     private Patient patient;
+
 
     @OneToOne
     private Cardiolog cardiolog;

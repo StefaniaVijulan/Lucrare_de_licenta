@@ -11,9 +11,10 @@ import javax.persistence.*;
 import java.util.*;
 @Setter
 @Getter
-@RequiredArgsConstructor
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@RequiredArgsConstructor
 public abstract class User implements UserDetails{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

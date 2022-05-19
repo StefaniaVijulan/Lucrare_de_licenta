@@ -71,8 +71,9 @@
               </mat-form-field>
        
         <br>
-        <div>
-          <button [disabled]="registerform.form.invalid"  class="button-first" mat-raised-button color="primary" matStepperNext>Next</button>
+        <div [align] = "'center'">
+          <button [disabled]="registerform.form.invalid" class="button-prog"  matStepperNext>Next</button>
+
         </div>
       </form>
     </mat-dialog-content>
@@ -106,8 +107,8 @@
           </mat-form-field>
 
 
-        <div class="example-button-row">
-          <button [disabled]="secondForm.form.invalid"  class="button-first" color="primary" mat-raised-button matStepperNext>Next</button>
+          <div [align] = "'center'">
+          <button class="button-prog" [disabled]="secondForm.form.invalid"  matStepperNext>Next</button>
         </div>
       </form>
     </mat-dialog-content>
@@ -139,8 +140,8 @@
           </mat-select>
         </mat-form-field>
         
-        <div class="example-button-row">
-          <button [disabled]="thirdForm.form.invalid"  class="button-second-2" color="primary" mat-raised-button matStepperNext (click) = "addPacient()">Next</button>
+        <div [align] = "'center'">
+          <button class="button-prog" [disabled]="thirdForm.form.invalid"  matStepperNext (click) = "addPacient()">Save</button>
         </div>
            
       </form>

@@ -12,6 +12,8 @@ import { DialogAddUserComponent } from 'src/app/components/moderator/dialog-add-
 import { DialogDeleteUserComponent } from 'src/app/components/moderator/dialog-delete-user/dialog-delete-user.component';
 import { element } from 'protractor';
 import { DialogResetPassComponent } from 'src/app/components/moderator/dialog-reset-pass/dialog-reset-pass.component';
+import { DialogCancelDeleteUserComponent } from 'src/app/components/dialog-cancel-delete-user/dialog-cancel-delete-user.component';
+
 
 @Component({
   selector: 'app-moderator',
@@ -36,8 +38,9 @@ export class ModeratorComponent implements OnInit {
   constructor(private dialog: MatDialog, 
     public _moderator: ModeratorService,
      private _http: HttpClient, 
-      public _service: AuthService) {
-       
+      public _service: AuthService,
+   ) {
+      
        }
 
   ngOnInit(): void {
@@ -79,6 +82,11 @@ export class ModeratorComponent implements OnInit {
 deleteUser(data: any){
   console.log(data)
   this._moderator.deleteUser(data).subscribe((res)=>{
+    if(res != null)
+    this.dialog.open(DialogCancelDeleteUserComponent,{
+      width: '20%',
+      panelClass: 'my-panel'
+     })
     this.allUsers()
   })
 }

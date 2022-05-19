@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { pipeFromArray } from 'rxjs/internal/util/pipe';
+import { finalize } from 'rxjs/operators';
 import { Cardiolog } from 'src/app/interfaces/cardiolog';
 import { Hematolog } from 'src/app/interfaces/hematolog';
 import { Imagist } from 'src/app/interfaces/imagist';
@@ -10,6 +11,7 @@ import { Secretar } from 'src/app/interfaces/secretar';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,8 @@ export class ModeratorService {
     
   };
 
-  constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
+  constructor( private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
+ 
   getAllUsers(){
     return this._http.get(this.baseUrl + '/moderator/allUsers', this.publicHttpHeaders);
   }
@@ -69,6 +72,25 @@ export class ModeratorService {
     return this._http.get<any>(this.baseUrl + '/moderator/resetPass?cnp='+ cnp, this.publicHttpHeaders);
   }
 
+  getAllAppointments(){
+    console.log("aici")
+    return this._http.get(this.baseUrl + '/moderator/allAppointment', this.publicHttpHeaders); 
+  }
+
+  getAllAppointmentsH(){
+    console.log("aici")
+    return this._http.get(this.baseUrl + '/moderator/allAppointmentHematology', this.publicHttpHeaders); 
+  }
+
+  getAllAppointmentsR(){
+    console.log("aici")
+    return this._http.get(this.baseUrl + '/moderator/allAppointmentRadiology', this.publicHttpHeaders); 
+  }
+
+  getAppointmentByDate(dataStart:any, dataEnd:any){
+    return this._http.get(this.baseUrl + '/moderator/betweenDate?dataStart=' + dataStart +'&dataEnd=' +dataEnd, this.publicHttpHeaders); 
+  }
+  /*for menu*/
   seeEmployee(){
     this._router.navigate(['/moderator'])
   }
@@ -84,5 +106,13 @@ export class ModeratorService {
   seeHematolog(){
     this._router.navigate(['/moderatorHematolog'])
   }
-
+  seeProgramari(){
+    this._router.navigate(['/moderator/appointments'])
+  }
+  seeProgramariHema(){
+    this._router.navigate(['/moderator/appointmentsHematology'])
+  }
+  seeProgramariRadio(){
+    this._router.navigate(['/moderator/appointmentsRadiology'])
+  }
 }

@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
   firstFormGroup: FormGroup;
   hideNew = true;
   isChecked: boolean = true;
+
+  loading = false;
   constructor(private dialog: MatDialog, private _formBuilder: FormBuilder,private _service: AuthService, private _router: Router) { }
 
   ngOnInit() {
@@ -44,10 +46,12 @@ export class LoginComponent implements OnInit {
     return !this.userDto.username || !this.userDto.password;
   }
   doLoginUser() {
+    this.loading = true
     console.log("isChesck", this.isChecked)
     this.setUser()
     console.log("intra in do login")
     this._service.loginUser(this.userDto).subscribe((response: any) => {
+      this.loading = false
       console.log("doLogin")
       console.log(response);
       if (response && response.jwt) {
@@ -83,9 +87,11 @@ export class LoginComponent implements OnInit {
     })
   }
   doLoginPatient() {
+    this.loading = true
     console.log("intra aici")
   //  window.location.href = "/pacient"
     this._service.loginPatient(this.userDto).subscribe((response: any) => {
+      this.loading = false
       console.log("doLogin")
       console.log(response);
       console.log(response.jwt)

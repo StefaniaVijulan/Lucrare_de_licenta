@@ -1,0 +1,55 @@
+<h4>Programare</h4>
+<mat-dialog-content>
+  <form #registerform="ngForm" [formGroup]="formG">
+    <!--  <mat-error style="text-align: center;">{{this.msg}}</mat-error>-->
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>CNP</mat-label>
+      <input matInput placeholder="ex. 6001100110000" formControlName="cnp" required>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Nume</mat-label>
+      <input matInput placeholder="ex. Popescu" formControlName="lastName" required>
+
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Prenume</mat-label>
+      <input matInput placeholder="ex. Ion" formControlName="firstName" required>
+
+    </mat-form-field><br>
+  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Cardiolog</mat-label>
+    <mat-select [(ngModel)]="selectedCardio" (ngModelChange)="onCardioChange($event)" name="cardio" required>
+      <mat-option *ngFor="let cardio of listCardio" [value]="cardio.cnp">
+        {{cardio.firstName}} {{cardio.lastName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="selectedCardio" class="example-full-width">
+    <input matInput  [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP"
+      name="dateP" (dateChange)="hourCheck()" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field *ngIf="dateP" appearance="fill">
+    <mat-label>Alege ora</mat-label>
+    <mat-select [(ngModel)]="hourP" name="hourP" required>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let hour of hourInterval" [value]="hour">
+        {{hour}}
+      </mat-option>
+    </mat-select>
+
+  </mat-form-field>
+
+
+  <div [align]="'center'">
+    <div class="spinner-container" *ngIf="loading">
+    <mat-spinner diameter="24"></mat-spinner>
+  </div>
+    <button [disabled]="registerform.form.invalid " class="button-prog" role="button"
+      (click)= "editAppointmentF()">Editeaza</button></div>
+
+
+</mat-dialog-content>
