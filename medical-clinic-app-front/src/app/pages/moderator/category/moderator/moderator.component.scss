@@ -1,9 +1,16 @@
-table {
+.first-table{
   width: 94vw;
   margin: 4vh;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.filter-table{
+  margin-left: 4vh;
+  width: 94vw;
+  margin-right: 4vh;
+}
+.filter-table button{
+  margin-left: 50%;
+}
 mat-paginator{
 width: 94vw;
   text-align: center;
@@ -29,4 +36,30 @@ td.mat-cell{
   bottom: 0;
     color: white;
   text-align: center;
+}
+.button-prog {
+  background: #EE6F57;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: white ;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: 0;
+  margin-left:4vh;
+}  
+ /*Input color*/
+ ::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #EE6F57 !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #EE6F57 !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #EE6F57 !important;;
 }

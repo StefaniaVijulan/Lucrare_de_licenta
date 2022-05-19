@@ -53,12 +53,12 @@ public class EmailService {
             helper.setFrom(request.getFrom());
             mailSender.send(message);
 
-            response.setMessange("mail send to: " + request.getTo());
+            response.setMessange("Mail send: " + request.getTo());
             response.setStatus(Boolean.TRUE);
 
         } catch (MessagingException | IOException | TemplateException e) {
             response.setStatus(Boolean.FALSE);
-            response.setMessange("Mail Sending failure: " + e.getMessage());
+            response.setMessange("Email failed: " + e.getMessage());
 
         }
         return response;

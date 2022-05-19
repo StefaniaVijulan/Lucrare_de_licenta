@@ -64,7 +64,8 @@ export class ModeratorComponent implements OnInit {
    
   openDialog(){ 
      this.dialog.open(DialogComponent,{
-      width: '20%'
+      width: '20%',
+      panelClass: 'my-panel'
      }).afterClosed().subscribe(val=>{
       console.log("nu aici")
       console.log(val)
@@ -87,6 +88,7 @@ resetPass(element: any){
   return this._moderator.resetPassword(element).subscribe((res)=>{
     this.dialog.open(DialogResetPassComponent,{
       width: '30%',
+      panelClass: 'my-panel',
       data:element
      })
   })
@@ -95,6 +97,7 @@ resetPass(element: any){
 editUser(element: any){
     this.dialog.open(DialogAddUserComponent,{
       width: '30%',
+      panelClass: 'my-panel',
       data:element
      }).afterClosed().subscribe(val=>{
       console.log(val)
@@ -103,7 +106,10 @@ editUser(element: any){
       }
     })
   }
-  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
 
 

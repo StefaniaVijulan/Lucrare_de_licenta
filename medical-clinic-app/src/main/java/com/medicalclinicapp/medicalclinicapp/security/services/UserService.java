@@ -71,8 +71,7 @@ public class UserService implements UserDetailsService {
         if(this.bCryptPasswordEncoder.matches(oldPass, currentUser.getPassword()))
         {
             if(oldPass.equals(newPass))
-            //"Noua parola este la fel cu parola curenta");
-            {System.out.println("Noua parola este la fel cu parola curenta");
+            {System.out.println("Noua parola este la fel ca parola curenta");
                 return null;}
             else
             {

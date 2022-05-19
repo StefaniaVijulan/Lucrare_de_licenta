@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  
   public userDto: LoginDto ={
     username: '',
     password: '',
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   msg: string;
   firstFormGroup: FormGroup;
   hideNew = true;
+  isChecked: boolean = true;
   constructor(private dialog: MatDialog, private _formBuilder: FormBuilder,private _service: AuthService, private _router: Router) { }
 
   ngOnInit() {
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     return !this.userDto.username || !this.userDto.password;
   }
   doLoginUser() {
+    console.log("isChesck", this.isChecked)
     this.setUser()
     console.log("intra in do login")
     this._service.loginUser(this.userDto).subscribe((response: any) => {
