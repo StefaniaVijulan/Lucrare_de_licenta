@@ -6,6 +6,7 @@ export class Hematolog {
     emailUser: String;
     numberUser: String;
     role: String;
+    imageUser: string;
     
     constructor(){}
 }

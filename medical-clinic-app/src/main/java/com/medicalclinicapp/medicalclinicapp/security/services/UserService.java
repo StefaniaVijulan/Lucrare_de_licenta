@@ -1,6 +1,7 @@
 package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.dto.MailRequest;
+import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.PatientRepository;
 import com.medicalclinicapp.medicalclinicapp.security.models.ChangeImg;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
@@ -63,8 +64,6 @@ public class UserService implements UserDetailsService {
         return userProfile;
     }
     public User changePassword(String oldPass, String newPass, String cnpC) throws Exception {
-        System.out.println("Old pass" + oldPass);
-        System.out.println("New pass" + newPass);
         String username;
         username = userRepository.findByCnp(cnpC).getCnp();
         User currentUser = this.userRepository.findByCnp(username);
@@ -95,6 +94,22 @@ public class UserService implements UserDetailsService {
             System.out.println("Parola curenta nu se potriveste");
             return null;}
 
+        if(patientRepository.existsByCnp(cnpC)){
+            System.out.println("In patienti =>");
+            Patient patient = this.patientRepository.findByCnp(cnpC);
+            System.out.println(patientRepository.existsByCnp(cnpC));
+            System.out.println("newPass =>" + newPass);
+            System.out.println("oldPass =>" + oldPass);
+            if(this.bCryptPasswordEncoder.matches(oldPass, patient.getPassword()))
+            {
+                patient.setPassword(this.bCryptPasswordEncoder.encode(newPass));
+
+                this.patientRepository.save(patient);
+                System.out.println("Password change patient");
+            }
+        }
+
+
         return currentUser;
     }
 
@@ -109,7 +124,17 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
-
+    public User deleteImage(String cnpU){
+        User user = userRepository.findByCnp(cnpU);
+        if(user.getImageUser() == null){
+            return null;
+        }
+        else{
+            user.setImageUser("https://www.nicepng.com/png/detail/380-3807237_doctor-tools-vector-png-download-heart-stethoscope.png");
+            userRepository.save(user);
+        }
+        return user;
+    }
     public List<User> getAllEmployees(){
         List<User> userList =  userRepository.findAll();
         return userList;
@@ -133,6 +158,11 @@ public class UserService implements UserDetailsService {
         emailService.sendmail(mailRequest, model);
         currentUser.setPassword(this.bCryptPasswordEncoder.encode(newParola));
         this.userRepository.save(currentUser);
+        Patient patient = patientRepository.findByCnp(cnpC);
+        if (patient == null)
+            return null;
+        patient.setPassword(this.bCryptPasswordEncoder.encode(newParola));
+        this.patientRepository.save(patient);
         System.out.println("Password reset");
         return currentUser;
     }

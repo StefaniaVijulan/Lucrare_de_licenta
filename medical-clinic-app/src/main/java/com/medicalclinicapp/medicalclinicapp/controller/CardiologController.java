@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,10 @@ public class CardiologController {
     @GetMapping("/cardiolog/allSpecificAppointment")
     public List<Appointment> getSpecificAppointment(@RequestParam(value = "cnpC") String cnpC){
         return cardiologService.getAllSpecificAppointment(cnpC);
+    }
+    @GetMapping("/cardiolog/allFutureSpecificAppointment")
+    public List<Appointment> getFutureSpecificAppointment(@RequestParam(value = "cnpC") String cnpC) throws ParseException {
+        return cardiologService.getAllFutureAppointment(cnpC);
     }
     @GetMapping("/cardiolog/allTodaySpecificAppointment")
     public List<Appointment> getTodaySpecificAppointment(@RequestParam(value = "cnpC") String cnpC){
@@ -76,7 +81,10 @@ public class CardiologController {
         System.out.println("Inta in controller");
         return cardiologService.verificaHoursRadiology(data);
     }
-
+    @GetMapping("/cardtiology/checkDateBeforeBlock")
+    public Boolean verifD(@RequestParam("dataV")String dataV, @RequestParam("cnpC") String cnpC){
+        return cardiologService.verficaDateBeforeBlock(dataV, cnpC);
+    }
     @DeleteMapping("/appointmentD")
     public String deleteA(){
         return cardiologService.deltete();
@@ -89,19 +97,8 @@ public class CardiologController {
     public AppointmentRadiology addAppointment(@RequestParam (value = "cnpP")String cnpP, @RequestBody AppointmentRadiology appointment) throws Exception {
         return cardiologService.addAppointmentRadiology(cnpP, appointment);
     }
-}
-
-/*
-    @PostMapping("/cardiolog/addAppointmentHematology")
-    public AppointmentHematology addAppointmentHematology(@RequestBody AppointmentHematology appointment, Principal principal) throws Exception {
-
-        return cardiologService.addAppointmentHematology(appointment, principal);
+    @PutMapping(("/cardiolog/editAppointment"))
+    public Appointment editAppointment(@RequestParam("id")Long id, @RequestBody Appointment appointment)  {
+        return cardiologService.editAppointment(id, appointment);
     }
-    @PostMapping("/cardiolog/addAppointmentRadiology")
-    public AppointmentRadiology addAppointmentRadiology(@RequestBody AppointmentRadiology appointment, Principal principal) throws Exception {
-
-        return cardiologService.addAppointmentRadiology(appointment, principal);
-    }
-
 }
-*/

@@ -179,8 +179,9 @@ public class SecretaryService {
     public Appointment deleteAppointment(Long id){
         for(int i= 0; i<appointmentRepository.findAll().size(); i++){
             if(appointmentRepository.findAll().get(i).getId() == id){
+                Appointment appointment = appointmentRepository.findAll().get(i);
                 appointmentRepository.delete(appointmentRepository.findAll().get(i));
-                return appointmentRepository.findAll().get(i);
+                return appointment;
             }
         }
         return null;

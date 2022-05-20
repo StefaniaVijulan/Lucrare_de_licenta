@@ -78,8 +78,9 @@ openEditAppointmentDialog(element: any){
 }
 deleteUser(data: any){
   console.log("deleteUser=>",data)
-  /*this._secretar.deleteAppointment(data).subscribe((res)=>{
-    console.log("data in this=>", data)
-  })*/
+  this._secretar.deleteAppointment(data).subscribe((res)=>{
+    console.log("data in this=>", res)
+    this.allFutureAppointments()
+  })
 }
 };

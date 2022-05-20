@@ -7,7 +7,7 @@ mat-toolbar {
 
 mat-sidenav {
     margin: 16px;
-    width: 220px;
+    width: 250px;
     border-right: none;
     background: rgba(5,55,106,1);
     color: #ededf0;
@@ -30,9 +30,17 @@ mat-sidenav {
 
 
 }
-
+.mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    background-color: #EE6F57;
+}
 mat-sidenav-container {
     height: calc(100vh - 65px);
+    background-color: #ededf0;
 }
 .menu-button {
     width: 100%;
@@ -62,9 +70,22 @@ mat-sidenav-container {
 .avatar {
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 60%;
-    height: 60%;
+    width: 54%;
+    height: 65%;
     margin-left:20%;
     margin-right: 20%;
     border-radius: 50%;
+}
+.nume{
+    text-align: center;
+    margin-top: 6%;
+    font-family: 'Roboto', sans-serif;
+
+}
+.role{
+    text-align: center;
+    margin-top: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-style: italic;
 }

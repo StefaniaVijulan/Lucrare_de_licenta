@@ -60,7 +60,7 @@ export class SecretarService {
   checkPatient(cnp: any){
     return this._http.get(this.baseUrl + '/secretary/checkPatient?cnp='+cnp, this.publicHttpHeaders)
   }
-  editUser(id: any,cnpU: string, appointment: Appointment){
+  editAppointment(id: any,cnpU: string, appointment: Appointment){
     console.log("cnpU =>", cnpU)
     console.log("id =>", id)
     console.log("appointment", appointment)

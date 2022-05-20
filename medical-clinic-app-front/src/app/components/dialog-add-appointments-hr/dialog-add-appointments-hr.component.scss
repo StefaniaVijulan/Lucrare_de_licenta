@@ -1,5 +1,5 @@
 mat-checkbox{
-    margin-left: 7%;
+    margin-left: 25%;
 
 }
   /*Input color*/
@@ -37,4 +37,19 @@ mat-checkbox{
 ::-webkit-scrollbar-thumb {
     background: rgb(59, 195, 251); 
     border-radius: 10px;
+}
+h4{
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+.button-prog {
+  background: #EE6F57;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: 0;
+
 }

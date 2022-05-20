@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -32,6 +33,9 @@ public class CardiologService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private CardiologRepository cardiologRepository;
+
 
     public List<Appointment> getAllSpecificAppointment(String cnp){
 
@@ -42,9 +46,33 @@ public class CardiologService {
         List<Appointment> appointmentList = new ArrayList<>();
         for(int i=0; i<appointmentRepository.findAll().size(); i++){
             if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp))
-                if (sdf.format(curentData).equals(appointmentRepository.findAll().get(i).getDataA())) {
+                {
                     appointmentList.add(appointmentRepository.findAll().get(i));
                 }
+        }
+        Comparator<Appointment> compareByHour =
+                (Appointment o1, Appointment o2) -> o1.getHour().compareTo( o2.getHour() );
+        Collections.sort(appointmentList, compareByHour);
+
+        return appointmentList;
+    }
+    public List<Appointment> getAllFutureAppointment(String cnp) throws ParseException {
+
+
+        Date curentData = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        List<Appointment> appointmentList = new ArrayList<>();
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp))
+            {
+                Date currentD;
+                currentD = new Date();
+                boolean stare = (sdf.parse(appointmentRepository.findAll().get(i).getDataA())).before(currentD);
+                if (!stare) {
+                    appointmentList.add(appointmentRepository.findAll().get(i));
+                }
+            }
         }
         Comparator<Appointment> compareByHour =
                 (Appointment o1, Appointment o2) -> o1.getHour().compareTo( o2.getHour() );
@@ -109,8 +137,7 @@ public class CardiologService {
 
     }
 
-    public FisaPatient delaleteFisa(Long blood)
-    {
+    public FisaPatient delaleteFisa(Long blood){
         for(int i=0; i<fisaPatientRepository.findAll().size(); i++) {
             if (fisaPatientRepository.findAll().get(i).getNoFile().equals(blood))
                 fisaPatientRepository.deleteById(blood);
@@ -208,6 +235,32 @@ public class CardiologService {
         return allHours;
     }
 
+    public Boolean verficaDateBeforeBlock(String dat, String cnpC){
+        List<Appointment> appointmentList = appointmentRepository.findAll();
+        System.out.println("Intra in check appoint service");
+        Collections.sort(appointmentList);
+        System.out.println("APPOINTMNET LIST=>" + appointmentList);
+        long count =0;
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            System.out.println("Intra aici in for");
+            System.out.println(cnpC);
+            System.out.println(appointmentRepository.findAll().get(i).getCardiolog().getCnp());
+            if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnpC)){
+                System.out.println(appointmentRepository.findAll().get(i).getCardiolog().getCnp());
+                System.out.println(appointmentRepository.findAll().get(i).getDataA());
+
+                if(appointmentRepository.findAll().get(i).getDataA().equals(dat)){
+                        count +=1;
+                }
+
+            }
+
+        }
+        if(count == 0)
+            return true;
+        return false;
+    }
+
     public AppointmentHematology addAppointmentHematology(String cnpP, AppointmentHematology appointment) throws Exception {
         for (int i = 0; i < patientRepository.findAll().size(); i++) {
             if (patientRepository.findAll().get(i).getCnp().equals(cnpP)) {
@@ -262,6 +315,28 @@ public class CardiologService {
             }
         }
         return null;
+    }
+    public Appointment editAppointment(Long id,  Appointment appointment){
+        for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
+            {
+                if (appointmentRepository.findAll().get(i).getId() == id) {
+                    Patient patient = appointmentRepository.findAll().get(i).getPatient();
+                    Cardiolog cardiolog = appointmentRepository.findAll().get(i).getCardiolog();
+                    appointmentRepository.findAll().get(i).setId(id);
+                    appointmentRepository.findAll().get(i).setCnp(appointment.getCnp());
+                    appointmentRepository.findAll().get(i).setDataA(appointment.getDataA());
+                    appointmentRepository.findAll().get(i).setEmailUser(appointment.getEmailUser());
+                    appointmentRepository.findAll().get(i).setNumberUser(appointment.getNumberUser());
+                    appointmentRepository.findAll().get(i).setHour(appointment.getHour());
+                    appointmentRepository.findAll().get(i).setFirstName(appointment.getFirstName());
+                    appointmentRepository.findAll().get(i).setLastName(appointment.getLastName());
+                    appointmentRepository.findAll().get(i).setCardiolog(cardiolog);
+                    appointmentRepository.findAll().get(i).setPatient(patient);
+                    appointmentRepository.save(appointmentRepository.findAll().get(i));
+                }
+            }
+        }
+        return appointment;
     }
 }
 

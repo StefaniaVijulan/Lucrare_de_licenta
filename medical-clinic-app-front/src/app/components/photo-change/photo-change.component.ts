@@ -25,13 +25,18 @@ export class PhotoChangeComponent implements OnInit {
     }
     onSubmit(){
     console.log("this.form.avatar =>", this.form.avatar)
-     this.changeImg = new ChangeImg(this.form.avatar);
+    this.changeImg = new ChangeImg(this.form.avatar);
       this._service.changeImg(this.changeImg).subscribe(res=>{
-        if(JSON.stringify(res)==JSON.stringify(this.error)){
+        localStorage.removeItem("image")
+          localStorage.setItem("image", this.form.avatar)
+          console.log(localStorage.getItem("image"))
+      if(JSON.stringify(res)==JSON.stringify(this.error)){
           this.status ="Vă rugăm să încărcați o poză"
         }
         if(JSON.stringify(res)==JSON.stringify(this.success)){
-          window.location.reload();
+
+           window.location.reload();
+
         }
         this.dialogref.close("save");
       }, error=>{

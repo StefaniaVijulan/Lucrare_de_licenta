@@ -62,6 +62,10 @@ public class UserController {
     public User changeI(@RequestParam String cnpU, @RequestBody ChangeImg changeImg){
         return userService.changeImage(cnpU, changeImg);
     }
+    @PutMapping("/deleteImage")
+    public User changeI(@RequestParam String cnpU){
+        return userService.deleteImage(cnpU);
+    }
     @GetMapping("/allUsers")
     public List<User> getEmployees(){
         return userService.getAllEmployees();

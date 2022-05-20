@@ -6,6 +6,6 @@ export class Secretar {
     emailUser: String;
     numberUser: String;
     role: String;
-    
+    imageUser: string;
     constructor(){}
 }

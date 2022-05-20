@@ -1,24 +1,46 @@
 .example-container .mat-form-field + .mat-form-field {
-    margin-left: 8px;
+    margin: 0 auto
    
   }
-  .mat-error{
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-  }
 .mat-form-field{
-    width: 20vw;
-    margin-left: 4vw;
+    width: 60%;
+    margin-left: 20%;
 }
 .button{
     text-align: center;
 }
-h4{
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
+
+
+.with-icon {
+    display: flex;
+    align-items: center;
 }
+
+h4{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 3vh;
+}
+  mat-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-size: small; 
+  }
+  /*Button*/
+  .button-prog {
+    background: #EE6F57;
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 18px;
+    border: 0;
+  
+  }
   /*Input color*/
-  ::ng-deep .mat-focused .mat-form-field-label {
+::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/
     color: #EE6F57 !important;
    }
@@ -52,23 +74,4 @@ h4{
 ::-webkit-scrollbar-thumb {
     background: rgb(59, 195, 251); 
     border-radius: 10px;
-}
-mat-spinner {
-  position: absolute;
-  z-index: 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.button-prog {
-  background: #EE6F57;
-  border-radius: 999px;
-  box-sizing: border-box;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 8px 18px;
-  border: 0;
-
 }

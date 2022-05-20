@@ -60,13 +60,14 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('cnp', response.user.cnp)
         localStorage.setItem('image', response.user.imageUser)
+        localStorage.setItem("name", response.user.firstName + " " + response.user.lastName)
         if(localStorage.getItem("role") == "MODERATOR"){
           window.location.href = "/moderator"
         } else if(localStorage.getItem("role") == "SECRETAR"){
           window.location.href = "/secretar"
         }
         else if(localStorage.getItem("role") == "CARDIOLOG"){
-          window.location.href = "/doctorProgramari"
+          window.location.href = "/doctor/consultatii"
         }
         else if(localStorage.getItem("role") == "HEMATOLOG"){
           window.location.href = "/hematolog"

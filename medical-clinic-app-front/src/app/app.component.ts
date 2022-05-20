@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
+import { loadavg } from 'os';
 import { retry } from 'rxjs/operators';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 import { PhotoChangeComponent } from './components/photo-change/photo-change.component';
@@ -16,11 +17,14 @@ import { SecretarService } from './services/secretar/secretar.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit  {
+export class AppComponent implements AfterViewInit, OnInit {
   title = 'medical-clinic-app-front';
-
+  nameItem: any;
+  roleItem: any;
   @ViewChild(MatSidenav,  {static: false})
   sidenav!: MatSidenav;
+  imageItem: any;
+  loading = false;
   @HostListener('window:beforeunload')
   unloadHandler(event) {
     sessionStorage.removeItem('token')
@@ -39,6 +43,10 @@ export class AppComponent implements AfterViewInit  {
     public _router: Router){
 
   }
+  ngOnInit(): void {
+    this.nume()
+    this.role()
+    }
   ngAfterViewInit(){
     this.observer.observe(['(max-width: 2500px']).subscribe((res)=>{
       if(res.matches){
@@ -81,8 +89,30 @@ export class AppComponent implements AfterViewInit  {
  
 
 };
-  secretarPhoto(){
-    console.log(localStorage.getItem("image"))
+  deleteImg(){
+    this.loading =true;
+    console.log("intra aici")
+    this._service.deleteImg().subscribe((res)=>{
+      this.loading = false;
+      console.log("in final aici =>", res)
+      localStorage.removeItem("image");
+      localStorage.setItem("image",res.imageUser)
+      this.imageItem = res.imageUser
+
+    })
+  }
+  userPhoto(){
+    this.imageItem = localStorage.getItem("image")
     return localStorage.getItem("image");
+  }
+  role(){
+    this.roleItem = localStorage.getItem("role")
+    return localStorage.getItem("role");
+  }
+  nume(){
+   
+    this.nameItem = localStorage.getItem("name")
+    
+    return localStorage.getItem("nume");
   }
 }

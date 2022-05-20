@@ -60,6 +60,10 @@ import { AppointmentsHematologyComponent } from './pages/moderator/appointments-
 import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-radiology/appointments-radiology.component';
 import { DialogEditAppointmentComponent } from './components/dialog-edit-appointment/dialog-edit-appointment.component';
 import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointment/secretar-appointment.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { DoctorAllAppointmentsComponent } from './pages/doctor/doctor-all-appointments/doctor-all-appointments.component';
+import { DoctorFutureAppointmentsComponent } from './pages/doctor/doctor-future-appointments/doctor-future-appointments.component';
+import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-appointment-doctor/dialog-edit-appointment-doctor.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +105,9 @@ import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointm
     AppointmentsRadiologyComponent,
     DialogEditAppointmentComponent,
     SecretarAppointmentComponent,
+    DoctorAllAppointmentsComponent,
+    DoctorFutureAppointmentsComponent,
+    DialogEditAppointmentDoctorComponent,
 
   
   ],
@@ -133,6 +140,7 @@ import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointm
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    
     MatStepperModule,
     MatListModule,
     MatAutocompleteModule,
@@ -157,6 +165,7 @@ import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointm
      DialogAddAppointmentsHematologyComponent,
      DialogAddAppointmentsRadiologyComponent,
      ForgotPassComponent,
+     DialogEditAppointmentDoctorComponent,
      PhotoChangeComponent,
      DialogCancelDeleteUserComponent,
      DialogEditAppointmentComponent

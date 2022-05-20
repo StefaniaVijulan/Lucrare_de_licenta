@@ -8,5 +8,6 @@ export class Cardiolog {
     imageUser: string;
     role: String;
     
+    
     constructor(){}
 }

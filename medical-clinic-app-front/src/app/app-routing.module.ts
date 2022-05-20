@@ -25,6 +25,8 @@ import { UploadImgComponent } from './pages/upload-img/upload-img.component';
 import { AppointmentsHematologyComponent } from './pages/moderator/appointments-hematology/appointments-hematology.component';
 import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-radiology/appointments-radiology.component';
 import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointment/secretar-appointment.component';
+import { DoctorFutureAppointmentsComponent } from './pages/doctor/doctor-future-appointments/doctor-future-appointments.component';
+import { DoctorAllAppointmentsComponent } from './pages/doctor/doctor-all-appointments/doctor-all-appointments.component';
 
 const routes: Routes = [ 
   {
@@ -79,8 +81,18 @@ const routes: Routes = [
     canActivate : [AuthGuard, SecretarGuard]
   },
   {
-    path:"doctorProgramari",
+    path:"doctor/consultatii",
     component: DoctorProgramariComponent,
+    canActivate : [AuthGuard, DoctorGuard]
+  },
+  {
+    path:"doctor/programari/viitoare",
+    component: DoctorFutureAppointmentsComponent,
+    canActivate : [AuthGuard, DoctorGuard]
+  },
+  {
+    path:"doctor/programari/all",
+    component: DoctorAllAppointmentsComponent,
     canActivate : [AuthGuard, DoctorGuard]
   },
   {

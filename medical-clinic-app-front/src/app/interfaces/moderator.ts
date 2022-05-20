@@ -6,6 +6,7 @@ export class Moderator {
     emailUser: String;
     numberUser: String;
     role: String;
+    imageUser: string;
     
     constructor(){}
 }

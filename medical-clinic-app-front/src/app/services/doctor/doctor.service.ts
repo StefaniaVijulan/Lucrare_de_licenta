@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Appointment } from 'src/app/interfaces/appointment';
 import { AppointmentsHematology } from 'src/app/interfaces/appointmentHematology';
 import { AppointmentsRadiology } from 'src/app/interfaces/appointmentRadiology';
 import { FisaPatient } from 'src/app/interfaces/fisaPatient';
@@ -13,6 +14,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class DoctorService {
+  appointmentListService: any;
   cnpCurrantCardioService: any;
   cnpCurrantpatientService: any;
   infoFisaService: any;
@@ -23,14 +25,28 @@ export class DoctorService {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
     
   };
-  allAppointementSpecifc(){
-    this.cnpCurrantCardioService = localStorage.getItem("cnp")
-    return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
-  }
+ 
   allTodayAppointementSpecifc(){
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
+    return this._http.get(this.baseUrl + '/cardiolog/allTodaySpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
+  }
+   
+  allFutureAppointementSpecifc(){
+    this.cnpCurrantCardioService = localStorage.getItem("cnp")
     return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
   }
+   
+  allAppointementSpecifc(){
+    this.cnpCurrantCardioService = localStorage.getItem("cnp")
+    return this._http.get(this.baseUrl + '/cardiolog/allFutureSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
+  }
+  editAppointment(id: any,appointment: Appointment){
+   
+    console.log("id =>", id)
+    console.log("appointment", appointment)
+    return this._http.put<any>(this.baseUrl + '/cardiolog/editAppointment?id=' + id ,appointment, this.publicHttpHeaders);
+  }
+
   infoSpecific(cnpP: any){
     return this._http.get(this.baseUrl + '/cardiolog/specificFisa?cnpP=' + cnpP, this.publicHttpHeaders)
   }
@@ -59,12 +75,19 @@ export class DoctorService {
   getValidationDataRadio( element: string){
     return this._http.get(this.baseUrl + '/checkAvailabilityRadiology?dateA=' + element);
   }
-
+  checkData( element: string){
+    this.cnpCurrantCardioService = localStorage.getItem("cnp")
+    return this._http.get(this.baseUrl + '/cardtiology/checkDateBeforeBlocK?dataV='+ element + '&cnpC='+ this.cnpCurrantCardioService, this.publicHttpHeaders);
+  }
 
   seeProgramari(){
-    this._router.navigate(['/doctorProgramari'])
+    this._router.navigate(['/doctor/consultatii'])
   }
-  seeInternari(){
-  //  this._router.navigate(['/secretar'])
+  seeFutureProgramari(){
+    this._router.navigate(['/doctor/programari/viitoare'])
   }
+  seeAllProgramari(){
+    this._router.navigate(['/doctor/programari/all'])
+  }
+ 
 }

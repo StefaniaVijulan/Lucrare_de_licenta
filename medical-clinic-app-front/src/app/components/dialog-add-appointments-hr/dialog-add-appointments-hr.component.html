@@ -8,9 +8,10 @@
   </p>
 </section>
 <div mat-dialog-actions [align]="'end'">
-  <button color="primary" *ngIf="appointmens.get('appointmensHematology').value == true" mat-raised-button
+  <button class="button-prog" role="button" *ngIf="appointmens.get('appointmensHematology').value == true" 
     (click)="addAppointmentHematology()">Adauga programare</button>
-  <button color="primary"
+
+    <button class="button-prog" role="button" 
     *ngIf="appointmens.get('appointmensRadiology').value == true && appointmens.get('appointmensHematology').value != true"
-    mat-raised-button (click)="openAddRadiology()">Adauga programare</button>
+     (click)="openAddRadiology()">Resetează</button>
 </div>

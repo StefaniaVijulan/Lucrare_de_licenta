@@ -1,25 +1,35 @@
-<h2 style="margin-top: 2vh;">Consultatiile din aceasta zi</h2>
-<div class="grid">
-  <ng-container *ngFor="let appointment of listAppointmentsSpecific">
-    <div class="container-style">
-      <br>
-      <h5 style="text-align: center;"><ins><b>{{appointment.hour}}</b></ins> </h5>
-      <span style="margin-left: 2rem ;"><b>CNP: </b>{{appointment.cnp}}</span><br>
-      <span style="margin-left: 2rem ;"><b>Prenume: </b> {{appointment.firstName}}</span><br>
-      <span style="margin-left: 2rem ;"><b>Nume: </b> {{appointment.lastName}}</span><br>
-      <br>
-      <span style="margin-left: 2rem ;"><b>Email: </b>{{appointment.emailUser}}</span><br>
-      <span style="margin-left: 2rem ;"><b>Telefon: </b>{{appointment.numberUser}}</span><br>
-
-      <br>
-
-      <div [align]="'center'">
-        <button mat-stroked-button color="primary" (click)= "readMoreDialog(appointment.cnp)">More info</button>
+<section id="team">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2>Consultațiile din această zi</h2>
       </div>
-      <br>
-
     </div>
+    <div class="row" *ngIf="listAppointmentsSpecific">
+      <div class="col-lg-3" *ngFor="let appointment of listAppointmentsSpecific">
+        <div class="member">
 
+          <div class="member-img">
+            <h4 style="text-align: center;"><ins><b>{{appointment.hour}}</b></ins> </h4>
+            <span style="margin-left: 2rem ;"><b>CNP: </b>{{appointment.cnp}}</span><br>
+            <span style="margin-left: 2rem ;"><b>Prenume: </b> {{appointment.firstName}}</span><br>
+            <span style="margin-left: 2rem ;"><b>Nume: </b> {{appointment.lastName}}</span><br>
+            <br>
+            <span style="margin-left: 2rem ;"><b>Email: </b>{{appointment.emailUser}}</span><br>
+            <span style="margin-left: 2rem ;"><b>Telefon: </b>{{appointment.numberUser}}</span><br>
+            <br>
 
-  </ng-container>
+            <div [align]="'center'">
+              <button class="button-prog" (click)="readMoreDialog(appointment.cnp)">Detalii </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!listAppointmentsSpecific" class="free-day">
+    <p >Nu aveți programată nicio consultație azi!</p>
+  <img style="width: 30%; height: 30%" src="/assets/freeDay.png">
 </div>
+  </div>
+</section>

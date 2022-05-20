@@ -10,6 +10,7 @@ import {
   Router
 } from '@angular/router';
 import { timeStamp } from 'console';
+import { User } from 'src/app/interfaces/user';
 import {
   environment
 } from 'src/environments/environment';
@@ -38,8 +39,13 @@ export class AuthService {
     return this._http.post(this.baseUrl + "/loginPatient", data, this.publicHttpHeaders);
   }
   forgotPass(data: any){
-    console.log("in service => ", data)
+
     return this._http.put(this.baseUrl + "/forgotPass?cnpU="+ data, this.publicHttpHeaders);
+  }
+  deleteImg(){
+    console.log("apoi")
+    this.cnpUser = localStorage.getItem("cnp")
+    return this._http.put<User>(this.baseUrl + "/deleteImage?cnpU="+ this.cnpUser, this.publicHttpHeaders);
   }
   logoutUser() {
     localStorage.removeItem('token')
@@ -47,6 +53,8 @@ export class AuthService {
     localStorage.removeItem('user')
     localStorage.removeItem('cnp')
     localStorage.removeItem('patient')
+    localStorage.removeItem('image')
+        localStorage.removeItem("name")
     this._router.navigate(['/dashboard'])
   }
   logInUser(){

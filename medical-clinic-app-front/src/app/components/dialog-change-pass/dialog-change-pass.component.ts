@@ -14,6 +14,7 @@ export class DialogChangePassComponent implements OnInit {
   oldPass: string;
   newPass: string;
   loading: boolean=false;
+  msg: string;
   constructor(private _service: AuthService,
     private formBuilder: FormBuilder,
     private dialogref: MatDialogRef < DialogChangePassComponent >) { }
@@ -22,20 +23,17 @@ export class DialogChangePassComponent implements OnInit {
   ngOnInit() {
   }
   changePass(){
+    this.loading = true;
     console.log(this.oldPass)
     console.log(this.newPass)
- this._service.changePass(this.oldPass, this.newPass).subscribe({
+    this._service.changePass(this.oldPass, this.newPass).subscribe({
     
     next: (res) => {
+      this.loading = false;
       if(res){
-      this.loading = true;
-      setTimeout(() => this.loading = false, 2000);
         this.dialogref.close("save");
-        this.loading = false;
-        console.log("intra in next")
-      console.log(this.oldPass)
-      console.log(this.newPass)
-      this.dialogref.close("change");
+    }else{
+      this.msg = "Parola curentă nu corespunde!"
     }
     },
     error:(error)=>{

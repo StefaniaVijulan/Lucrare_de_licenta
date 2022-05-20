@@ -65,7 +65,32 @@
       </button></div>
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'SECRETAR')">
-      <img class="avatar mat-elevation-z8" [src]="secretarPhoto()" />
+      <img class="avatar mat-elevation-z8" [src]="userPhoto()" />
+      <p class="nume">{{nameItem}}</p>
+      <p class="role">{{roleItem}}</p>
+      <mat-divider></mat-divider>
+      <button mat-button class="menu-button" [matMenuTriggerFor]="menu" >
+        <mat-icon>people</mat-icon>
+        <span>Setări profil</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openChangePhotoDialog()">
+          <mat-icon>image_search</mat-icon>
+          <span>Poză nouă</span>
+        </button>
+        <div mat-dialog-actions [align]="'center' ">
+          <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+        <button mat-menu-item (click)="deleteImg()">
+          <mat-icon>no_photography</mat-icon>
+          <span>Șterge poză</span>
+        </button>
+        </div>
+        <button mat-menu-item (click)="openDialog()">
+          <mat-icon>lock_reset</mat-icon>
+          <span>Resetare parolă</span>
+        </button>
+      </mat-menu>
+      <mat-divider></mat-divider>
       <button mat-button class="menu-button" (click)="_secretar.seeInternari()">
         <mat-icon>people</mat-icon>
         <span>Programari curente</span>
@@ -78,31 +103,49 @@
         <mat-icon>people</mat-icon>
         <span>Toate programările</span>
       </button>
-      <div style="position:absolute;
-      bottom:25px;">
-      <mat-divider ></mat-divider>
-
-      <button mat-button class="menu-button" (click)="openDialog()">
-        <mat-icon>lock_reset</mat-icon>
-        <span>Resetare parola</span>
-      </button>
-      <button mat-button class="menu-button" (click)="openChangePhotoDialog()">
-        <mat-icon>lock_reset</mat-icon>
-        <span>Poza noua</span>
-      </button></div>
     </div>
 
 
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'CARDIOLOG')">
+      <img class="avatar mat-elevation-z8" [src]="userPhoto()" />
+      <p class="nume">{{nameItem}}</p>
+      <p class="role">{{roleItem}}</p>
+      <mat-divider></mat-divider>
+      <button mat-button class="menu-button" [matMenuTriggerFor]="menu" >
+        <mat-icon>people</mat-icon>
+        <span>Setări profil</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openChangePhotoDialog()">
+          <mat-icon>image_search</mat-icon>
+          <span>Poză nouă</span>
+        </button>
+        <div mat-dialog-actions [align]="'center' ">
+          <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+        <button mat-menu-item (click)="deleteImg()">
+          <mat-icon>no_photography</mat-icon>
+          <span>Șterge poză</span>
+        </button>
+        </div>
+        <button mat-menu-item (click)="openDialog()">
+          <mat-icon>lock_reset</mat-icon>
+          <span>Resetare parolă</span>
+        </button>
+      </mat-menu>
+      <mat-divider></mat-divider>
       <button mat-button class="menu-button" (click)="_doctor.seeProgramari()">
         <mat-icon>people</mat-icon>
-        <span>Consultatii</span>
+        <span>Consultatii curente</span>
       </button>
-      <mat-divider></mat-divider>
-      <button mat-button class="menu-button" (click)="openDialog()">
-        <mat-icon>lock_reset</mat-icon>
-        <span>Resetare parola</span>
+      <button mat-button class="menu-button" (click)="_doctor.seeFutureProgramari()">
+        <mat-icon>people</mat-icon>
+        <span>Consultatii viitoare</span>
       </button>
+      <button mat-button class="menu-button" (click)="_doctor.seeAllProgramari()">
+        <mat-icon>people</mat-icon>
+        <span>Toate consultațiile</span>
+      </button>
+    
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'HEMATOLOG')">
       <button mat-button class="menu-button">

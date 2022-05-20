@@ -3,14 +3,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { DoctorService } from 'src/app/services/doctor/doctor.service';
 import { SecretarService } from 'src/app/services/secretar/secretar.service';
 
 @Component({
-  selector: 'app-dialog-edit-appointment',
-  templateUrl: './dialog-edit-appointment.component.html',
-  styleUrls: ['./dialog-edit-appointment.component.scss']
+  selector: 'app-dialog-edit-appointment-doctor',
+  templateUrl: './dialog-edit-appointment-doctor.component.html',
+  styleUrls: ['./dialog-edit-appointment-doctor.component.scss']
 })
-export class DialogEditAppointmentComponent implements OnInit {
+export class DialogEditAppointmentDoctorComponent implements OnInit {
+
   blockedData: any
   dateP: string;
   ziua: string;
@@ -20,46 +22,38 @@ export class DialogEditAppointmentComponent implements OnInit {
   hourInterval: any;
   luna: string;
   formG: FormGroup;
-  selectedCardio: any;
+  selectedCardio:any = localStorage.getItem("cnp")
   editAppointment: Appointment = new Appointment()
   listCardio: Object;
   loading: boolean = false;
   constructor(private _formBuilder: FormBuilder,
-    private _secretar: SecretarService,
+    private _doctor: DoctorService,
     private _appointment: AppointmentService,
-    private dialogref: MatDialogRef < DialogEditAppointmentComponent >,
+    private dialogref: MatDialogRef < DialogEditAppointmentDoctorComponent >,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.allCardio();
+    
 
     this.formG = this._formBuilder.group({
-      cnp: [this._secretar.appointmentListService.cnp],
-      firstName: [this._secretar.appointmentListService.firstName],
-      lastName: [this._secretar.appointmentListService.lastName],
-      emailUser: [this._secretar.appointmentListService.emailUser],
-      numberUser: [this._secretar.appointmentListService.numberUser],
+      cnp: [this._doctor.appointmentListService.cnp],
+      firstName: [this._doctor.appointmentListService.firstName],
+      lastName: [this._doctor.appointmentListService.lastName],
+      emailUser: [this._doctor.appointmentListService.emailUser],
+      numberUser: [this._doctor.appointmentListService.numberUser],
   });
       
     this.formG.controls['cnp'].disable()
     this.formG.controls['firstName'].disable()
     this.formG.controls['lastName'].disable()
 
-    console.log(this._secretar.appointmentListService)
 
   }
-  onCardioChange(event) {
-    this.dateP = ""
-    this.hourP = ""
-  }
-  allCardio(){
-    this._secretar.allCardiolog().subscribe((res)=>{
-      console.log(res)
-      this.listCardio = res
-    })
-  }
+
   validationDate(){
+    console.log("validation date => ", localStorage.getItem("cnp"))
+
     this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
       this.blockedData = new Array();
       for(let dat in res){
@@ -95,11 +89,11 @@ export class DialogEditAppointmentComponent implements OnInit {
   }
   editAppointmentF(){ 
   //  this.loading = true;
-    this.editAppointment.cnp = this._secretar.appointmentListService.cnp
-    this.editAppointment.lastName = this._secretar.appointmentListService.lastName
-    this.editAppointment.firstName = this._secretar.appointmentListService.firstName
-    this.editAppointment.emailUser = this._secretar.appointmentListService.emailUser
-    this.editAppointment.numberUser = this._secretar.appointmentListService.numberUser
+    this.editAppointment.cnp = this._doctor.appointmentListService.cnp
+    this.editAppointment.lastName = this._doctor.appointmentListService.lastName
+    this.editAppointment.firstName = this._doctor.appointmentListService.firstName
+    this.editAppointment.emailUser = this._doctor.appointmentListService.emailUser
+    this.editAppointment.numberUser = this._doctor.appointmentListService.numberUser
     this.editAppointment.dataA = this.dataEdit
     this.editAppointment.hour =this.hourP
 
@@ -110,19 +104,9 @@ export class DialogEditAppointmentComponent implements OnInit {
     console.log(this.dataEdit)
     console.log(this.hourP)
 
-    this._secretar.editAppointment(this._secretar.appointmentListService.id, this.selectedCardio, this.editAppointment).subscribe((res)=>{
+    this._doctor.editAppointment(this._doctor.appointmentListService.id, this.editAppointment).subscribe((res)=>{
       console.log(res)
     })
-    /*
-    this.setFisa()
-    this._doctor.editFisaPatient(this.newfisaPatient).subscribe((res)=>{
-      this.formG.reset();
-      this.formG2.reset();
-      this.formG3.reset();
-      this.formG4.reset();
-      //se intoarce cu textul save
-      this.dialogref.close("fisa");
-      console.log("Add fisas")
-    })*/
+  
   }
 }
