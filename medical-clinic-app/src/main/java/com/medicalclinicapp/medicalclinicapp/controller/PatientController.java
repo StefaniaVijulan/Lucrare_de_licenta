@@ -46,9 +46,13 @@ public class PatientController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                             loginRequest.getPassword()));
+            System.out.println( authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                            loginRequest.getPassword())));
         }
         catch (BadCredentialsException e) {
             System.out.println("intra in catch");
+            System.out.println(e);
             return null;
         }
         final UserDetails userDetails = userService

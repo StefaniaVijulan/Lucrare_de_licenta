@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', response.user.role)  
         localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('cnp', response.user.cnp)
+        localStorage.setItem('image', response.user.imageUser)
         if(localStorage.getItem("role") == "MODERATOR"){
           window.location.href = "/moderator"
         } else if(localStorage.getItem("role") == "SECRETAR"){
@@ -88,7 +89,9 @@ export class LoginComponent implements OnInit {
   }
   doLoginPatient() {
     this.loading = true
-    console.log("intra aici")
+    this.setUser()
+    console.log("intra aici pacient")
+    console.log(this.userDto)
   //  window.location.href = "/pacient"
     this._service.loginPatient(this.userDto).subscribe((response: any) => {
       this.loading = false
@@ -115,39 +118,9 @@ export class LoginComponent implements OnInit {
             this.msg ="CNP-ul sau parola este gresită!"
           }
         }
-      //window.location.href = "/pacient"
-     /* if (response && response.jwt) {
-        localStorage.setItem('token', response.jwt);
-        localStorage.setItem('role', response.user.role)  
-        localStorage.setItem('user', JSON.stringify(response.user))
-        localStorage.setItem('cnp', response.user.cnp)
-        if(localStorage.getItem("role") == "MODERATOR"){
-          window.location.href = "/moderator"
-        } else if(localStorage.getItem("role") == "SECRETAR"){
-          window.location.href = "/secretar"
-        }
-        else if(localStorage.getItem("role") == "CARDIOLOG"){
-          window.location.href = "/doctorProgramari"
-        }
-        else if(localStorage.getItem("role") == "HEMATOLOG"){
-          window.location.href = "/hematolog"
-
-        }
-        else{
-          this._service.logoutUser()
-          window.location.href = "/dashboard"
-
-        }
-
-      }
-      else{
-        console.log(response)
-        if(response ==  null){
-          this.msg ="CNP-ul sau parola este gresită!"
-        }
-      }*/
+     
     })
-  
+
   }
   openForgotPassDialog(){
     

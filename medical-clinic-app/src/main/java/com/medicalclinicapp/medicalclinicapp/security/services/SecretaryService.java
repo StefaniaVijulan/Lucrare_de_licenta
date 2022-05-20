@@ -82,6 +82,10 @@ public class SecretaryService {
         Collections.sort(appointmentList, compareByHour);
         return appointmentList;
     }
+    public List<Appointment> allAppointment() throws ParseException {
+        List<Appointment> appointmentList = appointmentRepository.findAll();
+        return appointmentList;
+    }
 
     public Patient addPatient(Patient patient) {
         if (patientRepository.existsByCnp(patient.getCnp())) {
@@ -118,12 +122,6 @@ public class SecretaryService {
             }
         }
         return null;
-    }
-
-    public Patient deletePatient(String firstName) {
-
-        patientRepository.delete(patientRepository.findByFirstName(firstName));
-        return patientRepository.findByFirstName(firstName);
     }
 
 
@@ -176,6 +174,16 @@ public class SecretaryService {
             }
         }
         return appointment;
+    }
+
+    public Appointment deleteAppointment(Long id){
+        for(int i= 0; i<appointmentRepository.findAll().size(); i++){
+            if(appointmentRepository.findAll().get(i).getId() == id){
+                appointmentRepository.delete(appointmentRepository.findAll().get(i));
+                return appointmentRepository.findAll().get(i);
+            }
+        }
+        return null;
     }
 
 }

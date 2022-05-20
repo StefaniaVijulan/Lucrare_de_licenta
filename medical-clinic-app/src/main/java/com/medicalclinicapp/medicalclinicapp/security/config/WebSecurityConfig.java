@@ -81,7 +81,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/moderator/allAppointmentRadiology"
 
                         ).hasAuthority("MODERATOR")
-                .antMatchers(
+                .antMatchers("/secretary/deleteAppointment",
+                        "/secretary/appointments",
                         "/secretary/allAppointments",
                         "/secretary/addPatient",
                         "/secretary/todayAppointments",

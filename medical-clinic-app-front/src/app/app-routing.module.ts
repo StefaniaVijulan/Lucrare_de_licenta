@@ -24,6 +24,7 @@ import { SecretarComponent } from './pages/secretar/secretar/secretar.component'
 import { UploadImgComponent } from './pages/upload-img/upload-img.component';
 import { AppointmentsHematologyComponent } from './pages/moderator/appointments-hematology/appointments-hematology.component';
 import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-radiology/appointments-radiology.component';
+import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointment/secretar-appointment.component';
 
 const routes: Routes = [ 
   {
@@ -68,8 +69,13 @@ const routes: Routes = [
     canActivate : [AuthGuard, SecretarGuard]
   },
   {
-    path:"secretarPacient",
+    path:"secretar/appointment/next",
     component: SecretarPacientiComponent,
+    canActivate : [AuthGuard, SecretarGuard]
+  },
+  {
+    path:"secretar/appointments/all",
+    component: SecretarAppointmentComponent,
     canActivate : [AuthGuard, SecretarGuard]
   },
   {

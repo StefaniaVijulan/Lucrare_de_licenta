@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
+import { retry } from 'rxjs/operators';
 import { DialogChangePassComponent } from './components/dialog-change-pass/dialog-change-pass.component';
 import { PhotoChangeComponent } from './components/photo-change/photo-change.component';
 
@@ -80,4 +81,8 @@ export class AppComponent implements AfterViewInit  {
  
 
 };
+  secretarPhoto(){
+    console.log(localStorage.getItem("image"))
+    return localStorage.getItem("image");
+  }
 }

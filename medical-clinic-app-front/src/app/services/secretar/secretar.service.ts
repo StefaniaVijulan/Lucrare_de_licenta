@@ -50,6 +50,9 @@ export class SecretarService {
   getAllCurrentAppointments(){
     return this._http.get(this.baseUrl + '/secretary/allAppointments', this.publicHttpHeaders)
   }
+  getAppointments(){
+    return this._http.get(this.baseUrl + '/secretary/appointments', this.publicHttpHeaders)
+  }
   getAllTodayAppointments(){
     return this._http.get(this.baseUrl + '/secretary/todayAppointments', this.publicHttpHeaders)
   }
@@ -68,14 +71,18 @@ export class SecretarService {
 
     return this._http.post<any>(this.baseUrl + '/secretary/addFisa?cnpP=' + cnpP, this.fisaService, this.publicHttpHeaders);
   }
-
+  deleteAppointment(data: any){
+    return this._http.delete(this.baseUrl + '/secretary/deleteAppointment?id='+ data, this.publicHttpHeaders);
+  }
 
   seePacient(){
-    this._router.navigate(['/secretarPacient'])
+    this._router.navigate(['/secretar/appointment/next'])
   }
   seeInternari(){
     this._router.navigate(['/secretar'])
   }
+  seeAll(){
+    this._router.navigate(['/secretar/appointments/all'])
+  }
   
-
 }

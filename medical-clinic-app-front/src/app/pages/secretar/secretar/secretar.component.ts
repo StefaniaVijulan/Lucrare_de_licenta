@@ -18,9 +18,7 @@ import { DialogEditAppointmentComponent } from 'src/app/components/dialog-edit-a
   styleUrls: ['./secretar.component.scss']
 })
 export class SecretarComponent implements OnInit {
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
+
   listAppointment: any
   currentList: any;
   pacientL: any;
@@ -96,15 +94,7 @@ export class SecretarComponent implements OnInit {
      
     })
   }
-  openEditAppointmentDialog(element: any){
-    this._secretar.appointmentListService = element;
-    console.log("appointment =>", this._secretar.appointmentListService)
-    console.log("edit appointment")
-    this.dialog.open(DialogEditAppointmentComponent, {
-      width: '35%',
-      panelClass: 'my-panel'
-    })
-  }
+
   /*onPageChange($event) {
     this.listAppointment =  this.currentItemsToShow.slice($event.pageIndex*$event.pageSize, $event.pageIndex*$event.pageSize + $event.pageSize);
   }

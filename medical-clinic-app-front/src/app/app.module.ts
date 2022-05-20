@@ -59,6 +59,7 @@ import { DialogCancelDeleteUserComponent } from './components/dialog-cancel-dele
 import { AppointmentsHematologyComponent } from './pages/moderator/appointments-hematology/appointments-hematology.component';
 import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-radiology/appointments-radiology.component';
 import { DialogEditAppointmentComponent } from './components/dialog-edit-appointment/dialog-edit-appointment.component';
+import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointment/secretar-appointment.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { DialogEditAppointmentComponent } from './components/dialog-edit-appoint
     AppointmentsHematologyComponent,
     AppointmentsRadiologyComponent,
     DialogEditAppointmentComponent,
+    SecretarAppointmentComponent,
 
   
   ],

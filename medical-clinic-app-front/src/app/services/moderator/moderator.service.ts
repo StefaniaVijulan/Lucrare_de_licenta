@@ -90,6 +90,8 @@ export class ModeratorService {
   getAppointmentByDate(dataStart:any, dataEnd:any){
     return this._http.get(this.baseUrl + '/moderator/betweenDate?dataStart=' + dataStart +'&dataEnd=' +dataEnd, this.publicHttpHeaders); 
   }
+
+  
   /*for menu*/
   seeEmployee(){
     this._router.navigate(['/moderator'])

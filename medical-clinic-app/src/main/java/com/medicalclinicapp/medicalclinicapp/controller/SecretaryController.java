@@ -28,6 +28,11 @@ public class SecretaryController {
     public List<Appointment> getAllTodayAppointment() throws ParseException {
         return secretaryService.todayAppointments();
     }
+    @GetMapping("/secretary/appointments")
+    public List<Appointment> allAppointment() throws ParseException {
+        return secretaryService.allAppointment();
+    }
+
     @PostMapping("/secretary/addPatient")
     public Patient addPatient(@RequestBody Patient patient) throws Exception {
         System.out.println("ana");
@@ -37,10 +42,7 @@ public class SecretaryController {
     public Patient getcheckPatient(@RequestParam("cnp")String cnp) throws ParseException {
         return secretaryService.checkPatient(cnp);
     }
-    @DeleteMapping("/secretary/deletePatient")
-    public Patient deleteP(@RequestParam("cnpP") String cnpP){
-        return secretaryService.deletePatient(cnpP);
-    }
+
     @GetMapping("/secretary/allCardiolog")
     public List<Cardiolog> getAllCardiolog(){
         return secretaryService.seeAllCardiolog();
@@ -57,6 +59,10 @@ public class SecretaryController {
     @PutMapping(("/secretary/editAppointment"))
     public Appointment editAppointment(@RequestParam("id")Long id, @RequestParam("cnpU")String cnpU, @RequestBody Appointment appointment)  {
         return secretaryService.editAppointment(id, cnpU, appointment);
+    }
+    @DeleteMapping("/secretary/deleteAppointment")
+    public Appointment deleteP(@RequestParam("id") Long id){
+        return secretaryService.deleteAppointment(id);
     }
 }
 /*

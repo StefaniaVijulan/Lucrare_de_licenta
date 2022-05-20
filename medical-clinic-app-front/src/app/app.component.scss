@@ -16,7 +16,7 @@ mat-sidenav {
 
   
 }
-img{
+.logo{
     width: 3rem;
     height: 3rem;
 }
@@ -58,3 +58,13 @@ mat-sidenav-container {
     border: 0;
   
   }
+  
+.avatar {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 60%;
+    height: 60%;
+    margin-left:20%;
+    margin-right: 20%;
+    border-radius: 50%;
+}

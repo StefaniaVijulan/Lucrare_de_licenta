@@ -7,22 +7,22 @@
         <br> 
               <mat-form-field appearance="fill">
                 <mat-label>Nume</mat-label>
-                <input matInput formControlName="lastName" placeholder="ex. Popescu">
+                <input matInput formControlName="lastName" placeholder="ex. Popescu" required>
               </mat-form-field>
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Initiala tatalui</mat-label>
-                <input matInput formControlName="dadLetterPatient" placeholder="D.F.">
+                <input matInput formControlName="dadLetterPatient" placeholder="D.F." required>
               </mat-form-field>
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Prenume</mat-label>
-                <input matInput formControlName="firstName" placeholder="ex. Ion">
+                <input matInput formControlName="firstName" placeholder="ex. Ion" required>
               </mat-form-field>
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>CNP</mat-label>
-                <input matInput formControlName="cnp" placeholder="ex. 6001100110000">
+                <input matInput formControlName="cnp" placeholder="ex. 6001100110000" required>
                 <mat-error class="error" *ngIf="firstFormGroup.controls['cnp'].hasError('pattern')">
                   Introduceti un CNP valid
                 </mat-error>
@@ -30,7 +30,7 @@
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Seria buletinului</mat-label>
-                <input matInput formControlName="seriesPatient" placeholder="ex. GZ">
+                <input matInput formControlName="seriesPatient" placeholder="ex. GZ" required>
                 <mat-error class="error" *ngIf="firstFormGroup.controls['seriesPatient'].hasError('pattern')">
                   Introduceti o serie valida
                 </mat-error>
@@ -38,7 +38,7 @@
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Numarul seriei</mat-label>
-                <input matInput formControlName="numberPatient" placeholder="ex. 717775">
+                <input matInput formControlName="numberPatient" placeholder="ex. 717775" required>
                 <mat-error class="error" *ngIf="firstFormGroup.controls['numberPatient'].hasError('pattern')">
                   Numarul seriei trebuie sa aiba 6 caractere
                 </mat-error>
@@ -46,7 +46,7 @@
              <br>
               <mat-form-field appearance="fill">
                 <mat-label>Telefon</mat-label>
-                <input matInput formControlName="numberUser" placeholder="ex. 0766666666">
+                <input matInput formControlName="numberUser" placeholder="ex. 0766666666" required>
                 <mat-error class="error" *ngIf="firstFormGroup.controls['numberUser'].hasError('pattern')">
                   Numarul de telefon nu este valid
                 </mat-error>
@@ -54,20 +54,20 @@
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input formControlName="emailUser" placeholder="pat@example.com" matInput>
+                <input formControlName="emailUser" placeholder="pat@example.com" matInput required>
               </mat-form-field>
               <br>
               <mat-form-field appearance="fill">
                 <mat-label>Sex</mat-label>
-                <mat-select formControlName="sexPatient">
+                <mat-select formControlName="sexPatient" required>
                   <mat-option value="feminin">Feminin</mat-option>
                   <mat-option value="masculin">Masculin</mat-option>
                 </mat-select>
               </mat-form-field>
               <br>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" >
                 <mat-label>Cetatenie</mat-label>
-                <input  formControlName="citizenshipPatient" placeholder="pat@example.com" matInput>
+                <input  formControlName="citizenshipPatient" placeholder="pat@example.com" matInput required>
               </mat-form-field>
        
         <br>
