@@ -14,6 +14,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class DoctorService {
+
   appointmentListService: any;
   cnpCurrantCardioService: any;
   cnpCurrantpatientService: any;
@@ -33,12 +34,12 @@ export class DoctorService {
    
   allFutureAppointementSpecifc(){
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
-    return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
+    return this._http.get(this.baseUrl + '/cardiolog/allFutureSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
   }
    
   allAppointementSpecifc(){
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
-    return this._http.get(this.baseUrl + '/cardiolog/allFutureSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
+    return this._http.get(this.baseUrl + '/cardiolog/allSpecificAppointment?cnpC='+this.cnpCurrantCardioService, this.publicHttpHeaders)
   }
   editAppointment(id: any,appointment: Appointment){
    
@@ -75,9 +76,20 @@ export class DoctorService {
   getValidationDataRadio( element: string){
     return this._http.get(this.baseUrl + '/checkAvailabilityRadiology?dateA=' + element);
   }
+  
+  getSpecificAppointmentHematology(){
+    console.log("getSpecificAppointmentHematology => ", this.cnpCurrantpatientService)
+    return this._http.get(this.baseUrl + '/cardiolog/specificAppointmentHematology?cnpP=' + this.cnpCurrantpatientService, this.publicHttpHeaders);
+  }
+  getSpecificAppointmentRadiology(){
+    console.log("getSpecificAppointmentRadiology => ", this.cnpCurrantpatientService)
+
+    return this._http.get(this.baseUrl + '/cardiolog/specificAppointmentRadiology?cnpP=' + this.cnpCurrantpatientService, this.publicHttpHeaders);
+  }
+
   checkData( element: string){
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
-    return this._http.get(this.baseUrl + '/cardtiology/checkDateBeforeBlocK?dataV='+ element + '&cnpC='+ this.cnpCurrantCardioService, this.publicHttpHeaders);
+    return this._http.get<boolean>(this.baseUrl + '/cardiolog/checkDateBeforeBlock?dataV='+ element + '&cnpC='+ this.cnpCurrantCardioService, this.publicHttpHeaders);
   }
 
   seeProgramari(){

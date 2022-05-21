@@ -1,17 +1,74 @@
+
+<mat-accordion>
+  <h4 *ngIf="listSpecificHema || listSpecificRadio">Programări</h4>
+  <mat-expansion-panel *ngIf="listSpecificHema" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Hematologie</b>
+      </mat-panel-title>
+      <mat-panel-description>
+
+        <b>{{listSpecificHema.dataAppointmentHematology}}, {{listSpecificHema.hourAppointmentHematology}}</b>
+
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <div class="grid">
+      <p *ngIf="listSpecificHema.acid_uric">Acid uric</p>
+      <p *ngIf="listSpecificHema.calciu_ionic_seric">Calciu ionic</p>
+      <p *ngIf="listSpecificHema.calciu_seric_total">Calciu seric </p>
+      <p *ngIf="listSpecificHema.colesterol_seric_total">Colesterol seric</p>
+      <p *ngIf="listSpecificHema.creatina_serica">Creatina serica</p>
+      <p *ngIf="listSpecificHema.ldl_colesterol">LDL colesterol</p>
+      <p *ngIf="listSpecificHema.magneziu_seric">Magneziu seric</p>
+      <p *ngIf="listSpecificHema.trigliceride_serice">Trigliceride serice</p>
+      <p *ngIf="listSpecificHema.uree_serica">Uree serica</p>
+      <p *ngIf="listSpecificHema.potasiu_seric">Potasiu seric</p>
+      <p *ngIf="listSpecificHema.inr_cu_interpretare">INR</p>
+      <p *ngIf="listSpecificHema.t3">T3</p>
+      <p *ngIf="listSpecificHema.t4">T4</p>
+      <p *ngIf="listSpecificHema.tgo">TGO</p>
+      <p *ngIf="listSpecificHema.tgp">TGP</p>
+      <p *ngIf="listSpecificHema.tsh">TSH</p>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="listSpecificRadio" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Imagistică</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <b>{{listSpecificRadio.dataAppointmentRadiology}}, {{listSpecificRadio.hourAppointmentRadiology}}</b>
+
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <div class="grid">
+      <p *ngIf="listSpecificRadio.eco">ECO</p>
+      <p *ngIf="listSpecificRadio.ekg">EKG</p>
+      <p *ngIf="listSpecificRadio.ct">CT</p>
+      <p *ngIf="listSpecificRadio.irm">IRM</p>
+
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 <section class="programare" [formGroup]="appointmens">
-  <h4>Selectează tipul de programare dorit</h4>
-  <p>
-    <mat-checkbox formControlName="appointmensRadiology">Imagistica</mat-checkbox>
+  <h4  *ngIf="!listSpecificHema ||!listSpecificRadio "><br>Programări noi</h4>
+  
+  <p *ngIf="!listSpecificHema">
+    <mat-checkbox formControlName="appointmensRadiology">Imagistică</mat-checkbox>
   </p>
-  <p>
+  <p *ngIf="!listSpecificRadio">
     <mat-checkbox formControlName="appointmensHematology">Hematologie</mat-checkbox>
   </p>
 </section>
 <div mat-dialog-actions [align]="'end'">
-  <button class="button-prog" role="button" *ngIf="appointmens.get('appointmensHematology').value == true" 
-    (click)="addAppointmentHematology()">Adauga programare</button>
+  <button class="button-prog" role="button" *ngIf="appointmens.get('appointmensHematology').value == true"
+    (click)="addAppointmentHematology()">Adaugă programare</button>
 
-    <button class="button-prog" role="button" 
+  <button class="button-prog" role="button"
     *ngIf="appointmens.get('appointmensRadiology').value == true && appointmens.get('appointmensHematology').value != true"
-     (click)="openAddRadiology()">Resetează</button>
+    (click)="openAddRadiology()">Adaugă programare</button>
 </div>

@@ -51,28 +51,39 @@ public class AppointmentService {
         return null;
     }
 
-    public List<String> verificaDisponibilitateDoctor(String cnpD){
+    public List<String> verificaDisponibilitateDoctor(String cnpD) {
         List<Appointment> appointmentList = appointmentRepository.findAll();
         List<String> newAppointment = new ArrayList<>();
         Collections.sort(appointmentList);
-        long count = 0;
-        for (int i = 0; i < appointmentList.size() - 1; i++) {
-            if(appointmentList.get(i).getCardiolog().getCnp().equals(cnpD))
-                //incepem sa calculam de  cate ori apare o zi in appointment-urile curente
-                if (appointmentList.get(i).getDataA().equals(appointmentList.get(i + 1).getDataA()))
-                    count += 1;
-                else {
-                    count += 1;
-                    if (count == 8) {
-                //Verificam ca daca o anumita data apare de 8 ori (numarul de programari posibile intr-o zi)
-                        newAppointment.add(appointmentList.get(i).getDataA());
-                    } else {
-                        count = 0;
-                    }
-                }
-        }
+        long count = 1;
+        System.out.println("cnpD => " + cnpD);
 
-        return newAppointment;
+        for (int i = 0; i < appointmentList.size() - 1; i++) {
+            System.out.println("i= " + i);
+            if (appointmentList.get(i).getCardiolog().getCnp().equals(cnpD)) {
+                System.out.println("Appointment" + appointmentList.get(i).getId());
+                System.out.println("\tappointmentList.get(i).getDataA()" + appointmentList.get(i).getDataA());
+                System.out.println("\tappointmentList.get(i + 1).getDataA()" + appointmentList.get(i + 1).getDataA());
+
+                //incepem sa calculam de  cate ori apare o zi in appointment-urile curente
+                if (appointmentList.get(i).getDataA().equals(appointmentList.get(i + 1).getDataA())) {
+                    count += 1;
+                    System.out.println("\tcount=> " + count);
+                } else {
+                    System.out.println("O luam de la inceput");
+                    count = 1;
+                }
+
+            }
+            if (count == 9) {
+                System.out.println("Intra aici si face add");
+                //Verificam ca daca o anumita data apare de 8 ori (numarul de programari posibile intr-o zi)
+                newAppointment.add(appointmentList.get(i).getDataA());
+
+            }
+
+
+        }return newAppointment;
     }
     public List<String> verificaHoursDoctor(String cnpC, String dataD) {
         List<Appointment> appointmentList = appointmentRepository.findAll();

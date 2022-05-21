@@ -72,8 +72,8 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Data</ng-template>
-    <mat-form-field class="example-full-width">
-        <input matInput [matDatepickerFilter]="myFilter" [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
+    <mat-form-field class="example-full-width" required>
+        <input matInput  [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker ></mat-datepicker>
       </mat-form-field>

@@ -81,7 +81,7 @@ public class CardiologController {
         System.out.println("Inta in controller");
         return cardiologService.verificaHoursRadiology(data);
     }
-    @GetMapping("/cardtiology/checkDateBeforeBlock")
+    @GetMapping("/cardiolog/checkDateBeforeBlock")
     public Boolean verifD(@RequestParam("dataV")String dataV, @RequestParam("cnpC") String cnpC){
         return cardiologService.verficaDateBeforeBlock(dataV, cnpC);
     }
@@ -93,10 +93,28 @@ public class CardiologController {
     public AppointmentHematology addAppointment(@RequestParam (value = "cnpP")String cnpP, @RequestBody AppointmentHematology appointment) throws Exception {
         return cardiologService.addAppointmentHematology(cnpP, appointment);
     }
+    @GetMapping("/cardiolog/specificAppointmentHematology")
+    public AppointmentHematology specificAppointmentHema(@RequestParam("cnpP")String cnpP) throws ParseException {
+        return cardiologService.getSpecificAppointmentHematology(cnpP);
+    }
+    @GetMapping("/cardiolog/specificAppointmentRadiology")
+    public AppointmentRadiology specificAppointmentRadio(@RequestParam("cnpP")String cnpP) throws ParseException {
+        return cardiologService.getSpecificAppointmentRadiology(cnpP);
+    }
     @PostMapping("/cardiolog/addAppointmentRadiology")
     public AppointmentRadiology addAppointment(@RequestParam (value = "cnpP")String cnpP, @RequestBody AppointmentRadiology appointment) throws Exception {
         return cardiologService.addAppointmentRadiology(cnpP, appointment);
     }
+
+    @GetMapping("/cardiolog/allAppointmentHematology")
+    public List<AppointmentHematology> getAllHematology(){
+        return cardiologService.allAppointmentsHematology();
+    }
+    @GetMapping("/cardiolog/allAppointmentRadiology")
+    public List<AppointmentRadiology> getAllRadiology(){
+        return cardiologService.allAppointmentRadiology();
+    }
+
     @PutMapping(("/cardiolog/editAppointment"))
     public Appointment editAppointment(@RequestParam("id")Long id, @RequestBody Appointment appointment)  {
         return cardiologService.editAppointment(id, appointment);

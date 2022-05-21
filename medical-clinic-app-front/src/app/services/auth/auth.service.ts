@@ -21,6 +21,7 @@ import {
 export class AuthService {
   private baseUrl = environment.baseUrl;
   private cnpUser: string;
+
   userListService:any;
   private publicHttpHeaders = {
     headers: new HttpHeaders({

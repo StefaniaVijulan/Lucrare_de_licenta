@@ -34,8 +34,7 @@ export class DialogEditAppointmentDoctorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
-
+    this.validationDate()
     this.formG = this._formBuilder.group({
       cnp: [this._doctor.appointmentListService.cnp],
       firstName: [this._doctor.appointmentListService.firstName],
@@ -52,18 +51,29 @@ export class DialogEditAppointmentDoctorComponent implements OnInit {
   }
 
   validationDate(){
-    console.log("validation date => ", localStorage.getItem("cnp"))
-
+    
     this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
-      this.blockedData = new Array();
-      for(let dat in res){
-        this.blockedData.add(new Date(dat).getTime())
-      }
       console.log(res)
+      for(let dat of res){
+        console.log(dat)
+        console.log(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] )
+        console.log(new Date(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] ).getTime())
+        this._appointment.blockedDataAppointment.push(new Date(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] ).getTime());
+        console.log(this._appointment.blockedDataAppointment)
+      }
+      
+      console.log(this._appointment.blockedDataAppointment)
     })
   }
+  myFilter = (d: Date): boolean => {
+    const time=d.getTime()
+    const day = d.getDay();
+    
+
+    console.log("this._appointment.blockedDataAppointment =>",this._appointment.blockedDataAppointment)
+    return !this._appointment.blockedDataAppointment.find(x=>x==time) && day !==0 && day !==6;
+  };
  
-  
    hourCheck(){
      var formatedDate = new Date(this.dateP).toLocaleString();
      if(formatedDate.split(",")[0].split("/")[0].length ==1)
@@ -106,6 +116,9 @@ export class DialogEditAppointmentDoctorComponent implements OnInit {
 
     this._doctor.editAppointment(this._doctor.appointmentListService.id, this.editAppointment).subscribe((res)=>{
       console.log(res)
+      window.location.reload()
+      this.dialogref.close("edit")
+
     })
   
   }

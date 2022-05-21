@@ -52,6 +52,7 @@ export class DialogEditAppointmentComponent implements OnInit {
   onCardioChange(event) {
     this.dateP = ""
     this.hourP = ""
+    this.validationDate()
   }
   allCardio(){
     this._secretar.allCardiolog().subscribe((res)=>{
@@ -60,15 +61,30 @@ export class DialogEditAppointmentComponent implements OnInit {
     })
   }
   validationDate(){
+    
     this._appointment.getDataBlock(this.selectedCardio).subscribe((res)=>{
-      this.blockedData = new Array();
-      for(let dat in res){
-        this.blockedData.add(new Date(dat).getTime())
-      }
       console.log(res)
+      for(let dat of res){
+        console.log(dat)
+        console.log(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] )
+        console.log(new Date(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] ).getTime())
+        this._appointment.blockedDataAppointment.push(new Date(dat.split("-")[1] + "/" +dat.split("-")[0] + "/" + dat.split("-")[2] ).getTime());
+        console.log(this._appointment.blockedDataAppointment)
+      }
+      
+      console.log(this._appointment.blockedDataAppointment)
     })
   }
- 
+
+  myFilter = (d: Date): boolean => {
+    const time=d.getTime()
+    const day = d.getDay();
+    
+
+    console.log("this._appointment.blockedDataAppointment =>",this._appointment.blockedDataAppointment)
+    return !this._appointment.blockedDataAppointment.find(x=>x==time) && day !==0 && day !==6;
+  };
+
   
    hourCheck(){
      var formatedDate = new Date(this.dateP).toLocaleString();
@@ -112,6 +128,8 @@ export class DialogEditAppointmentComponent implements OnInit {
 
     this._secretar.editAppointment(this._secretar.appointmentListService.id, this.selectedCardio, this.editAppointment).subscribe((res)=>{
       console.log(res)
+      this.dialogref.close("edit")
+      window.location.reload()
     })
     /*
     this.setFisa()

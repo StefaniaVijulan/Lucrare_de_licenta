@@ -54,7 +54,7 @@ export class DialogAddAppointmentsRadiologyComponent implements OnInit {
   myFilter = (d: Date): boolean => {
     const time=d.getTime()
     const day = d.getDay();
-    return !this.blockedData.find(x=>x==time) ;
+    return !this.blockedData.find(x=>x==time) && day !==0 && day !==6;
   };
 
   hourCheck(){
@@ -85,7 +85,9 @@ export class DialogAddAppointmentsRadiologyComponent implements OnInit {
    this.appointment.ct = this.appointmentRadiology.value.ct,
    this.appointment.eco = this.appointmentRadiology.value.eco,
    this.appointment.ekg = this.appointmentRadiology.value.ekg,
-   this.appointment.irm = this.appointmentRadiology.value.irm
+   this.appointment.irm = this.appointmentRadiology.value.irm,
+   this.appointment.dataAppointmentRadiology = this.dataEdit,
+   this.appointment.hourAppointmentRadiology = this.hourP
  }
  addAppointmentRadio(){
    this.setAppointementRadio()
@@ -94,7 +96,6 @@ export class DialogAddAppointmentsRadiologyComponent implements OnInit {
   this._doctor.addAppointmentRadiologie(this.appointment).subscribe((res)=>{
     console.log("add radio")
     console.log(res)
-
   })
  }
 }

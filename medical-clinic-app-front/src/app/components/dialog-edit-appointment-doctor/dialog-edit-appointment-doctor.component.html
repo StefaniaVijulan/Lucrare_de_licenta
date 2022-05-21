@@ -20,7 +20,7 @@
   </form>
 
   <mat-form-field *ngIf="selectedCardio" class="example-full-width">
-    <input matInput  [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP"
+    <input matInput  [matDatepicker]="picker"  [matDatepickerFilter]="myFilter" placeholder="Alege data dorita" [(ngModel)]="dateP"
       name="dateP" (dateChange)="hourCheck()" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>

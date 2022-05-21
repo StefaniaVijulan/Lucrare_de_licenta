@@ -1,3 +1,4 @@
+import { AnimateTimings } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
@@ -13,8 +14,10 @@ import { DialogAddAppointmentsRadiologyComponent } from '../dialog-add-appointme
 export class DialogAddAppointmentsHrComponent implements OnInit {
 
   appointmens: FormGroup;
- 
+  panelOpenState = false;
 
+  listSpecificHema: any;
+  listSpecificRadio: any;
   constructor(private _doctor:DoctorService,
     private _formBuilder: FormBuilder,
     private dialogref: MatDialogRef < DialogAddAppointmentsHrComponent >,
@@ -27,7 +30,8 @@ export class DialogAddAppointmentsHrComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.getSpeciifcHema();
+this.getSpeciifcRadio();
 }
 
 addAppointmentHematology(){
@@ -43,6 +47,17 @@ openAddRadiology(){
   this.dialog.open(DialogAddAppointmentsRadiologyComponent,{
    width: '30%'
   });
-  
+}
+getSpeciifcHema(){
+  this._doctor.getSpecificAppointmentHematology().subscribe((res)=>{
+    this.listSpecificHema = res;
+    console.log(this.listSpecificHema)
+  })
+}
+getSpeciifcRadio(){
+  this._doctor.getSpecificAppointmentRadiology().subscribe((res)=>{
+    this.listSpecificRadio = res;
+    console.log(this.listSpecificRadio)
+  })
 }
 }

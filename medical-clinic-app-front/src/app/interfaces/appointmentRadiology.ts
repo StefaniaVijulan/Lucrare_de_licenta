@@ -2,8 +2,8 @@ import { Patient } from "./patient";
 
 export class AppointmentsRadiology {
     
-    dataAppointmentHematology: string;
-    hourAppointmentHematology: string;
+    dataAppointmentRadiology: string;
+    hourAppointmentRadiology: string;
 
     //Analize de sange
     eco: boolean;

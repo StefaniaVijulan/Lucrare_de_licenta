@@ -6,7 +6,7 @@
     <mat-form-field appearance="fill">
       <mat-label>CNP</mat-label>
       <input matInput placeholder="ex. 6001100110000" formControlName="cnp" required
-        (click)='getSpecificPatient($event)'>
+      >
       <mat-error class="error" *ngIf="firstFormGroup.controls['cnp'].hasError('pattern')">
         Introduceti un CNP valid
       </mat-error>
@@ -45,7 +45,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="selectedCardio" class="example-full-width">
-    <input matInput [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP"
+    <input matInput [min]="tomorrowD" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP"
       name="dateP" (dateChange)="hourCheck()" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>

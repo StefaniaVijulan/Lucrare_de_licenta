@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { DialogMoreInfoPacientComponent } from 'src/app/components/dialog-more-info-pacient/dialog-more-info-pacient.component';
-import { DoctorService } from 'src/app/services/doctor/doctor.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  MatDialog
+} from '@angular/material';
+import {
+  DialogMoreInfoPacientComponent
+} from 'src/app/components/dialog-more-info-pacient/dialog-more-info-pacient.component';
+import {
+  DoctorService
+} from 'src/app/services/doctor/doctor.service';
 
 @Component({
   selector: 'app-doctor-programari',
@@ -16,8 +25,8 @@ export class DoctorProgramariComponent implements OnInit {
   ngOnInit() {
     this.allAppointmentS();
   }
-  allAppointmentS(){
-    this._doctor.allTodayAppointementSpecifc().subscribe((res)=>{
+  allAppointmentS() {
+    this._doctor.allTodayAppointementSpecifc().subscribe((res) => {
       this.listAppointmentsSpecific = res;
       console.log(res)
     })
@@ -26,9 +35,9 @@ export class DoctorProgramariComponent implements OnInit {
     this._doctor.cnpCurrantpatientService = element;
     console.log("Cnp => ", this._doctor.cnpCurrantpatientService)
     this.dialog.open(DialogMoreInfoPacientComponent, {
-          width: '40%',
-          data: element
-        })
+      width: '40%',
+      data: element
+    })
   }
 
 }

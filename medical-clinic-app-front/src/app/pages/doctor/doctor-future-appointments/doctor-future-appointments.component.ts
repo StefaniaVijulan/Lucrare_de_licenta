@@ -5,6 +5,7 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/m
 import { DialogEditAppointmentDoctorComponent } from 'src/app/components/dialog-edit-appointment-doctor/dialog-edit-appointment-doctor.component';
 import { DialogEditAppointmentComponent } from 'src/app/components/dialog-edit-appointment/dialog-edit-appointment.component';
 import { Appointment } from 'src/app/interfaces/appointment';
+import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DoctorService } from 'src/app/services/doctor/doctor.service';
 import { SecretarService } from 'src/app/services/secretar/secretar.service';
@@ -26,11 +27,13 @@ export class DoctorFutureAppointmentsComponent implements OnInit {
   columnsToDisplay = ['dataA','hour','cnp','firstName', 'lastName', 'emailUser', 'numberUser','action'];
   expandedElement: Appointment | null;
 
-  dateP: string;
+  dateP: string="";
   formatedDate: any;
   luna: any;
   ziua: any;
   dataEdit: any;
+
+  msg="";
   @ViewChild(MatPaginator, {static: true}) 
   paginator!: MatPaginator;
 
@@ -39,6 +42,7 @@ export class DoctorFutureAppointmentsComponent implements OnInit {
 
   constructor(private dialog: MatDialog, 
     public _doctor: DoctorService,
+    public _appointment: AppointmentService,
      private _http: HttpClient, 
       public _service: AuthService) {
        
@@ -72,27 +76,50 @@ openEditAppointmentDialog(element: any){
   })
 }
 checkDate(){
-  var formatedDate = new Date(this.dateP).toLocaleString();
-  if(formatedDate.split(",")[0].split("/")[0].length ==1)
+  if(this.dateP == "")
   {
-    this.luna = "0"+ formatedDate.split(",")[0].split("/")[0];
+    this.msg ="Selectați o dată!"
+    console.log(this.msg)
+  }else{
+    var formatedDate = new Date(this.dateP).toLocaleString();
+   // this._appointment.blockedData = formatedDate;
+    console.log(" formateDate => " +formatedDate)
+    if(formatedDate.split(",")[0].split("/")[0].length ==1)
+    {
+      this.luna = "0"+ formatedDate.split(",")[0].split("/")[0];
+    }
+    else{
+      this.luna = formatedDate.split(",")[0].split("/")[0]
+    }
+    console.log(" luna => " +this.luna)
+  
+   if(formatedDate.split(",")[0].split("/")[1].length ==1)
+    {
+      this.ziua = "0"+ formatedDate.split(",")[0].split("/")[1];
+    }
+    else{
+      this.ziua = formatedDate.split(",")[0].split("/")[1]
+    }
+    console.log(" zi => " +this.ziua)
+  
+    this.dataEdit = this.ziua +"-"+ this.luna + "-"+formatedDate.split(",")[0].split("/")[2]
+    console.log(this.dataEdit)
+    /*this._doctor.checkData(this.dataEdit).subscribe((res)=>{
+      console.log(res)
+      if(res == true){
+        console.log("este true")
+        console.log(this._appointment.blockedData)
+        console.log(formatedDate)
+        //this._appointment.blockedData.add(formatedDate)
+        console.log(this._appointment.blockedData)
+        
+      }else{
+        console.log("este false")
+      }
+    })*/
+ 
   }
-  else{
-    this.luna = formatedDate.split(",")[0].split("/")[0]
-  }
-  if(formatedDate.split(",")[0].split("/")[1].length ==1)
-  {
-    this.ziua = "0"+ formatedDate.split(",")[0].split("/")[1];
-  }
-  else{
-    this.ziua = formatedDate.split(",")[0].split("/")[1]
-  }
-  this.dataEdit = this.ziua +"-"+ this.luna + "-"+formatedDate.split(",")[0].split("/")[2]
-  console.log(this.dataEdit)
-  this._doctor.checkData(this.dataEdit).subscribe((res)=>{
-    console.log(res)
-  })
-
+ 
 }
 
 };

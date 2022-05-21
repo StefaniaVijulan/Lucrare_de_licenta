@@ -12,6 +12,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AppointmentService {
   doctorListService: any;
+  blockedDataAppointment: any = new Array();
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
@@ -20,6 +21,7 @@ export class AppointmentService {
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }
 
   getDataBlock(cnpC: string): Observable<any>{
+    console.log("cnpC=>", cnpC)
     return this._http.get(this.baseUrl + '/blockDateForCardio?cnpC=' + cnpC );
   }
   getValidationData(cnpC: string, element: string){

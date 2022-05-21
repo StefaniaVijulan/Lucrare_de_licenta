@@ -98,7 +98,7 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
   myFilter = (d: Date): boolean => {
     const time=d.getTime()
     const day = d.getDay();
-    return !this.blockedData.find(x=>x==time) ;//&& day !==0 && day !==6
+    return !this.blockedData.find(x=>x==time) && day !==0 && day !==6
   };
 
   hourCheck(){
@@ -140,6 +140,7 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
    console.log(this.appointment)
   this._doctor.addAppointmenthematology(this.appointment).subscribe((res)=>{
      console.log(res)
+    
    })
 
  }

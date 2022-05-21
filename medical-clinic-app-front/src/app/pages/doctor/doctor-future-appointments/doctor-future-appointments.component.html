@@ -2,14 +2,16 @@
     <mat-label>Cautare</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
+<!--
+<div>{{msg}}
 <mat-form-field appearance="fill">
   <mat-label>Angular forms</mat-label>
-  <input matInput [matDatepicker]="picker1" [(ngModel)]="dateP">
+  <input matInput [matDatepicker]="picker1" [(ngModel)]="dateP" >
   <mat-hint>MM/DD/YYYY</mat-hint>
   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
   <mat-datepicker #picker1></mat-datepicker>
-</mat-form-field>
-<button (click) = "checkDate()">Select data</button>
+</mat-form-field></div>
+<button (click) = "checkDate()">Select data</button>-->
   <table  style="  box-shadow: 0 4px 8px 0 rgba(5,55,106,0.2)" mat-table [dataSource]="dataSource" matSort multiTemplateDataRows >
   
     <ng-container matColumnDef="dataA">
