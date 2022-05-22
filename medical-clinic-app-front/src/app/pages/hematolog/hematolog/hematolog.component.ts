@@ -29,11 +29,12 @@ export class HematologComponent implements OnInit {
     this._hematolog.seeAppointmentDone(element).subscribe((res)=>{
       console.log("res ", res)
       if(res == 1){
+        this.allTodayAppointmentsH()
         this._snackBar.openFromComponent(AppointmentDoneComponent, {
           duration: this.durationInSeconds * 1000,
           panelClass: ['blue-snackbar']
         });
-        this.allTodayAppointmentsH()
+        
       }
     }
       

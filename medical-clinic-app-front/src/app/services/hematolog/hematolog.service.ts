@@ -1,7 +1,9 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HematologyResult } from 'src/app/interfaces/hematologyResult';
 import { environment } from 'src/environments/environment';
 
 import { AuthService } from '../auth/auth.service';
@@ -11,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HematologService {
 
- 
+  resultHematology: HematologyResult;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
     headers: new HttpHeaders({'content-type':'application/json','Authorization': 'Bearer ' + localStorage.getItem('token')})
@@ -30,6 +32,10 @@ export class HematologService {
     return this._http.get(this.baseUrl + '/hematolog/seeAppointmentWithoutResult', this.publicHttpHeaders)
   }
 
+  editAppointmentResult(idA: any, result: any){
+    console.log("intra in service")
+    return this._http.put(this.baseUrl + '/hematolog/editAppointmentResult?idR='+idA, result, this.publicHttpHeaders)
+  }
 
 
   seeAllProgramari(){

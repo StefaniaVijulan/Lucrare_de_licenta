@@ -1,6 +1,7 @@
 import { AppointmentsHematology } from "./appointmentHematology";
 
 export class HematologyResult{
+    colesterol_seric_total: number;
     hdl_colesterol: number;
     ldl_colesterol: number;
     trigliceride_serice: number;
@@ -20,7 +21,11 @@ export class HematologyResult{
     t4: number;
     tsh: number;
 
+    id: Long;
     done: boolean;
 
     appointmentHematology: AppointmentsHematology;
+
+    
+    constructor(){}
 }

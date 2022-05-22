@@ -10,6 +10,7 @@ export class AppointmentDoneComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("face aici treaba")
   }
 
 }

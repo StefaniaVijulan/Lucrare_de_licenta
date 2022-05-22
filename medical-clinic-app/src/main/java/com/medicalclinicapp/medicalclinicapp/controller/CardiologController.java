@@ -1,11 +1,8 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
 
-import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
-import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
+import com.medicalclinicapp.medicalclinicapp.models.*;
 
-import com.medicalclinicapp.medicalclinicapp.models.FisaPatient;
 import com.medicalclinicapp.medicalclinicapp.security.models.Cardiolog;
 import com.medicalclinicapp.medicalclinicapp.security.models.User;
 import com.medicalclinicapp.medicalclinicapp.security.services.CardiologService;
@@ -107,6 +104,10 @@ public class CardiologController {
     }
 
 
+    @GetMapping("/cardiolog/resultAppointmentHematology")
+    public List<HematologyResult> seeresulthematology(@RequestParam(value = "cnpP") String cnpP){
+        return cardiologService.seeHematologyResult(cnpP);
+    }
     @PutMapping(("/cardiolog/editAppointment"))
     public Appointment editAppointment(@RequestParam("id")Long id, @RequestBody Appointment appointment)  {
         return cardiologService.editAppointment(id, appointment);

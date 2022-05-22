@@ -29,6 +29,9 @@ public class CardiologService {
     private AppointmentRadiologyRepository appointmentRadiologyRepository;
 
     @Autowired
+    private HematologyResultRepository hematologyResultRepository;
+
+    @Autowired
     private FisaPatientRepository fisaPatientRepository;
 
     @Autowired
@@ -386,6 +389,18 @@ public class CardiologService {
             }
         }
         return appointment;
+    }
+
+    public List<HematologyResult> seeHematologyResult(String cnpP){
+        List<HematologyResult> hematologyResultList = new ArrayList<>();
+        for(int i=0; i<hematologyResultRepository.findAll().size(); i++){
+            if(hematologyResultRepository.findAll().get(i).getDone()){
+                if(hematologyResultRepository.findAll().get(i).getAppointmentHematology().getPatient().getCnp().equals(cnpP)){
+                    hematologyResultList.add(hematologyResultRepository.findAll().get(i));
+                }
+            }
+        }
+        return hematologyResultList;
     }
 }
 

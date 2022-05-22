@@ -72,7 +72,7 @@ public class HematologService {
         }
         return hematologyResultList;
     }
-    public String resultDone (Long idR, HematologyResult hematologyResult){
+    public int resultDone (Long idR, HematologyResult hematologyResult){
         for (int i = 0; i < hematologyResultRepository.findAll().size(); i++) {
             if(hematologyResultRepository.findAll().get(i).getId() == idR){
                 hematologyResultRepository.findAll().get(i).setColesterol_seric_total(hematologyResult.getColesterol_seric_total());
@@ -99,7 +99,8 @@ public class HematologService {
                 break;
             }
         }
-        return "Rezultatele au fost adaugate cu succes!";
+        //"Rezultatele au fost adaugate cu succes!"
+        return 1;
     }
 }
 

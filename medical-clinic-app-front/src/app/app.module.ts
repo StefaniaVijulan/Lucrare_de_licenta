@@ -67,6 +67,7 @@ import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-a
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AppointmentDoneComponent } from './snacks/hematology/appointment-done/appointment-done.component';
 import { HematologResultComponent } from './pages/hematolog/hematolog-result/hematolog-result.component';
+import { DialogAddResultHematologyComponent } from './components/dialog-add-result-hematology/dialog-add-result-hematology.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,6 +113,7 @@ import { HematologResultComponent } from './pages/hematolog/hematolog-result/hem
     DialogEditAppointmentDoctorComponent,
     AppointmentDoneComponent,
     HematologResultComponent,
+    DialogAddResultHematologyComponent,
 
   
   ],
@@ -156,6 +158,7 @@ import { HematologResultComponent } from './pages/hematolog/hematolog-result/hem
   ],
   entryComponents: [
     DialogComponent, 
+    DialogAddResultHematologyComponent,
     DialogAddUserComponent,
     DialogDeleteUserComponent,
     DialogResetPassComponent,
