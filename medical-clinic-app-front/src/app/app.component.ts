@@ -9,6 +9,7 @@ import { PhotoChangeComponent } from './components/photo-change/photo-change.com
 
 import { AuthService } from './services/auth/auth.service';
 import { DoctorService } from './services/doctor/doctor.service';
+import { HematologService } from './services/hematolog/hematolog.service';
 import { ModeratorService } from './services/moderator/moderator.service';
 import { SecretarService } from './services/secretar/secretar.service';
 
@@ -39,6 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     private cdr: ChangeDetectorRef,
     public _service:AuthService,
     public _secretar: SecretarService,
+    public _hematolog: HematologService,
     public _doctor: DoctorService,
     public _router: Router){
 
@@ -70,9 +72,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     }).afterClosed().subscribe(val=>{
      if(val === "change"){
        if(localStorage.getItem("role")=="MODERATOR")
-        this._router.navigate(['/moderator'])
-        else{
+        this._router.navigate(['/moderator/appointments'])
+        else if(localStorage.getItem("role")=="SECRETAR"){
           this._router.navigate(['/secretar'])
+        }else if(localStorage.getItem("role")=="CARDIOLOG"){
+          this._router.navigate(['/doctor/consultatii'])
+        } else if(localStorage.getItem("role")=="HEMATOLOG"){
+          this._router.navigate(['/hematolog/appointments'])
+
         }
        
      }

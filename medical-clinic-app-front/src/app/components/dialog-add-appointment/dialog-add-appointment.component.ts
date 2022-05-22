@@ -57,7 +57,7 @@ export class DialogAddAppointmentComponent implements OnInit {
     console.log(time)
 
     console.log(this._appointment.blockedDataAppointment)
-    return !this._appointment.blockedDataAppointment.find(x=>x==time) && day !==0 && day !==6;
+    return !this._appointment.blockedDataAppointment.find(x=>x==time);//&& day !==0 && day !==6;
   };
 
   validationDate(){

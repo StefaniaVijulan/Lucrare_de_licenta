@@ -64,7 +64,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { DoctorAllAppointmentsComponent } from './pages/doctor/doctor-all-appointments/doctor-all-appointments.component';
 import { DoctorFutureAppointmentsComponent } from './pages/doctor/doctor-future-appointments/doctor-future-appointments.component';
 import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-appointment-doctor/dialog-edit-appointment-doctor.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AppointmentDoneComponent } from './snacks/hematology/appointment-done/appointment-done.component';
+import { HematologResultComponent } from './pages/hematolog/hematolog-result/hematolog-result.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +110,8 @@ import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-a
     DoctorAllAppointmentsComponent,
     DoctorFutureAppointmentsComponent,
     DialogEditAppointmentDoctorComponent,
+    AppointmentDoneComponent,
+    HematologResultComponent,
 
   
   ],
@@ -140,7 +144,7 @@ import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-a
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
+    MatSnackBarModule,
     MatStepperModule,
     MatListModule,
     MatAutocompleteModule,
@@ -168,7 +172,8 @@ import { DialogEditAppointmentDoctorComponent } from './components/dialog-edit-a
      DialogEditAppointmentDoctorComponent,
      PhotoChangeComponent,
      DialogCancelDeleteUserComponent,
-     DialogEditAppointmentComponent
+     DialogEditAppointmentComponent,
+     AppointmentDoneComponent
     ],
     
   providers:[],

@@ -34,3 +34,70 @@ td.mat-cell{
   margin-right: 4vh;
   width: 94vw;
 }
+.table-filter{
+  margin-left: 4vh;
+}
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+
+.example-element-description {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width: 100%;
+  text-align: left;
+  margin-left: 3vw;
+  font-family: 'Roboto', sans-serif;;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* Create 2 columns and auto-place rows */
+}
+h2 {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 3.5vh;
+ 
+  margin-top: 2vh;
+  
+}
+
+h2::after {
+  content: '';
+  border-bottom: 2px solid #EE6F57;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  margin-top: 1.5vh;
+  width: 100px;
+  margin: 0 auto;
+  display: block;
+}
+th{
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+}

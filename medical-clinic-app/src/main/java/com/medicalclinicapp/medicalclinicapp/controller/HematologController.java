@@ -2,13 +2,12 @@ package com.medicalclinicapp.medicalclinicapp.controller;
 
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
+import com.medicalclinicapp.medicalclinicapp.models.HematologyResult;
 import com.medicalclinicapp.medicalclinicapp.security.services.HematologService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +27,19 @@ public class HematologController {
     public List<AppointmentHematology> getTodayAppointmentHematology(){
         return hematologService.getAllTodayAppointmentHematology();
     }
+    @PutMapping("/hematolog/appointmentHematologyDone")
+    public int seeAppointment(@RequestParam("idA") Long idA){
+        return hematologService.seeAppointment(idA);
+    }
+    @GetMapping("/hematolog/seeAppointmentWithoutResult")
+    public List<HematologyResult> seeAppointmentR()
+    {
+        return hematologService.seeAppointmentsWithoutResult();
+    }
+    @PutMapping("/hematolog/editAppointmentResult")
+    public String editResultHema(@RequestParam("idR")Long idR, @RequestBody HematologyResult hematologyResult){
+        return hematologService.resultDone(idR, hematologyResult);
+
+    }
+
 }

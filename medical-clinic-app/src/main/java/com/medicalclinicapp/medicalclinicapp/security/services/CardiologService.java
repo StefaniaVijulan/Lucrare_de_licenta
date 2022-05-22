@@ -299,9 +299,6 @@ public class CardiologService {
         }
         return  null;
     }
-    public List<AppointmentHematology> allAppointmentsHematology(){
-        return appointmentHematologyRepository.findAll();
-    }
 
     public AppointmentRadiology addAppointmentRadiology(String cnpP, AppointmentRadiology appointment) throws Exception {
         for (int i = 0; i < patientRepository.findAll().size(); i++) {
@@ -332,9 +329,6 @@ public class CardiologService {
             }
         }
         return  null;
-    }
-    public List<AppointmentRadiology> allAppointmentRadiology(){
-        return appointmentRadiologyRepository.findAll();
     }
 
     public String deltete(){

@@ -47,6 +47,7 @@ public class AppointmentHematology implements Comparable<AppointmentHematology> 
     private Boolean t4;
     private Boolean tsh;
 
+    private Boolean done;
     @OneToOne
     private Patient patient;
 

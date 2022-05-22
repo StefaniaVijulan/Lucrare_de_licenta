@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
           window.location.href = "/doctor/consultatii"
         }
         else if(localStorage.getItem("role") == "HEMATOLOG"){
-          window.location.href = "/hematolog"
+          window.location.href = "/hematolog/appointments"
 
         }
         else{

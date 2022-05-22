@@ -117,10 +117,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                         ).hasAuthority("CARDIOLOG")
                 .antMatchers("/hematolog/allAppointmentHematology",
-                        "/hematolog/allTodayAppointmentHematology").hasAuthority("HEMATOLOG")
+                        "/hematolog/allTodayAppointmentHematology",
+                        "/hematolog/seeAppointmentWithoutResult",
+                        "/hematolog/editAppointmentResult",
+                        "/hematolog/appointmentHematologyDone").hasAuthority("HEMATOLOG")
                 .antMatchers("/imagist/allAppointmentRadiology",
                         "/imagist/addRadiologyResult",
-                        "/imagist/allTodayAppointmentRadiology").hasAuthority("IMAGIST")
+                        "/imagist/allTodayAppointmentRadiology"
+                        ).hasAuthority("IMAGIST")
 
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()

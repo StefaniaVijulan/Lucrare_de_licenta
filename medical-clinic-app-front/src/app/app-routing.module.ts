@@ -27,6 +27,7 @@ import { AppointmentsRadiologyComponent } from './pages/moderator/appointments-r
 import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointment/secretar-appointment.component';
 import { DoctorFutureAppointmentsComponent } from './pages/doctor/doctor-future-appointments/doctor-future-appointments.component';
 import { DoctorAllAppointmentsComponent } from './pages/doctor/doctor-all-appointments/doctor-all-appointments.component';
+import { HematologResultComponent } from './pages/hematolog/hematolog-result/hematolog-result.component';
 
 const routes: Routes = [ 
   {
@@ -96,8 +97,13 @@ const routes: Routes = [
     canActivate : [AuthGuard, DoctorGuard]
   },
   {
-    path:"hematolog",
+    path:"hematolog/appointments",
     component: HematologComponent,
+    canActivate : [AuthGuard, HematologGuard]
+  },
+  {
+    path:"hematolog/result/add",
+    component: HematologResultComponent,
     canActivate : [AuthGuard, HematologGuard]
   },
   {

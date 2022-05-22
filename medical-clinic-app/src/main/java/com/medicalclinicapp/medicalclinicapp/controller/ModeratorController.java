@@ -57,7 +57,8 @@ public class ModeratorController {
     public List<Appointment> getDateBetween(@RequestParam(value = "dataStart") String dataS, @RequestParam(value = "dataEnd") String dataE ) throws ParseException {
         return moderatorService.getAppointmentBetweenDate(dataS, dataE);
     }
-*//*
+*/
+    /*
 @GetMapping("/moderator/appointmentByDate")
 public List<Appointment> getAppointmentByDate(@RequestParam(value = "dataStart") String dataS) throws ParseException {
     return moderatorService.getAppointmentByDate(dataS);

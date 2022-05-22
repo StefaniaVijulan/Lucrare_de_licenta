@@ -106,14 +106,6 @@ public class CardiologController {
         return cardiologService.addAppointmentRadiology(cnpP, appointment);
     }
 
-    @GetMapping("/cardiolog/allAppointmentHematology")
-    public List<AppointmentHematology> getAllHematology(){
-        return cardiologService.allAppointmentsHematology();
-    }
-    @GetMapping("/cardiolog/allAppointmentRadiology")
-    public List<AppointmentRadiology> getAllRadiology(){
-        return cardiologService.allAppointmentRadiology();
-    }
 
     @PutMapping(("/cardiolog/editAppointment"))
     public Appointment editAppointment(@RequestParam("id")Long id, @RequestBody Appointment appointment)  {

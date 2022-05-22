@@ -26,6 +26,8 @@ export class AppointmentsHematology {
     t4: boolean;
     tsh: boolean;
 
+    done: boolean;
+
     patient: Patient;
     
     constructor(){}

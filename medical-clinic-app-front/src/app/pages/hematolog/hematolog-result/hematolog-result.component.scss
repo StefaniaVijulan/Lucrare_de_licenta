@@ -1,0 +1,123 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Create 2 columns and auto-place rows */
+  }
+  
+  .container-style {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 6rem;
+    margin-right: 6rem;
+    margin-top: 1rem;
+    margin-bottom: 6rem;
+    width: 19.5rem;
+  }
+  
+  mat-paginator {
+    width: 94vw;
+    text-align: center;
+    margin: 4vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .footer {
+    position: fixed;
+  
+    bottom: 0;
+    color: white;
+    text-align: center;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  #team {
+    padding: 60px 0;
+    
+    background-color: #ededf0;
+    
+  }
+  
+  #team h2 {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    padding: 0px 0px 15px;
+    text-align: center;
+    font-size: 3vh;
+  }
+  
+  #team h2::after {
+    content: '';
+    border-bottom: 2px solid #EE6F57;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    width: 90px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  #team .member{
+    margin-bottom: 20px;
+    position: relative;
+  
+    background-color: white;
+    padding: 10px;
+    margin-top: 5vh;
+    border-radius: 15px 0px 15px 0px;
+    box-shadow: 0px 1px 6px 0px rgba(5, 55, 106, 1);
+  }
+  
+  #team .member:hover {
+    margin-bottom: 20px;
+    position: relative;
+  
+    background-color: white;
+    padding: 11px;
+    margin-top: 5vh;
+    border-radius: 15px 0px 15px 0px;
+    box-shadow: 0px 1px 6px 0px rgb(59, 195, 251);
+  }
+  #team .member h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin-bottom: 3px;
+    text-align: center;
+    font-size: 20px;
+    color: #EE6F57;
+  }
+  
+  #team .member span {
+    font-family: 'Roboto', sans-serif;
+  
+    color: rgba(5, 55, 106, 1);
+    font-size: 14px;
+  }
+  
+  .free-day {
+    text-align: center;
+    font-style: italic;
+
+    font-size: 4vh;
+    color: #EE6F57;
+    font-family: 'Roboto', sans-serif;
+  
+  }
+  .icon-display {
+    transform: scale(0.5);
+    margin-left: 4vw;
+    vertical-align:middle;
+  }
+  .button-prog {
+    background: #EE6F57;
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 18px;
+    border: 0;
+    margin-left: 35%;
+  }
