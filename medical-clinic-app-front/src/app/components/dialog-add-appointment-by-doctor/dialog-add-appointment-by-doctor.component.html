@@ -1,4 +1,4 @@
-<h5>Adaugă programare!</h5>
+<h5>Adaugă consultație!</h5>
 <mat-dialog-content>
   <form #registerform="ngForm" [formGroup]="firstFormGroup">
     <!--  <mat-error style="text-align: center;">{{this.msg}}</mat-error>-->
@@ -19,31 +19,9 @@
     <mat-form-field appearance="fill">
       <mat-label>Prenume</mat-label>
       <input matInput placeholder="ex. Ion" formControlName="firstName" required>
-
-    </mat-form-field><br>
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input placeholder="exemplu@example.com" matInput formControlName="emailUser" required>
-      <mat-error class="error" *ngIf="firstFormGroup.controls['emailUser'].hasError('email')">
-        Nu este un email valid
-      </mat-error>
-    </mat-form-field><br>
-    <mat-form-field appearance="fill">
-      <mat-label>Telefon</mat-label>
-      <input matInput placeholder="ex. 0766666666" formControlName="numberUser" required>
-      <mat-error class="error" *ngIf="firstFormGroup.controls['numberUser'].hasError('pattern')">
-        Numarul de telefon nu este valid
-      </mat-error>
     </mat-form-field><br>
   </form>
-  <mat-form-field appearance="fill">
-    <mat-label>Cardiolog</mat-label>
-    <mat-select [(ngModel)]="selectedCardio" (ngModelChange)="onCardioChange($event)" name="food" required>
-      <mat-option *ngFor="let food of cardiologList" [value]="food.cnp">
-        {{food.firstName}} {{food.lastName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  
   <mat-form-field *ngIf="selectedCardio" class="example-full-width">
     <input matInput [min]="tomorrowD" [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP"
       name="dateP" (dateChange)="hourCheck()" required>

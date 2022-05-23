@@ -5,6 +5,7 @@ import {
 import {
   MatDialog
 } from '@angular/material';
+import { DialogAddAppointmentByDoctorComponent } from 'src/app/components/dialog-add-appointment-by-doctor/dialog-add-appointment-by-doctor.component';
 import {
   DialogMoreInfoPacientComponent
 } from 'src/app/components/dialog-more-info-pacient/dialog-more-info-pacient.component';
@@ -38,6 +39,16 @@ export class DoctorProgramariComponent implements OnInit {
       width: '40%',
       data: element
     })
+  }
+  openAppointmentDialog(elemet: any){
+    this._doctor.patientService = elemet
+    console.log(this._doctor.patientService)
+   
+    this.dialog.open(DialogAddAppointmentByDoctorComponent,{
+       width: '30%',
+       panelClass: 'my-panel'
+      });
+    
   }
 
 }

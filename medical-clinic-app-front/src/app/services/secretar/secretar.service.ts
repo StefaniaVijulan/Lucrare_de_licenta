@@ -68,11 +68,13 @@ export class SecretarService {
   }
 
   addFisa(cnpP: string){
-
     return this._http.post<any>(this.baseUrl + '/secretary/addFisa?cnpP=' + cnpP, this.fisaService, this.publicHttpHeaders);
   }
   deleteAppointment(data: any){
     return this._http.delete(this.baseUrl + '/secretary/deleteAppointment?id='+ data, this.publicHttpHeaders);
+  }
+  infoPatient(cnp: any){
+    return this._http.get<Patient>(this.baseUrl + '/secretary/infoPatient?cnpP='+cnp, this.publicHttpHeaders)
   }
 
   seePacient(){

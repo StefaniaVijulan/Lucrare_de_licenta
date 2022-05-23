@@ -44,6 +44,10 @@ export class SecretarComponent implements OnInit {
    
     this. allCardiolog();
   }
+  editeazaPacient(element){
+    this._secretar.pacientService = element;
+    console.log("element=> ", this._secretar.pacientService)
+  }
 
 
   openAddDialog(element: any) {
@@ -53,11 +57,8 @@ export class SecretarComponent implements OnInit {
     this._secretar.pacientService.lastName = element.lastName;
     this._secretar.pacientService.numberUser = element.numberUser;
     this._secretar.pacientService.emailUser = element.emailUser;
-    console.log("Service pacient")
     console.log(this._secretar.pacientService)
-    console.log("intra mai jos")
     this._secretar.checkPatient(element.cnp).subscribe((res)=>{
-      
       if(res == null){
         this._secretar.existaPacient = false;
         this.dialog.open(DialogAddPacientComponent, {
@@ -65,7 +66,6 @@ export class SecretarComponent implements OnInit {
           panelClass: 'my-panel'
         })
       }else{
-        console.log("aia e")
         this.dialog.open(DialogAddPacientComponent, {
           width: '35%',
           panelClass: 'my-panel'
@@ -88,13 +88,8 @@ export class SecretarComponent implements OnInit {
       console.log(this._secretar.doctorListService)
     })
   }
-  checkPatientA(element: any){
-    return this._secretar.checkPatient(element).subscribe((res)=>{
-      console.log(res)
-     
-    })
-  }
 
+ 
   /*onPageChange($event) {
     this.listAppointment =  this.currentItemsToShow.slice($event.pageIndex*$event.pageSize, $event.pageIndex*$event.pageSize + $event.pageSize);
   }

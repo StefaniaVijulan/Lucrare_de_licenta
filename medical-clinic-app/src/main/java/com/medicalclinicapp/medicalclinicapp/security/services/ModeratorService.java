@@ -107,10 +107,14 @@ private ModeratorRepository moderatorRepository;
       return moderator;
   };
 
-  public Cardiolog registerCardiolog(Cardiolog cardiolog)  {
+  public int registerCardiolog(Cardiolog cardiolog)  {
         if (cardiologRepository.existsByCnp(cardiolog.getCnp())) {
             //acest cardiolog exista deja
-            return null;
+            return 1;
+        }
+        if(userRepository.existsByCnp(cardiolog.getCnp())){
+            //exista un alt angajat cua cest cnp
+            return 2;
         }
 
         String parola = "qDu8cg";
@@ -147,13 +151,17 @@ private ModeratorRepository moderatorRepository;
           }
       }
       fisaPatientRepository.save(fisaPatient);
-        return cardiolog;
+        return 0;
     };
-  public Secretary registerSecretary(Secretary secretary) {
-         if (secretaryRepository.existsByCnp(secretary.getCnp())) {
-             //acest cardiolog exista deja
-             return null;
-         }
+  public int registerSecretary(Secretary secretary) {
+      if (secretaryRepository.existsByCnp(secretary.getCnp())) {
+          //acest cardiolog exista deja
+          return 1;
+      }
+      if(userRepository.existsByCnp(secretary.getCnp())){
+          //exista un alt angajat cua cest cnp
+          return 2;
+      }
          String parola = "parola";
          secretary.setPassword(bCryptPasswordEncoder.encode(parola));
       String emailtext;
@@ -188,14 +196,17 @@ private ModeratorRepository moderatorRepository;
           }
       }
       fisaPatientRepository.save(fisaPatient);
-         return secretary;
+         return 0;
     };
-  public Imagist registerImagist(Imagist imagist) {
-         if (imagistRepository.existsByCnp(imagist.getCnp())) {
-             //acest cardiolog exista deja
-             return null;
-         }
-
+  public int registerImagist(Imagist imagist) {
+      if (imagistRepository.existsByCnp(imagist.getCnp())) {
+          //acest cardiolog exista deja
+          return 1;
+      }
+      if(userRepository.existsByCnp(imagist.getCnp())){
+          //exista un alt angajat cua cest cnp
+          return 2;
+      }
          String parola = "parola";
          imagist.setPassword(bCryptPasswordEncoder.encode(parola));
       String emailtext;
@@ -230,13 +241,17 @@ private ModeratorRepository moderatorRepository;
           }
       }
       fisaPatientRepository.save(fisaPatient);
-         return imagist;
+         return 0;
     };
-  public Hematolog registerHematolog(Hematolog hematolog)  {
-           if (hematologRepository.existsByCnp(hematolog.getCnp())) {
-               //acest cardiolog exista deja
-               return null;
-           }
+  public int registerHematolog(Hematolog hematolog)  {
+      if (hematologRepository.existsByCnp(hematolog.getCnp())) {
+          //acest cardiolog exista deja
+          return 1;
+      }
+      if(userRepository.existsByCnp(hematolog.getCnp())){
+          //exista un alt angajat cua cest cnp
+          return 2;
+      }
 
            String parola = "parola";
            hematolog.setPassword(bCryptPasswordEncoder.encode(parola));
@@ -272,7 +287,7 @@ private ModeratorRepository moderatorRepository;
           }
       }
       fisaPatientRepository.save(fisaPatient);
-           return hematolog;
+           return 0;
         };
 
 

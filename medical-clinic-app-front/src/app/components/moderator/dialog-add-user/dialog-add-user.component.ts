@@ -15,7 +15,7 @@ export class DialogAddUserComponent implements OnInit {
 
   myForm!: FormGroup;
   disabled = false;
-
+  loading=false;
   msg = ''
   actionBtn: string = "Save"
   constructor(private _service: ModeratorService,
@@ -44,15 +44,20 @@ export class DialogAddUserComponent implements OnInit {
     }
   }
   register() {
+    this.loading = true
     if (!this.editData) {
       if (this.myForm.valid) {
         console.log("Dialogul de adaugare a unui pacient este deschis!")
         if (this._service.newUserRole.toUpperCase() == "CARDIOLOG") {
           this._service.addCardiolog(this.myForm.value).subscribe((res) => {
-              if (res == null) {
+              this.loading = false
+              if (res == 1) {
                 console.log("Un cardiolog cu acest CNP exista deja!")
                 this.msg = "Un cardiolog cu acest CNP exista deja!"
-              } else {
+              } else if (res == 2) {
+                console.log("Un angajat cu acest CNP exista deja!")
+                this.msg = "Un angajat cu acest CNP exista deja!"}
+                else {
                 console.log("Cardiolog adaugat")
                 //se reseteaza formularul
                 this.myForm.reset();
@@ -66,10 +71,15 @@ export class DialogAddUserComponent implements OnInit {
           this._service.getAllUsers()
         } else if (this._service.newUserRole.toUpperCase() == "SECRETAR") {
           this._service.addSecretaries(this.myForm.value).subscribe((res) => {
-              if (res == null) {
-                console.log("Un secretar cu acest CNP exista deja!")
-                this.msg = "Un secretar cu acest CNP exista deja!"
-              } else {
+            this.loading = false
+           
+            if (res == 1) {
+              console.log("Un secretar cu acest CNP exista deja!")
+              this.msg = "Un secretar cu acest CNP exista deja!"
+            } else if (res == 2) {
+              console.log("Un angajat cu acest CNP exista deja!")
+              this.msg = "Un angajat cu acest CNP exista deja!"}
+              else {
                 console.log("Secretar adaugat")
                 //se reseteaza formularul
                 this.myForm.reset();
@@ -83,10 +93,15 @@ export class DialogAddUserComponent implements OnInit {
           this._service.getAllUsers()
         }else if (this._service.newUserRole.toUpperCase() == "IMAGIST") {
           this._service.addImagists(this.myForm.value).subscribe((res) => {
-              if (res == null) {
-                console.log("Un imagist cu acest CNP exista deja!")
-                this.msg = "Un imagist cu acest CNP exista deja!"
-              } else {
+            this.loading = false
+            
+            if (res == 1) {
+              console.log("Un imagist cu acest CNP exista deja!")
+              this.msg = "Un imagist cu acest CNP exista deja!"
+            } else if (res == 2) {
+              console.log("Un angajat cu acest CNP exista deja!")
+              this.msg = "Un angajat cu acest CNP exista deja!"}
+              else {
                 console.log("Imagist adaugat")
                 //se reseteaza formularul
                 this.myForm.reset();
@@ -100,10 +115,15 @@ export class DialogAddUserComponent implements OnInit {
           this._service.getAllUsers()
         } else if (this._service.newUserRole.toUpperCase() == "HEMATOLOG") {
           this._service.addHematolog(this.myForm.value).subscribe((res) => {
-              if (res == null) {
-                console.log("Un hematolog cu acest CNP exista deja!")
-                this.msg = "Un hematolog cu acest CNP exista deja!"
-              } else {
+            this.loading = false
+            
+            if (res == 1) {
+              console.log("Un cardiolog cu acest CNP exista deja!")
+              this.msg = "Un hematolog cu acest CNP exista deja!"
+            } else if (res == 2) {
+              console.log("Un angajat cu acest CNP exista deja!")
+              this.msg = "Un angajat cu acest CNP exista deja!"}
+              else {
                 console.log("Hematolog adaugat")
                 //se reseteaza formularul
                 this.myForm.reset();

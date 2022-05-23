@@ -1,6 +1,7 @@
 import { Component, OnInit,HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DialogAddAppointmentComponent } from 'src/app/components/dialog-add-appointment/dialog-add-appointment.component';
+import { DialogContComponent } from 'src/app/components/dialog-cont/dialog-cont.component';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -30,13 +31,19 @@ export class DashboardComponent implements OnInit {
       console.log(this._service.userListService)
     })
   }
-  openAppointmentDialog(){
+  openApp(){
+    this.dialog.open(DialogContComponent,{
+      width: '20%',
+      panelClass: 'my-panel'
+     });
+  }
+ /* openAppointmentDialog(){
     
-    this.dialog.open(DialogAddAppointmentComponent,{
+    this.dialog.open(DialogContComponent,{
      width: '30%',
      panelClass: 'my-panel'
     });
-  }
+  }*/
 
   bgVariable:boolean = false;
   @HostListener('document:scroll', ['$event'])

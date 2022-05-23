@@ -7,10 +7,9 @@
         </button>
       </div>
       <br>
-      <br>
+  <h5>Adaugă angajat!</h5>
+  <mat-dialog-content>
   <form #registerform="ngForm" [formGroup]="myForm">
- 
-
     <mat-error style="text-align: center;">{{this.msg}}</mat-error>
     <br>
     <mat-form-field appearance="fill">
@@ -46,10 +45,11 @@
     </mat-form-field>
 
   </form>
+</mat-dialog-content>
 </div>
-<br>
+
 <div mat-dialog-actions [align]="'center'">
-    <button mat-raised-button type="submit" class="btn"
-      color="primary" (click)="register()">{{actionBtn}}</button>
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    <button  type="submit" class="button-prog" role="button" (click)="register()">{{actionBtn}}</button>
 </div>
 <br>

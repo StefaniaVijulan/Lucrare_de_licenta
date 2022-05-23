@@ -52,6 +52,14 @@ public class SecretaryController {
         return secretaryService.getSpecificCardiologOfPatient(cnp);
     }
 
+    @PutMapping("/secretary/editPatient")
+    public Patient editPatient(@RequestParam(value = "cnpP") String cnpP, @RequestBody Patient patient){
+        return secretaryService.editPatient(cnpP, patient);
+    }
+    @GetMapping("/secretary/infoPatient")
+    public Patient moreInfoP(@RequestParam(value = "cnpP")String cnpP){
+        return secretaryService.moreInfo(cnpP);
+    }
     @PostMapping("/secretary/addFisa")
     public FisaPatient addFisa1(@RequestParam("cnpP") String cnpP, @RequestBody FisaPatient fisa){
         return secretaryService.addFisa(cnpP, fisa);

@@ -1,70 +1,59 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import {  Component,  OnInit} from '@angular/core';
-import {  FormBuilder,  FormGroup,  Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { timeStamp } from 'console';
 import { Patient } from 'src/app/interfaces/patient';
-
-import { User } from 'src/app/interfaces/user';
-import { SecretarComponent } from 'src/app/pages/secretar/secretar/secretar.component';
 import { SecretarService } from 'src/app/services/secretar/secretar.service';
-import { DialogEditPatientComponent } from '../dialog-edit-patient/dialog-edit-patient.component';
+import { DialogAddPacientComponent } from '../dialog-add-pacient/dialog-add-pacient.component';
 
 @Component({
-  selector: 'app-dialog-add-pacient',
-  templateUrl: './dialog-add-pacient.component.html',
-  styleUrls: ['./dialog-add-pacient.component.scss']
+  selector: 'app-dialog-edit-patient',
+  templateUrl: './dialog-edit-patient.component.html',
+  styleUrls: ['./dialog-edit-patient.component.scss']
 })
-export class DialogAddPacientComponent implements OnInit {
-
+export class DialogEditPatientComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
-  selectedCardio: any= [];
 
   hospitalizationGroup: FormGroup;
-  user: User;
  
 
   newPacient: Patient = new Patient();
-  oldPacient: Patient = new Patient()
   constructor(private _formBuilder: FormBuilder,
     public _secretar: SecretarService, private dialog: MatDialog,
     private dialogref: MatDialogRef < DialogAddPacientComponent >) {}
 
   ngOnInit() {
-   
-    this.infoPatient()
     this.firstFormGroup = this._formBuilder.group({
       cnp: [this._secretar.pacientService.cnp, Validators.compose([Validators.required, Validators.pattern('[1-9]\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-9]|[1-4]\\d|5[0-2]|99)(00[1-9]|0[1-9]\\d|[1-9]\\d\\d)\\d')])],
       firstName: [this._secretar.pacientService.firstName, Validators.required],
       lastName: [this._secretar.pacientService.lastName, Validators.required],
       emailUser: [this._secretar.pacientService.emailUser, Validators.required], 
       numberUser: [this._secretar.pacientService.numberUser, Validators.compose([Validators.required, Validators.pattern('(\\d{3})(\\d{3})(\\d{4})')])],
-      dadLetterPatient: ['', Validators.required], 
-      seriesPatient:['', Validators.compose([Validators.required, Validators.pattern('([A-Z][A-Z])')])],
-      numberPatient: ['', Validators.compose([Validators.required, Validators.pattern('([0-9]{6})')])],
-      sexPatient: ['', Validators.required],
-      citizenshipPatient:['', Validators.required],
+      dadLetterPatient: [this._secretar.pacientService.dadLetterPatient, Validators.required], 
+      seriesPatient:[this._secretar.pacientService.seriesPatient, Validators.compose([Validators.required, Validators.pattern('([A-Z][A-Z])')])],
+      numberPatient: [this._secretar.pacientService.numberPatient, Validators.compose([Validators.required, Validators.pattern('([0-9]{6})')])],
+      sexPatient: [this._secretar.pacientService.sexPatient, Validators.required],
+      citizenshipPatient:[this._secretar.pacientService.citizenshipPatient, Validators.required],
     });
     this.firstFormGroup.controls['cnp'].disable()
 
     this.secondFormGroup = this._formBuilder.group({
-      cityPatient: ['', Validators.required],
-      townPatient: ['', Validators.required],
-      streetPatient: ['', Validators.required],
-      noPatient: ['', Validators.required],
-      placePatient: ['', Validators.required]
+      cityPatient: [this._secretar.pacientService.cityPatient, Validators.required],
+      townPatient: [this._secretar.pacientService.townPatient, Validators.required],
+      streetPatient: [this._secretar.pacientService.streetPatient, Validators.required],
+      noPatient: [this._secretar.pacientService.noPatient, Validators.required],
+      placePatient: [this._secretar.pacientService.placePatient, Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({
-      jobTypePatient:['', Validators.required],
-      insurancePatient:['', Validators.required],
+      jobTypePatient:[this._secretar.pacientService.jobTypePatient, Validators.required],
+      insurancePatient:[this._secretar.pacientService.insurancePatient, Validators.required],
      
     });
-   
    
   }
   setPacient(){
@@ -91,50 +80,9 @@ export class DialogAddPacientComponent implements OnInit {
 
    
   }
-  addPacient(){
-      this.setPacient() 
-      console.log("intra aici")
-      this._secretar.addPatient(this.newPacient).subscribe({
-          next: (data) => {
-            this._secretar.addFisa(this.newPacient.cnp).subscribe((res)=>{
-              this.firstFormGroup.reset();
-              this.secondFormGroup.reset();
-              this.thirdFormGroup.reset();
-              //se intoarce cu textul save
-              this.dialogref.close("add");
-              console.log("add fisa")
-            })
-
-          console.log("Add pacient")
-          },
-          error: () => {
-            console.log("eroare")
-            
-          }
-        }
-      
-
-  )
-  }
-  infoPatient(){
-    return this._secretar.infoPatient(this._secretar.pacientService.cnp).subscribe((res)=>{
-      console.log("Pacient=>")
-      console.log(res)
-      this.oldPacient = res
-      console.log("Old patient=>", this.oldPacient)
-    });
-  }
-  editPacient(){
-    this._secretar.pacientService = this.oldPacient
-    console.log("edit")
+  editPatient(){
+    console.log("editeaza")
+  //DE FACUT FUNCTIA DE EDIT 
     this.dialogref.close();
-    this.dialog.open(DialogEditPatientComponent,{
-     width: '30%',
-     panelClass: 'my-panel'
-    });
-
   }
- 
-
 }
-

@@ -68,6 +68,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AppointmentDoneComponent } from './snacks/hematology/appointment-done/appointment-done.component';
 import { HematologResultComponent } from './pages/hematolog/hematolog-result/hematolog-result.component';
 import { DialogAddResultHematologyComponent } from './components/dialog-add-result-hematology/dialog-add-result-hematology.component';
+import { DialogAddAppointmentByDoctorComponent } from './components/dialog-add-appointment-by-doctor/dialog-add-appointment-by-doctor.component';
+import { DialogContComponent } from './components/dialog-cont/dialog-cont.component';
+import { DialogEditPatientComponent } from './components/dialog-edit-patient/dialog-edit-patient.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,6 +117,9 @@ import { DialogAddResultHematologyComponent } from './components/dialog-add-resu
     AppointmentDoneComponent,
     HematologResultComponent,
     DialogAddResultHematologyComponent,
+    DialogAddAppointmentByDoctorComponent,
+    DialogContComponent,
+    DialogEditPatientComponent,
 
   
   ],
@@ -168,12 +174,15 @@ import { DialogAddResultHematologyComponent } from './components/dialog-add-resu
      DialogAddAppointmentComponent,
      DialogAppointmentSuccessComponent,
      DialogEditFisaComponent,
+     DialogEditPatientComponent,
+     DialogAddAppointmentByDoctorComponent,
      DialogAddAppointmentsHrComponent,
      DialogAddAppointmentsHematologyComponent,
      DialogAddAppointmentsRadiologyComponent,
      ForgotPassComponent,
      DialogEditAppointmentDoctorComponent,
      PhotoChangeComponent,
+     DialogContComponent,
      DialogCancelDeleteUserComponent,
      DialogEditAppointmentComponent,
      AppointmentDoneComponent

@@ -19,6 +19,7 @@ export class DoctorService {
   cnpCurrantCardioService: any;
   cnpCurrantpatientService: any;
   infoFisaService: any;
+  patientService: Patient;
   private baseUrl = environment.baseUrl;
   appointmensRadio: any;
   constructor(private _http: HttpClient,  private _router: Router, public _service: AuthService) { }

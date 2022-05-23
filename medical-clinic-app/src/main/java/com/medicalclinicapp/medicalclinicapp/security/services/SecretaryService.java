@@ -124,6 +124,32 @@ public class SecretaryService {
         return null;
     }
 
+    public Patient editPatient(String cnpP, Patient patient){
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+            if(patientRepository.findAll().get(i).getCnp().equals(cnpP)){
+                patientRepository.findAll().get(i).setFirstName(patient.getFirstName());
+                patientRepository.findAll().get(i).setLastName(patient.getLastName());
+                patientRepository.findAll().get(i).setEmailUser(patient.getEmailUser());
+                patientRepository.findAll().get(i).setNumberUser(patient.getNumberUser());
+                patientRepository.findAll().get(i).setDadLetterPatient(patient.getDadLetterPatient());
+                patientRepository.findAll().get(i).setSeriesPatient(patient.getSeriesPatient());
+                patientRepository.findAll().get(i).setNumberPatient(patient.getNumberPatient());
+                patientRepository.findAll().get(i).setSexPatient(patient.getSexPatient());
+                patientRepository.findAll().get(i).setCitizenshipPatient(patient.getCitizenshipPatient());
+                patientRepository.findAll().get(i).setCityPatient(patient.getCityPatient());
+                patientRepository.findAll().get(i).setTownPatient(patient.getTownPatient());
+                patientRepository.findAll().get(i).setStreetPatient(patient.getStreetPatient());
+                patientRepository.findAll().get(i).setNoPatient(patient.getNoPatient());
+                patientRepository.findAll().get(i).setPlacePatient(patient.getPlacePatient());
+                patientRepository.findAll().get(i).setInsurancePatient(patient.getInsurancePatient());
+                patientRepository.findAll().get(i).setJobTypePatient(patient.getJobTypePatient());
+                patientRepository.save(patientRepository.findAll().get(i));
+                return patientRepository.findAll().get(i);
+
+            }
+        }
+        return null;
+    }
 
     public List<Cardiolog> seeAllCardiolog() {
         List<Cardiolog> generalists = new ArrayList<>();
@@ -187,6 +213,14 @@ public class SecretaryService {
         return null;
     }
 
+    public Patient moreInfo(String cnpP){
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+            if(patientRepository.findAll().get(i).getCnp().equals(cnpP)){
+                return patientRepository.findAll().get(i);
+            }
+        }
+        return null;
+    }
 }
     /*
         public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){

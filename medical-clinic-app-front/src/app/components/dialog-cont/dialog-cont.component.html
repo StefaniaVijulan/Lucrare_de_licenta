@@ -1,0 +1,9 @@
+<h5>Aveți un cont?</h5><br>
+<mat-radio-group [(ngModel)]="labelPosition">
+  <mat-radio-button class="example-margin" value="after">Da, am cont</mat-radio-button><br>
+  <mat-radio-button class="example-margin" value="before">Nu am cont</mat-radio-button>
+</mat-radio-group>
+<br><br>
+<div [align]="'center'">
+  <button class="button-prog" role="button" (click)="nextStep()">Next</button>
+</div>

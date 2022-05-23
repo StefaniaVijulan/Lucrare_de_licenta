@@ -1,4 +1,5 @@
-  <div *ngIf="!this._secretar.existaPacient">
+<p>dialog-edit-patient works!</p>
+<div>
     <mat-horizontal-stepper #stepper [linear]="true">
       <mat-step [stepControl]="firstFormGroup" [completed]="false">
         <mat-dialog-content>
@@ -142,63 +143,11 @@
 
             <div [align]="'center'">
               <button class="button-prog" [disabled]="thirdForm.form.invalid" matStepperNext
-                (click)="addPacient()">Save</button>
+                (click)="editPatient()">Save</button>
             </div>
 
           </form>
         </mat-dialog-content>
       </mat-step>
     </mat-horizontal-stepper>
-  </div>
-
-  <div *ngIf="this._secretar.existaPacient">
-    <mat-dialog-content>
-      <mat-vertical-stepper orientation="vertical">
-        <ng-template matStepperIcon="edit">
-          <mat-icon>done</mat-icon>
-        </ng-template>
-        <mat-step>
-          <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Nume</ins>: {{oldPacient.firstName}} {{oldPacient.lastName}}</span><br>
-        <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Email</ins>: {{oldPacient.emailUser}}</span><br>
-        <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Telefon</ins>: {{oldPacient.numberUser}}</span><br>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>CNP</ins>: {{oldPacient.cnp}}</span><br>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>Seria</ins>: {{oldPacient.seriesPatient}}, nr.
-            {{oldPacient.numberPatient}}</span><br>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>Cetatenie</ins>: {{oldPacient.citizenshipPatient}}</span><br>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Informatii despre adresă</ng-template>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Oraș</ins>: {{oldPacient.cityPatient}}</span><br>
-        <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Județ</ins>: {{oldPacient.townPatient}}</span><br>
-        <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Stradă</ins>: {{oldPacient.streetPatient}}</span><br>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>Număr</ins>: {{oldPacient.noPatient}}</span><br>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>Așezare</ins>: {{oldPacient.placePatient}}
-          </span><br>    
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Alte informații</ng-template>
-          <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Starea jobului</ins>: {{oldPacient.jobTypePatient}}</span><br>
-        <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-          class="aligned-with-icon"><ins>Asigurare</ins>: {{oldPacient.insurancePatient}}</span><br>
-      
-        <br>    
-        </mat-step>
-      </mat-vertical-stepper>
-    </mat-dialog-content>
-    <div mat-dialog-actions [align]="'center'">
-    <button class="button-prog" role="button" (click)= "editPacient()">Editează</button>
-  </div>
   </div>

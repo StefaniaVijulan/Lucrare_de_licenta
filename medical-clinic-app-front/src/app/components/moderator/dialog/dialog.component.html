@@ -1,4 +1,4 @@
-<label id="radio-group-label">Ce angajat doriță să adăugați?</label>
+<h5 id="radio-group-label"><b>Ce angajat doriță să adăugați?</b></h5>
 <mat-radio-group
   aria-labelledby="radio-group-label"
   class="radio-group"
@@ -8,6 +8,6 @@
     {{user}}
   </mat-radio-button>
 </mat-radio-group>
-<div mat-dialog-actions class="nextButton" [align]="'center'" >
-  <button mat-raised-button color="warn" (click)="openDialog()">Next</button>
+<div mat-dialog-actions [align]="'center'" >
+  <button class="button-prog" role="button" (click)="openDialog()">Next</button>
 </div>

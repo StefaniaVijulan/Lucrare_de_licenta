@@ -31,23 +31,23 @@ public class ModeratorController {
     }
 
     @PostMapping(path = "/moderator/registerSecretary")
-    public Secretary registerSecretary(@RequestBody Secretary secretary){
+    public int registerSecretary(@RequestBody Secretary secretary){
         System.out.println(secretary);
         return moderatorService.registerSecretary(secretary);
 
     }
     @PostMapping(path = "/moderator/registerCardiolog")
-    public Cardiolog registerCardiolog(@RequestBody Cardiolog cardiolog) {
+    public int registerCardiolog(@RequestBody Cardiolog cardiolog) {
         return moderatorService.registerCardiolog(cardiolog);
 
     }
     @PostMapping(path = "/moderator/registerImagist")
-    public Imagist registerImagist(@RequestBody Imagist imagist) {
+    public int registerImagist(@RequestBody Imagist imagist) {
         return moderatorService.registerImagist(imagist);
 
     }
     @PostMapping(path = "/moderator/registerHematolog")
-    public Hematolog registerHematolog(@RequestBody Hematolog hematolog){
+    public int registerHematolog(@RequestBody Hematolog hematolog){
         return moderatorService.registerHematolog(hematolog);
 
     }

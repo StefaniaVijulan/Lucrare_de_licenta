@@ -21,7 +21,7 @@ export class HematologyResult{
     t4: number;
     tsh: number;
 
-    id: Long;
+    id: number;
     done: boolean;
 
     appointmentHematology: AppointmentsHematology;
