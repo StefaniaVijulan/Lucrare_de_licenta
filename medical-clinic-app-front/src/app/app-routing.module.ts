@@ -126,7 +126,7 @@ const routes: Routes = [
     canActivate : [AuthGuard, ImagistGuard]
   },
   {
-    path:"pacient",
+    path:"pacient/home",
     component: PacientComponent,
   },
    {

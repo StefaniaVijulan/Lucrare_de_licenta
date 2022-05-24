@@ -12,6 +12,7 @@ import { DoctorService } from './services/doctor/doctor.service';
 import { HematologService } from './services/hematolog/hematolog.service';
 import { ImagistService } from './services/imagist/imagist.service';
 import { ModeratorService } from './services/moderator/moderator.service';
+import { PacientService } from './services/pacient/pacient.service';
 import { SecretarService } from './services/secretar/secretar.service';
 
 @Component({
@@ -44,6 +45,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     public _hematolog: HematologService,
     public _doctor: DoctorService,
     public _imagist: ImagistService,
+    public _pacient: PacientService,
+
     public _router: Router){
 
   }

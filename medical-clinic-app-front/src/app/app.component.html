@@ -241,6 +241,12 @@
         <span>Adaugă rezultat</span>
       </button>
     </div>
+    <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'PACIENT')">
+      <button mat-button class="menu-button" (click)="_pacient.goHome()"> 
+        <mat-icon>people</mat-icon>
+        <span>Toate investigațiile</span>
+      </button>
+    </div>
   </mat-sidenav>
   <router-outlet></router-outlet>
 

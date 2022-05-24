@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('patient', JSON.stringify(response.patient))
         localStorage.setItem('cnp', response.patient.cnp) 
         if(localStorage.getItem("role") == "PACIENT"){
-          window.location.href = "/pacient"
+          window.location.href = "/pacient/home"
         }else{
           this._service.logoutUser()
           window.location.href = "/dashboard"

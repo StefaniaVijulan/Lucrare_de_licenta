@@ -155,7 +155,7 @@ public class SecretaryService {
                 appointmentRepository.findAll().get(i).setNumberUser(patient.getNumberUser());
 
                 appointmentRepository.save(appointmentRepository.findAll().get(i));
-                break;
+              
             }
         }
         return patient;

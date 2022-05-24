@@ -73,7 +73,8 @@ public class ImagistService {
             }
         }
         return radiologyResults;
-    }/*
+    }
+    /*
     public int resultDone (Long idR, HematologyResult hematologyResult){
         for (int i = 0; i < hematologyResultRepository.findAll().size(); i++) {
             if(hematologyResultRepository.findAll().get(i).getId() == idR){

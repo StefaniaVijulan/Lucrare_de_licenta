@@ -129,7 +129,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/imagist/seeAppointmentWithoutResult",
                         "/imagist/seeAllResult"
                         ).hasAuthority("IMAGIST")
-
+                .antMatchers("/pacient/addAppointment",
+                        "/pacient/allCardiolog","/pacient/blockDateForCardio","/pacient/checkAvailabilityHourCardio").hasAuthority("PACIENT")
                 .and().cors().and().csrf().disable()
                 .exceptionHandling()
                 .and().sessionManagement()
