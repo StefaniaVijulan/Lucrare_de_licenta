@@ -74,6 +74,10 @@ public class PatientController {
     public List<Cardiolog> getAllCardiolog(){
         return patientService.allCardio();
     }
+    @GetMapping("/pacient/nextAppointment")
+    public Appointment getNextAppointment(@RequestParam(value = "cnpP") String cnpP) throws ParseException {
+        return patientService.getNextAppointment(cnpP);
+    }
     @GetMapping("/pacient/blockDateForCardio")
     public List<String> verificaDispDateCardio(@RequestParam (value = "cnpC") String cnpC){
         return patientService.verificaDisponibilitateDoctor(cnpC);

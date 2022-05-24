@@ -243,8 +243,8 @@
     </div>
     <div *ngIf="(_service.loggedIn() && _service.getRole().toUpperCase() == 'PACIENT')">
       <button mat-button class="menu-button" (click)="_pacient.goHome()"> 
-        <mat-icon>people</mat-icon>
-        <span>Toate investigațiile</span>
+        <mat-icon>home</mat-icon>
+        <span>Programări</span>
       </button>
     </div>
   </mat-sidenav>

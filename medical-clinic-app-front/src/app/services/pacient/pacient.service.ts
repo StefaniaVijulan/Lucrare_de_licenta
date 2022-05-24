@@ -25,9 +25,11 @@ cnpP: any;
     this.cnpP = localStorage.getItem("cnp")
     return this._http.post(this.baseUrl + '/pacient/addAppointment?cnpP=' + this.cnpP +'&cnpC='+cnpC, element, this.publicHttpHeaders);
   }
-  goHome(){
-    this._router.navigate(['/pacient/home'])
+  getNextAppointment(){
+    this.cnpP = localStorage.getItem("cnp")
+    return this._http.get(this.baseUrl + '/pacient/nextAppointment?cnpP=' + this.cnpP, this.publicHttpHeaders)
   }
+
   allCardiolog(){
     return this._http.get(this.baseUrl + '/pacient/allCardiolog', this.publicHttpHeaders)
   }
@@ -37,5 +39,9 @@ cnpP: any;
   }
   getValidationData(cnpC: string, element: string){
     return this._http.get(this.baseUrl + '/pacient/checkAvailabilityHourCardio?cnpC=' + cnpC + '&date=' + element, this.publicHttpHeaders);
+  }
+  
+  goHome(){
+    this._router.navigate(['/pacient/home'])
   }
 }

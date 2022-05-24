@@ -107,13 +107,14 @@ public class PatientService{
                 break;
             }
         }
-        Patient patient = new Patient();
+        Patient patient;
         patient = patientRepository.findByCnp(cnpP);
         appointment.setLastName(patient.getLastName());
         appointment.setFirstName(patient.getFirstName());
         appointment.setNumberUser(patient.getNumberUser());
         appointment.setEmailUser(patient.getEmailUser());
         appointment.setCnp(cnpP);
+        appointment.setPatient(patient);
         appointmentRepository.save(appointment);
         //programarea a fost adaugata cu succes
         String emailtext;
