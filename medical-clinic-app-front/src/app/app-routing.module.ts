@@ -28,6 +28,10 @@ import { SecretarAppointmentComponent } from './pages/secretar/secretar-appointm
 import { DoctorFutureAppointmentsComponent } from './pages/doctor/doctor-future-appointments/doctor-future-appointments.component';
 import { DoctorAllAppointmentsComponent } from './pages/doctor/doctor-all-appointments/doctor-all-appointments.component';
 import { HematologResultComponent } from './pages/hematolog/hematolog-result/hematolog-result.component';
+import { HematologAllResultComponent } from './pages/hematolog/hematolog-all-result/hematolog-all-result.component';
+import { ImagistGuard } from './guard/imagist/imagist.guard';
+import { ImagistComponent } from './pages/imagist/imagist/imagist.component';
+import { ImagistResultComponent } from './pages/imagist/imagist-result/imagist-result.component';
 
 const routes: Routes = [ 
   {
@@ -105,6 +109,21 @@ const routes: Routes = [
     path:"hematolog/result/add",
     component: HematologResultComponent,
     canActivate : [AuthGuard, HematologGuard]
+  },
+  {
+    path:"hematolog/result/all",
+    component: HematologAllResultComponent,
+    canActivate : [AuthGuard, HematologGuard]
+  },
+  {
+    path:"imagist/appointments",
+    component: ImagistComponent,
+    canActivate : [AuthGuard, ImagistGuard]
+  },
+  {
+    path:"imagist/result/add",
+    component: ImagistResultComponent,
+    canActivate : [AuthGuard, ImagistGuard]
   },
   {
     path:"pacient",

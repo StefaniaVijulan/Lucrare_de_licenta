@@ -144,11 +144,21 @@ public class SecretaryService {
                 patientRepository.findAll().get(i).setInsurancePatient(patient.getInsurancePatient());
                 patientRepository.findAll().get(i).setJobTypePatient(patient.getJobTypePatient());
                 patientRepository.save(patientRepository.findAll().get(i));
-                return patientRepository.findAll().get(i);
-
+                break;
             }
         }
-        return null;
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            if(appointmentRepository.findAll().get(i).getCnp().equals(cnpP)){
+                appointmentRepository.findAll().get(i).setFirstName(patient.getFirstName());
+                appointmentRepository.findAll().get(i).setLastName(patient.getLastName());
+                appointmentRepository.findAll().get(i).setEmailUser(patient.getEmailUser());
+                appointmentRepository.findAll().get(i).setNumberUser(patient.getNumberUser());
+
+                appointmentRepository.save(appointmentRepository.findAll().get(i));
+                break;
+            }
+        }
+        return patient;
     }
 
     public List<Cardiolog> seeAllCardiolog() {

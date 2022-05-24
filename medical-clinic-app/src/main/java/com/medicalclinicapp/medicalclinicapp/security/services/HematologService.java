@@ -102,9 +102,17 @@ public class HematologService {
         //"Rezultatele au fost adaugate cu succes!"
         return 1;
     }
+
+    public List<HematologyResult> seeAllResult() {
+        List<HematologyResult> hematologyResultList = new ArrayList<>();
+        for (int i = 0; i < hematologyResultRepository.findAll().size(); i++) {
+            if (hematologyResultRepository.findAll().get(i).getDone() != null) {
+                hematologyResultList.add(hematologyResultRepository.findAll().get(i));
+            }
+        }
+        return hematologyResultList;
+    }
 }
-
-
     /*
     public Hematology addConsultationHematology(Long idAppointment, Hematology hematology, Principal principal) throws Exception {
         if(hematologyRepository.existsById(hematology.getId()))

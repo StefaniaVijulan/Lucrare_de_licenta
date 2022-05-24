@@ -52,7 +52,7 @@ public class SecretaryController {
         return secretaryService.getSpecificCardiologOfPatient(cnp);
     }
 
-    @PutMapping("/secretary/editPatient")
+    @PutMapping("/editPatient")
     public Patient editPatient(@RequestParam(value = "cnpP") String cnpP, @RequestBody Patient patient){
         return secretaryService.editPatient(cnpP, patient);
     }

@@ -1,3 +1,4 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -82,7 +83,11 @@ export class DialogEditPatientComponent implements OnInit {
   }
   editPatient(){
     console.log("editeaza")
-  //DE FACUT FUNCTIA DE EDIT 
-    this.dialogref.close();
+    this.setPacient()
+    this._secretar.editPacient(this.newPacient.cnp,this.newPacient).subscribe((res)=>{
+     
+      console.log("Pacient editat cu succes")
+    })
+     this.dialogref.close("editPacient");
   }
 }

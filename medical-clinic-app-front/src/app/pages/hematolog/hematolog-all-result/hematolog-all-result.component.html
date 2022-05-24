@@ -1,0 +1,79 @@
+
+<mat-form-field appearance="standard" class="table-filter">
+    <mat-label>Cautare</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+  <table style="  box-shadow: 0 4px 8px 0 rgba(5,55,106,0.2)" mat-table [dataSource]="dataSource" matSort
+    multiTemplateDataRows>
+  
+    <ng-container matColumnDef="dataAppointmentHematology">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b><ins>Data programarii</ins></b></th>
+      <td mat-cell *matCellDef="let element"> <b>{{element.appointmentHematology.dataAppointmentHematology}}</b>
+      
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="hourAppointmentHematology">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b><ins>Ora programarii</ins></b></th>
+      <td mat-cell *matCellDef="let element"><b>{{element.appointmentHematology.hourAppointmentHematology}}</b></td>
+    </ng-container>
+    <ng-container matColumnDef="cnpP">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b><ins>CNP pacient</ins></b></th>
+      <td mat-cell *matCellDef="let element"><b>{{element.appointmentHematology.patient.cnp}}</b></td>
+    </ng-container>
+  
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b><ins>Prenume pacient</ins></b></th>
+      <td mat-cell *matCellDef="let element"><b>{{element.appointmentHematology.patient.firstName}}</b></td>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header><b><ins>Nume pacient</ins></b></th>
+      <td mat-cell *matCellDef="let element"><b>{{element.appointmentHematology.patient.lastName}}</b></td>
+    </ng-container>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-description">
+  
+            <div class="content">
+              <span class="label" >
+              
+      <div class="grid">
+        <p *ngIf="element.appointmentHematology.acid_uric">Acid uric: <span *ngIf="element.acid_uric">{{element.acid_uric}}</span></p>
+        <p *ngIf="element.appointmentHematology.hemoleucograma_completa">Hemoleucograma completa: <span *ngIf="element.hemoleucograma_completa">{{element.hemoleucograma_completa}}</span></p>
+        <p *ngIf="element.appointmentHematology.calciu_ionic_seric">Calciu ionic <span *ngIf="element.calciu_ionic_seric"> {{element.calciu_ionic_seric}}</span></p>
+        <p *ngIf="element.appointmentHematology.calciu_seric_total">Calciu seric <span *ngIf="element.calciu_seric_total"> {{element.calciu_seric_total}}</span></p>
+        <p *ngIf="element.appointmentHematology.colesterol_seric_total">Colesterol seric: <span *ngIf="element.colesterol_seric_total">{{element.colesterol_seric_total}} </span></p>
+        <p *ngIf="element.appointmentHematology.creatina_serica">Creatina serica: <span *ngIf="element.creatina_serica">{{element.creatina_serica}}</span></p>
+        <p *ngIf="element.appointmentHematology.ldl_colesterol">LDL colesterol: <span *ngIf="element.ldl_colesterol">{{element.ldl_colesterol}}</span></p>
+        <p *ngIf="element.appointmentHematology.magneziu_seric">Magneziu seric: <span *ngIf="element.magneziu_seric">{{element.magneziu_seric}}}</span></p>
+        <p *ngIf="element.appointmentHematology.trigliceride_serice">Trigliceride serice: <span *ngIf="element.trigliceride_serice">{{element.trigliceride_serice}}</span></p>
+        <p *ngIf="element.appointmentHematology.uree_serica">Uree serica: <span *ngIf="element.uree_serica"> {{element.uree_serica}}</span></p>
+        <p *ngIf="element.appointmentHematology.potasiu_seric">Potasiu seric: <span *ngIf="element.potasiu_seric"> {{element.potasiu_seric}}</span></p>
+        <p *ngIf="element.appointmentHematology.inr_cu_interpretare">INR: <span *ngIf="element.inr_cu_interpretare">{{element.inr_cu_interpretare}}</span></p>
+        <p *ngIf="element.appointmentHematology.t3">T3: <span *ngIf="element.t3">{{element.t3}}</span></p>
+        <p *ngIf="element.appointmentHematology.t4">T4: <span *ngIf="element.t4">{{element.t4}}</span></p>
+        <p *ngIf="element.appointmentHematology.tgo">TGO: <span *ngIf="element.tgo"> {{element.tgo}}</span></p>
+        <p *ngIf="element.appointmentHematology.tgp">TGP: <span *ngIf="element.tgp">{{element.tgp}}</span></p>
+        <p *ngIf="element.appointmentHematology.tsh">TSH: <span *ngIf="element.tsh"> {{element.tsh}}</span></p>
+      </div>
+              
+              </span>
+            </div>
+  
+          </div>
+        </div>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <div class="footer">
+    <mat-paginator [pageSize]="6"></mat-paginator>
+  </div>

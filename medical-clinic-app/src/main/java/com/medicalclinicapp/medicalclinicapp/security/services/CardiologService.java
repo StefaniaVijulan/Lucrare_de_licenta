@@ -402,6 +402,7 @@ public class CardiologService {
         }
         return hematologyResultList;
     }
+
 }
 
 

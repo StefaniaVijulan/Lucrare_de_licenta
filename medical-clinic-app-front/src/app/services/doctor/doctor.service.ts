@@ -87,6 +87,9 @@ export class DoctorService {
 
     return this._http.get(this.baseUrl + '/cardiolog/specificAppointmentRadiology?cnpP=' + this.cnpCurrantpatientService, this.publicHttpHeaders);
   }
+  getHematologyResult(cnpP: any){
+    return this._http.get(this.baseUrl + '/cardiolog/resultAppointmentHematology?cnpP=' + cnpP, this.publicHttpHeaders)
+  }
 
   checkData( element: string){
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
@@ -102,5 +105,6 @@ export class DoctorService {
   seeAllProgramari(){
     this._router.navigate(['/doctor/programari/all'])
   }
+ 
  
 }

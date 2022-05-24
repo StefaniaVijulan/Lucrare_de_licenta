@@ -30,6 +30,7 @@ public class AppointmentRadiology  implements Comparable<AppointmentRadiology>{
     private Boolean irm;
 
 
+    private Boolean done;
     @OneToOne
     private Patient patient;
 

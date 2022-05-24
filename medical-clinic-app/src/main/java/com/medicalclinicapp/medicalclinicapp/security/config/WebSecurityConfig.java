@@ -98,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/secretary/infoPatient",
                         "/secretary/afisare",
                         "/secretary/specificP",
-                        "/secretary/editPatient",
+                        "/editPatient",
                         "/secretary/editAppointment",
                         "/secretary/deletePatient").hasAuthority("SECRETAR")
                 .antMatchers("/cardiolog/allSpecificAppointment",
@@ -121,10 +121,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/hematolog/allTodayAppointmentHematology",
                         "/hematolog/seeAppointmentWithoutResult",
                         "/hematolog/editAppointmentResult",
+                        "/hematolog/seeAllResult",
                         "/hematolog/appointmentHematologyDone").hasAuthority("HEMATOLOG")
                 .antMatchers("/imagist/allAppointmentRadiology",
-                        "/imagist/addRadiologyResult",
-                        "/imagist/allTodayAppointmentRadiology"
+                        "/imagist/allTodayAppointmentRadiology",
+                        "/imagist/appointmentRadiologyDone",
+                        "/imagist/seeAppointmentWithoutResult",
+                        "/imagist/seeAllResult"
                         ).hasAuthority("IMAGIST")
 
                 .and().cors().and().csrf().disable()

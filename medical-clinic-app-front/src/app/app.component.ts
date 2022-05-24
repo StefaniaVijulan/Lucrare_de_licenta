@@ -10,6 +10,7 @@ import { PhotoChangeComponent } from './components/photo-change/photo-change.com
 import { AuthService } from './services/auth/auth.service';
 import { DoctorService } from './services/doctor/doctor.service';
 import { HematologService } from './services/hematolog/hematolog.service';
+import { ImagistService } from './services/imagist/imagist.service';
 import { ModeratorService } from './services/moderator/moderator.service';
 import { SecretarService } from './services/secretar/secretar.service';
 
@@ -42,6 +43,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     public _secretar: SecretarService,
     public _hematolog: HematologService,
     public _doctor: DoctorService,
+    public _imagist: ImagistService,
     public _router: Router){
 
   }

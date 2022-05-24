@@ -73,6 +73,10 @@ export class LoginComponent implements OnInit {
           window.location.href = "/hematolog/appointments"
 
         }
+        else if(localStorage.getItem("role") == "IMAGIST"){
+          window.location.href = "/imagist/appointments"
+
+        }
         else{
           this._service.logoutUser()
           window.location.href = "/dashboard"

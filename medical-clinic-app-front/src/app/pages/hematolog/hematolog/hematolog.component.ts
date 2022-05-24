@@ -38,10 +38,7 @@ export class HematologComponent implements OnInit {
       }
     }
       
-  ); 
-      
-      
-    
+  );   
    
   }
 }

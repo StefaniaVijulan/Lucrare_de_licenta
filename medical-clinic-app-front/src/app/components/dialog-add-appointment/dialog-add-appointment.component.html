@@ -1,12 +1,13 @@
 <h5>Adaugă programare!</h5>
 <mat-dialog-content>
+  <mat-error style="text-align: center;">{{msg}}</mat-error>
   <form #registerform="ngForm" [formGroup]="firstFormGroup">
     <!--  <mat-error style="text-align: center;">{{this.msg}}</mat-error>-->
     <br>
     <mat-form-field appearance="fill">
       <mat-label>CNP</mat-label>
       <input matInput placeholder="ex. 6001100110000" formControlName="cnp" required
-      >
+    >
       <mat-error class="error" *ngIf="firstFormGroup.controls['cnp'].hasError('pattern')">
         Introduceti un CNP valid
       </mat-error>
@@ -69,9 +70,9 @@
   <div [align]="'center'">
     <div class="spinner-container" *ngIf="loading">
     <mat-spinner diameter="24"></mat-spinner>
-  </div>
+</div>
     <button [disabled]="registerform.form.invalid || !acordGDPR" class="button-prog" role="button"
-      (click)="addAppointment()">Adaugă o programare</button></div>
+      (click)="addAppointment()">Adaugă o programare</button>
 
-
+  </div>
 </mat-dialog-content>

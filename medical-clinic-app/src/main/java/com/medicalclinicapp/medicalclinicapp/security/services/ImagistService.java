@@ -3,11 +3,14 @@ package com.medicalclinicapp.medicalclinicapp.security.services;
 
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentHematology;
 import com.medicalclinicapp.medicalclinicapp.models.AppointmentRadiology;
+import com.medicalclinicapp.medicalclinicapp.models.HematologyResult;
 import com.medicalclinicapp.medicalclinicapp.models.RadiologyResult;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentHematologyRepository;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRadiologyRepository;
 
 
+import com.medicalclinicapp.medicalclinicapp.repository.HematologyResultRepository;
+import com.medicalclinicapp.medicalclinicapp.repository.RadiologyResultRepository;
 import com.medicalclinicapp.medicalclinicapp.security.repository.ImagistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +26,93 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ImagistService {
 
+
     @Autowired
     private AppointmentRadiologyRepository appointmentRadiologyRepository;
 
+    @Autowired
+    private RadiologyResultRepository radiologyResultRepository;
 
     public List<AppointmentRadiology> getAllAppointmentRadiology(){
-        List<AppointmentRadiology> appointmentRadiologyList  =appointmentRadiologyRepository.findAll();
+        List<AppointmentRadiology> appointmentRadiologyList =appointmentRadiologyRepository.findAll();
         return appointmentRadiologyList;
     }
     public List<AppointmentRadiology> getAllTodayAppointmentRadiology(){
-        List<AppointmentRadiology> appointmentRadiologyList = new ArrayList<>();
+        List<AppointmentRadiology> appointmentList = new ArrayList<>();
         for (int i = 0; i < appointmentRadiologyRepository.findAll().size(); i++) {
             {
                 Date curentData = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 if (sdf.format(curentData).equals(appointmentRadiologyRepository.findAll().get(i).getDataAppointmentRadiology())) {
-                    appointmentRadiologyList.add(appointmentRadiologyRepository.findAll().get(i));
+                    if(appointmentRadiologyRepository.findAll().get(i).getDone()==null)
+                        appointmentList.add(appointmentRadiologyRepository.findAll().get(i));
                 }
             }
         }
-        return appointmentRadiologyList;
+        return appointmentList;
     }
-
-
-    public RadiologyResult addRadiologyResult(RadiologyResult radiologyResult){
-        if(radiologyResult.getCt() == null || radiologyResult.getCt().trim().isEmpty()){
-            radiologyResult.setCt("https://adminassets.devops.arabiaweather.com/sites/default/files/field/image/mountains.jpg");
+    public int seeAppointment(Long idA){
+        for (int i = 0; i < appointmentRadiologyRepository.findAll().size(); i++) {
+            if(appointmentRadiologyRepository.findAll().get(i).getId() == idA){
+                appointmentRadiologyRepository.findAll().get(i).setDone(true);
+                appointmentRadiologyRepository.save(appointmentRadiologyRepository.findAll().get(i));
+                RadiologyResult radiologyResult = new RadiologyResult();
+                radiologyResult.setAppointmentRadiology(appointmentRadiologyRepository.findAll().get(i));
+                radiologyResultRepository.save(radiologyResult);
+                break;
+            }
         }
-        return radiologyResult;
+        //"Consultatia a fost realizata cu succes!"
+        return 1;
+    }
+    public List<RadiologyResult> seeAppointmentsWithoutResult() {
+        List<RadiologyResult> radiologyResults = new ArrayList<>();
+        for (int i = 0; i < radiologyResultRepository.findAll().size(); i++) {
+            if (radiologyResultRepository.findAll().get(i).getDone() == null) {
+                radiologyResults.add(radiologyResultRepository.findAll().get(i));
+            }
+        }
+        return radiologyResults;
+    }/*
+    public int resultDone (Long idR, HematologyResult hematologyResult){
+        for (int i = 0; i < hematologyResultRepository.findAll().size(); i++) {
+            if(hematologyResultRepository.findAll().get(i).getId() == idR){
+                hematologyResultRepository.findAll().get(i).setColesterol_seric_total(hematologyResult.getColesterol_seric_total());
+                hematologyResultRepository.findAll().get(i).setHdl_colesterol(hematologyResult.getHdl_colesterol());
+                hematologyResultRepository.findAll().get(i).setLdl_colesterol(hematologyResult.getLdl_colesterol());                hematologyResultRepository.findAll().get(i).setAcid_uric(hematologyResult.getAcid_uric());
+                hematologyResultRepository.findAll().get(i).setTrigliceride_serice(hematologyResult.getTrigliceride_serice());                hematologyResultRepository.findAll().get(i).setAcid_uric(hematologyResult.getAcid_uric());
+                hematologyResultRepository.findAll().get(i).setGlicemie(hematologyResult.getGlicemie());
+                hematologyResultRepository.findAll().get(i).setTgo(hematologyResult.getTgo());
+                hematologyResultRepository.findAll().get(i).setTgp(hematologyResult.getTgp());
+                hematologyResultRepository.findAll().get(i).setUree_serica(hematologyResult.getUree_serica());
+                hematologyResultRepository.findAll().get(i).setCreatina_serica(hematologyResult.getCreatina_serica());
+                hematologyResultRepository.findAll().get(i).setPotasiu_seric(hematologyResult.getPotasiu_seric());
+                hematologyResultRepository.findAll().get(i).setMagneziu_seric(hematologyResult.getMagneziu_seric());
+                hematologyResultRepository.findAll().get(i).setAcid_uric(hematologyResult.getAcid_uric());
+                hematologyResultRepository.findAll().get(i).setCalciu_ionic_seric(hematologyResult.getCalciu_ionic_seric());
+                hematologyResultRepository.findAll().get(i).setCalciu_seric_total(hematologyResult.getCalciu_seric_total());
+                hematologyResultRepository.findAll().get(i).setInr_cu_interpretare(hematologyResult.getInr_cu_interpretare());
+                hematologyResultRepository.findAll().get(i).setHemoleucograma_completa(hematologyResult.getHemoleucograma_completa());
+                hematologyResultRepository.findAll().get(i).setT3(hematologyResult.getT3());
+                hematologyResultRepository.findAll().get(i).setT4(hematologyResult.getT4());
+                hematologyResultRepository.findAll().get(i).setTsh(hematologyResult.getTsh());
+                hematologyResultRepository.findAll().get(i).setDone(true);
+                hematologyResultRepository.save(hematologyResultRepository.findAll().get(i));
+                break;
+            }
+        }
+        //"Rezultatele au fost adaugate cu succes!"
+        return 1;
+    }
+*/
+    public List<RadiologyResult> seeAllResult() {
+        List<RadiologyResult> radiologyResults = new ArrayList<>();
+        for (int i = 0; i < radiologyResultRepository.findAll().size(); i++) {
+            if (radiologyResultRepository.findAll().get(i).getDone() != null) {
+                radiologyResults.add(radiologyResultRepository.findAll().get(i));
+            }
+        }
+        return radiologyResults;
     }
 
 }

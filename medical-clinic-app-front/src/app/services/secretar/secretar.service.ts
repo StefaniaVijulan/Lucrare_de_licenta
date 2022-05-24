@@ -66,7 +66,10 @@ export class SecretarService {
     console.log("appointment", appointment)
     return this._http.put<any>(this.baseUrl + '/secretary/editAppointment?id=' + id + '&cnpU=' + cnpU,appointment, this.publicHttpHeaders);
   }
-
+  editPacient(cnpP: string, patient: Patient){
+    return this._http.put(this.baseUrl + '/editPatient?cnpP=' + cnpP, patient, this.publicHttpHeaders);
+  
+  }
   addFisa(cnpP: string){
     return this._http.post<any>(this.baseUrl + '/secretary/addFisa?cnpP=' + cnpP, this.fisaService, this.publicHttpHeaders);
   }

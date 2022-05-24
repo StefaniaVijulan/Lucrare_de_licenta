@@ -129,10 +129,14 @@ export class DialogAddPacientComponent implements OnInit {
     console.log("edit")
     this.dialogref.close();
     this.dialog.open(DialogEditPatientComponent,{
-     width: '30%',
+     width: '35%',
      panelClass: 'my-panel'
-    });
-
+    }).afterClosed().subscribe(val=>{
+      console.log(val)
+      if(val === "editPacient"){
+        window.location.reload()
+      }
+    })
   }
  
 

@@ -1,0 +1,40 @@
+<section id="team">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h2>Consultațiile din această zi</h2>
+        </div>
+      </div>
+      <div class="row" *ngIf="listAppointmentsRadio">
+        <div class="col-lg-3" *ngFor="let appointment of listAppointmentsRadio">
+          <div class="member">
+  
+            <div class="member-img">
+              <h4 style="text-align: center;"><ins><b>{{appointment.hourAppointmentHematology}}</b></ins> </h4>
+              <span style="margin-left: 2rem; font-size: 16px;"><b>Pacient: </b>{{appointment.patient.firstName}}
+                {{appointment.patient.lastName}}</span><br>
+              <mat-icon class="icon-display" *ngIf="appointment.eco" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.eco">ECO<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.ekg" matListIcon inline=true>fiber_manual_record
+            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.ekg">EKG<br></span>
+            <mat-icon class="icon-display" *ngIf="appointment.ct" matListIcon inline=true>fiber_manual_record
+            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.ct">CT<br></span>
+            <mat-icon class="icon-display" *ngIf="appointment.irm" matListIcon inline=true>fiber_manual_record
+            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.irm">IRM<br></span>
+           
+              <br>
+        
+            
+         </div>
+       <button  class="button-prog" role="button"
+              (click)="appointmentDone(appointment.id)">Done</button>
+            </div>
+        </div>
+      </div>
+      <div *ngIf="!listAppointmentsRadio" class="free-day">
+        <p>Nu aveți programată nicio consultație azi!</p>
+        <img style="width: 30%; height: 30%" src="/assets/freeDay.png">
+      </div>
+    </div>
+  </section>
+  

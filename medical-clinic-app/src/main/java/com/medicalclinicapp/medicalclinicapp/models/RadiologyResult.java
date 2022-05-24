@@ -23,4 +23,9 @@ public class RadiologyResult {
     private String ekg;
     private String ct;
     private String irm;
+
+    private Boolean done;
+
+    @OneToOne
+    private AppointmentRadiology appointmentRadiology;
 }

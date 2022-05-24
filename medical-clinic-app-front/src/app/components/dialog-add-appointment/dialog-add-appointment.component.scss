@@ -39,7 +39,10 @@ h5{
     font-size: 16px;
     padding: 8px 18px;
     border: 0;
-  
+    position: relative;
+  }
+  mat-spinner{
+    position: absolute;
   }
   /*Input color*/
 ::ng-deep .mat-focused .mat-form-field-label {

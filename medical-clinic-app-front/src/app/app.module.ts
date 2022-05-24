@@ -71,6 +71,10 @@ import { DialogAddResultHematologyComponent } from './components/dialog-add-resu
 import { DialogAddAppointmentByDoctorComponent } from './components/dialog-add-appointment-by-doctor/dialog-add-appointment-by-doctor.component';
 import { DialogContComponent } from './components/dialog-cont/dialog-cont.component';
 import { DialogEditPatientComponent } from './components/dialog-edit-patient/dialog-edit-patient.component';
+import { HematologAllResultComponent } from './pages/hematolog/hematolog-all-result/hematolog-all-result.component';
+import { ImagistComponent } from './pages/imagist/imagist/imagist.component';
+import { ImagistResultComponent } from './pages/imagist/imagist-result/imagist-result.component';
+import { DialogAddResultRadiologyComponent } from './components/dialog-add-result-radiology/dialog-add-result-radiology.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,6 +124,10 @@ import { DialogEditPatientComponent } from './components/dialog-edit-patient/dia
     DialogAddAppointmentByDoctorComponent,
     DialogContComponent,
     DialogEditPatientComponent,
+    HematologAllResultComponent,
+    ImagistComponent,
+    ImagistResultComponent,
+    DialogAddResultRadiologyComponent,
 
   
   ],
@@ -185,7 +193,8 @@ import { DialogEditPatientComponent } from './components/dialog-edit-patient/dia
      DialogContComponent,
      DialogCancelDeleteUserComponent,
      DialogEditAppointmentComponent,
-     AppointmentDoneComponent
+     AppointmentDoneComponent,
+     DialogAddResultRadiologyComponent
     ],
     
   providers:[],

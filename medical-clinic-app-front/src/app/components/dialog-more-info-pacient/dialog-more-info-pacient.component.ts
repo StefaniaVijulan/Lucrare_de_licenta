@@ -23,6 +23,7 @@ export class DialogMoreInfoPacientComponent implements OnInit {
   rhSange: string;
   asigurare: string;
   nrH: string;
+  listResultHematology: any;
   constructor(private _formBuilder: FormBuilder,
     private _doctor: DoctorService,
     private dialogref: MatDialogRef < DialogMoreInfoPacientComponent >,
@@ -37,6 +38,9 @@ export class DialogMoreInfoPacientComponent implements OnInit {
       console.log(res)
       this._doctor.infoFisaService = res;
       
+    })
+    this._doctor.getHematologyResult(this._doctor.cnpCurrantpatientService).subscribe((res)=>{
+        this.listResultHematology = res
     })
     
   }

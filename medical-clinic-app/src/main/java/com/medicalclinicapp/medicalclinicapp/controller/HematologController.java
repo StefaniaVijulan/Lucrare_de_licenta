@@ -41,5 +41,9 @@ public class HematologController {
         return hematologService.resultDone(idR, hematologyResult);
 
     }
-
+    @GetMapping("/hematolog/seeAllResult")
+    public List<HematologyResult> seeAllResult()
+    {
+        return hematologService.seeAllResult();
+    }
 }

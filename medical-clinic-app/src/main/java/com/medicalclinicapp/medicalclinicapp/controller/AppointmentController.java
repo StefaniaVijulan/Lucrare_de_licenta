@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class AppointmentController {
         return appointmentService.verificaHoursDoctor(cnpC, data);
     }
     @PostMapping("/addAppointment")
-    public Appointment addAppointment(@RequestParam (value = "cnpC")String cnpC, @RequestBody Appointment appointment){
+    public int addAppointment(@RequestParam (value = "cnpC")String cnpC, @RequestBody Appointment appointment) throws ParseException {
         return appointmentService.addAppointment(cnpC, appointment);
     }
     @DeleteMapping("/deleteAppointment")

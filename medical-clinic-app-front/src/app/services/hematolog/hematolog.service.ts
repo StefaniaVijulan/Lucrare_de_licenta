@@ -31,6 +31,10 @@ export class HematologService {
   getAllAppointemntWithoutResult(){
     return this._http.get(this.baseUrl + '/hematolog/seeAppointmentWithoutResult', this.publicHttpHeaders)
   }
+  getAllResult(){
+    return this._http.get(this.baseUrl + '/hematolog/seeAllResult', this.publicHttpHeaders)
+  }
+
 
   editAppointmentResult(idA: any, result: any){
     console.log("intra in service")
@@ -43,5 +47,8 @@ export class HematologService {
   }
   seeAddResult(){
     this._router.navigate(['/hematolog/result/add'])
+  }
+  seeAllResult(){
+    this._router.navigate(['/hematolog/result/all'])
   }
 }

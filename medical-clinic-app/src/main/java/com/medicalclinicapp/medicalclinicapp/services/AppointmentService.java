@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.services;
 
+import com.medicalclinicapp.medicalclinicapp.dto.MailRequest;
 import com.medicalclinicapp.medicalclinicapp.models.Appointment;
 import com.medicalclinicapp.medicalclinicapp.models.Patient;
 import com.medicalclinicapp.medicalclinicapp.repository.AppointmentRepository;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.net.StandardSocketOptions;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -107,14 +110,50 @@ public class AppointmentService {
         return allHours;
     }
 
-    public Appointment addAppointment(String cnpC, Appointment appointment) {
+    public int addAppointment(String cnpC, Appointment appointment) throws ParseException {
         System.out.println("Add appointment");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        for(int i=0; i<appointmentRepository.findAll().size(); i++){
+            System.out.println("Intra in verificare daca exista programre viitoare");
+            Date currentD;
+            currentD = new Date();
+            //luam toate programarile viitoare
+            // veriricam daca data curenta este inainte datei din progrmare ("<")
+            int stare  = currentD.compareTo(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
+            System.out.println("Stare");
+            System.out.println(currentD);
+
+            System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
+            System.out.println(stare);
+            if (stare>0) {
+                System.out.println("Intra in stare");
+                if(appointmentRepository.findAll().get(i).getCnp().equals(appointment.getCnp())){
+                    System.out.println("Exista deja o programare facuta cu acest cnp");
+                    //Exista deja o programare facuta pentru acest cnp
+                    return 1;
+                }
+            }
+        }
+        for(int i=0; i<patientRepository.findAll().size(); i++){
+                if(patientRepository.findAll().get(i).getCnp().equals(appointment.getCnp())){
+                    //Exista deja un cont creat pentru acest cnp
+                    System.out.println("Exista un cont");
+                    return 2;
+                }
+            }
         String emailtext;
-       /* emailtext = "Buna ziua, \n" +
+        emailtext = "Buna ziua, \n" +
                 "Va multumim ca ati apelat la serviciile noastre. Va asteptam pe data de " + appointment.getDataA() + ", la ora " + appointment.getHour() + "." +
                 "\n\nPentru orice alta informatie nu ezitati sa ne contactati la numarul de telefon: 0760774768. ";
-        emailService.sendmail(appointment.getEmailUser(), "Medical Clinic App - Detalii programare", emailtext);*/
+     //   emailService.sendmail(appointment.getEmailUser(), "Medical Clinic App - Detalii programare", emailtext);*/
        // Patient patient = new Patient();
+        MailRequest mailRequest = new MailRequest();
+        mailRequest.setTo(appointment.getEmailUser());
+        mailRequest.setSubject("Your Heart Clinic - Programare consult");
+        Map<String, Object> model = new HashMap<>();
+        model.put("action","Programare consult");
+        model.put("body", emailtext);
+        emailService.sendmail(mailRequest, model);
         for (int i = 0; i < patientRepository.findAll().size(); i++) {
             if(patientRepository.findAll().get(i).getCnp().equals(appointment.getCnp()))
             {   System.out.println(patientRepository.findAll().get(i));
@@ -125,14 +164,13 @@ public class AppointmentService {
         for (int i = 0; i < cardiologRepository.findAll().size(); i++) {
             if(cardiologRepository.findAll().get(i).getCnp().equals(cnpC))
             {
-                System.out.println(cardiologRepository.findAll().get(i).getCnp());
-                System.out.println(cardiologRepository.findAll().get(i).getFirstName());
                 appointment.setCardiolog(cardiologRepository.findAll().get(i));
                 break;
             }
         }
         appointmentRepository.save(appointment);
-        return appointment;
+        //programarea a fost adaugata cu succes
+        return 0;
     }
 
     public Appointment deleteAppointment(Long idA) {

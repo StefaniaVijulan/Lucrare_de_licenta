@@ -78,7 +78,36 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Rezultate hematologie</ng-template>
+      <ng-container  *ngFor="let result of listResultHematology">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>{{result.appointmentHematology.dataAppointmentHematology}}</b>
+            </mat-panel-title>
       
+          </mat-expansion-panel-header>
+      
+          <div class="grid">
+            <p *ngIf="result.appointmentHematology.acid_uric">Acid uric: <span *ngIf="result.acid_uric">{{result.acid_uric}}</span></p>
+            <p *ngIf="result.appointmentHematology.hemoleucograma_completa">Hemoleucograma completa: <span *ngIf="result.hemoleucograma_completa">{{result.hemoleucograma_completa}}</span></p>
+            <p *ngIf="result.appointmentHematology.calciu_ionic_seric">Calciu ionic <span *ngIf="result.calciu_ionic_seric"> {{result.calciu_ionic_seric}}</span></p>
+            <p *ngIf="result.appointmentHematology.calciu_seric_total">Calciu seric <span *ngIf="result.calciu_seric_total"> {{result.calciu_seric_total}}</span></p>
+            <p *ngIf="result.appointmentHematology.colesterol_seric_total">Colesterol seric: <span *ngIf="result.colesterol_seric_total">{{result.colesterol_seric_total}} </span></p>
+            <p *ngIf="result.appointmentHematology.creatina_serica">Creatina serica: <span *ngIf="result.creatina_serica">{{result.creatina_serica}}</span></p>
+            <p *ngIf="result.appointmentHematology.ldl_colesterol">LDL colesterol: <span *ngIf="result.ldl_colesterol">{{result.ldl_colesterol}}</span></p>
+            <p *ngIf="result.appointmentHematology.magneziu_seric">Magneziu seric: <span *ngIf="result.magneziu_seric">{{result.magneziu_seric}}}</span></p>
+            <p *ngIf="result.appointmentHematology.trigliceride_serice">Trigliceride serice: <span *ngIf="result.trigliceride_serice">{{result.trigliceride_serice}}</span></p>
+            <p *ngIf="result.appointmentHematology.uree_serica">Uree serica: <span *ngIf="result.uree_serica"> {{result.uree_serica}}</span></p>
+            <p *ngIf="result.appointmentHematology.potasiu_seric">Potasiu seric: <span *ngIf="result.potasiu_seric"> {{result.potasiu_seric}}</span></p>
+            <p *ngIf="result.appointmentHematology.inr_cu_interpretare">INR: <span *ngIf="result.inr_cu_interpretare">{{result.inr_cu_interpretare}}</span></p>
+            <p *ngIf="result.appointmentHematology.t3">T3: <span *ngIf="result.t3">{{result.t3}}</span></p>
+            <p *ngIf="result.appointmentHematology.t4">T4: <span *ngIf="result.t4">{{result.t4}}</span></p>
+            <p *ngIf="result.appointmentHematology.tgo">TGO: <span *ngIf="result.tgo"> {{result.tgo}}</span></p>
+            <p *ngIf="result.appointmentHematology.tgp">TGP: <span *ngIf="result.tgp">{{result.tgp}}</span></p>
+            <p *ngIf="result.appointmentHematology.tsh">TSH: <span *ngIf="result.tsh"> {{result.tsh}}</span></p>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Rezultate radiologie</ng-template>

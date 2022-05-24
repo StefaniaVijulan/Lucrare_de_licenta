@@ -30,6 +30,9 @@ export class DialogAddAppointmentComponent implements OnInit {
   selectedCardio: any;
   cardiologList: any;
   bloackValid: any;
+
+  msg=''
+
   loading = false;
   constructor(private _formBuilder: FormBuilder, private _http: HttpClient, private dialog: MatDialog, private _appointment: AppointmentService, private dialogref: MatDialogRef < DialogAddAppointmentComponent >) { }
 
@@ -110,19 +113,26 @@ export class DialogAddAppointmentComponent implements OnInit {
     this.appointment.hour = this.hourP
   }
   addAppointment(){
+    this.loading = true;
     this.setAppointment()
     console.log("selectedCardio")
     console.log(this.selectedCardio)
     console.log(this.appointment)
     return this._appointment.addAppointment(this.selectedCardio,this.appointment).subscribe((res)=>{
+      this.loading = false;
       console.log(res)
-      if(res){
-        this.loading = true;
-    setTimeout(() => this.loading = false, 2000);
-      this.dialogref.close("save");
-      this.dialog.open(DialogAppointmentSuccessComponent,{
-      width: '30%'
-    })}
+      if(res == 0){
+      
+        this.dialogref.close("save");
+        this.dialog.open(DialogAppointmentSuccessComponent,{
+        width: '30%'
+      })}
+      else if(res ==1 ){
+        this.msg ='Există deja o programare făcută pe acest CNP'
+      } else
+      if(res == 2){
+        this.msg = 'Exista deja un cont creat pentru acest cnp. Pentru a face o progrmare vă recomandăm să vă conectați la acesta'
+      }
    })
   
   }
