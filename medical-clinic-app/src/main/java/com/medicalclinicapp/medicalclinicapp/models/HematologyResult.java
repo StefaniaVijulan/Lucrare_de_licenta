@@ -39,6 +39,7 @@ public class HematologyResult {
     private Float t4;
     private Float tsh;
 
+    private String interpretare;
     private Boolean done;
 
 

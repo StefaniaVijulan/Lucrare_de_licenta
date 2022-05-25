@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       else{
         console.log(response)
         if(response ==  null){
-          this.msg ="CNP-ul sau parola este gresită!"
+          this.msg ="Contul nu este valid!"
         }
       }
     })
@@ -102,7 +102,12 @@ export class LoginComponent implements OnInit {
       this.loading = false
       console.log("doLogin")
       console.log(response);
-      console.log(response.jwt)
+
+      if(response == null){
+      
+          this.msg ="Contul nu este valid!"
+
+      }
       if (response && response.jwt) {
         console.log("intra in if")
         localStorage.setItem('token', response.jwt)
@@ -117,12 +122,7 @@ export class LoginComponent implements OnInit {
 
         }
         console.log("dupa token")
-      }else{
-          console.log(response)
-          if(response ==  null){
-            this.msg ="CNP-ul sau parola este gresită!"
-          }
-        }
+      }
      
     })
 

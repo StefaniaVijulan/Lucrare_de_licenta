@@ -1,11 +1,9 @@
 <div class="background-font"></div>
 <mat-card class="first-box">
-  <mat-card-content>
+  
     <form #loginForm="ngForm" [formGroup]="firstFormGroup">
       <h2>Contul meu</h2>
       <mat-error>{{msg}}</mat-error>
-      <br>
-
 
       <mat-form-field appearance="fill">
         <mat-label>CNP</mat-label>
@@ -31,5 +29,5 @@
 
       <button class="button-prog" role="button" *ngIf="!isChecked" (click)="doLoginUser()">Autentificare</button>
     </diV>
-  </mat-card-content>
+
 </mat-card>

@@ -24,6 +24,7 @@ public class RadiologyResult {
     private String ct;
     private String irm;
 
+    private String interpretare;
     private Boolean done;
 
     @OneToOne

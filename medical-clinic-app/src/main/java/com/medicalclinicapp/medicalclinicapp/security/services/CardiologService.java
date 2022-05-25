@@ -293,8 +293,9 @@ public class CardiologService {
                 Date curentData = new Date();
 
                 int dataC;
+
                 dataC = sdf.format(curentData).compareTo(appointmentHematologyRepository.findAll().get(i).getDataAppointmentHematology());
-                if(dataC >= 0 ){
+                if(dataC <= 0 ){
 
                     return appointmentHematologyRepository.findAll().get(i);
                 }
@@ -323,8 +324,8 @@ public class CardiologService {
                 Date curentData = new Date();
 
                 int dataC;
-                dataC = sdf.format(curentData).compareTo(appointmentRadiologyRepository.findAll().get(i).getHourAppointmentRadiology());
-                if(dataC >= 0 ){
+                dataC = sdf.format(curentData).compareTo(appointmentRadiologyRepository.findAll().get(i).getDataAppointmentRadiology());
+                if(dataC <= 0 ){
 
                     return appointmentRadiologyRepository.findAll().get(i);
                 }

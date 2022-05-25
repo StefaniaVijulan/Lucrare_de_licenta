@@ -2,83 +2,98 @@
   {{resultH.appointmentHematology.patient.lastName}}</h5>
   <mat-dialog-content>
 <form #registerform="ngForm">
-  <div *ngIf="resultH.appointmentHematology.colesterol_seric_total">
-    <label for="name">Colesterol seric total:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.colesterol_seric_total" name="colesterol_seric_total" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.hdl_colesterol">
-    <label for="name">HDL colesterol:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.hdl_colesterol" name="hdl_colesterol" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.ldl_colesterol">
-    <label for="name">LDL colesterol:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.ldl_colesterol" name="ldl_colesterol" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.trigliceride_serice">
-    <label for="name">Trigliceride serice:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.trigliceride_serice" name="trigliceride_serice" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.glicemie">
-    <label for="name">Glicemia:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.glicemie" name="glicemie" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.tgo">
-    <label for="name">TGO:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.tgo" name="tgo" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.tgp">
-    <label for="name">TGP:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.tgp" name="tgp" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.uree_serica">
-    <label for="name">Uree serică:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.uree_serica" name="uree_serica" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.creatina_serica">
-    <label for="name">Creatină serică:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.creatina_serica" name="creatina_serica" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.potasiu_seric">
-    <label for="name">Potasiu seric:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.potasiu_seric" name="potasiu_seric" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.magneziu_seric">
-    <label for="name">Magneziu seric:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.magneziu_seric" name="magneziu_seric" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.acid_uric">
-    <label for="name">Acid uric:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.acid_uric" name="acid_uric" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.calciu_ionic_seric">
-    <label for="name">Calciu ionic seric:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.calciu_ionic_seric" name="calciu_ionic_seric" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.calciu_seric_total">
-    <label for="name">Calciu seric total:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.calciu_seric_total" name="calciu_seric_total" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.inr_cu_interpretare">
-    <label for="name">INR cu interpretare:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.inr_cu_interpretare" name="inr_cu_interpretare" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.hemoleucograma_completa">
-    <label for="name">Hemoleucogramă completă:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.hemoleucograma_completa" name="hemoleucograma_completa" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.t3">
-    <label for="name">T3:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.t3" name="t3" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.t4">
-    <label for="name">T4:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.t4" name="t4" required/>
-  </div>
-  <div *ngIf="resultH.appointmentHematology.tsh">
-    <label for="name">TSH:</label>
-    <input id="name" type="number" autofocus [(ngModel)]="resultA.tsh" name="tsh" required/>
-  </div>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.colesterol_seric_total">
+    <mat-label>Colesterol seric total</mat-label>
+    <input type="number" [(ngModel)]="resultA.colesterol_seric_total" name="colesterol_seric_total" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.hdl_colesterol">
+    <mat-label>HDL colesterol</mat-label>
+    <input type="number" [(ngModel)]="resultA.hdl_colesterol" name="hdl_colesterol" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.ldl_colesterol">
+    <mat-label>LDL colesterol</mat-label>
+    <input type="number" [(ngModel)]="resultA.ldl_colesterol" name="ldl_colesterol" matInput>
+  </mat-form-field>
 
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.trigliceride_serice">
+    <mat-label>Trigliceride serice</mat-label>
+    <input type="number" [(ngModel)]="resultA.trigliceride_serice" name="trigliceride_serice" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.glicemie">
+    <mat-label>Glicemie</mat-label>
+    <input type="number" [(ngModel)]="resultA.glicemie" name="glicemie" matInput>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.tgo">
+    <mat-label>TGO</mat-label>
+    <input type="number" [(ngModel)]="resultA.tgo" name="tgo" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.tgp">
+    <mat-label>TGP</mat-label>
+    <input type="number" [(ngModel)]="resultA.tgp" name="tgp" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.uree_serica">
+    <mat-label>uree serica</mat-label>
+    <input type="number" [(ngModel)]="resultA.uree_serica" name="uree_serica" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.creatina_serica">
+    <mat-label>creatina_serica</mat-label>
+    <input type="number" [(ngModel)]="resultA.creatina_serica" name="creatina_serica" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.potasiu_seric">
+    <mat-label>Potasiu seric</mat-label>
+    <input type="number" [(ngModel)]="resultA.potasiu_seric" name="potasiu_seric" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.magneziu_seric">
+    <mat-label>Magneziu seric</mat-label>
+    <input type="number" [(ngModel)]="resultA.magneziu_seric" name="magneziu_seric" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.acid_uric">
+    <mat-label>Acid uric</mat-label>
+    <input type="number" [(ngModel)]="resultA.acid_uric" name="acid_uric" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.calciu_ionic_seric">
+    <mat-label>Calciu ionic seric</mat-label>
+    <input type="number" [(ngModel)]="resultA.calciu_ionic_seric" name="calciu_ionic_seric" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.calciu_seric_total">
+    <mat-label>Calciu seric total</mat-label>
+    <input type="number" [(ngModel)]="resultA.calciu_seric_total" name="calciu_seric_total" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.inr_cu_interpretare">
+    <mat-label>INR cu interpretare</mat-label>
+    <input type="number" [(ngModel)]="resultA.inr_cu_interpretare" name="inr_cu_interpretare" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.hemoleucograma_completa">
+    <mat-label>Hemoleucograma completa</mat-label>
+    <input type="number" [(ngModel)]="resultA.hemoleucograma_completa" name="hemoleucograma_completa" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.t3">
+    <mat-label>T3</mat-label>
+    <input type="number" [(ngModel)]="resultA.t3" name="t3" matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.t4">
+    <mat-label>T4</mat-label>
+    <input type="number" [(ngModel)]="resultA.t4" name="t4" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" *ngIf="resultH.appointmentHematology.tsh">
+    <mat-label>TSH</mat-label>
+    <input type="number" [(ngModel)]="resultA.tsh" name="tsh" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Interpretare</mat-label>
+    <textarea matInput placeholder="În urma analizelor făcute..."></textarea>
+  </mat-form-field>
   </form></mat-dialog-content>
     <div>
     <button class="button-prog" [disabled]="registerform.form.invalid" role="button" (click)="saveResult()">Adaugă rezultat</button>

@@ -15,8 +15,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean | UrlTree | Observable < boolean | UrlTree > | Promise < boolean | UrlTree > {
     
     if(this._service.loggedIn()) {
+      console.log("intra in guardul if")
     return true;
   } else {
+    console.log("intra in guardul else")
     this.router.navigate(['/home'])
     return false;
   }

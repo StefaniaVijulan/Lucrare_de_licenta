@@ -86,26 +86,140 @@
             </mat-panel-title>
       
           </mat-expansion-panel-header>
-      
-          <div class="grid">
-            <p *ngIf="result.appointmentHematology.acid_uric">Acid uric: <span *ngIf="result.acid_uric">{{result.acid_uric}}</span></p>
-            <p *ngIf="result.appointmentHematology.hemoleucograma_completa">Hemoleucograma completa: <span *ngIf="result.hemoleucograma_completa">{{result.hemoleucograma_completa}}</span></p>
-            <p *ngIf="result.appointmentHematology.calciu_ionic_seric">Calciu ionic <span *ngIf="result.calciu_ionic_seric"> {{result.calciu_ionic_seric}}</span></p>
-            <p *ngIf="result.appointmentHematology.calciu_seric_total">Calciu seric <span *ngIf="result.calciu_seric_total"> {{result.calciu_seric_total}}</span></p>
-            <p *ngIf="result.appointmentHematology.colesterol_seric_total">Colesterol seric: <span *ngIf="result.colesterol_seric_total">{{result.colesterol_seric_total}} </span></p>
-            <p *ngIf="result.appointmentHematology.creatina_serica">Creatina serica: <span *ngIf="result.creatina_serica">{{result.creatina_serica}}</span></p>
-            <p *ngIf="result.appointmentHematology.ldl_colesterol">LDL colesterol: <span *ngIf="result.ldl_colesterol">{{result.ldl_colesterol}}</span></p>
-            <p *ngIf="result.appointmentHematology.magneziu_seric">Magneziu seric: <span *ngIf="result.magneziu_seric">{{result.magneziu_seric}}}</span></p>
-            <p *ngIf="result.appointmentHematology.trigliceride_serice">Trigliceride serice: <span *ngIf="result.trigliceride_serice">{{result.trigliceride_serice}}</span></p>
-            <p *ngIf="result.appointmentHematology.uree_serica">Uree serica: <span *ngIf="result.uree_serica"> {{result.uree_serica}}</span></p>
-            <p *ngIf="result.appointmentHematology.potasiu_seric">Potasiu seric: <span *ngIf="result.potasiu_seric"> {{result.potasiu_seric}}</span></p>
-            <p *ngIf="result.appointmentHematology.inr_cu_interpretare">INR: <span *ngIf="result.inr_cu_interpretare">{{result.inr_cu_interpretare}}</span></p>
-            <p *ngIf="result.appointmentHematology.t3">T3: <span *ngIf="result.t3">{{result.t3}}</span></p>
-            <p *ngIf="result.appointmentHematology.t4">T4: <span *ngIf="result.t4">{{result.t4}}</span></p>
-            <p *ngIf="result.appointmentHematology.tgo">TGO: <span *ngIf="result.tgo"> {{result.tgo}}</span></p>
-            <p *ngIf="result.appointmentHematology.tgp">TGP: <span *ngIf="result.tgp">{{result.tgp}}</span></p>
-            <p *ngIf="result.appointmentHematology.tsh">TSH: <span *ngIf="result.tsh"> {{result.tsh}}</span></p>
-          </div>
+          <table class="table">
+            <caption>List of users</caption>
+            <thead>
+              <tr>
+                <th scope="col">Denumire</th>
+                <th scope="col">Rezultate</th>
+                <th scope="col">UM</th>
+                <th scope="col">Interval biologic <br>de referință</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="result.appointmentHematology.acid_uric">
+                <th scope="row">Acid uric</th>
+                <td>{{result.acid_uric}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.hemoleucograma_completa">
+                <th scope="row">Hemoleucogramă completă</th>
+                <td>{{result.hemoleucograma_completa}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.calciu_ionic_seric">
+                <th scope="row">Calciu ionic seric</th>
+                <td>{{result.calciu_ionic_seric}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.calciu_seric_total">
+                <th scope="row">Calciu ionic total</th>
+                <td>{{result.calciu_seric_total}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.colesterol_seric_total">
+                <th scope="row">Colesterol seric total</th>
+                <td>{{result.colesterol_seric_total}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.creatina_serica">
+                <th scope="row">Creatină serică</th>
+                <td>{{result.creatina_serica}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.ldl_colesterol">
+                <th scope="row">LDL colesterol</th>
+                <td>{{result.ldl_colesterol}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.magneziu_seric">
+                <th scope="row">Magneziu seric</th>
+                <td>{{result.magneziu_seric}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.trigliceride_serice">
+                <th scope="row">Trigliceride serice</th>
+                <td>{{result.trigliceride_serice}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.uree_serica">
+                <th scope="row">Uree serica</th>
+                <td>{{result.uree_serica}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.potasiu_seric">
+                <th scope="row">Potasiu seric</th>
+                <td>{{result.potasiu_seric}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.inr_cu_interpretare">
+                <th scope="row">INR cu interpretare</th>
+                <td>{{result.inr_cu_interpretare}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.t3">
+                <th scope="row">T3</th>
+                <td>{{result.t3}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.t4">
+                <th scope="row">T4</th>
+                <td>{{result.t4}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.tgo">
+                <th scope="row">TGO</th>
+                <td>{{result.tgo}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>          
+              <tr *ngIf="result.appointmentHematology.tgp">
+                <th scope="row">TGP</th>
+                <td>{{result.tgp}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+              <tr *ngIf="result.appointmentHematology.tsh">
+                <th scope="row">TSH</th>
+                <td>{{result.tsh}}</td>
+                <td></td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'feminin'">Otto</td>
+                <td *ngIf="result.appointmentHematology.patient.sexPatient == 'masculin'">Ana</td>
+              </tr>
+            </tbody>
+          </table>
+           <!-- <div class="grid">
+          </div>  --> 
         </mat-expansion-panel>
       </ng-container>
     </mat-step>

@@ -35,7 +35,7 @@ public class UserController {
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         //    excelReadService.ReadDataFromExcel("src/main/resources/excelFile/UserDB.xlsx");
-        System.out.println("Intra");
+
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),

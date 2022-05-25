@@ -94,6 +94,7 @@ public class HematologService {
                 hematologyResultRepository.findAll().get(i).setT3(hematologyResult.getT3());
                 hematologyResultRepository.findAll().get(i).setT4(hematologyResult.getT4());
                 hematologyResultRepository.findAll().get(i).setTsh(hematologyResult.getTsh());
+                hematologyResultRepository.findAll().get(i).setInterpretare(hematologyResult.getInterpretare());
                 hematologyResultRepository.findAll().get(i).setDone(true);
                 hematologyResultRepository.save(hematologyResultRepository.findAll().get(i));
                 break;

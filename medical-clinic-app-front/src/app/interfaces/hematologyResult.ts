@@ -23,7 +23,8 @@ export class HematologyResult{
 
     id: number;
     done: boolean;
-
+    interpretare: string;
+    
     appointmentHematology: AppointmentsHematology;
 
     

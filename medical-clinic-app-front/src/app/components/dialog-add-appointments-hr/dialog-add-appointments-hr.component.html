@@ -57,10 +57,10 @@
 <section class="programare" [formGroup]="appointmens">
   <h4  *ngIf="!listSpecificHema || !listSpecificRadio "><br>Programări noi</h4>
   
-  <p *ngIf="!listSpecificHema">
+  <p *ngIf="!listSpecificRadio">
     <mat-checkbox formControlName="appointmensRadiology">Imagistică</mat-checkbox>
   </p>
-  <p *ngIf="!listSpecificRadio">
+  <p *ngIf="!listSpecificHema">
     <mat-checkbox formControlName="appointmensHematology">Hematologie</mat-checkbox>
   </p>
 </section>
