@@ -37,8 +37,8 @@ public class HematologController {
         return hematologService.seeAppointmentsWithoutResult();
     }
     @PutMapping("/hematolog/editAppointmentResult")
-    public int editResultHema(@RequestParam("idR")Long idR, @RequestBody HematologyResult hematologyResult){
-        return hematologService.resultDone(idR, hematologyResult);
+    public int editResultHema(@RequestParam("cnpH")String cnpH, @RequestParam("idR")Long idR, @RequestBody HematologyResult hematologyResult){
+        return hematologService.resultDone(cnpH, idR, hematologyResult);
 
     }
     @GetMapping("/hematolog/seeAllResult")

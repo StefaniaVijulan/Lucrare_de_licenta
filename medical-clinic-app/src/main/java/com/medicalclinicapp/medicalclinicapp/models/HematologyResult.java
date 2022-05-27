@@ -1,5 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.models;
 
+import com.medicalclinicapp.medicalclinicapp.security.models.Hematolog;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -33,8 +34,11 @@ public class HematologyResult {
     private Float acid_uric;
     private Float calciu_ionic_seric;
     private Float calciu_seric_total;
-    private Float inr_cu_interpretare;
-    private Float hemoleucograma_completa;
+    private Float globule_rosii;
+    private Float hemoglobina;
+    private Float hematocrit;
+    private Float globule_albe;
+    private Float trombocite;
     private Float t3;
     private Float t4;
     private Float tsh;
@@ -42,6 +46,8 @@ public class HematologyResult {
     private String interpretare;
     private Boolean done;
 
+    @OneToOne
+    private Hematolog hematolog;
 
     @OneToOne
     private AppointmentHematology appointmentHematology;

@@ -51,8 +51,14 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
       acid_uric: false,
       calciu_ionic_seric: false,
       calciu_seric_total: false,
-      inr_cu_interpretare: false,
-      hemoleucograma_completa: false,
+
+      
+      globule_rosii:false,
+      hemoglobina:false,
+      hematocrit:false,
+      globule_albe:false,
+      trombocite:false,
+
       t3: false,
       t4: false,
       tsh: false      
@@ -75,8 +81,13 @@ export class DialogAddAppointmentsHematologyComponent implements OnInit {
     this.appointment.acid_uric= this.appointmentHematology.value.acid_uric,
     this.appointment.calciu_ionic_seric= this.appointmentHematology.value.calciu_ionic_seric,
     this.appointment.calciu_seric_total= this.appointmentHematology.value.calciu_seric_total,
-    this.appointment.inr_cu_interpretare= this.appointmentHematology.value.inr_cu_interpretare,
-    this.appointment.hemoleucograma_completa= this.appointmentHematology.value.hemoleucograma_completa,
+
+    this.appointment.globule_rosii= this.appointmentHematology.value.globule_rosii,
+    this.appointment.hematocrit= this.appointmentHematology.value.hematocrit,
+    this.appointment.globule_albe= this.appointmentHematology.value.globule_albe,
+    this.appointment.trombocite= this.appointmentHematology.value.trombocite,
+
+    this.appointment.hemoglobina= this.appointmentHematology.value.hemoglobina,
     this.appointment.t3= this.appointmentHematology.value.t3,
     this.appointment.t4= this.appointmentHematology.value.t4,
     this.appointment.tsh= this.appointmentHematology.value.tsh,

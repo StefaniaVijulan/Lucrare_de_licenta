@@ -154,11 +154,11 @@
   <div *ngIf="this._secretar.existaPacient">
     <mat-dialog-content>
       <mat-vertical-stepper orientation="vertical">
-        <ng-template matStepperIcon="edit">
-          <mat-icon>done</mat-icon>
+        <ng-template matStepperIcon="edit" >
+          <mat-icon color="red">done</mat-icon>
         </ng-template>
         <mat-step>
-          <ng-template matStepLabel>Informatii generale despre pacient</ng-template>
+          <ng-template matStepLabel>Informații generale despre pacient</ng-template>
           <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
           class="aligned-with-icon"><ins>Nume</ins>: {{oldPacient.firstName}} {{oldPacient.lastName}}</span><br>
         <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
@@ -171,10 +171,10 @@
             class="aligned-with-icon"><ins>Seria</ins>: {{oldPacient.seriesPatient}}, nr.
             {{oldPacient.numberPatient}}</span><br>
           <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
-            class="aligned-with-icon"><ins>Cetatenie</ins>: {{oldPacient.citizenshipPatient}}</span><br>
+            class="aligned-with-icon"><ins>Cetățenie</ins>: {{oldPacient.citizenshipPatient}}</span><br>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Informatii despre adresă</ng-template>
+          <ng-template matStepLabel>Informații despre adresă</ng-template>
           <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span
           class="aligned-with-icon"><ins>Oraș</ins>: {{oldPacient.cityPatient}}</span><br>
         <mat-icon class="icon-display" matListIcon inline=true>fiber_manual_record</mat-icon><span

@@ -4,7 +4,10 @@ table {
     margin: 4vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-
+.table1{
+  width:70vw;
+  margin: 0 auto;
+  }
 mat-paginator{
   width: 94vw;
     text-align: center;
@@ -104,3 +107,4 @@ th{
 p{
   margin-left: 2vw;
 }
+.red {background-color: red}

@@ -30,6 +30,7 @@ export class DialogAddAppointmentByDoctorComponent implements OnInit {
   cardiologList: any;
   bloackValid: any;
   loading = false;
+  msg=''
   constructor(private _formBuilder: FormBuilder,private _doctor:DoctorService, private _http: HttpClient, private dialog: MatDialog, private _appointment: AppointmentService, private dialogref: MatDialogRef < DialogAddAppointmentByDoctorComponent >) { }
 
   ngOnInit() {
@@ -116,15 +117,17 @@ export class DialogAddAppointmentByDoctorComponent implements OnInit {
     console.log("selectedCardio")
     console.log(this.selectedCardio)
     console.log(this.appointment)
-    return this._appointment.addAppointment(this.selectedCardio,this.appointment).subscribe((res)=>{
+    return this._doctor.addAppointment(this.appointment).subscribe((res)=>{
       console.log(res)
-      if(res){
-        this.loading = true;
-    setTimeout(() => this.loading = false, 2000);
+      if(res == 0){
+   
       this.dialogref.close("save");
       this.dialog.open(DialogAppointmentSuccessComponent,{
       width: '30%'
     })}
+    else if(res==1){
+      this.msg='Există deja o programare făcută!'
+    }
    })
   
   }

@@ -30,7 +30,7 @@ export class HematologResultComponent implements OnInit {
       this._hematolog.resultHematology = element
       console.log(this._hematolog.resultHematology)
       this.dialog.open(DialogAddResultHematologyComponent,{
-       width: '33%',
+       width: '30%',
        panelClass: 'my-panel'
       }).afterClosed().subscribe(val=>{
        if(val === "save"){

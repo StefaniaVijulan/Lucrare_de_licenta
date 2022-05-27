@@ -1,4 +1,5 @@
 import { AppointmentsHematology } from "./appointmentHematology";
+import { Hematolog } from "./hematolog";
 
 export class HematologyResult{
     colesterol_seric_total: number;
@@ -15,8 +16,15 @@ export class HematologyResult{
     acid_uric: number;
     calciu_ionic_seric: number;
     calciu_seric_total: number;
-    inr_cu_interpretare: number;
-    hemoleucograma_completa: number;
+
+    
+    globule_rosii: number;
+    hemoglobina: number;
+    hematocrit: number;
+    globule_albe: number;
+    trombocite: number;
+
+
     t3: number;
     t4: number;
     tsh: number;
@@ -24,9 +32,9 @@ export class HematologyResult{
     id: number;
     done: boolean;
     interpretare: string;
-    
+
     appointmentHematology: AppointmentsHematology;
 
-    
+    hematolog: Hematolog;
     constructor(){}
 }

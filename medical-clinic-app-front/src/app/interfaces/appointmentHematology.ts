@@ -20,8 +20,14 @@ export class AppointmentsHematology {
     acid_uric: boolean;
     calciu_ionic_seric: boolean;
     calciu_seric_total: boolean;
-    inr_cu_interpretare: boolean;
-    hemoleucograma_completa: boolean;
+
+
+    globule_rosii: boolean;
+    hemoglobina: boolean;
+    hematocrit: boolean;
+    globule_albe: boolean;
+    trombocite: boolean;
+
     t3: boolean;
     t4: boolean;
     tsh: boolean;

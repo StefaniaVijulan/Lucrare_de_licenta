@@ -1,4 +1,4 @@
-<p>Programare hematologie</p>
+<h5>Programare hematologie</h5>
 <mat-vertical-stepper orientation="vertical">
   <ng-template matStepperIcon="edit">
     <mat-icon>done</mat-icon>
@@ -12,13 +12,10 @@
           <mat-checkbox formControlName="colesterol_seric_total">Colesterol seric total</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="hemoleucograma_completa">Hemoleucograma completa</mat-checkbox>
+          <mat-checkbox formControlName="hemoleucograma_completa">Hemoleucogramă completă</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="trigliceride_serice">Trigliceride serice</mat-checkbox>
-        </p>
-        <p>
-          <mat-checkbox formControlName="inr_cu_interpretare">INR cu interpretare</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="calciu_ionic_seric">Calciu ionic seric</mat-checkbox>
@@ -27,7 +24,7 @@
           <mat-checkbox formControlName="calciu_seric_total">Calciu seric total</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="creatina_serica">Creatina serica</mat-checkbox>
+          <mat-checkbox formControlName="creatina_serica">Creatină serică</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="magneziu_seric">Magneziu seric</mat-checkbox>
@@ -42,7 +39,7 @@
           <mat-checkbox formControlName="potasiu_seric">Potasiu seric</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="uree_serica">Uree serica</mat-checkbox>
+          <mat-checkbox formControlName="uree_serica">Uree serică</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="acid_uric">Acid uric</mat-checkbox>
@@ -63,7 +60,7 @@
           <mat-checkbox formControlName="t4">T4</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="tsh">THS</mat-checkbox>
+          <mat-checkbox formControlName="tsh">TSH</mat-checkbox>
         </p>
 
 
@@ -73,7 +70,7 @@
   <mat-step>
     <ng-template matStepLabel>Data</ng-template>
     <mat-form-field class="example-full-width" required>
-        <input matInput  [min]="tomorrowD" [matDatepicker]="picker" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" placeholder="Alege data dorita" [(ngModel)]="dateP" name="dateP" (dateChange)="hourCheck()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker ></mat-datepicker>
       </mat-form-field>
@@ -92,6 +89,6 @@
 
 </mat-vertical-stepper>
 <div mat-dialog-actions [align]="'center'">
-    <button color="primary" *ngIf= "_doctor.appointmensRadio == true" mat-raised-button (click)= "openAddRadiology()">Programare radiologie</button>
-    <button color="primary" *ngIf= "_doctor.appointmensRadio != true" mat-raised-button mat-dialog-close (click) = "addHematologyAppointment()">Programeaza</button>
+    <button class="button-prog" *ngIf= "_doctor.appointmensRadio == true" mat-raised-button (click)= "openAddRadiology()">Programează</button>
+    <button class="button-prog" *ngIf= "_doctor.appointmensRadio != true" mat-raised-button mat-dialog-close (click) = "addHematologyAppointment()">Programează</button>
   </div>

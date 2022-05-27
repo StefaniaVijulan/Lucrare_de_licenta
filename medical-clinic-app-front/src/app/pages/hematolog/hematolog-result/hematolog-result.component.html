@@ -15,73 +15,67 @@
             <span style="margin-left: 2rem; font-size: 16px;"><b>Pacient:
               </b>{{appointment.appointmentHematology.patient.firstName}}
               {{appointment.appointmentHematology.patient.lastName}}</span><br>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.colesterol_seric_total" matListIcon
-              inline=true>fiber_manual_record
-            </mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.colesterol_seric_total">Colesterol seric total<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.acid_uric" matListIcon inline=true>
-              fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.acid_uric">Acid
-              uric<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.calciu_ionic_seric" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.calciu_ionic_seric">Calciu ionic<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.calciu_seric_total" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.calciu_seric_total">Calciu seric <br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.colesterol_seric_total" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.colesterol_seric_total">Colesterol seric<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.creatina_serica" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.creatina_serica">Creatina
-              serica<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.ldl_colesterol" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.ldl_colesterol">LDL
-              colesterol<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.magneziu_seric" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.magneziu_seric">Magneziu
-              seric<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.trigliceride_serice" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.trigliceride_serice">Trigliceride serice<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.uree_serica" matListIcon
-              inline=true>fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.uree_serica">Uree
-              serica<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.potasiu_seric" matListIcon
-              inline=true>fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.potasiu_seric">Potasiu
-              seric<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.inr_cu_interpretare" matListIcon
-              inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.appointmentHematology.inr_cu_interpretare">INR<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.t3" matListIcon inline=true>
-              fiber_manual_record</mat-icon>
-            <span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.t3">T3<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.t4" matListIcon inline=true>
-              fiber_manual_record</mat-icon>
-            <span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.t4">T4<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tgo" matListIcon inline=true>
-              fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tgo">TGO<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tgp" matListIcon inline=true>
-              fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tgp">TGP<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tsh" matListIcon inline=true>
-              fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tsh">TSH<br></span>
-            <br>
+              <mat-icon class="icon-display" *ngIf="appointment.acid_uric" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.acid_uric">Acid uric</span>
+  
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.globule_rosii" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.globule_rosii">Globule rosii</span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.hemoglobina" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.hemoglobina">Hemoglobina</span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.hematocrit" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.hematocrit">Hematocrit</span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.globule_albe" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.globule_albe">Globule albe</span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.trombocite" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.trombocite">Trombocite</span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.calciu_ionic_seric" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.calciu_ionic_seric">Calciu ionic<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.calciu_seric_total" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.calciu_seric_total">Calciu seric <br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.colesterol_seric_total" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.colesterol_seric_total">Colesterol seric<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.creatina_serica" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.creatina_serica">Creatina
+                serica<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.ldl_colesterol" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.ldl_colesterol">LDL
+                colesterol<br></span>
+                <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.hdl_colesterol" matListIcon inline=true>
+                  fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.hdl_colesterol">HDL
+                  colesterol<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.magneziu_seric" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.magneziu_seric">Magneziu
+                seric<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.trigliceride_serice" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.trigliceride_serice">Trigliceride serice<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.uree_serica" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.uree_serica">Uree serica<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.potasiu_seric" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.potasiu_seric">Potasiu seric<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.inr_cu_interpretare" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon"
+                *ngIf="appointment.appointmentHematology.inr_cu_interpretare">INR<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.t3" matListIcon inline=true>fiber_manual_record</mat-icon>
+              <span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.t3">T3<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.t4" matListIcon inline=true>fiber_manual_record</mat-icon>
+              <span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.t4">T4<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tgo" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tgo">TGO<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tgp" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tgp">TGP<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.appointmentHematology.tsh" matListIcon inline=true>fiber_manual_record
+              </mat-icon><span class="aligned-with-icon" *ngIf="appointment.appointmentHematology.tsh">TSH<br></span>
+              <br>
+  
 
           </div>
           <button class="button-prog" role="button" (click)="addResult(appointment)">Adaugă rezultat</button>

@@ -18,6 +18,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   private baseUrl = environment.baseUrl;
   tooltipVariable = "Prin completarea formularului declar ca sunt de acord cu folosirea datelor mele personale de catre clinica. Puteti consulta mai multe detalii despre prelucrarea datelor dvs. personale in Politica de prelucrare disponibila clinica noastră. Prezentul consimtamant este acordat de bunavoie si poate fi oricand revocat in scris la adresa cabinetului sau prin email la adresa gdpr@medicalclinicapp.com."
   tomorrowD:any = new Date().getDate()+1;
+
   dateP: string;
   ziua: string;
   hourP:string;
@@ -37,6 +38,7 @@ export class DialogAddAppointmentComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, private _http: HttpClient, private dialog: MatDialog, private _appointment: AppointmentService, private dialogref: MatDialogRef < DialogAddAppointmentComponent >) { }
 
   ngOnInit() {
+    console.log("next date =>", this.tomorrowD)
     console.log("Intra in on init")
     this.cardiologList = this._appointment.doctorListService
     this.firstFormGroup = this._formBuilder.group({
@@ -60,7 +62,7 @@ export class DialogAddAppointmentComponent implements OnInit {
     console.log(time)
 
     console.log(this._appointment.blockedDataAppointment)
-    return !this._appointment.blockedDataAppointment.find(x=>x==time);//&& day !==0 && day !==6;
+    return !this._appointment.blockedDataAppointment.find(x=>x==time) && day !==0 && day !==6;
   };
 
   validationDate(){

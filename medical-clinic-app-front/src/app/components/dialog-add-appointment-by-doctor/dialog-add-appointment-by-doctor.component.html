@@ -38,17 +38,13 @@
     </mat-select>
 
   </mat-form-field>
-  <div style="margin-left: 20%;">
-    <mat-checkbox [(ngModel)]="acordGDPR" class="example-margin">Acord GDPR</mat-checkbox>
-    <mat-icon class='infoCard' [matTooltip]="tooltipVariable">info_outline</mat-icon>
-  </div>
-  <br>
 
+  <mat-error style="text-align: center;">{{msg}}</mat-error>
   <div [align]="'center'">
     <div class="spinner-container" *ngIf="loading">
     <mat-spinner diameter="24"></mat-spinner>
   </div>
-    <button [disabled]="registerform.form.invalid || !acordGDPR" class="button-prog" role="button"
+    <button [disabled]="registerform.form.invalid" class="button-prog" role="button"
       (click)="addAppointment()">Adaugă o programare</button></div>
 
 

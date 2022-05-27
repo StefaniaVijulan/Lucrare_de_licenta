@@ -15,7 +15,7 @@
   }
   /*checkbox*/
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: #EE6F57;
+    background-color: rgba(5,55,106,1);
   }
     /*scroll bar*/
   /* width */
@@ -33,4 +33,15 @@
 ::-webkit-scrollbar-thumb {
     background: rgb(59, 195, 251); 
     border-radius: 10px;
+}
+.button-prog {
+  background: #EE6F57;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 18px;
+  border: 0;
+  position: relative;
 }

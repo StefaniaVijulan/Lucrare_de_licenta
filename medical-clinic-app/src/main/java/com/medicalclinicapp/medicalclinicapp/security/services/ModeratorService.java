@@ -117,7 +117,7 @@ private ModeratorRepository moderatorRepository;
             return 2;
         }
 
-        String parola = "qDu8cg";
+        String parola = "c";
         cardiolog.setPassword(bCryptPasswordEncoder.encode(parola));
         String emailtext;
       emailtext = "Creearea contului s-a realizat cu succes. \n\t Parola corespunzătoare CNP-ului dumneavoastră este: " + parola + "" +

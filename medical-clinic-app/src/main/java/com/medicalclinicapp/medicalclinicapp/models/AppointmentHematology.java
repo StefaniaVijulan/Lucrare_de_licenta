@@ -41,8 +41,13 @@ public class AppointmentHematology implements Comparable<AppointmentHematology> 
     private Boolean acid_uric;
     private Boolean calciu_ionic_seric;
     private Boolean calciu_seric_total;
-    private Boolean inr_cu_interpretare;
-    private Boolean hemoleucograma_completa;
+
+    private Boolean globule_rosii;
+    private Boolean hemoglobina;
+    private Boolean hematocrit;
+    private Boolean globule_albe;
+    private Boolean trombocite;
+
     private Boolean t3;
     private Boolean t4;
     private Boolean tsh;

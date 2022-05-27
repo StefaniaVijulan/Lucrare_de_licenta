@@ -95,7 +95,13 @@ export class DoctorService {
     this.cnpCurrantCardioService = localStorage.getItem("cnp")
     return this._http.get<boolean>(this.baseUrl + '/cardiolog/checkDateBeforeBlock?dataV='+ element + '&cnpC='+ this.cnpCurrantCardioService, this.publicHttpHeaders);
   }
+  addAppointment(element: Appointment){
+    console.log("element=>", element)
+    this.cnpCurrantCardioService = localStorage.getItem("cnp")
+    console.log("this.cnpCurrantCardioService=>", this.cnpCurrantCardioService)
 
+    return this._http.post(this.baseUrl + '/cardiolog/addAppointment?cnpC='+this.cnpCurrantCardioService, element,this.publicHttpHeaders);
+  }
   seeProgramari(){
     this._router.navigate(['/doctor/consultatii'])
   }

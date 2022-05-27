@@ -87,3 +87,7 @@
   border: 0;
 
 }
+
+::ng-deep .mat-step-header .mat-step-icon{
+  background-color: rgba(5,55,106,1); 
+}

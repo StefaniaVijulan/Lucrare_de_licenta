@@ -115,7 +115,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cardiolog/checkDateBeforeBlockk",
                         "/cardiolog/specificAppointmentRadiology",
                         "/cardiolog/specificAppointmentHematology",
-                        "/cardiolog/resultAppointmentHematology"
+                        "/cardiolog/resultAppointmentHematology",
+                        "/cardiolog/addAppointment"
                         ).hasAuthority("CARDIOLOG")
                 .antMatchers("/hematolog/allAppointmentHematology",
                         "/hematolog/allTodayAppointmentHematology",

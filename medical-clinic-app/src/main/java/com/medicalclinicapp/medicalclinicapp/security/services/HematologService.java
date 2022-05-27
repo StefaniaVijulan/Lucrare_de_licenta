@@ -29,6 +29,9 @@ public class HematologService {
     private AppointmentHematologyRepository appointmentHematologyRepository;
 
     @Autowired
+    private HematologRepository hematologRepository;
+
+    @Autowired
     private HematologyResultRepository hematologyResultRepository;
 
     public List<AppointmentHematology> getAllAppointmentHematology(){
@@ -72,7 +75,8 @@ public class HematologService {
         }
         return hematologyResultList;
     }
-    public int resultDone (Long idR, HematologyResult hematologyResult){
+    public int resultDone (String cnpH, Long idR, HematologyResult hematologyResult){
+
         for (int i = 0; i < hematologyResultRepository.findAll().size(); i++) {
             if(hematologyResultRepository.findAll().get(i).getId() == idR){
                 hematologyResultRepository.findAll().get(i).setColesterol_seric_total(hematologyResult.getColesterol_seric_total());
@@ -89,13 +93,17 @@ public class HematologService {
                 hematologyResultRepository.findAll().get(i).setAcid_uric(hematologyResult.getAcid_uric());
                 hematologyResultRepository.findAll().get(i).setCalciu_ionic_seric(hematologyResult.getCalciu_ionic_seric());
                 hematologyResultRepository.findAll().get(i).setCalciu_seric_total(hematologyResult.getCalciu_seric_total());
-                hematologyResultRepository.findAll().get(i).setInr_cu_interpretare(hematologyResult.getInr_cu_interpretare());
-                hematologyResultRepository.findAll().get(i).setHemoleucograma_completa(hematologyResult.getHemoleucograma_completa());
+                hematologyResultRepository.findAll().get(i).setGlobule_rosii(hematologyResult.getGlobule_rosii());
+                hematologyResultRepository.findAll().get(i).setHemoglobina(hematologyResult.getHemoglobina());
+                hematologyResultRepository.findAll().get(i).setHematocrit(hematologyResult.getHematocrit());
+                hematologyResultRepository.findAll().get(i).setGlobule_albe(hematologyResult.getGlobule_albe());
+                hematologyResultRepository.findAll().get(i).setTrombocite(hematologyResult.getTrombocite());
                 hematologyResultRepository.findAll().get(i).setT3(hematologyResult.getT3());
                 hematologyResultRepository.findAll().get(i).setT4(hematologyResult.getT4());
                 hematologyResultRepository.findAll().get(i).setTsh(hematologyResult.getTsh());
                 hematologyResultRepository.findAll().get(i).setInterpretare(hematologyResult.getInterpretare());
                 hematologyResultRepository.findAll().get(i).setDone(true);
+                hematologyResultRepository.findAll().get(i).setHematolog(hematologRepository.findByCnp(cnpH));
                 hematologyResultRepository.save(hematologyResultRepository.findAll().get(i));
                 break;
             }

@@ -103,7 +103,10 @@ public class CardiologController {
         return cardiologService.addAppointmentRadiology(cnpP, appointment);
     }
 
-
+    @PostMapping("/cardiolog/addAppointment")
+    public int addAppointmentA(@RequestParam (value = "cnpC")String cnpC, @RequestBody Appointment appointment) throws ParseException {
+        return cardiologService.addAppointment(cnpC, appointment);
+    }
     @GetMapping("/cardiolog/resultAppointmentHematology")
     public List<HematologyResult> seeresulthematology(@RequestParam(value = "cnpP") String cnpP){
         return cardiologService.seeHematologyResult(cnpP);

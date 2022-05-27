@@ -41,6 +41,7 @@ export class SecretarPacientiComponent  {
 
   @ViewChild(MatSort, {static: true}) 
   sort!: MatSort;
+  listAppointment: any;
 
   constructor(private dialog: MatDialog, 
     public _secretar: SecretarService,
@@ -56,6 +57,8 @@ export class SecretarPacientiComponent  {
     
         return this._secretar.getAllCurrentAppointments()
         .subscribe((res:any)=>{
+          this.listAppointment = res;
+
             this.dataSource =  new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

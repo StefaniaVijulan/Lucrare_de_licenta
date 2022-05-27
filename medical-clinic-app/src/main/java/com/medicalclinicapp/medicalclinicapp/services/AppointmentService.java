@@ -125,7 +125,7 @@ public class AppointmentService {
 
             System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
             System.out.println(stare);
-            if (stare>0) {
+            if (stare <0) {
                 System.out.println("Intra in stare");
                 if(appointmentRepository.findAll().get(i).getCnp().equals(appointment.getCnp())){
                     System.out.println("Exista deja o programare facuta cu acest cnp");

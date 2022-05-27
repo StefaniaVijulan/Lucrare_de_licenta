@@ -39,25 +39,167 @@
             <div class="content">
               <span class="label" >
               
-      <div class="grid">
-        <p *ngIf="element.appointmentHematology.acid_uric">Acid uric: <span *ngIf="element.acid_uric">{{element.acid_uric}}</span></p>
-        <p *ngIf="element.appointmentHematology.hemoleucograma_completa">Hemoleucograma completa: <span *ngIf="element.hemoleucograma_completa">{{element.hemoleucograma_completa}}</span></p>
-        <p *ngIf="element.appointmentHematology.calciu_ionic_seric">Calciu ionic <span *ngIf="element.calciu_ionic_seric"> {{element.calciu_ionic_seric}}</span></p>
-        <p *ngIf="element.appointmentHematology.calciu_seric_total">Calciu seric <span *ngIf="element.calciu_seric_total"> {{element.calciu_seric_total}}</span></p>
-        <p *ngIf="element.appointmentHematology.colesterol_seric_total">Colesterol seric: <span *ngIf="element.colesterol_seric_total">{{element.colesterol_seric_total}} </span></p>
-        <p *ngIf="element.appointmentHematology.creatina_serica">Creatina serica: <span *ngIf="element.creatina_serica">{{element.creatina_serica}}</span></p>
-        <p *ngIf="element.appointmentHematology.ldl_colesterol">LDL colesterol: <span *ngIf="element.ldl_colesterol">{{element.ldl_colesterol}}</span></p>
-        <p *ngIf="element.appointmentHematology.magneziu_seric">Magneziu seric: <span *ngIf="element.magneziu_seric">{{element.magneziu_seric}}}</span></p>
-        <p *ngIf="element.appointmentHematology.trigliceride_serice">Trigliceride serice: <span *ngIf="element.trigliceride_serice">{{element.trigliceride_serice}}</span></p>
-        <p *ngIf="element.appointmentHematology.uree_serica">Uree serica: <span *ngIf="element.uree_serica"> {{element.uree_serica}}</span></p>
-        <p *ngIf="element.appointmentHematology.potasiu_seric">Potasiu seric: <span *ngIf="element.potasiu_seric"> {{element.potasiu_seric}}</span></p>
-        <p *ngIf="element.appointmentHematology.inr_cu_interpretare">INR: <span *ngIf="element.inr_cu_interpretare">{{element.inr_cu_interpretare}}</span></p>
-        <p *ngIf="element.appointmentHematology.t3">T3: <span *ngIf="element.t3">{{element.t3}}</span></p>
-        <p *ngIf="element.appointmentHematology.t4">T4: <span *ngIf="element.t4">{{element.t4}}</span></p>
-        <p *ngIf="element.appointmentHematology.tgo">TGO: <span *ngIf="element.tgo"> {{element.tgo}}</span></p>
-        <p *ngIf="element.appointmentHematology.tgp">TGP: <span *ngIf="element.tgp">{{element.tgp}}</span></p>
-        <p *ngIf="element.appointmentHematology.tsh">TSH: <span *ngIf="element.tsh"> {{element.tsh}}</span></p>
-      </div>
+                <table class="table table1">
+                  <caption>{{element.interpretare}}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Denumire</th>
+                      <th scope="col">Rezultate</th>
+                      <th scope="col">UM</th>
+                      <th scope="col">Interval biologic <br>de referință</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="element.appointmentHematology.acid_uric">
+                      <th scope="row">Acid uric</th>
+                      <td>{{element.acid_uric}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">2.5 - 6.2</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">2.5 - 6.2</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.globule_rosii">
+                      <th scope="row">Globule roșii</th>
+                      <td>{{element.globule_rosii}}</td>
+                      <td>milioane de celule/ mcL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">3,90 - 5,03</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">4,32 - 5,72</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.hemoglobina">
+                      <th scope="row">Hemoglobină</th>
+                      <td>{{element.hemoglobina}}</td>
+                      <td>g/L</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">135 - 175</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">120 - 155</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.hematocrit">
+                      <th scope="row">Hematocrit</th>
+                      <td>{{element.hematocrit}}</td>
+                      <td>%</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">38,8 - 50,0</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">34,9 - 44,5</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.globule_albe">
+                      <th scope="row">Globule albe</th>
+                      <td>{{element.globule_albe}}</td>
+                      <td>celule/ mcL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">3,500 - 10,500</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">3,500 - 10,500</td>
+                    </tr>  
+                    <tr *ngIf="element.appointmentHematology.trombocite">
+                      <th scope="row">Trombocite</th>
+                      <td>{{element.trombocite}}</td>
+                      <td>/mcL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">150.000 - 450.000</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">150.000 - 450.000</td>
+                    </tr>  
+                    <tr *ngIf="element.appointmentHematology.calciu_ionic_seric">
+                      <th scope="row">Calciu ionic seric</th>
+                      <td>{{element.calciu_ionic_seric}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">3.82 - 4.82</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">3.82 - 4.82</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.calciu_seric_total">
+                      <th scope="row">Calciu seric total</th>
+                      <td>{{element.calciu_seric_total}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">8.2 – 11.2</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">8.2 – 11.2</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.colesterol_seric_total">
+                      <th scope="row">Colesterol seric total</th>
+                      <td>{{element.colesterol_seric_total}}</td>
+                      <td>mg/dcl</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">201 – 240</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">201 – 240</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.creatina_serica">
+                      <th scope="row">Creatină serică</th>
+                      <td>{{element.creatina_serica}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">0,7 - 1,3</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">0,6 - 1,1</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.ldl_colesterol">
+                      <th scope="row">LDL colesterol</th>
+                      <td>{{element.ldl_colesterol}}</td>
+                      <td>mg/dcl</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">130 – 159</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">130 – 159</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.hdl_colesterol">
+                      <th scope="row">HDL colesterol</th>
+                      <td>{{element.hdl_colesterol}}</td>
+                      <td>mg/dcl</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">40 – 59</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">40 – 59</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.magneziu_seric">
+                      <th scope="row">Magneziu seric</th>
+                      <td>{{element.magneziu_seric}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">1.6 - 2.4</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">1.6 - 2.4</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.trigliceride_serice">
+                      <th scope="row">Trigliceride serice</th>
+                      <td>{{element.trigliceride_serice}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">150 - 200</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">150 - 200</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.uree_serica">
+                      <th scope="row">Uree serica</th>
+                      <td>{{element.uree_serica}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">12.8 - 42.6</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">12.8 - 42.6</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.potasiu_seric">
+                      <th scope="row">Potasiu seric</th>
+                      <td>{{element.potasiu_seric}}</td>
+                      <td>mmol/L</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">3.5 – 5.1</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">3.5 – 5.1</td>
+                    </tr>
+                   
+                    <tr *ngIf="element.appointmentHematology.t3">
+                      <th scope="row">T3</th>
+                      <td>{{element.t3}}</td>
+                      <td>nmol/L</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">1.3 - 3.1</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">1.3 - 3.1</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.t4">
+                      <th scope="row">T4</th>
+                      <td>{{element.t4}}</td>
+                      <td>µg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">5.13 - 14.1</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">5.13 - 14.1</td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.tgo">
+                      <th scope="row">TGO</th>
+                      <td>{{element.tgo}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">4 – 38</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">4 – 46</td>
+                    </tr>          
+                    <tr *ngIf="element.appointmentHematology.tgp">
+                      <th scope="row">TGP</th>
+                      <td>{{element.tgp}}</td>
+                      <td>mg/dL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">4 – 52</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">4 – 69 </td>
+                    </tr>
+                    <tr *ngIf="element.appointmentHematology.tsh">
+                      <th scope="row">TSH</th>
+                      <td>{{element.tsh}}</td>
+                      <td>µUI/mL</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'feminin'">0,27- 4,2</td>
+                      <td *ngIf="element.appointmentHematology.patient.sexPatient == 'masculin'">0,27- 4,2</td>
+                    </tr>
+                  </tbody>
+                </table>
               
               </span>
             </div>

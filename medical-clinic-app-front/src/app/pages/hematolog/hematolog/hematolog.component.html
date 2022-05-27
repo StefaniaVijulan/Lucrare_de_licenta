@@ -15,8 +15,22 @@
               {{appointment.patient.lastName}}</span><br>
             <mat-icon class="icon-display" *ngIf="appointment.acid_uric" matListIcon inline=true>fiber_manual_record
             </mat-icon><span class="aligned-with-icon" *ngIf="appointment.acid_uric">Acid uric</span>
-            <mat-icon class="icon-display" *ngIf="appointment.hemoleucograma_completa" matListIcon inline=true>fiber_manual_record
-            </mat-icon><span class="aligned-with-icon" *ngIf="appointment.hemoleucograma_completa">Hemoleucograma completa</span>
+
+            <mat-icon class="icon-display" *ngIf="appointment.globule_rosii" matListIcon inline=true>
+              fiber_manual_record</mat-icon><span class="aligned-with-icon"
+              *ngIf="appointment.globule_rosii">Globule rosii</span>
+            <mat-icon class="icon-display" *ngIf="appointment.hemoglobina" matListIcon inline=true>
+              fiber_manual_record</mat-icon><span class="aligned-with-icon"
+              *ngIf="appointment.hemoglobina">Hemoglobina</span>
+            <mat-icon class="icon-display" *ngIf="appointment.hematocrit" matListIcon inline=true>
+              fiber_manual_record</mat-icon><span class="aligned-with-icon"
+              *ngIf="appointment.hematocrit">Hematocrit</span>
+            <mat-icon class="icon-display" *ngIf="appointment.globule_albe" matListIcon inline=true>
+              fiber_manual_record</mat-icon><span class="aligned-with-icon"
+              *ngIf="appointment.globule_albe">Globule albe</span>
+            <mat-icon class="icon-display" *ngIf="appointment.trombocite" matListIcon inline=true>
+              fiber_manual_record</mat-icon><span class="aligned-with-icon"
+              *ngIf="appointment.trombocite">Trombocite</span>
             <mat-icon class="icon-display" *ngIf="appointment.calciu_ionic_seric" matListIcon inline=true>
               fiber_manual_record</mat-icon><span class="aligned-with-icon"
               *ngIf="appointment.calciu_ionic_seric">Calciu ionic<br></span>
@@ -32,6 +46,9 @@
             <mat-icon class="icon-display" *ngIf="appointment.ldl_colesterol" matListIcon inline=true>
               fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.ldl_colesterol">LDL
               colesterol<br></span>
+              <mat-icon class="icon-display" *ngIf="appointment.hdl_colesterol" matListIcon inline=true>
+                fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.hdl_colesterol">HDL
+                colesterol<br></span>
             <mat-icon class="icon-display" *ngIf="appointment.magneziu_seric" matListIcon inline=true>
               fiber_manual_record</mat-icon><span class="aligned-with-icon" *ngIf="appointment.magneziu_seric">Magneziu
               seric<br></span>
@@ -42,9 +59,7 @@
             </mat-icon><span class="aligned-with-icon" *ngIf="appointment.uree_serica">Uree serica<br></span>
             <mat-icon class="icon-display" *ngIf="appointment.potasiu_seric" matListIcon inline=true>fiber_manual_record
             </mat-icon><span class="aligned-with-icon" *ngIf="appointment.potasiu_seric">Potasiu seric<br></span>
-            <mat-icon class="icon-display" *ngIf="appointment.inr_cu_interpretare" matListIcon inline=true>
-              fiber_manual_record</mat-icon><span class="aligned-with-icon"
-              *ngIf="appointment.inr_cu_interpretare">INR<br></span>
+            
             <mat-icon class="icon-display" *ngIf="appointment.t3" matListIcon inline=true>fiber_manual_record</mat-icon>
             <span class="aligned-with-icon" *ngIf="appointment.t3">T3<br></span>
             <mat-icon class="icon-display" *ngIf="appointment.t4" matListIcon inline=true>fiber_manual_record</mat-icon>
@@ -56,11 +71,10 @@
             <mat-icon class="icon-display" *ngIf="appointment.tsh" matListIcon inline=true>fiber_manual_record
             </mat-icon><span class="aligned-with-icon" *ngIf="appointment.tsh">TSH<br></span>
             <br>
-      
-          
-        </div><button  class="button-prog" role="button"
-            (click)="appointmentDone(appointment.id)">Done</button>
-          </div>
+
+
+          </div><button class="button-prog" role="button" (click)="appointmentDone(appointment.id)">Done</button>
+        </div>
       </div>
     </div>
     <div *ngIf="!listAppointmentsHema" class="free-day">

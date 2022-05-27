@@ -12,7 +12,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class HematologService {
-
+  cnpHematolog: any;
   resultHematology: HematologyResult;
   private baseUrl = environment.baseUrl;
   private publicHttpHeaders= {
@@ -38,7 +38,8 @@ export class HematologService {
 
   editAppointmentResult(idA: any, result: any){
     console.log("intra in service")
-    return this._http.put(this.baseUrl + '/hematolog/editAppointmentResult?idR='+idA, result, this.publicHttpHeaders)
+    this.cnpHematolog = localStorage.getItem("cnp")
+    return this._http.put(this.baseUrl + '/hematolog/editAppointmentResult?cnpH=' + this.cnpHematolog + '&idR='+idA, result, this.publicHttpHeaders)
   }
 
 
