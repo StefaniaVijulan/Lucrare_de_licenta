@@ -15,6 +15,7 @@ import java.net.StandardSocketOptions;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -66,6 +67,8 @@ public class CardiologService {
     }
     public List<Appointment> getAllFutureAppointment(String cnp) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Bucharest")));
+
         List<Appointment> appointmentList = new ArrayList<>();
         for(int i=0; i<appointmentRepository.findAll().size(); i++){
             if(appointmentRepository.findAll().get(i).getCardiolog().getCnp().equals(cnp))
@@ -73,7 +76,10 @@ public class CardiologService {
                 Date currentD;
                 currentD = new Date();
                 System.out.println("current D => " +currentD);
-                boolean stare = (sdf.parse(appointmentRepository.findAll().get(i).getDataA())).before(currentD);
+                Date targetDate;
+                targetDate = sdf.parse(appointmentRepository.findAll().get(i).getDataA() + " " + appointmentRepository.findAll().get(i).getHour());
+                boolean stare = targetDate.before(currentD);
+
                 System.out.println("Appointment date" + sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
                 System.out.println(stare);
                 if (!stare) {
@@ -188,7 +194,7 @@ public class CardiologService {
         List<AppointmentHematology> appointmentList = appointmentHematologyRepository.findAll();
         List<String> allHours = new ArrayList<>(Arrays.asList("09:00","09:15","09:30","09:45",
                 "10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45",
-                "12:00","12:15","12:30","12:45","14:00","14:15","14:30","14:45",
+                "13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45",
                 "15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45",
                 "17:00","17:15","17:30","17:45","18:00"));
         System.out.println("inainte de for" + allHours);
@@ -237,7 +243,7 @@ public class CardiologService {
         List<AppointmentRadiology> appointmentList = appointmentRadiologyRepository.findAll();
         List<String> allHours = new ArrayList<>(Arrays.asList("09:00","09:15","09:30","09:45",
                 "10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45",
-                "12:00","12:15","12:30","12:45","14:00","14:15","14:30","14:45",
+                "13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45",
                 "15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45",
                 "17:00","17:15","17:30","17:45","18:00"));
         System.out.println(allHours);
@@ -410,19 +416,22 @@ public class CardiologService {
     public int addAppointment(String cnpC, Appointment appointment) throws ParseException {
         System.out.println("Add appointment");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        sdf.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Bucharest")));
         for(int i=0; i<appointmentRepository.findAll().size(); i++){
-            System.out.println("Intra in verificare daca exista programre viitoare");
             Date currentD;
             currentD = new Date();
+            Date targetDate;
+            targetDate = sdf.parse(appointmentRepository.findAll().get(i).getDataA() + " " + appointmentRepository.findAll().get(i).getHour());
             //luam toate programarile viitoare
             // veriricam daca data curenta este inainte datei din progrmare ("<")
-            int stare  = currentD.compareTo(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
+            boolean stare = targetDate.before(currentD);
             System.out.println("Stare");
             System.out.println(currentD);
 
             System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
             System.out.println(stare);
-            if (stare <0) {
+            if (!stare) {
                 System.out.println("Intra in stare");
                 if(appointmentRepository.findAll().get(i).getCnp().equals(appointment.getCnp())){
                     System.out.println("Exista deja o programare facuta cu acest cnp");

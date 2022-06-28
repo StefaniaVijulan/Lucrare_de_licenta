@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.ZoneId;
 import java.util.*;
 
 
@@ -45,14 +46,21 @@ public class SecretaryService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    //programari viitoare
     public List<Appointment> currentAppointments() throws ParseException {
         List<Appointment> appointmentList = new ArrayList<>();
         for (int i = 0; i < appointmentRepository.findAll().size(); i++) {
             {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                sdf.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Bucharest")));
+
                 Date currentD;
                 currentD = new Date();
-                boolean stare = (sdf.parse(appointmentRepository.findAll().get(i).getDataA())).before(currentD);
+                Date targetDate;
+                targetDate = sdf.parse(appointmentRepository.findAll().get(i).getDataA() + " " + appointmentRepository.findAll().get(i).getHour());
+                System.out.println(appointmentRepository.findAll().get(i).getDataA() + " " + appointmentRepository.findAll().get(i).getHour());
+                boolean stare = targetDate.before(currentD);
+
                 if (!stare) {
                     appointmentList.add(appointmentRepository.findAll().get(i));
                 }
@@ -232,191 +240,3 @@ public class SecretaryService {
         return null;
     }
 }
-    /*
-        public Hospitalization addHospitalization(String cnpS, String cnpC, String cnpP, Hospitalization hospitalization){
-            Date curentData = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-            hospitalization.setStartDateHospitalization(sdf.format(curentData));
-
-            if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
-                //Numarul de inregistrare a acestei internari este deja luat
-                return null;
-
-
-            Secretary secretary = this.secretaryRepository.findByCnp(cnpS);
-            System.out.println("Secretar");
-            System.out.println(cnpS);
-            System.out.println(secretary);
-            hospitalization.setSecretary(secretary);
-
-            Patient patient = this.patientRepository.findByCnp(cnpP);
-            System.out.println("Patient");
-            System.out.println((cnpP));
-            System.out.println(patient);
-            hospitalization.setPatient(patient);
-
-            Cardiolog cardiolog = this.cardiologRepository.findByCnp(cnpC);
-            System.out.println("Cardiolog");
-            System.out.println(cardiolog);
-            hospitalization.setCardiolog(cardiolog);
-
-            hospitalizationRepository.save(hospitalization);
-
-            return hospitalization;
-        }
-
-
-    public List<Hospitalization> getAllHospitalizationActive(Principal principal){
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
-                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
-            }
-        }
-        return hospitalizationList;
-    }
-
-}
-   /* // Date despre internarea specifica unui pacient
-    public Hospitalization getSpecificHospitalization(String noHosp){
-        Hospitalization hospitalization= new Hospitalization();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            {
-                if(hospitalizationRepository.findAll().get(i).getRegistrationNoHospitalization().equals(noHosp))
-                    hospitalization = hospitalizationRepository.findAll().get(i);
-            }
-        }
-        return hospitalization;
-    }*/
- /*   public Hospitalization editHospitalization(String id) throws ParseException {
-        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(id);
-        Date currentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-        System.out.println(sdf.format(currentData));
-        hospitalization.setEndDateHospitalization(sdf.format(currentData));
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy ", Locale.getDefault());
-
-        System.out.println(formatter.parse(hospitalization.getStartDateHospitalization()));
-        System.out.println(formatter.parse(sdf.format(currentData)));
-        Date startDate = formatter.parse(hospitalization.getStartDateHospitalization());
-        long diff = currentData.getTime() - startDate.getTime();
-        System.out.println(diff);
-        Integer difference_In_Days
-                = Math.toIntExact((diff
-                / (1000 * 60 * 60 * 24))
-                % 365);
-        System.out.println(difference_In_Days+1);
-        hospitalization.setNumberOfHospitalization(difference_In_Days+1);
-        hospitalizationRepository.save(hospitalization);
-        return hospitalization;
-    }
-    public List<Hospitalization> getAllHospitalization(Principal principal){
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        hospitalizationList = hospitalizationRepository.findAll();
-
-                return hospitalizationList;
-    }
-}*/
- /*
-
-    public Hospitalization newHospitalization(String registrationNo, Patient patient){
-        System.out.println("newHospitalization");
-        System.out.println("\tAdaugam un pacient nou");
-        if (patientRepository.existsById(patient.getCnp()))
-        {
-            return null;
-
-        }
-
-        System.out.println("\tAdaugam internare");
-        Hospitalization hospitalization = new Hospitalization();
-
-        hospitalization.setRegistrationNoHospitalization(registrationNo);
-
-        Date curentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        hospitalization.setStartDateHospitalization(sdf.format(curentData));
-
-        if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
-            throw new Exception("Hospitalization exist");
-        String username = secretaryRepository.findByCnp(cnpS).getCnp();
-        Secretary secretary = this.secretaryRepository.findByCnp(username);
-        hospitalization.setSecretary(secretary);
-
-        if(!patientRepository.existsById(cnpP))
-            throw new Exception("Patient doesnt exist");
-        Patient patient = this.patientRepository.findByCnp(cnpP);
-        hospitalization.setPatient(patient);
-
-
-        if(!cardiologRepository.existsById(cnpD))
-            throw new Exception("You cant assign this doctor because he doesnt exist");
-        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnpD));
-        hospitalizationRepository.save(hospitalization);
-        return hospitalization;
-        return patient;
-    }*/
-/*
-
-
-
-    public List<Patient> allPatient() {
-        List<Patient> patientList = new ArrayList<>();
-        for(int i=0; i<patientRepository.findAll().size(); i++){
-            {
-                patientList.add(patientRepository.findAll().get(i));
-            }
-        }
-        return patientList;
-    }
-    public Hospitalization addHospitalization(String cnpS, String cnpD, String cnpP, Hospitalization hospitalization) throws Exception {
-        Date curentData = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        System.out.println(sdf.format(curentData));
-        hospitalization.setStartDateHospitalization(sdf.format(curentData));
-        if(hospitalizationRepository.existsById(hospitalization.getRegistrationNoHospitalization()))
-            throw new Exception("Hospitalization exist");
-        String username = secretaryRepository.findByCnp(cnpS).getCnp();
-        Secretary secretary = this.secretaryRepository.findByCnp(username);
-        hospitalization.setSecretary(secretary);
-
-        if(!patientRepository.existsById(cnpP))
-            throw new Exception("Patient doesnt exist");
-        Patient patient = this.patientRepository.findByCnp(cnpP);
-        hospitalization.setPatient(patient);
-
-
-        if(!cardiologRepository.existsById(cnpD))
-            throw new Exception("You cant assign this doctor because he doesnt exist");
-        hospitalization.setCardiolog(cardiologRepository.findByCnp(cnpD));
-        hospitalizationRepository.save(hospitalization);
-        return hospitalization;
-    }
-   */
-  /*  public String changeHospitalizationDataEnd(String registrationNoHospitalization, Date dateEnd ){
-
-        Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
-        if(!hospitalizationOptional.isPresent()){
-            return "This hospitalization doesnt exist";
-        }
-        System.out.println(dateEnd);
-        System.out.println(hospitalizationRepository);
-        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
-        hospitalization.setEndDateHospitalization(dateEnd);
-        hospitalizationRepository.save(hospitalization);
-        return "Change Hospitalization Data End";
-    }*/
-   /* public String changeHospitalizationNumberOfHospitalization(String registrationNoHospitalization, Integer numberOfHospitalization){
-        Optional<Hospitalization> hospitalizationOptional = hospitalizationRepository.findById(registrationNoHospitalization);
-        if(!hospitalizationOptional.isPresent()){
-            return "This hospitalization doesnt exist";
-        }
-        Hospitalization hospitalization = hospitalizationRepository.findByRegistrationNoHospitalization(registrationNoHospitalization);
-        hospitalization.setNumberOfHospitalization(numberOfHospitalization);
-        return "Change Hospitalization Data End";
-    }
-}
-        */

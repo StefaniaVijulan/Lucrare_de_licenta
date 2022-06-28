@@ -1,23 +1,22 @@
-<section id="team">
+  <section id="team">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <h2>Home</h2>
+          <h2>Programările viitoare</h2>
+          <div [align]="'center'">
+            <button class="button-prog" role="button" (click)="addAppointment()">Adaugă consultație</button>
+          </div>
         </div>
       </div>
-      <div [align]="'center'">
-        <button class="button-prog" role="button" (click)="addAppointment()">Adaugă consultație</button>
-      </div>
-
       <div class="row" >
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="member">
-                <h5>Consultație viitoare  </h5>
-                <p class="cardiolog">Cardiolog: {{cardiologName}}</p>
+                <h5 >Consultație viitoare  </h5>
+              <br>
                 <div class="coundown d-flex justify-content-between align-items-baseline">
-                    <p>Days</p>
-                    <p class="ml-2 mr-2">Hours</p>
-                    <p>Minu</p>
+                    <p>Zile</p>
+                    <p class="ml-2 mr-2">Ore</p>
+                    <p>Min</p>
                     <p class="ml-2">Sec</p>
                 </div>
                 <div class="coundown d-flex justify-content-between align-items-baseline">
@@ -26,10 +25,56 @@
                     <p id="mins"></p>
                     <p id="seconds"></p>
                 </div>
+                <div [align]="'center'">
+                <button  class="button-prog" role="button" (click)= "reprogramareAppointment('appointment')">Reprogramează</button></div>
           </div>
+          
+        </div>
+        <div class="col-lg-4" >
+ 
+            <div class="member" >
+              <h5>Programare hematologie</h5>
+          <br>
+              <div class="coundown d-flex justify-content-between align-items-baseline">
+                  <p>Zile</p>
+                  <p class="ml-2 mr-2">Ore</p>
+                  <p>Min</p>
+                  <p class="ml-2">Sec</p>
+              </div>
+              <div class="coundown d-flex justify-content-between align-items-baseline">
+                  <p id="daysH"></p>
+                  <p id="hoursH"></p>
+                  <p id="minsH"></p>
+                  <p id="secondsH"></p>
+             
+              </div>
+              <div [align]="'center'">
+                <button  class="button-prog" role="button" (click)= "reprogramareAppointment('hematology')">Reprogramează</button></div>
+          </div>
+          
+        </div>
+        <div class="col-lg-4" >
+          <div class="member">
+            <h5>Programare radiologie</h5>
+        <br>
+            <div class="coundown d-flex justify-content-between align-items-baseline">
+                <p>Zile</p>
+                <p class="ml-2 mr-2">Ore</p>
+                <p>Min</p>
+                <p class="ml-2">Sec</p>
+            </div>
+            <div class="coundown d-flex justify-content-between align-items-baseline">
+                <p id="daysR"></p>
+                <p id="hoursR"></p>
+                <p id="minsR"></p>
+                <p id="secondsR"></p>
+            </div>
+            <div [align]="'center'">
+              <button  class="button-prog" role="button" (click)= "reprogramareAppointment('radiology')">Reprogramează</button></div>
+        </div>
         </div>
       </div>
-     
+      
     </div>
   </section>
   

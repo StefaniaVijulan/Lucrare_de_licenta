@@ -76,6 +76,10 @@ import { ImagistComponent } from './pages/imagist/imagist/imagist.component';
 import { ImagistResultComponent } from './pages/imagist/imagist-result/imagist-result.component';
 import { DialogAddResultRadiologyComponent } from './components/dialog-add-result-radiology/dialog-add-result-radiology.component';
 import { DialogAddAppointmentByPacientComponent } from './components/pacient/dialog-add-appointment-by-pacient/dialog-add-appointment-by-pacient.component';
+
+import { PacientAllDoctorsComponent } from './pages/pacient/pacient-all-doctors/pacient-all-doctors.component';
+import { ReprogramareAppComponent } from './components/pacient/reprogramare-app/reprogramare-app.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -131,7 +135,9 @@ import { DialogAddAppointmentByPacientComponent } from './components/pacient/dia
     DialogAddResultRadiologyComponent,
     DialogAddAppointmentByPacientComponent,
 
-  
+    PacientAllDoctorsComponent,
+
+    ReprogramareAppComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -164,6 +170,7 @@ import { DialogAddAppointmentByPacientComponent } from './components/pacient/dia
     MatNativeDateModule,
     MatSnackBarModule,
     MatStepperModule,
+    
     MatListModule,
     MatAutocompleteModule,
     MatExpansionModule,
@@ -184,6 +191,7 @@ import { DialogAddAppointmentByPacientComponent } from './components/pacient/dia
      DialogAddAppointmentComponent,
      DialogAppointmentSuccessComponent,
      DialogEditFisaComponent,
+     ReprogramareAppComponent,
      DialogEditPatientComponent,
      DialogAddAppointmentByDoctorComponent,
      DialogAddAppointmentsHrComponent,

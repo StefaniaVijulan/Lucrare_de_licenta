@@ -32,6 +32,7 @@ import { HematologAllResultComponent } from './pages/hematolog/hematolog-all-res
 import { ImagistGuard } from './guard/imagist/imagist.guard';
 import { ImagistComponent } from './pages/imagist/imagist/imagist.component';
 import { ImagistResultComponent } from './pages/imagist/imagist-result/imagist-result.component';
+import { PacientAllDoctorsComponent } from './pages/pacient/pacient-all-doctors/pacient-all-doctors.component';
 
 const routes: Routes = [ 
   {
@@ -129,6 +130,11 @@ const routes: Routes = [
     path:"pacient/home",
     component: PacientComponent,
   },
+  {
+    path:"pacient/all/doctors",
+    component: PacientAllDoctorsComponent,
+  },
+
    {
     path:"upload",
     component: UploadImgComponent,

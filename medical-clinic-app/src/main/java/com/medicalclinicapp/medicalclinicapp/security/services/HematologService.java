@@ -122,22 +122,3 @@ public class HematologService {
         return hematologyResultList;
     }
 }
-    /*
-    public Hematology addConsultationHematology(Long idAppointment, Hematology hematology, Principal principal) throws Exception {
-        if(hematologyRepository.existsById(hematology.getId()))
-            throw new Exception("Din consultation it was done");
-        String username = principal.getName();
-        Hematolog hematolog = this.hematologRepository.findByCnp(username);
-      //  hematology.setHematolog(hematolog);
-
-        for(int i=0; i<appointmentHematologyRepository.findAll().size(); i++){
-            if(appointmentHematologyRepository.findAll().get(i).getId().equals(idAppointment)){
-                hematology.setAppointmentHematology(appointmentHematologyRepository.findAll().get(i));
-            }}
-
-
-        hematologyRepository.save(hematology);
-        return hematology;
-    }
-}
-        */

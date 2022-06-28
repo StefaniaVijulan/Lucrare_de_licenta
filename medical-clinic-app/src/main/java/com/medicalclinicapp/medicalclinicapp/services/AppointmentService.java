@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.net.StandardSocketOptions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -90,7 +91,7 @@ public class AppointmentService {
     }
     public List<String> verificaHoursDoctor(String cnpC, String dataD) {
         List<Appointment> appointmentList = appointmentRepository.findAll();
-        List<String> allHours = new ArrayList<>(Arrays.asList("09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00"));
+        List<String> allHours = new ArrayList<>(Arrays.asList("09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"));
         System.out.println(appointmentList);
         for (int i = 0; i < appointmentList.size(); i++) {
             {
@@ -113,19 +114,21 @@ public class AppointmentService {
     public int addAppointment(String cnpC, Appointment appointment) throws ParseException {
         System.out.println("Add appointment");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Bucharest")));
         for(int i=0; i<appointmentRepository.findAll().size(); i++){
-            System.out.println("Intra in verificare daca exista programre viitoare");
             Date currentD;
             currentD = new Date();
+            Date targetDate;
+            targetDate = sdf.parse(appointmentRepository.findAll().get(i).getDataA() + " " + appointmentRepository.findAll().get(i).getHour());
             //luam toate programarile viitoare
             // veriricam daca data curenta este inainte datei din progrmare ("<")
-            int stare  = currentD.compareTo(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
+            boolean stare = targetDate.before(currentD);
             System.out.println("Stare");
             System.out.println(currentD);
 
             System.out.println(sdf.parse(appointmentRepository.findAll().get(i).getDataA()));
             System.out.println(stare);
-            if (stare <0) {
+            if (!stare) {
                 System.out.println("Intra in stare");
                 if(appointmentRepository.findAll().get(i).getCnp().equals(appointment.getCnp())){
                     System.out.println("Exista deja o programare facuta cu acest cnp");

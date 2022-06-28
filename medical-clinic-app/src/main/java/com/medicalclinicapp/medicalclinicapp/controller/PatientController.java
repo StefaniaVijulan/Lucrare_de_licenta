@@ -1,7 +1,6 @@
 package com.medicalclinicapp.medicalclinicapp.controller;
 
-import com.medicalclinicapp.medicalclinicapp.models.Appointment;
-import com.medicalclinicapp.medicalclinicapp.models.Patient;
+import com.medicalclinicapp.medicalclinicapp.models.*;
 import com.medicalclinicapp.medicalclinicapp.security.config.JwtUtil;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginPatientResponse;
 import com.medicalclinicapp.medicalclinicapp.security.dto.LoginRequest;
@@ -74,6 +73,14 @@ public class PatientController {
     public Appointment getNextAppointment(@RequestParam(value = "cnpP") String cnpP) throws ParseException {
         return patientService.getNextAppointment(cnpP);
     }
+    @GetMapping("/pacient/nextAppointmentHematology")
+    public AppointmentHematology getNextAppointmentH(@RequestParam(value = "cnpP") String cnpP) throws ParseException {
+        return patientService.getNextAppointmentHematology(cnpP);
+    }
+    @GetMapping("/pacient/nextAppointmentRadiology")
+    public AppointmentRadiology getNextAppointmentR(@RequestParam(value = "cnpP") String cnpP) throws ParseException {
+        return patientService.getNextAppointmentRadiology(cnpP);
+    }
     @GetMapping("/pacient/blockDateForCardio")
     public List<String> verificaDispDateCardio(@RequestParam (value = "cnpC") String cnpC){
         return patientService.verificaDisponibilitateDoctor(cnpC);
@@ -82,5 +89,40 @@ public class PatientController {
     public List<String> verificaDispHourCardio(@RequestParam(value = "cnpC") String cnpC,@RequestParam("date")String data){
         System.out.println("Inta in controller");
         return patientService.verificaHoursDoctor(cnpC, data);
+    }
+    @PutMapping("/pacient/reprogrameazaAppointment")
+    public Appointment reprogrameazaAppointment(@RequestParam(value = "cnpP") String cnpP, @RequestBody Appointment appointment) throws ParseException {
+        return patientService.reprogrameazaAppointment(cnpP, appointment);
+    }
+    @PutMapping("/pacient/reprogrameazaAppointmentHematology")
+    public AppointmentHematology reprogrameazaAppointment(@RequestParam(value = "cnpP") String cnpP, @RequestBody AppointmentHematology appointment) throws ParseException {
+        return patientService.reprogrameazaAppointmentH(cnpP, appointment);
+    }
+    @PutMapping("/pacient/reprogrameazaAppointmentRadiology")
+    public AppointmentRadiology reprogrameazaAppointment(@RequestParam(value = "cnpP") String cnpP, @RequestBody AppointmentRadiology appointment) throws ParseException {
+        return patientService.reprogrameazaAppointmentR(cnpP, appointment);
+    }
+    @GetMapping("/pacient/blockDateHematology")
+    public List<String> verificaDisp(){
+        return patientService.verificaDisponibilitateHematology();
+    }
+    @GetMapping("/pacient/checkAvailabilityHematology")
+    public List<String> verificaDispHour(@RequestParam("dateA")String data){
+        return patientService.verificaHoursHematology(data);
+    }
+    @GetMapping("/pacient/blockDateRadiology")
+    public List<String> verificaDispRad(){
+        return patientService.verificaDisponibilitateRadiology();
+    }
+    @GetMapping("/pacient/checkAvailabilityRadiology")
+    public List<String> verificaDispHourRad(@RequestParam("dateA")String data){
+        return patientService.verificaHoursRadiology(data);
+    }
+    @GetMapping("/pacient/radiologyResult")
+    public List<RadiologyResult> getAllRadiologyResult(@RequestParam("cnpP") String cnpP){ return patientService.allRadiologyResult(cnpP);
+    }
+    @GetMapping("/pacient/hematologyResult")
+    public List<HematologyResult> getAllHematologyResult(@RequestParam("cnpP") String cnpP){
+        return patientService.allHematologyResult(cnpP);
     }
 }

@@ -328,41 +328,7 @@ private ModeratorRepository moderatorRepository;
             }}
         return imagistList;
   }
-/*
-  public List<Appointment> getAppointmentBetweenDate(String startDate, String endDate) throws ParseException {
 
-      List<Appointment> appointmentList = new ArrayList<>();
-      SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-      Date dateS = formatter.parse(startDate);
-      System.out.println("DateS => "+ dateS);
-      SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-      Date dateE = formatter.parse(endDate);
-      System.out.println("DateE => "+ dateE);
-      for(int i=0; i<appointmentRepository.findAll().size(); i++){
-          SimpleDateFormat formatter3= new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-          Date appointmentData = formatter.parse(appointmentRepository.findAll().get(i).getDataA());
-          if(appointmentData.compareTo(dateS)>=0 && appointmentData.compareTo(dateE)<=0 ){
-              appointmentList.add(appointmentRepository.findAll().get(i));
-          }}
-      return appointmentList;
-
-  }
-*/
-/*
-    public List<Appointment> getAppointmentByDate(String startDate) throws ParseException {
-
-        List<Appointment> appointmentList = new ArrayList<>();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        Date dateS = formatter.parse(startDate);
-
-        for(int i=0; i<appointmentRepository.findAll().size(); i++){
-            Date appointmentData = formatter.parse(appointmentRepository.findAll().get(i).getDataA());
-            if(appointmentData.compareTo(dateS)==0){
-                appointmentList.add(appointmentRepository.findAll().get(i));
-            }}
-        return appointmentList;
-
-    }*/
     public List<Appointment> getAllAppointments() throws ParseException {
         List<Appointment> appointmentList = appointmentRepository.findAll();
         return appointmentList;

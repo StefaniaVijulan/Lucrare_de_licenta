@@ -167,45 +167,4 @@ public class UserService implements UserDetailsService {
         return currentUser;
     }
 
-    /*
-
-
-    public List<Hospitalization> getAllHospitalizationByUser(Principal principal){
-        String username = principal.getName();
-        User currentUser = this.userRepository.findUserByCnp(username);
-
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            if(hospitalizationRepository.findAll().get(i).getUser().equals(currentUser)){
-                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
-                hospitalizationList.add(hospitalizationRepository.findAll().get(i));
-            }
-        }
-        return hospitalizationList;
-    }
-    public List<Hospitalization> getAllHospitalization(Principal principal){
-        String username = principal.getName();
-        User currentUser = this.userRepository.findUserByCnp(username);
-
-        List<Hospitalization> hospitalizationList = new ArrayList<>();
-        for(int i=0; i<hospitalizationRepository.findAll().size(); i++){
-            if(hospitalizationRepository.findAll().get(i).getUser().equals(currentUser)){
-                if(hospitalizationRepository.findAll().get(i).getEndDateHospitalization() == null)
-                    hospitalizationList.add(hospitalizationRepository.findAll().get(i));
-            }
-        }
-        return hospitalizationList;
-    }
-    public Map<String, Boolean> deleteUser(String cnp) throws UsernameNotFoundException {
-        if(!userRepository.existsByCnp(cnp)){
-            throw new IllegalStateException("User not found for this cnp :: " + cnp);
-        }
-        User user = userRepository.findUserByCnp(cnp);
-
-        userRepository.delete(user);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
-    }
-*/
 }
